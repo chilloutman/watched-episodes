@@ -1,0 +1,11 @@
+syntax: glob
+
+# Java
+classes/
+
+# others
+\#*
+\._*
+*~
+*.orig
+.DS_Store
