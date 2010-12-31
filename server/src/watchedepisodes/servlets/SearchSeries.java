@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import watchedepisodes.tools.ServiceLocator;
 
-import com.google.appengine.repackaged.com.google.common.base.Service;
 import com.moviejukebox.thetvdb.TheTVDB;
 import com.moviejukebox.thetvdb.model.Series;
 
@@ -37,7 +36,7 @@ public class SearchSeries extends HttpServlet {
 		try {
 			resp.getWriter().println("<h1>Search Results:</h1>");
 			for (Series s : results) {
-				resp.getWriter().println(s.getSeriesName() + "<br />");
+				resp.getWriter().println(s.getId() + " -> " + s.getSeriesName() + "<br />");
 			}
 		} catch (IOException e) {
 			System.err.println(e);
