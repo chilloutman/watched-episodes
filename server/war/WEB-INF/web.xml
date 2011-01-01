@@ -31,6 +31,24 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/getSeries</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>checktvdb</servlet-name>
+		<servlet-class>watchedepisodes.servlets.CheckTVDB</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>checktvdb</servlet-name>
+		<url-pattern>/admin/checktvdb</url-pattern>
+	</servlet-mapping>
+	
+	<security-constraint>
+        <web-resource-collection>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+	
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
