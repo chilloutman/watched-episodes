@@ -8,20 +8,15 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.SAXException;
-
 import watchedepisodes.entities.SeriesFragment;
+import watchedepisodes.entities.Series;
 
 public class TVDB {
 	static private final String BaseURL= "http://www.thetvdb.com/api/";
 	static private final String SearchURL= BaseURL + "GetSeries.php?seriesname=";
 	
 	private String apiKey;
-	private SAXParser parser;
+	private TVDBParser parser= new TVDBParser();
 	
 	public TVDB (String apiKey) {
 		this.apiKey= apiKey;
@@ -30,40 +25,9 @@ public class TVDB {
 	public List<SeriesFragment> searchSeries (String searchString, String language) {
 		String url= getSearchURL(searchString, language);
 		InputStream xml= fetchURL(url);	
-		SearchResultsHandler contentHandler= new SearchResultsHandler();
-			
-		try {
-			getParser().parse(xml, contentHandler);
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				xml.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-				throw new RuntimeException();
-			}
-		}
-		
-		return contentHandler.getResult();
-	}
-	
-	private SAXParser getParser () {
-		if (parser == null) {
-			SAXParserFactory factory = SAXParserFactory.newInstance();
-			try {
-				parser= factory.newSAXParser();
-			} catch (ParserConfigurationException e) {
-				e.printStackTrace();
-			} catch (SAXException e) {
-				e.printStackTrace();
-			}
-		} else {
-			parser.reset();
-		}
-		return parser;
+		SearchResultsHandler handler= new SearchResultsHandler();
+		parser.parse(xml, handler);
+		return handler.getResult();
 	}
 	
 	private String getSearchURL (String searchString, String language) {
@@ -74,6 +38,19 @@ public class TVDB {
 		} catch (UnsupportedEncodingException e) {
 			return SearchURL + searchString;
 		}
+	}
+	
+	public Series getSeries (String id, String language) {
+		String url= getSeriesURL(id, language);
+		InputStream xml= fetchURL(url);
+		SeriesHandler handler= new SeriesHandler();
+		parser.parse(xml, handler);
+		return handler.getResult();
+	}
+	
+	private String getSeriesURL (String id, String language) {
+		language= (language == null || language == "") ? "en" : language;
+		return BaseURL + apiKey + "/series/" + id + "/" + language + ".xml";
 	}
 	
 	private InputStream fetchURL (String url) {

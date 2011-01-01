@@ -1,64 +1,64 @@
 package watchedepisodes.thetvdb;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import watchedepisodes.entities.Series;
 import watchedepisodes.entities.SeriesFragment;
 
-public class SearchResultsHandler extends DefaultHandler {
-	
-	private ArrayList<SeriesFragment> result;
-	private SeriesFragment currentSeries;
+public class SeriesHandler extends DefaultHandler {
+	private Series result;
 	private String currentElement;
 	private StringBuilder currentValue;
 	
-	List<SeriesFragment> getResult () {
-		return (result == null) ? new ArrayList<SeriesFragment>() : result;
+	Series getResult () {
+		return result;
 	}
 	
 	@Override
 	public void startDocument () throws SAXException {
-		currentElement= "";
+		currentElement= null;
 		currentValue= new StringBuilder();
 	}
 	
 	@Override
 	public void startElement (String uri, String localName, String qName, Attributes atts) throws SAXException {
 		if (qName == "Series") {
-			currentSeries= new SeriesFragment();
+			result= new Series();
 		} else {
-			currentElement= (elementIsRelevant(qName)) ? qName : "";
+			currentElement= (elementIsRelevant(qName)) ? qName : null;
 		}
 	}
 	
 	@Override
 	public void characters (char[] ch, int start, int length) throws SAXException {
-		if (elementIsRelevant(currentElement)) {
+		if (currentElement != null) {
 			String content= new String(ch).substring(start, start + length);
 			currentValue.append(content);
 		}
 	}
 	
 	private boolean elementIsRelevant (String elementName) {
-		return (elementName == "SeriesName" ||
-				elementName == "id");
+		return (elementName == "id" ||
+				elementName == "Actors" ||
+				elementName == "Overview" ||
+				elementName == "SeriesName" ||
+				elementName == "banner" ||
+				elementName == "IMDB_ID" ||
+				elementName == "FirstAired");
 	}
 	
 	@Override
 	public void endElement (String uri, String localName, String qName) throws SAXException {
 		if (qName == "Series") {
-			result.add(currentSeries);
 			return;
 		}
 		
 		if (qName == "SeriesName") {
-			currentSeries.setName(currentValue.toString());	
+			result.setName(currentValue.toString());	
 		} else if (qName == "id") {
-			currentSeries.setId(currentValue.toString());
+			result.setId(currentValue.toString());
 		}
 		
 		currentValue.delete(0, currentValue.length());

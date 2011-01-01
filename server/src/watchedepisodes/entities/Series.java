@@ -24,6 +24,8 @@ public class Series {
 	@Persistent
 	private Date firstAired;
 	@Persistent
+	private List<String> actors;
+	@Persistent
 	private String banner;
 	@Persistent
 	private String imdbId;
@@ -57,6 +59,12 @@ public class Series {
 	}
 	public void setFirstAired(Date firstAired) {
 		this.firstAired = firstAired;
+	}
+	public void setActors(List<String> actors) {
+		this.actors = actors;
+	}
+	public List<String> getActors() {
+		return actors;
 	}
 	public String getBanner() {
 		return banner;
