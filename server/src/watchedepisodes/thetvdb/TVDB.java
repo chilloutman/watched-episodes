@@ -3,12 +3,16 @@ package watchedepisodes.thetvdb;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
+import org.xml.sax.SAXException;
 
 import watchedepisodes.entities.SeriesFragment;
 
@@ -17,33 +21,49 @@ public class TVDB {
 	static private final String SearchURL= BaseURL + "GetSeries.php?seriesname=";
 	
 	private String apiKey;
+	private SAXParser parser;
 	
 	public TVDB (String apiKey) {
 		this.apiKey= apiKey;
 	}
 	
 	public List<SeriesFragment> searchSeries (String searchString, String language) {
-		InputStream xml= getInputStream(getSearchURL(searchString, language));	
+		String url= getSearchURL(searchString, language);
+		InputStream xml= fetchURL(url);	
 		SearchResultsHandler contentHandler= new SearchResultsHandler();
-		
-		System.out.println(getSearchURL(searchString, language));
-		
-		SAXParserFactory factory = SAXParserFactory.newInstance();
 			
 		try {
-			SAXParser parser = factory.newSAXParser();
-	        parser.parse(xml, contentHandler);
-		} catch (Exception e) {
-		    e.printStackTrace();
+			getParser().parse(xml, contentHandler);
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				xml.close();
 			} catch (IOException e) {
 				e.printStackTrace();
+				throw new RuntimeException();
 			}
 		}
 		
 		return contentHandler.getResult();
+	}
+	
+	private SAXParser getParser () {
+		if (parser == null) {
+			SAXParserFactory factory = SAXParserFactory.newInstance();
+			try {
+				parser= factory.newSAXParser();
+			} catch (ParserConfigurationException e) {
+				e.printStackTrace();
+			} catch (SAXException e) {
+				e.printStackTrace();
+			}
+		} else {
+			parser.reset();
+		}
+		return parser;
 	}
 	
 	private String getSearchURL (String searchString, String language) {
@@ -56,12 +76,14 @@ public class TVDB {
 		}
 	}
 	
-	private InputStream getInputStream (String url) {
+	private InputStream fetchURL (String url) {
 		try {
 			return new URL(url).openStream();
-		} catch (Exception e) {
+		} catch (MalformedURLException e) {
 			e.printStackTrace();
-			return null;
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		return null;
 	}
 }

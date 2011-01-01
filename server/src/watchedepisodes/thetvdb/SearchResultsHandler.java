@@ -20,9 +20,12 @@ public class SearchResultsHandler extends DefaultHandler {
 		return result;
 	}
 	
+	public SearchResultsHandler() {
+		result= new ArrayList<SeriesFragment>();
+	}
+	
 	@Override
 	public void startDocument () throws SAXException {
-		result= new ArrayList<SeriesFragment>();
 		currentElement= "";
 		currentValue= new StringBuilder();
 	}
