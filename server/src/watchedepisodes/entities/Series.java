@@ -1,6 +1,5 @@
 package watchedepisodes.entities;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.jdo.annotations.PersistenceCapable;
@@ -22,7 +21,7 @@ public class Series {
 	private Text overview;
 	
 	@Persistent
-	private Date firstAired;
+	private String firstAired;
 	@Persistent
 	private List<String> actors;
 	@Persistent
@@ -54,10 +53,10 @@ public class Series {
 	public void setOverview(Text overview) {
 		this.overview = overview;
 	}
-	public Date getFirstAired() {
+	public String getFirstAired() {
 		return firstAired;
 	}
-	public void setFirstAired(Date firstAired) {
+	public void setFirstAired(String firstAired) {
 		this.firstAired = firstAired;
 	}
 	public void setActors(List<String> actors) {

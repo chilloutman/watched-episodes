@@ -24,6 +24,7 @@ public class SearchResultsHandler extends DefaultHandler {
 	public void startDocument () throws SAXException {
 		currentElement= "";
 		currentValue= new StringBuilder();
+		result= new ArrayList<SeriesFragment>();
 	}
 	
 	@Override

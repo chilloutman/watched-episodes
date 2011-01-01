@@ -1,11 +1,15 @@
 package watchedepisodes.thetvdb;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import watchedepisodes.entities.Series;
-import watchedepisodes.entities.SeriesFragment;
+
+import com.google.appengine.api.datastore.Text;
 
 public class SeriesHandler extends DefaultHandler {
 	private Series result;
@@ -27,7 +31,7 @@ public class SeriesHandler extends DefaultHandler {
 		if (qName == "Series") {
 			result= new Series();
 		} else {
-			currentElement= (elementIsRelevant(qName)) ? qName : null;
+			currentElement= (isElementRelevant(qName)) ? qName : null;
 		}
 	}
 	
@@ -39,7 +43,7 @@ public class SeriesHandler extends DefaultHandler {
 		}
 	}
 	
-	private boolean elementIsRelevant (String elementName) {
+	private boolean isElementRelevant (String elementName) {
 		return (elementName == "id" ||
 				elementName == "Actors" ||
 				elementName == "Overview" ||
@@ -51,14 +55,32 @@ public class SeriesHandler extends DefaultHandler {
 	
 	@Override
 	public void endElement (String uri, String localName, String qName) throws SAXException {
-		if (qName == "Series") {
+		if (currentElement == null) {
 			return;
 		}
 		
+		String content= currentValue.toString(); 
+		
 		if (qName == "SeriesName") {
-			result.setName(currentValue.toString());	
+			result.setName(content);	
 		} else if (qName == "id") {
-			result.setId(currentValue.toString());
+			result.setId(content);
+		} else if (qName == "Actors") {
+			String[] actors= content.split("\\|");
+			ArrayList<String> actorsList= new ArrayList<String>();
+			for (int i= 1; i < actors.length ; i++) {
+				actorsList.add(actors[i]);
+			}
+			result.setActors(actorsList);
+		} else if (qName == "Overview") {
+			Text overview= new Text(content);
+			result.setOverview(overview);
+		} else if (qName == "banner") {
+			result.setBanner(content);
+		} else if (qName == "IMDB_ID") {
+			result.setImdbId(content);
+		} else if (qName == "FirstAired") {
+			result.setFirstAired(content);
 		}
 		
 		currentValue.delete(0, currentValue.length());
