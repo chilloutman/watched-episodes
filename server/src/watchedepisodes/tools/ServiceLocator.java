@@ -1,14 +1,14 @@
 package watchedepisodes.tools;
 
-import com.moviejukebox.thetvdb.TheTVDB;
+import watchedepisodes.thetvdb.TVDB;
 
 public class ServiceLocator {
-	static private TheTVDB tvdb;
+	static private TVDB tvdb;
 	
-	static public TheTVDB getTVDBInstance () {
+	static public TVDB getTVDBInstance () {
 		if (tvdb == null) {
 			// TODO: Get an API-Key
-			tvdb= new TheTVDB("0629B785CE550C8D");
+			tvdb= new TVDB("0629B785CE550C8D");
 		}
 		return tvdb;
 	}

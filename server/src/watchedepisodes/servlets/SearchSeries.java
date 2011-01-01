@@ -7,10 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import watchedepisodes.entities.SeriesFragment;
+import watchedepisodes.thetvdb.TVDB;
 import watchedepisodes.tools.ServiceLocator;
-
-import com.moviejukebox.thetvdb.TheTVDB;
-import com.moviejukebox.thetvdb.model.Series;
 
 @SuppressWarnings("serial")
 public class SearchSeries extends HttpServlet {
@@ -25,18 +24,18 @@ public class SearchSeries extends HttpServlet {
 			language= "en";
 		}
 		
-		TheTVDB tvdb= ServiceLocator.getTVDBInstance();
-		List<Series> results= tvdb.searchSeries(seriesName, language);
+		TVDB tvdb= ServiceLocator.getTVDBInstance();
+		List<SeriesFragment> results= tvdb.searchSeries(seriesName, language);
 		
 		printHumanReadableList(resp, results);
 	}
 	
-	private void printHumanReadableList (HttpServletResponse resp, List<Series> results) {
+	private void printHumanReadableList (HttpServletResponse resp, List<SeriesFragment> results) {
 		resp.setContentType("text/html");
 		try {
 			resp.getWriter().println("<h1>Search Results:</h1>");
-			for (Series s : results) {
-				resp.getWriter().println(s.getId() + " -> " + s.getSeriesName() + "<br />");
+			for (SeriesFragment s : results) {
+				resp.getWriter().println(s.getId() + " -> " + s.getName() + "<br />");
 			}
 		} catch (IOException e) {
 			System.err.println(e);

@@ -15,11 +15,13 @@ package com.moviejukebox.thetvdb.tools;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -32,6 +34,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
+import org.xml.sax.SAXException;
 
 /**
  * Generic set of routines to process the DOM model data
@@ -64,33 +67,26 @@ public class DOMHelper {
      * Get a DOM document from the supplied URL
      * @param url
      * @return
-     * @throws Exception 
+     * @throws IOException 
+     * @throws ParserConfigurationException 
+     * @throws SAXException 
      */
-    public synchronized static Document getEventDocFromUrl(String url) throws Throwable {
-        String webPage = null;
-        InputStream in = null;
-        
-        try {
-            webPage = WebBrowser.request(url);
-            in = new ByteArrayInputStream(webPage.getBytes("UTF-8"));
-        } catch (Throwable tw) {
-            throw new RuntimeException("Unable to download URL", tw);
-        }
-        
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        DocumentBuilder db = dbf.newDocumentBuilder();
-        Document doc = null;
-        
-        try {
-            doc = db.parse(in);
+	public static Document getEventDocFromUrl(String url) throws IOException, SAXException, ParserConfigurationException {
+		InputStream in= null;
+		try {
+        	String webPage= WebBrowser.request(url);
+        	in= new ByteArrayInputStream(webPage.getBytes("UTF-8"));
+        	
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document doc = null;
+			
+            doc = builder.parse(in);
             doc.getDocumentElement().normalize();
-        } catch (Throwable tw) {
-            throw new RuntimeException("Unable to parse TheTVDb response, please try again later.", tw);
+            return doc;
         } finally {
             in.close();
         }
-        
-        return doc;
     }
 
     /**
