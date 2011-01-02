@@ -6,12 +6,18 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Text;
 
 @PersistenceCapable
 public class Series {
 	@PrimaryKey
+	private Key key;
+	@Persistent
 	private String id;
+	@Persistent
+	private String language;
 	@Persistent (mappedBy= "series")
 	private List<Episode> episodes;
 	
@@ -28,12 +34,34 @@ public class Series {
 	private String banner;
 	@Persistent
 	private String imdbId;
-
+	
+	public void setKey() throws Exception {
+		if (id != null && language != null) {
+			this.key= KeyFactory.createKey(Series.class.getSimpleName(), id + language);
+			System.out.println("Key input: '" + id + language + "'");
+		} else {
+			System.err.println("Could not generate key for series because id or language were missing!");
+			throw new Exception("Could not generate key!");
+		}
+	}
+	
+	public void setKey(Key key) {
+		this.key = key;
+	}
+	public Key getKey() {
+		return key;
+	}
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+	public String getLanguage() {
+		return language;
 	}
 	public void setEpisodes(List<Episode> episodes) {
 		this.episodes = episodes;

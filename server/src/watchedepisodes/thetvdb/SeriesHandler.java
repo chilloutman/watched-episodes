@@ -1,7 +1,6 @@
 package watchedepisodes.thetvdb;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -50,6 +49,7 @@ public class SeriesHandler extends DefaultHandler {
 				elementName == "SeriesName" ||
 				elementName == "banner" ||
 				elementName == "IMDB_ID" ||
+				elementName == "Language" ||
 				elementName == "FirstAired");
 	}
 	
@@ -59,7 +59,7 @@ public class SeriesHandler extends DefaultHandler {
 			return;
 		}
 		
-		String content= currentValue.toString(); 
+		String content= currentValue.toString().trim();
 		
 		if (qName == "SeriesName") {
 			result.setName(content);	
@@ -79,6 +79,8 @@ public class SeriesHandler extends DefaultHandler {
 			result.setBanner(content);
 		} else if (qName == "IMDB_ID") {
 			result.setImdbId(content);
+		} else if (qName == "Language") {
+			result.setLanguage(content);
 		} else if (qName == "FirstAired") {
 			result.setFirstAired(content);
 		}
@@ -88,5 +90,10 @@ public class SeriesHandler extends DefaultHandler {
 
 	@Override
 	public void endDocument () throws SAXException {
+		try {
+			result.setKey();
+		} catch (Exception e) {
+			result= null;
+		}
 	}
 }

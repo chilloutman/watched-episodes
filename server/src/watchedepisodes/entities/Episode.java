@@ -7,11 +7,18 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
+
 
 @PersistenceCapable
 public class Episode {
-	@PrimaryKey
+	@PrimaryKey // Key is generated from "id + language"
+	private Key key;
+	@Persistent
 	private String id;
+	@Persistent
+	private String language;
 	@Persistent
 	private Series series;
 	
@@ -22,9 +29,8 @@ public class Episode {
 	@Persistent
 	private int episodeNumber;
 	
-	private String overview;
 	@Persistent
-	private String language;
+	private String overview;
 	@Persistent
 	private String firstAired;
 	@Persistent
@@ -39,6 +45,12 @@ public class Episode {
 	@Persistent
 	private List<String> guestStars = new ArrayList<String>();
 	
+	public void setKey(Key key) {
+		this.key = key;
+	}
+	public Key getKey() {
+		return key;
+	}
 	public Series getSeries() {
 		return series;
 	}
