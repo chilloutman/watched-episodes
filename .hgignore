@@ -1,7 +1,10 @@
 syntax: glob
 
+#gae
+appengine-generated/*
+
 # Java
-classes/
+classes/*
 
 # others
 \#*
