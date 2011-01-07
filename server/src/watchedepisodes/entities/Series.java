@@ -38,10 +38,10 @@ public class Series {
 	public void setKey() throws Exception {
 		if (id != null && language != null) {
 			this.key= KeyFactory.createKey(Series.class.getSimpleName(), id + language);
-			System.out.println("Key input: '" + id + language + "'");
 		} else {
-			System.err.println("Could not generate key for series because id or language were missing!");
-			throw new Exception("Could not generate key!");
+			String message= "Could not generate key for series because id or language was missing!";
+			System.err.println(message);
+			throw new Exception(message);
 		}
 	}
 	

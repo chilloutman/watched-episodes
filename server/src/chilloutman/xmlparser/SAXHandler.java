@@ -17,6 +17,7 @@ public abstract class SAXHandler<ResultType> extends DefaultHandler {
 	@Override
 	public void startDocument () throws SAXException {
 		result= getNewResult();
+		currentParentElement= null;
 		currentChildElement= null;
 		currentValue= new StringBuilder();
 	}
@@ -25,17 +26,17 @@ public abstract class SAXHandler<ResultType> extends DefaultHandler {
 	
 	@Override
 	public void startElement (String uri, String localName, String qName, Attributes atts) throws SAXException {
-		if (isRelevantParentElement(qName)) {
+		if (isRelevantParentElement(qName) && (currentParentElement != qName)) {
+			willStartParentElement(qName);
 			currentParentElement= qName;
-		}
-			
-		if (currentParentElement != null) {
+		} else if (currentParentElement != null) {
 			currentChildElement= (isRelevantChildElement(currentParentElement, qName)) ? qName : null;
 		}
 	}
 	
 	protected abstract boolean isRelevantParentElement (String elementName) throws SAXException;
 	protected abstract boolean isRelevantChildElement (String parentName, String elementName) throws SAXException;
+	protected abstract void willStartParentElement (String parentName) throws SAXException;
 	
 	@Override
 	public void characters (char[] ch, int start, int length) throws SAXException {
@@ -47,22 +48,23 @@ public abstract class SAXHandler<ResultType> extends DefaultHandler {
 	
 	@Override
 	public void endElement (String uri, String localName, String qName) throws SAXException {
-		if (currentParentElement == qName) {
-			currentParentElement= null;
-		}
-		
 		if (currentChildElement != null) {
 			XMLElement element= new XMLElement();
-			element.setName(qName);
+			element.setName(currentChildElement);
 			element.setParentName(currentParentElement);
 			element.setContent(currentValue.toString().trim());
 			currentValue.delete(0, currentValue.length());
+			currentChildElement= null;
 			
-			parseElement(element);
+			parseChildElement(element);
+		} else if (qName == currentParentElement) {
+			finishedParentElement(currentParentElement);
+			currentParentElement= null;
 		}
 	}
 	
-	protected abstract void parseElement (XMLElement element) throws SAXException;
+	protected abstract void parseChildElement (XMLElement element) throws SAXException;
+	protected abstract void finishedParentElement (String parentName) throws SAXException;
 	
 	@Override
 	public void endDocument () throws SAXException {

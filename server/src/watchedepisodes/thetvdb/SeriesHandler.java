@@ -15,7 +15,7 @@ public class SeriesHandler extends SAXHandler<Series> {
 	private static final String rootName= "Series";
 	
 	@Override
-	protected Series getNewResult() {
+	protected Series getNewResult() throws SAXException {
 		return new Series();
 	}
 	
@@ -38,9 +38,14 @@ public class SeriesHandler extends SAXHandler<Series> {
 		}
 		return false;
 	}
-
+	
 	@Override
-	protected void parseElement(XMLElement element) {
+	protected void willStartParentElement (String parentName) throws SAXException {
+		
+	}
+	
+	@Override
+	protected void parseChildElement(XMLElement element) {
 		if (element.getParentName() == rootName) {
 			if (element.getName() == "SeriesName") {
 				getResult().setName(element.getContent());	
@@ -67,14 +72,18 @@ public class SeriesHandler extends SAXHandler<Series> {
 			}
 		}
 	}
-
+	
 	@Override
-	protected void parsingEnded() throws SAXException {
+	protected void finishedParentElement (String parentName) throws SAXException {
 		try {
 			getResult().setKey();
 		} catch (Exception e) {
-			throw new SAXException("Could not generate key");
+			throw new SAXException(e);
 		}
 	}
-
+	
+	@Override
+	protected void parsingEnded () throws SAXException {
+		
+	}
 }

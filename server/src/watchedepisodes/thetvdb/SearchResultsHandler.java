@@ -2,69 +2,61 @@ package watchedepisodes.thetvdb;
 
 import java.util.ArrayList;
 
-import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
 import watchedepisodes.entities.SeriesFragment;
 
-class SearchResultsHandler extends DefaultHandler {
+import chilloutman.xmlparser.SAXHandler;
+import chilloutman.xmlparser.XMLElement;
+
+public class SearchResultsHandler extends SAXHandler<ArrayList<SeriesFragment>> {
 	
-	private ArrayList<SeriesFragment> result;
-	private SeriesFragment currentSeries;
-	private String currentElement;
-	private StringBuilder currentValue;
+	private static final String rootName= "Series";
+	SeriesFragment currentSeries;
 	
-	ArrayList<SeriesFragment> getResult () {
-		return result;
+	@Override
+	protected ArrayList<SeriesFragment> getNewResult () throws SAXException {
+		return new ArrayList<SeriesFragment>();
 	}
 	
 	@Override
-	public void startDocument () throws SAXException {
-		currentElement= "";
-		currentValue= new StringBuilder();
-		result= new ArrayList<SeriesFragment>();
-	}
-	
-	@Override
-	public void startElement (String uri, String localName, String qName, Attributes atts) throws SAXException {
-		if (qName == "Series") {
-			currentSeries= new SeriesFragment();
-		} else {
-			currentElement= (elementIsRelevant(qName)) ? qName : "";
-		}
-	}
-	
-	@Override
-	public void characters (char[] ch, int start, int length) throws SAXException {
-		if (elementIsRelevant(currentElement)) {
-			String content= new String(ch).substring(start, start + length);
-			currentValue.append(content);
-		}
-	}
-	
-	private boolean elementIsRelevant (String elementName) {
-		return (elementName == "SeriesName" ||
-				elementName == "id");
-	}
-	
-	@Override
-	public void endElement (String uri, String localName, String qName) throws SAXException {
-		if (qName == "Series") {
-			result.add(currentSeries);
-			return;
-		}
-		
-		if (qName == "SeriesName") {
-			currentSeries.setName(currentValue.toString());	
-		} else if (qName == "id") {
-			currentSeries.setId(currentValue.toString());
-		}
-		
-		currentValue.delete(0, currentValue.length());
+	protected boolean isRelevantParentElement (String elementName) throws SAXException {
+		return (elementName == rootName);
 	}
 
 	@Override
-	public void endDocument () throws SAXException {
+	protected boolean isRelevantChildElement (String parentName, String elementName) throws SAXException {
+		if (parentName == rootName) {
+			return (elementName == "SeriesName" ||
+					elementName == "id");
+		}
+		return false;
+	}
+
+	@Override
+	protected void willStartParentElement (String parentName) {
+		currentSeries= new SeriesFragment();
+		getResult().add(currentSeries);
+	}
+	
+	@Override
+	protected void parseChildElement (XMLElement element) throws SAXException {		
+		if (element.getParentName() == rootName) {
+			if (element.getName() == "SeriesName") {
+				currentSeries.setName(element.getContent());	
+			} else if (element.getName() == "id") {
+				currentSeries.setId(element.getContent());
+			}
+		}
+	}
+	
+	@Override
+	protected void finishedParentElement (String parentName) throws SAXException {
+		
+	}
+	
+	@Override
+	protected void parsingEnded () throws SAXException {
+		
 	}
 }
