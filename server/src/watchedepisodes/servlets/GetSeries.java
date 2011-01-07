@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import watchedepisodes.entities.Series;
 import watchedepisodes.thetvdb.TVDB;
+import watchedepisodes.thetvdb.TVDB.TVDBException;
 import watchedepisodes.tools.ServiceLocator;
 
 import com.google.appengine.api.datastore.Key;
@@ -30,8 +31,12 @@ public class GetSeries extends HttpServlet {
 		try {
 			series= pm.getObjectById(Series.class, key);
 		} catch (JDOObjectNotFoundException e) {
-			series= fetchSeriesFromTVDB();
-			pm.makePersistent(series);
+			try {
+				series= fetchSeriesFromTVDB();
+				pm.makePersistent(series);
+			} catch (TVDBException e1) {
+				// TODO Handle this
+			}
 		}
 		
 		pm.close();
@@ -60,7 +65,7 @@ public class GetSeries extends HttpServlet {
 		}
 	}
 	
-	private Series fetchSeriesFromTVDB () {
+	private Series fetchSeriesFromTVDB () throws TVDBException {
 		TVDB tvdb= ServiceLocator.getTVDBInstance();
 		return tvdb.getSeries(id, language);
 	}

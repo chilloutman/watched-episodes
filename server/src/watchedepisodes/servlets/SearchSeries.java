@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import watchedepisodes.entities.SeriesFragment;
 import watchedepisodes.thetvdb.TVDB;
+import watchedepisodes.thetvdb.TVDB.TVDBException;
 import watchedepisodes.tools.ServiceLocator;
 
 @SuppressWarnings("serial")
@@ -25,9 +26,13 @@ public class SearchSeries extends HttpServlet {
 		}
 		
 		TVDB tvdb= ServiceLocator.getTVDBInstance();
-		List<SeriesFragment> results= tvdb.searchSeries(seriesName, language);
-		
-		printHumanReadableList(resp, results);
+		List<SeriesFragment> results;
+		try {
+			results = tvdb.searchSeries(seriesName, language);
+			printHumanReadableList(resp, results);
+		} catch (TVDBException e) {
+			// TODO Auto-generated catch block
+		}
 	}
 	
 	private void printHumanReadableList (HttpServletResponse resp, List<SeriesFragment> results) {

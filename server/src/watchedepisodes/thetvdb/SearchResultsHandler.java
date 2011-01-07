@@ -1,7 +1,6 @@
 package watchedepisodes.thetvdb;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -9,15 +8,15 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import watchedepisodes.entities.SeriesFragment;
 
-public class SearchResultsHandler extends DefaultHandler {
+class SearchResultsHandler extends DefaultHandler {
 	
 	private ArrayList<SeriesFragment> result;
 	private SeriesFragment currentSeries;
 	private String currentElement;
 	private StringBuilder currentValue;
 	
-	List<SeriesFragment> getResult () {
-		return (result == null) ? new ArrayList<SeriesFragment>() : result;
+	ArrayList<SeriesFragment> getResult () {
+		return result;
 	}
 	
 	@Override
