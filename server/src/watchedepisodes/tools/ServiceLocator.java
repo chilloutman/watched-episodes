@@ -5,7 +5,7 @@ import javax.jdo.PersistenceManagerFactory;
 
 import watchedepisodes.thetvdb.TVDB;
 
-public class ServiceLocator {
+public abstract class ServiceLocator {
 	private static final TVDB tvdb= new TVDB("0629B785CE550C8D");
 	private static final PersistenceManagerFactory pmf= JDOHelper.getPersistenceManagerFactory("transactions-optional");
 	
