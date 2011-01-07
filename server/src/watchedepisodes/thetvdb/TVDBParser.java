@@ -11,21 +11,21 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 @SuppressWarnings("serial")
-class TVDBParseException extends Exception { }
+class ParseException extends Exception { }
 
 public class TVDBParser {
 	
 	private SAXParser parser;
 	
-	void parse (InputStream xml, DefaultHandler handler) throws TVDBParseException {
+	void parse (InputStream xml, DefaultHandler handler) throws ParseException {
 		try {
 			getParser().parse(xml, handler);
 		} catch (SAXException e) {
 			e.printStackTrace();
-			throw new TVDBParseException();
+			throw new ParseException();
 		} catch (IOException e) {
 			e.printStackTrace();
-			throw new TVDBParseException();
+			throw new ParseException();
 		} finally {
 			try {
 				xml.close();
@@ -35,15 +35,17 @@ public class TVDBParser {
 		}
 	}
 	
-	private SAXParser getParser () throws TVDBParseException {
+	private SAXParser getParser () throws ParseException {
 		if (parser == null) {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			try {
 				parser= factory.newSAXParser();
 			} catch (ParserConfigurationException e) {
 				e.printStackTrace();
+				throw new ParseException();
 			} catch (SAXException e) {
 				e.printStackTrace();
+				throw new ParseException();
 			}
 		} else {
 			parser.reset();

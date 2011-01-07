@@ -11,8 +11,6 @@ import java.util.List;
 import watchedepisodes.entities.Series;
 import watchedepisodes.entities.SeriesFragment;
 
-
-
 public class TVDB {
 	private static final String BaseURL= "http://www.thetvdb.com/api/";
 	private static final String SearchURL= BaseURL + "GetSeries.php?seriesname=";
@@ -34,7 +32,7 @@ public class TVDB {
 		try {
 			parser.parse(xml, handler);
 			return handler.getResult();
-		} catch (TVDBParseException e) {
+		} catch (ParseException e) {
 			throw new TVDBException();
 		}
 		
@@ -57,7 +55,7 @@ public class TVDB {
 		try {
 			parser.parse(xml, handler);
 			return handler.getResult();
-		} catch (TVDBParseException e) {
+		} catch (ParseException e) {
 			throw new TVDBException();
 		}
 	}

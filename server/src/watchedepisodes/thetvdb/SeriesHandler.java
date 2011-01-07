@@ -2,98 +2,79 @@ package watchedepisodes.thetvdb;
 
 import java.util.ArrayList;
 
-import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
 import watchedepisodes.entities.Series;
+import chilloutman.xmlparser.SAXHandler;
+import chilloutman.xmlparser.XMLElement;
 
 import com.google.appengine.api.datastore.Text;
 
-public class SeriesHandler extends DefaultHandler {
-	private Series result;
-	private String currentElement;
-	private StringBuilder currentValue;
+public class SeriesHandler extends SAXHandler<Series> {
 	
-	Series getResult () {
-		return result;
+	private static final String rootName= "Series";
+	
+	@Override
+	protected Series getNewResult() {
+		return new Series();
 	}
 	
 	@Override
-	public void startDocument () throws SAXException {
-		currentElement= null;
-		currentValue= new StringBuilder();
+	protected boolean isRelevantParentElement (String elementName) throws SAXException {
+		return (elementName == rootName);
 	}
 	
 	@Override
-	public void startElement (String uri, String localName, String qName, Attributes atts) throws SAXException {
-		if (qName == "Series") {
-			result= new Series();
-		} else {
-			currentElement= (isElementRelevant(qName)) ? qName : null;
+	protected boolean isRelevantChildElement (String parentName, String elementName) throws SAXException {
+		if (parentName == rootName) {
+			return (elementName == "id" ||
+					elementName == "Actors" ||
+					elementName == "Overview" ||
+					elementName == "SeriesName" ||
+					elementName == "banner" ||
+					elementName == "IMDB_ID" ||
+					elementName == "Language" ||
+					elementName == "FirstAired");
 		}
-	}
-	
-	@Override
-	public void characters (char[] ch, int start, int length) throws SAXException {
-		if (currentElement != null) {
-			String content= new String(ch).substring(start, start + length);
-			currentValue.append(content);
-		}
-	}
-	
-	private boolean isElementRelevant (String elementName) {
-		return (elementName == "id" ||
-				elementName == "Actors" ||
-				elementName == "Overview" ||
-				elementName == "SeriesName" ||
-				elementName == "banner" ||
-				elementName == "IMDB_ID" ||
-				elementName == "Language" ||
-				elementName == "FirstAired");
-	}
-	
-	@Override
-	public void endElement (String uri, String localName, String qName) throws SAXException {
-		if (currentElement == null) {
-			return;
-		}
-		
-		String content= currentValue.toString().trim();
-		
-		if (qName == "SeriesName") {
-			result.setName(content);	
-		} else if (qName == "id") {
-			result.setId(content);
-		} else if (qName == "Actors") {
-			String[] actors= content.split("\\|");
-			ArrayList<String> actorsList= new ArrayList<String>();
-			for (int i= 1; i < actors.length ; i++) {
-				actorsList.add(actors[i]);
-			}
-			result.setActors(actorsList);
-		} else if (qName == "Overview") {
-			Text overview= new Text(content);
-			result.setOverview(overview);
-		} else if (qName == "banner") {
-			result.setBanner(content);
-		} else if (qName == "IMDB_ID") {
-			result.setImdbId(content);
-		} else if (qName == "Language") {
-			result.setLanguage(content);
-		} else if (qName == "FirstAired") {
-			result.setFirstAired(content);
-		}
-		
-		currentValue.delete(0, currentValue.length());
+		return false;
 	}
 
 	@Override
-	public void endDocument () throws SAXException {
-		try {
-			result.setKey();
-		} catch (Exception e) {
-			result= null;
+	protected void parseElement(XMLElement element) {
+		if (element.getParentName() == rootName) {
+			if (element.getName() == "SeriesName") {
+				getResult().setName(element.getContent());	
+			} else if (element.getName() == "id") {
+				getResult().setId(element.getContent());
+			} else if (element.getName() == "Actors") {
+				String[] actors= element.getContent().split("\\|");
+				ArrayList<String> actorsList= new ArrayList<String>();
+				for (int i= 1; i < actors.length ; i++) {
+					actorsList.add(actors[i]);
+				}
+				getResult().setActors(actorsList);
+			} else if (element.getName() == "Overview") {
+				Text overview= new Text(element.getContent());
+				getResult().setOverview(overview);
+			} else if (element.getName() == "banner") {
+				getResult().setBanner(element.getContent());
+			} else if (element.getName() == "IMDB_ID") {
+				getResult().setImdbId(element.getContent());
+			} else if (element.getName() == "Language") {
+				getResult().setLanguage(element.getContent());
+			} else if (element.getName() == "FirstAired") {
+				getResult().setFirstAired(element.getContent());
+			}
 		}
 	}
+
+	@Override
+	protected void parsingEnded() throws SAXException {
+		try {
+			getResult().setKey();
+		} catch (Exception e) {
+			throw new SAXException("Could not generate key");
+		}
+	}
+
 }
