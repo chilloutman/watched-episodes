@@ -1,4 +1,4 @@
-package watchedepisodes.thetvdb;
+package watchedepisodes.thetvdb.xmlparser;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,14 +10,11 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-@SuppressWarnings("serial")
-class ParseException extends Exception { }
-
 public class TVDBParser {
 	
 	private SAXParser parser;
 	
-	void parse (InputStream xml, DefaultHandler handler) throws ParseException {
+	public void parse (InputStream xml, DefaultHandler handler) throws ParseException {
 		try {
 			getParser().parse(xml, handler);
 		} catch (SAXException e) {
@@ -26,12 +23,6 @@ public class TVDBParser {
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new ParseException();
-		} finally {
-			try {
-				xml.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 	
@@ -50,6 +41,7 @@ public class TVDBParser {
 		} else {
 			parser.reset();
 		}
+		
 		return parser;
 	}
 }

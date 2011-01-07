@@ -1,4 +1,4 @@
-package watchedepisodes.thetvdb;
+package watchedepisodes.thetvdb.xmlparser;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ import chilloutman.xmlparser.XMLElement;
 public class SearchResultsHandler extends SAXHandler<ArrayList<SeriesFragment>> {
 	
 	private static final String rootName= "Series";
-	SeriesFragment currentSeries;
+	private SeriesFragment currentSeries;
 	
 	@Override
 	protected ArrayList<SeriesFragment> getNewResult () throws SAXException {

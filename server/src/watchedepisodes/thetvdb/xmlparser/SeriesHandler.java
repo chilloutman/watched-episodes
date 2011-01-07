@@ -1,4 +1,4 @@
-package watchedepisodes.thetvdb;
+package watchedepisodes.thetvdb.xmlparser;
 
 import java.util.ArrayList;
 

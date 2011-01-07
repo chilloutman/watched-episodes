@@ -10,6 +10,10 @@ import java.util.List;
 
 import watchedepisodes.entities.Series;
 import watchedepisodes.entities.SeriesFragment;
+import watchedepisodes.thetvdb.xmlparser.SearchResultsHandler;
+import watchedepisodes.thetvdb.xmlparser.SeriesHandler;
+import watchedepisodes.thetvdb.xmlparser.ParseException;
+import watchedepisodes.thetvdb.xmlparser.TVDBParser;
 
 public class TVDB {
 	private static final String BaseURL= "http://www.thetvdb.com/api/";
@@ -52,11 +56,18 @@ public class TVDB {
 		String url= getSeriesURL(id, language);
 		InputStream xml= fetchURL(url);
 		SeriesHandler handler= new SeriesHandler();
+		
 		try {
 			parser.parse(xml, handler);
 			return handler.getResult();
 		} catch (ParseException e) {
 			throw new TVDBException();
+		} finally {
+			try {
+				xml.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
