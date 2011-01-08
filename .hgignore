@@ -1,12 +1,18 @@
 syntax: glob
 
-#gae
+# GAE
 appengine-generated/*
 
 # Java
 classes/*
 
-# others
+# Xcode user data & build directory
+*.pbxuser
+*.mode?v?
+*.perspectivev?
+build/*
+
+# Others
 \#*
 \._*
 *~
