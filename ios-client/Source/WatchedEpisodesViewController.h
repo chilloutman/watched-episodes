@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WatchedEpisodesViewController : UIViewController {
+@interface WatchedEpisodesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate> {
+	UITableView *searchResultsTable;
+	UITextField *searchField;
 }
+
+@property (nonatomic, retain) IBOutlet UITableView *searchResultsTable;
+@property (nonatomic, retain) IBOutlet UITextField *searchField;
+
+- (IBAction)search:(UIButton *)sender;
 
 @end
 

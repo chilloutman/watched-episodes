@@ -7,24 +7,25 @@ import javax.servlet.http.HttpServletRequest;
 @SuppressWarnings("serial")
 abstract class AbstractServlet extends HttpServlet {
 	protected String language;
-	protected ResponseType responseType;
+	protected String responseType;
 	
-	protected enum ResponseType {
-		ProtocolBuffers,
-		Html
-	};
+	protected class ResponseTypes {
+		static final String ProtocolBuffers= "protobuf";
+		static final String Html= "html";
+	}
 	
 	protected void getParameters(HttpServletRequest request) {
 		language= request.getParameter("lang");
+		// TODO: Check if language is supported here or somewhere esle?
 		if (language == null) {
 			language= "en";
 		}
 		
 		String type= request.getParameter("t");
-		if (type == null) {
-			responseType= ResponseType.Html;
-		} else if (type == "protobuf") {
-			responseType= ResponseType.ProtocolBuffers;
+		if (type.equals(ResponseTypes.ProtocolBuffers)) {
+			responseType= ResponseTypes.ProtocolBuffers;
+		} else {
+			responseType= ResponseTypes.Html;
 		}
 	}
 }

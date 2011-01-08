@@ -128,11 +128,11 @@
 		EF8D76E912D8DEDA0064C5B5 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				EF8D76F312D8DEE40064C5B5 /* Other */,
 				EF8D76EC12D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.h */,
 				EF8D76ED12D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.m */,
 				EF8D76EE12D8DEDA0064C5B5 /* WatchedEpisodesViewController.h */,
 				EF8D76EF12D8DEDA0064C5B5 /* WatchedEpisodesViewController.m */,
+				EF8D76F312D8DEE40064C5B5 /* Other */,
 			);
 			path = Source;
 			sourceTree = "<group>";

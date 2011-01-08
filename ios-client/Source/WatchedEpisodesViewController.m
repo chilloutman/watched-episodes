@@ -10,20 +10,18 @@
 #import "ProtocolBuffers.h"
 #import "SearchSeries.pb.h"
 
+@interface WatchedEpisodesViewController ()
+
+- (void)performSearch;
+- (BOOL)checkResponse:(NSHTTPURLResponse *)response;
+
+@property (nonatomic, retain) NSArray *searchResults;
+
+@end
+
 @implementation WatchedEpisodesViewController
 
-
-
-/*
-// The designated initializer. Override to perform setup that is required before the view is loaded.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
+@synthesize searchResultsTable, searchField, searchResults;
 
 /*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
@@ -39,44 +37,93 @@
 }
 */
 
-- (void)viewWillAppear:(BOOL)animated {
-	//NSURL *url= [NSURL URLWithString:@"http://localhost:8080/searchSeries?name=simpsons"];
-	NSURL *url= [NSURL URLWithString:@"http://watched-episodes.appspot.com/searchSeries?name=walking+dead"];
+// - (void)viewWillAppear:(BOOL)animated { }
+
+- (IBAction)search:(UIButton *)sender {
+	[self performSearch];
+}
+
+- (void)performSearch {
+	//NSString *base= @"http://watched-episodes.appspot.com";
+	NSString *base= @"http://localhost:8080";
+	
+	NSString *search= [self.searchField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	
+	NSString *urlString= [NSString stringWithFormat:@"%@/searchSeries?name=%@&t=protobuf", base, search];
+	NSLog(@"%@", urlString);
+	NSURL *url= [NSURL URLWithString:urlString];
 	NSURLRequest *request= [NSURLRequest requestWithURL:url];
-	NSData *data= [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+	NSHTTPURLResponse *response;
+	NSData *data= [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
 	
-	NSArray *searchResults= [[PBSearchResults parseFromData:data] seriesList];
-	
-	NSLog(@"Search Results: ");
-	for (PBSearchResults_PBSeries *s in searchResults) {
-		NSLog(@"%@ -> %@\n", [s id], [s name]);
+	if ([self checkResponse:response]) {
+		self.searchResults= [[PBSearchResults parseFromData:data] seriesList];
+		[self.searchResultsTable reloadData];
 	}
 }
 
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+
+- (BOOL)checkResponse:(NSHTTPURLResponse *)response {
+	if ([response statusCode] == 200) {
+		NSDictionary *headers= [response allHeaderFields];
+		NSLog(@"%@", [headers objectForKey:@"Content-Type"]);
+		return ([[headers objectForKey:@"Content-Type"] isEqualToString:@"application/x-protobuf"]);
+	} else {
+		return NO;
+	}
 }
-*/
+
+#pragma mark UITextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+	// TODO The request has to be async for this to make any sense.
+	// [self performSelectorOnMainThread:@selector(performSearch) withObject:nil waitUntilDone:NO];
+	return YES;
+}
+
+#pragma mark UITableViewDelegate
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	NSLog(@"%d", [self.searchResults count]);
+	return [self.searchResults count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	static NSString *CellIdentifier= @"searchCell";
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	
+	if (cell == nil) {
+		cell= [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+	}
+	
+	PBSearchResults_PBSeries *series= [self.searchResults objectAtIndex:indexPath.row];
+	cell.textLabel.text= [series name];
+				
+	return cell;
+}
 
 #pragma mark -
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return YES;
+}
+
 - (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
+	self.searchResults= nil;
 }
 
 - (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
+	self.searchResultsTable= nil;
+	self.searchField= nil;
+	self.searchResults= nil;
 }
 
-
 - (void)dealloc {
+	self.searchResults= nil;
+	self.searchResultsTable= nil;
+	self.searchField= nil;
+	self.searchResults= nil;
     [super dealloc];
 }
 

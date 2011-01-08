@@ -44,7 +44,7 @@ public class SearchSeriesServlet extends AbstractServlet {
 	
 	private void writeResponse (HttpServletResponse response, List<SeriesFragment> results) {
 		try {
-			if (responseType == ResponseType.ProtocolBuffers) {
+			if (responseType.equals(ResponseTypes.ProtocolBuffers)) {
 				writeProtobuf(response, results);
 			} else {
 				writeHtml(response, results);
