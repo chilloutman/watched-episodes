@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import watchedepisodes.entities.SeriesFragment;
 import watchedepisodes.thetvdb.TVDB;
-import watchedepisodes.thetvdb.TVDB.TVDBException;
+import watchedepisodes.thetvdb.TVDBException;
 import watchedepisodes.tools.ServiceLocator;
 
 @SuppressWarnings("serial")

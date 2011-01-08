@@ -1,6 +1,7 @@
 package watchedepisodes.thetvdb.xmlparser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.xml.sax.SAXException;
 
@@ -9,13 +10,13 @@ import watchedepisodes.entities.SeriesFragment;
 import chilloutman.xmlparser.SAXHandler;
 import chilloutman.xmlparser.XMLElement;
 
-public class SearchResultsHandler extends SAXHandler<ArrayList<SeriesFragment>> {
+public class SearchResultsHandler extends SAXHandler<List<SeriesFragment>> {
 	
 	private static final String rootName= "Series";
 	private SeriesFragment currentSeries;
 	
 	@Override
-	protected ArrayList<SeriesFragment> getNewResult () throws SAXException {
+	protected List<SeriesFragment> getNewResult () throws SAXException {
 		return new ArrayList<SeriesFragment>();
 	}
 	
@@ -36,7 +37,7 @@ public class SearchResultsHandler extends SAXHandler<ArrayList<SeriesFragment>> 
 	@Override
 	protected void willStartParentElement (String parentName) {
 		currentSeries= new SeriesFragment();
-		getResult().add(currentSeries);
+		((ArrayList<SeriesFragment>)getResult()).add(currentSeries);
 	}
 	
 	@Override

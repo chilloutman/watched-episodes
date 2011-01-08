@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import watchedepisodes.entities.Series;
 import watchedepisodes.thetvdb.TVDB;
-import watchedepisodes.thetvdb.TVDB.TVDBException;
+import watchedepisodes.thetvdb.TVDBException;
 import watchedepisodes.tools.ServiceLocator;
 
 import com.google.appengine.api.datastore.Key;
