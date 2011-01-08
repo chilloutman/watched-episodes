@@ -18,8 +18,8 @@ public class Series {
 	private String id;
 	@Persistent
 	private String language;
-	@Persistent (mappedBy= "series")
-	private List<Episode> episodes;
+	@Persistent
+	private List<Season> seasons;
 	
 	@Persistent
 	private String name;
@@ -63,11 +63,11 @@ public class Series {
 	public String getLanguage() {
 		return language;
 	}
-	public void setEpisodes(List<Episode> episodes) {
-		this.episodes = episodes;
+	public void setSeasons(List<Season> seasons) {
+		this.seasons = seasons;
 	}
-	public List<Episode> getEpisodes() {
-		return episodes;
+	public List<Season> getSeasons() {
+		return seasons;
 	}
 	public String getName() {
 		return name;
