@@ -76,7 +76,7 @@ public class SeriesHandler extends SAXHandler<Series> {
 	@Override
 	protected void finishedParentElement (String parentName) throws SAXException {
 		try {
-			getResult().setKey();
+			getResult().generateKey();
 		} catch (Exception e) {
 			throw new SAXException(e);
 		}

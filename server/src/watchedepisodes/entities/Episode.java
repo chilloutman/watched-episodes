@@ -8,6 +8,8 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.datastore.Text;
 
 
 @PersistenceCapable
@@ -29,21 +31,28 @@ public class Episode {
 	private int episodeNumber;
 	
 	@Persistent
-	private String overview;
+	private Text overview;
 	@Persistent
 	private String firstAired;
-	@Persistent
-	private String imdbId;
 	@Persistent
 	private String rating;
 	
 	@Persistent
-	private List<String> writers = new ArrayList<String>();
+	private String writer;
 	@Persistent
-	private List<String> directors = new ArrayList<String>();
+	private String director;
 	@Persistent
 	private List<String> guestStars = new ArrayList<String>();
 	
+	public void generateKey() throws Exception {
+		if (id != null && language != null) {
+			this.key= KeyFactory.createKey(Episode.class.getSimpleName(), id + language);
+		} else {
+			String message= "Could not generate key for series because id or language was missing!";
+			System.err.println(message);
+			throw new Exception(message);
+		}
+	}
 	public void setKey(Key key) {
 		this.key = key;
 	}
@@ -80,10 +89,10 @@ public class Episode {
 	public void setEpisodeNumber(int episodeNumber) {
 		this.episodeNumber = episodeNumber;
 	}
-	public String getOverview() {
+	public Text getOverview() {
 		return overview;
 	}
-	public void setOverview(String overview) {
+	public void setOverview(Text overview) {
 		this.overview = overview;
 	}
 	public String getLanguage() {
@@ -98,29 +107,23 @@ public class Episode {
 	public void setFirstAired(String firstAired) {
 		this.firstAired = firstAired;
 	}
-	public String getImdbId() {
-		return imdbId;
-	}
-	public void setImdbId(String imdbId) {
-		this.imdbId = imdbId;
-	}
 	public String getRating() {
 		return rating;
 	}
 	public void setRating(String rating) {
 		this.rating = rating;
 	}
-	public List<String> getWriters() {
-		return writers;
+	public String getWriter() {
+		return writer;
 	}
-	public void setWriters(List<String> writers) {
-		this.writers = writers;
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
-	public List<String> getDirectors() {
-		return directors;
+	public String getDirector() {
+		return director;
 	}
-	public void setDirectors(List<String> directors) {
-		this.directors = directors;
+	public void setDirector(String director) {
+		this.director = director;
 	}
 	public List<String> getGuestStars() {
 		return guestStars;

@@ -2,6 +2,7 @@ package watchedepisodes.thetvdb;
 
 import java.util.List;
 
+import watchedepisodes.entities.Episode;
 import watchedepisodes.entities.Series;
 import watchedepisodes.entities.SeriesFragment;
 
@@ -29,5 +30,9 @@ public class TVDB {
 		return request.getHandler().getResult();
 	}
 	
-	
+	public List<Episode> getAllEpisodes (String seriesId, String language) throws TVDBException {
+		GetAllEpisodesRequest request= new GetAllEpisodesRequest(BaseURL, apiKey, seriesId, language);
+		agent.performRequest(request);
+		return request.getHandler().getResult();
+	}
 }

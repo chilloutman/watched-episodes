@@ -35,7 +35,7 @@ public class Series {
 	@Persistent
 	private String imdbId;
 	
-	public void setKey() throws Exception {
+	public void generateKey() throws Exception {
 		if (id != null && language != null) {
 			this.key= KeyFactory.createKey(Series.class.getSimpleName(), id + language);
 		} else {
