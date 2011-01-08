@@ -15,8 +15,8 @@
 		EF8D76F012D8DEDA0064C5B5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D76EA12D8DEDA0064C5B5 /* main.m */; };
 		EF8D76F112D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D76ED12D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.m */; };
 		EF8D76F212D8DEDA0064C5B5 /* WatchedEpisodesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D76EF12D8DEDA0064C5B5 /* WatchedEpisodesViewController.m */; };
-		EF8D76FB12D8DF070064C5B5 /* SearchResultsProtocol.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D76FA12D8DF070064C5B5 /* SearchResultsProtocol.pb.m */; };
 		EF8D772112D8E29F0064C5B5 /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8D771812D8E2370064C5B5 /* libProtocolBuffers.a */; };
+		EF8D777212D9039A0064C5B5 /* SearchSeries.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D777112D903990064C5B5 /* SearchSeries.pb.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,28 +24,28 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = EF8D770E12D8E2370064C5B5 /* ProtocolBuffers.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 7461B52E0F94FAF800A0C422 /* libProtocolBuffers.a */;
+			remoteGlobalIDString = 7461B52E0F94FAF800A0C422;
 			remoteInfo = ProtocolBuffers;
 		};
 		EF8D771912D8E2370064C5B5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EF8D770E12D8E2370064C5B5 /* ProtocolBuffers.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 7401C1A80F950347006D8281 /* UnitTests.octest */;
+			remoteGlobalIDString = 7401C1A80F950347006D8281;
 			remoteInfo = UnitTests;
 		};
 		EF8D771B12D8E2370064C5B5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EF8D770E12D8E2370064C5B5 /* ProtocolBuffers.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 748F14580FD75E3B000858A9 /* CommandLineTests.app */;
+			remoteGlobalIDString = 748F14580FD75E3B000858A9;
 			remoteInfo = CommandLineTests;
 		};
 		EF8D772212D8E2AB0064C5B5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EF8D770E12D8E2370064C5B5 /* ProtocolBuffers.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 7461B52D0F94FAF800A0C422 /* ProtocolBuffers */;
+			remoteGlobalIDString = 7461B52D0F94FAF800A0C422;
 			remoteInfo = ProtocolBuffers;
 		};
 /* End PBXContainerItemProxy section */
@@ -64,10 +64,10 @@
 		EF8D76ED12D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchedEpisodesAppDelegate.m; sourceTree = "<group>"; };
 		EF8D76EE12D8DEDA0064C5B5 /* WatchedEpisodesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchedEpisodesViewController.h; sourceTree = "<group>"; };
 		EF8D76EF12D8DEDA0064C5B5 /* WatchedEpisodesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchedEpisodesViewController.m; sourceTree = "<group>"; };
-		EF8D76F912D8DF070064C5B5 /* SearchResultsProtocol.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchResultsProtocol.pb.h; path = ../shared/SearchResultsProtocol.pb.h; sourceTree = SOURCE_ROOT; };
-		EF8D76FA12D8DF070064C5B5 /* SearchResultsProtocol.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchResultsProtocol.pb.m; path = ../shared/SearchResultsProtocol.pb.m; sourceTree = SOURCE_ROOT; };
 		EF8D770E12D8E2370064C5B5 /* ProtocolBuffers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ProtocolBuffers.xcodeproj; path = protobuf/ProtocolBuffers.xcodeproj; sourceTree = "<group>"; };
 		EF8D771D12D8E26F0064C5B5 /* ProtocolBuffers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProtocolBuffers.h; path = protobuf/Classes/ProtocolBuffers.h; sourceTree = "<group>"; };
+		EF8D777012D903990064C5B5 /* SearchSeries.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSeries.pb.h; sourceTree = "<group>"; };
+		EF8D777112D903990064C5B5 /* SearchSeries.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSeries.pb.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,10 +157,9 @@
 		EF8D76F512D8DEF70064C5B5 /* ProtocolBuffers */ = {
 			isa = PBXGroup;
 			children = (
+				EF8D776F12D903990064C5B5 /* generated */,
 				EF8D771D12D8E26F0064C5B5 /* ProtocolBuffers.h */,
 				EF8D770E12D8E2370064C5B5 /* ProtocolBuffers.xcodeproj */,
-				EF8D76F912D8DF070064C5B5 /* SearchResultsProtocol.pb.h */,
-				EF8D76FA12D8DF070064C5B5 /* SearchResultsProtocol.pb.m */,
 			);
 			name = ProtocolBuffers;
 			sourceTree = "<group>";
@@ -173,6 +172,15 @@
 				EF8D771C12D8E2370064C5B5 /* CommandLineTests.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EF8D776F12D903990064C5B5 /* generated */ = {
+			isa = PBXGroup;
+			children = (
+				EF8D777012D903990064C5B5 /* SearchSeries.pb.h */,
+				EF8D777112D903990064C5B5 /* SearchSeries.pb.m */,
+			);
+			path = generated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,7 +278,7 @@
 				EF8D76F012D8DEDA0064C5B5 /* main.m in Sources */,
 				EF8D76F112D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.m in Sources */,
 				EF8D76F212D8DEDA0064C5B5 /* WatchedEpisodesViewController.m in Sources */,
-				EF8D76FB12D8DF070064C5B5 /* SearchResultsProtocol.pb.m in Sources */,
+				EF8D777212D9039A0064C5B5 /* SearchSeries.pb.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

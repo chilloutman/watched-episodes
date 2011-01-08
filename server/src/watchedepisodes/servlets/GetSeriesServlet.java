@@ -17,7 +17,8 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
 @SuppressWarnings("serial")
-public class GetSeries extends HttpServlet {
+public class GetSeriesServlet extends HttpServlet {
+	
 	private String id;
 	private String language;
 	

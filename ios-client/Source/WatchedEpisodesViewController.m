@@ -8,7 +8,7 @@
 
 #import "WatchedEpisodesViewController.h"
 #import "ProtocolBuffers.h"
-#import "SearchResultsProtocol.pb.h"
+#import "SearchSeries.pb.h"
 
 @implementation WatchedEpisodesViewController
 
@@ -45,11 +45,10 @@
 	NSURLRequest *request= [NSURLRequest requestWithURL:url];
 	NSData *data= [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
 	
-	PBSearchResults *searchResults= [PBSearchResults parseFromData:data];
-	NSArray *results= [searchResults searchResultList];
+	NSArray *searchResults= [[PBSearchResults parseFromData:data] seriesList];
 	
 	NSLog(@"Search Results: ");
-	for (PBSearchResults_PBSeries *s in results) {
+	for (PBSearchResults_PBSeries *s in searchResults) {
 		NSLog(@"%@ -> %@\n", [s id], [s name]);
 	}
 }

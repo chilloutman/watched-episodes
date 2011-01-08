@@ -15,7 +15,7 @@ import watchedepisodes.thetvdb.TVDBException;
 import watchedepisodes.tools.ServiceLocator;
 
 @SuppressWarnings("serial")
-public class CheckTVDB extends HttpServlet {
+public class CheckTVDBServlet extends HttpServlet {
 	
 	public void doGet (HttpServletRequest req, HttpServletResponse resp) {
 		resp.setContentType("text/html");

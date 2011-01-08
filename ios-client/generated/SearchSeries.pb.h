@@ -7,7 +7,7 @@
 @class PBSearchResults_PBSeries;
 @class PBSearchResults_PBSeries_Builder;
 
-@interface SearchResultsProtocolRoot : NSObject {
+@interface SearchSeriesRoot : NSObject {
 }
 + (PBExtensionRegistry*) extensionRegistry;
 + (void) registerAllExtensions:(PBMutableExtensionRegistry*) registry;
@@ -15,10 +15,10 @@
 
 @interface PBSearchResults : PBGeneratedMessage {
 @private
-  NSMutableArray* mutableSearchResultList;
+  NSMutableArray* mutableSeriesList;
 }
-- (NSArray*) searchResultList;
-- (PBSearchResults_PBSeries*) searchResultAtIndex:(int32_t) index;
+- (NSArray*) seriesList;
+- (PBSearchResults_PBSeries*) seriesAtIndex:(int32_t) index;
 
 + (PBSearchResults*) defaultInstance;
 - (PBSearchResults*) defaultInstance;
@@ -111,11 +111,11 @@
 - (PBSearchResults_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
 - (PBSearchResults_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
 
-- (NSArray*) searchResultList;
-- (PBSearchResults_PBSeries*) searchResultAtIndex:(int32_t) index;
-- (PBSearchResults_Builder*) replaceSearchResultAtIndex:(int32_t) index with:(PBSearchResults_PBSeries*) value;
-- (PBSearchResults_Builder*) addSearchResult:(PBSearchResults_PBSeries*) value;
-- (PBSearchResults_Builder*) addAllSearchResult:(NSArray*) values;
-- (PBSearchResults_Builder*) clearSearchResultList;
+- (NSArray*) seriesList;
+- (PBSearchResults_PBSeries*) seriesAtIndex:(int32_t) index;
+- (PBSearchResults_Builder*) replaceSeriesAtIndex:(int32_t) index with:(PBSearchResults_PBSeries*) value;
+- (PBSearchResults_Builder*) addSeries:(PBSearchResults_PBSeries*) value;
+- (PBSearchResults_Builder*) addAllSeries:(NSArray*) values;
+- (PBSearchResults_Builder*) clearSeriesList;
 @end
 
