@@ -1,0 +1,8 @@
+message PBSearchResults {
+	message PBSeries {
+		required string id = 1;
+		required string name = 2;
+	}
+
+	repeated PBSeries searchResult = 1;
+}

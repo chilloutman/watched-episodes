@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import watchedepisodes.entities.SeriesFragment;
+import watchedepisodes.servlets.SearchResultsProtocol.PBSearchResults;
+import watchedepisodes.servlets.SearchResultsProtocol.PBSearchResults.PBSeries;
 import watchedepisodes.thetvdb.TVDB;
 import watchedepisodes.thetvdb.TVDBException;
 import watchedepisodes.tools.ServiceLocator;
@@ -29,9 +31,30 @@ public class SearchSeries extends HttpServlet {
 		List<SeriesFragment> results;
 		try {
 			results = tvdb.searchSeries(seriesName, language);
-			printHumanReadableList(resp, results);
+			//printHumanReadableList(resp, results);
+			returnProtobuf(resp, results);
 		} catch (TVDBException e) {
 			// TODO Auto-generated catch block
+		}
+	}
+	
+	private void returnProtobuf (HttpServletResponse resp, List<SeriesFragment> results) {
+		resp.setContentType("application/x-protobuf");
+		
+		PBSearchResults.Builder protocol= PBSearchResults.newBuilder();
+		
+		for (SeriesFragment s : results) {
+			PBSeries.Builder series= PBSeries.newBuilder();
+			series.setId(s.getId());
+			series.setName(s.getName());
+			protocol.addSearchResults(series);
+		}
+		
+		try {
+			protocol.build().writeTo(resp.getOutputStream());
+		} catch (IOException e) {
+			System.err.println("IOExcetion!");
+			e.printStackTrace();
 		}
 	}
 	
