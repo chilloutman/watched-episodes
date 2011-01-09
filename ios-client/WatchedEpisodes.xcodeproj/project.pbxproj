@@ -15,37 +15,38 @@
 		EF8D76F012D8DEDA0064C5B5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D76EA12D8DEDA0064C5B5 /* main.m */; };
 		EF8D76F112D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D76ED12D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.m */; };
 		EF8D76F212D8DEDA0064C5B5 /* WatchedEpisodesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D76EF12D8DEDA0064C5B5 /* WatchedEpisodesViewController.m */; };
-		EF8D772112D8E29F0064C5B5 /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8D771812D8E2370064C5B5 /* libProtocolBuffers.a */; };
-		EF8D777212D9039A0064C5B5 /* SearchSeries.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D777112D903990064C5B5 /* SearchSeries.pb.m */; };
+		EF8D78B912D933500064C5B5 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D786012D933500064C5B5 /* NSString+URLEncoding.m */; };
+		EF8D790512D933AB0064C5B5 /* SearchSeries.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D790412D933AB0064C5B5 /* SearchSeries.pb.m */; };
+		EF8D790E12D934030064C5B5 /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8D78F812D933800064C5B5 /* libProtocolBuffers.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		EF8D771712D8E2370064C5B5 /* PBXContainerItemProxy */ = {
+		EF8D78F712D933800064C5B5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EF8D770E12D8E2370064C5B5 /* ProtocolBuffers.xcodeproj */;
+			containerPortal = EF8D78EE12D933800064C5B5 /* ProtocolBuffers.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 7461B52E0F94FAF800A0C422;
+			remoteGlobalIDString = 7461B52E0F94FAF800A0C422 /* libProtocolBuffers.a */;
 			remoteInfo = ProtocolBuffers;
 		};
-		EF8D771912D8E2370064C5B5 /* PBXContainerItemProxy */ = {
+		EF8D78F912D933800064C5B5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EF8D770E12D8E2370064C5B5 /* ProtocolBuffers.xcodeproj */;
+			containerPortal = EF8D78EE12D933800064C5B5 /* ProtocolBuffers.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 7401C1A80F950347006D8281;
+			remoteGlobalIDString = 7401C1A80F950347006D8281 /* UnitTests.octest */;
 			remoteInfo = UnitTests;
 		};
-		EF8D771B12D8E2370064C5B5 /* PBXContainerItemProxy */ = {
+		EF8D78FB12D933800064C5B5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EF8D770E12D8E2370064C5B5 /* ProtocolBuffers.xcodeproj */;
+			containerPortal = EF8D78EE12D933800064C5B5 /* ProtocolBuffers.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 748F14580FD75E3B000858A9;
+			remoteGlobalIDString = 748F14580FD75E3B000858A9 /* CommandLineTests.app */;
 			remoteInfo = CommandLineTests;
 		};
-		EF8D772212D8E2AB0064C5B5 /* PBXContainerItemProxy */ = {
+		EF8D790C12D933F90064C5B5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EF8D770E12D8E2370064C5B5 /* ProtocolBuffers.xcodeproj */;
+			containerPortal = EF8D78EE12D933800064C5B5 /* ProtocolBuffers.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 7461B52D0F94FAF800A0C422;
+			remoteGlobalIDString = 7461B52D0F94FAF800A0C422 /* ProtocolBuffers */;
 			remoteInfo = ProtocolBuffers;
 		};
 /* End PBXContainerItemProxy section */
@@ -64,10 +65,12 @@
 		EF8D76ED12D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchedEpisodesAppDelegate.m; sourceTree = "<group>"; };
 		EF8D76EE12D8DEDA0064C5B5 /* WatchedEpisodesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchedEpisodesViewController.h; sourceTree = "<group>"; };
 		EF8D76EF12D8DEDA0064C5B5 /* WatchedEpisodesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchedEpisodesViewController.m; sourceTree = "<group>"; };
-		EF8D770E12D8E2370064C5B5 /* ProtocolBuffers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ProtocolBuffers.xcodeproj; path = protobuf/ProtocolBuffers.xcodeproj; sourceTree = "<group>"; };
-		EF8D771D12D8E26F0064C5B5 /* ProtocolBuffers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProtocolBuffers.h; path = protobuf/Classes/ProtocolBuffers.h; sourceTree = "<group>"; };
-		EF8D777012D903990064C5B5 /* SearchSeries.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSeries.pb.h; sourceTree = "<group>"; };
-		EF8D777112D903990064C5B5 /* SearchSeries.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSeries.pb.m; sourceTree = "<group>"; };
+		EF8D785F12D933500064C5B5 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
+		EF8D786012D933500064C5B5 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
+		EF8D78EE12D933800064C5B5 /* ProtocolBuffers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ProtocolBuffers.xcodeproj; path = protobuf/ProtocolBuffers.xcodeproj; sourceTree = "<group>"; };
+		EF8D78FD12D933920064C5B5 /* ProtocolBuffers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProtocolBuffers.h; path = protobuf/Classes/ProtocolBuffers.h; sourceTree = "<group>"; };
+		EF8D790312D933AB0064C5B5 /* SearchSeries.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSeries.pb.h; sourceTree = "<group>"; };
+		EF8D790412D933AB0064C5B5 /* SearchSeries.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSeries.pb.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF8D772112D8E29F0064C5B5 /* libProtocolBuffers.a in Frameworks */,
+				EF8D790E12D934030064C5B5 /* libProtocolBuffers.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -96,7 +99,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				EF8D76F412D8DEF10064C5B5 /* External */,
+				EF8D785E12D933500064C5B5 /* External */,
+				EF8D790212D933AB0064C5B5 /* Generated */,
 				EF8D76E912D8DEDA0064C5B5 /* Source */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -146,41 +150,34 @@
 			name = Other;
 			sourceTree = "<group>";
 		};
-		EF8D76F412D8DEF10064C5B5 /* External */ = {
+		EF8D785E12D933500064C5B5 /* External */ = {
 			isa = PBXGroup;
 			children = (
-				EF8D76F512D8DEF70064C5B5 /* ProtocolBuffers */,
+				EF8D785F12D933500064C5B5 /* NSString+URLEncoding.h */,
+				EF8D786012D933500064C5B5 /* NSString+URLEncoding.m */,
+				EF8D78EE12D933800064C5B5 /* ProtocolBuffers.xcodeproj */,
+				EF8D78FD12D933920064C5B5 /* ProtocolBuffers.h */,
 			);
-			name = External;
+			path = External;
 			sourceTree = "<group>";
 		};
-		EF8D76F512D8DEF70064C5B5 /* ProtocolBuffers */ = {
+		EF8D78EF12D933800064C5B5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EF8D776F12D903990064C5B5 /* generated */,
-				EF8D771D12D8E26F0064C5B5 /* ProtocolBuffers.h */,
-				EF8D770E12D8E2370064C5B5 /* ProtocolBuffers.xcodeproj */,
-			);
-			name = ProtocolBuffers;
-			sourceTree = "<group>";
-		};
-		EF8D770F12D8E2370064C5B5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EF8D771812D8E2370064C5B5 /* libProtocolBuffers.a */,
-				EF8D771A12D8E2370064C5B5 /* UnitTests.octest */,
-				EF8D771C12D8E2370064C5B5 /* CommandLineTests.app */,
+				EF8D78F812D933800064C5B5 /* libProtocolBuffers.a */,
+				EF8D78FA12D933800064C5B5 /* UnitTests.octest */,
+				EF8D78FC12D933800064C5B5 /* CommandLineTests.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EF8D776F12D903990064C5B5 /* generated */ = {
+		EF8D790212D933AB0064C5B5 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				EF8D777012D903990064C5B5 /* SearchSeries.pb.h */,
-				EF8D777112D903990064C5B5 /* SearchSeries.pb.m */,
+				EF8D790312D933AB0064C5B5 /* SearchSeries.pb.h */,
+				EF8D790412D933AB0064C5B5 /* SearchSeries.pb.m */,
 			);
-			path = generated;
+			path = Generated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,7 +194,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				EF8D772312D8E2AB0064C5B5 /* PBXTargetDependency */,
+				EF8D790D12D933F90064C5B5 /* PBXTargetDependency */,
 			);
 			name = WatchedEpisodes;
 			productName = WatchedEpisodes;
@@ -223,8 +220,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = EF8D770F12D8E2370064C5B5 /* Products */;
-					ProjectRef = EF8D770E12D8E2370064C5B5 /* ProtocolBuffers.xcodeproj */;
+					ProductGroup = EF8D78EF12D933800064C5B5 /* Products */;
+					ProjectRef = EF8D78EE12D933800064C5B5 /* ProtocolBuffers.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -235,25 +232,25 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		EF8D771812D8E2370064C5B5 /* libProtocolBuffers.a */ = {
+		EF8D78F812D933800064C5B5 /* libProtocolBuffers.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libProtocolBuffers.a;
-			remoteRef = EF8D771712D8E2370064C5B5 /* PBXContainerItemProxy */;
+			remoteRef = EF8D78F712D933800064C5B5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EF8D771A12D8E2370064C5B5 /* UnitTests.octest */ = {
+		EF8D78FA12D933800064C5B5 /* UnitTests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = UnitTests.octest;
-			remoteRef = EF8D771912D8E2370064C5B5 /* PBXContainerItemProxy */;
+			remoteRef = EF8D78F912D933800064C5B5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EF8D771C12D8E2370064C5B5 /* CommandLineTests.app */ = {
+		EF8D78FC12D933800064C5B5 /* CommandLineTests.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = CommandLineTests.app;
-			remoteRef = EF8D771B12D8E2370064C5B5 /* PBXContainerItemProxy */;
+			remoteRef = EF8D78FB12D933800064C5B5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -278,17 +275,18 @@
 				EF8D76F012D8DEDA0064C5B5 /* main.m in Sources */,
 				EF8D76F112D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.m in Sources */,
 				EF8D76F212D8DEDA0064C5B5 /* WatchedEpisodesViewController.m in Sources */,
-				EF8D777212D9039A0064C5B5 /* SearchSeries.pb.m in Sources */,
+				EF8D78B912D933500064C5B5 /* NSString+URLEncoding.m in Sources */,
+				EF8D790512D933AB0064C5B5 /* SearchSeries.pb.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		EF8D772312D8E2AB0064C5B5 /* PBXTargetDependency */ = {
+		EF8D790D12D933F90064C5B5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = ProtocolBuffers;
-			targetProxy = EF8D772212D8E2AB0064C5B5 /* PBXContainerItemProxy */;
+			targetProxy = EF8D790C12D933F90064C5B5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

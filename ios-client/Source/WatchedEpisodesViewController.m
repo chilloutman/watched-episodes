@@ -9,6 +9,7 @@
 #import "WatchedEpisodesViewController.h"
 #import "ProtocolBuffers.h"
 #import "SearchSeries.pb.h"
+#import "NSString+URLEncoding.h"
 
 @interface WatchedEpisodesViewController ()
 
@@ -47,7 +48,7 @@
 	//NSString *base= @"http://watched-episodes.appspot.com";
 	NSString *base= @"http://localhost:8080";
 	
-	NSString *search= [self.searchField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	NSString *search= [self.searchField.text URLEncodedString];
 	
 	NSString *urlString= [NSString stringWithFormat:@"%@/searchSeries?name=%@&t=protobuf", base, search];
 	NSLog(@"%@", urlString);
