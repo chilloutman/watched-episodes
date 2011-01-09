@@ -8,15 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@class WatchedEpisodesViewController;
+@class SearchSeriesViewController;
 
 @interface WatchedEpisodesAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
-    WatchedEpisodesViewController *viewController;
+    SearchSeriesViewController *viewController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet WatchedEpisodesViewController *viewController;
+@property (nonatomic, retain) IBOutlet SearchSeriesViewController *viewController;
 
 @end
 

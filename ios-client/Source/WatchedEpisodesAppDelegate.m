@@ -7,7 +7,7 @@
 //
 
 #import "WatchedEpisodesAppDelegate.h"
-#import "WatchedEpisodesViewController.h"
+#import "SearchSeriesViewController.h"
 
 @implementation WatchedEpisodesAppDelegate
 

@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SearchSeriesModel.h"
 
-@interface WatchedEpisodesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate> {
+@interface SearchSeriesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, SearchSeriesModelDelegate> {
+	SearchSeriesModel *model;
 	UITableView *searchResultsTable;
 	UITextField *searchField;
 }

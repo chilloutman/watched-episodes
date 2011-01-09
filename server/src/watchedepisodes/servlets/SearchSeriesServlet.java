@@ -67,6 +67,7 @@ public class SearchSeriesServlet extends AbstractServlet {
 			searchResults.addSeries(series);
 		}
 		
+		response.setBufferSize(searchResults.build().getSerializedSize());
 		searchResults.build().writeTo(response.getOutputStream());
 	}
 	

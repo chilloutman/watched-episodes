@@ -6,23 +6,23 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "WatchedEpisodesViewController.h"
-#import "ProtocolBuffers.h"
-#import "SearchSeries.pb.h"
-#import "NSString+URLEncoding.h"
+#import "SearchSeriesViewController.h"
+#import "SearchSeriesModel.h"
 
-@interface WatchedEpisodesViewController ()
+@interface SearchSeriesViewController ()
+
+@property (nonatomic, retain) NSArray *searchResults;
+@property (nonatomic, retain) SearchSeriesModel *model;
 
 - (void)performSearch;
 - (BOOL)checkResponse:(NSHTTPURLResponse *)response;
 
-@property (nonatomic, retain) NSArray *searchResults;
-
 @end
 
-@implementation WatchedEpisodesViewController
+@implementation SearchSeriesViewController
 
-@synthesize searchResultsTable, searchField, searchResults;
+@synthesize searchResultsTable, searchField;
+@synthesize model, searchResults;
 
 /*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
@@ -40,29 +40,25 @@
 
 // - (void)viewWillAppear:(BOOL)animated { }
 
+- (NSString *)nibName {
+	return @"SearchSeries";
+}
+
+- (SearchSeriesModel *)model {
+	if (!model) {
+		model= [[SearchSeriesModel alloc] init];
+		model.delegate= self;
+	}
+	return model;
+}
+
 - (IBAction)search:(UIButton *)sender {
 	[self performSearch];
 }
 
 - (void)performSearch {
-	//NSString *base= @"http://watched-episodes.appspot.com";
-	NSString *base= @"http://localhost:8080";
-	
-	NSString *search= [self.searchField.text URLEncodedString];
-	
-	NSString *urlString= [NSString stringWithFormat:@"%@/searchSeries?name=%@&t=protobuf", base, search];
-	NSLog(@"%@", urlString);
-	NSURL *url= [NSURL URLWithString:urlString];
-	NSURLRequest *request= [NSURLRequest requestWithURL:url];
-	NSHTTPURLResponse *response;
-	NSData *data= [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
-	
-	if ([self checkResponse:response]) {
-		self.searchResults= [[PBSearchResults parseFromData:data] seriesList];
-		[self.searchResultsTable reloadData];
-	}
+	[self.model searchSeries:self.searchField.text];
 }
-
 
 - (BOOL)checkResponse:(NSHTTPURLResponse *)response {
 	if ([response statusCode] == 200) {
@@ -74,18 +70,19 @@
 	}
 }
 
+#pragma mark SearchSeriesModelDelegate
+
+- (void)searchResultsUpdated:(NSArray *)results {
+	self.searchResults= results;
+	[self.searchResultsTable reloadData];
+}
+
 #pragma mark UITextFieldDelegate
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-	// TODO The request has to be async for this to make any sense.
-	// [self performSelectorOnMainThread:@selector(performSearch) withObject:nil waitUntilDone:NO];
-	return YES;
-}
 
 #pragma mark UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	NSLog(@"%d", [self.searchResults count]);
 	return [self.searchResults count];
 }
 
@@ -97,8 +94,7 @@
 		cell= [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 	}
 	
-	PBSearchResults_PBSeries *series= [self.searchResults objectAtIndex:indexPath.row];
-	cell.textLabel.text= [series name];
+	cell.textLabel.text= [self.searchResults objectAtIndex:indexPath.row];
 				
 	return cell;
 }
@@ -111,7 +107,7 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-	self.searchResults= nil;
+	self.model= nil;
 }
 
 - (void)viewDidUnload {
@@ -121,10 +117,10 @@
 }
 
 - (void)dealloc {
-	self.searchResults= nil;
 	self.searchResultsTable= nil;
 	self.searchField= nil;
 	self.searchResults= nil;
+	self.model= nil;
     [super dealloc];
 }
 
