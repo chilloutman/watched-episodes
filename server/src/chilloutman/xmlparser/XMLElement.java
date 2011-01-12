@@ -25,6 +25,12 @@ public class XMLElement {
 		this.content = content;
 	}
 	
+	void reset () {
+		this.name= null;
+		this.parentName= null;
+		this.content= null;
+	}
+	
 	@Override
 	public String toString () {
 		return "<" + name + ">" + content + "</" + name + ">";

@@ -16,32 +16,20 @@ public class SearchResultsHandler extends SAXHandler<List<SeriesFragment>> {
 	private SeriesFragment currentSeries;
 	
 	@Override
-	protected List<SeriesFragment> getNewResult () throws SAXException {
+	protected ArrayList<SeriesFragment> getNewResult () throws SAXException {
 		return new ArrayList<SeriesFragment>();
 	}
-	
-	@Override
-	protected boolean isRelevantParentElement (String elementName) throws SAXException {
-		return (elementName == rootName);
-	}
 
 	@Override
-	protected boolean isRelevantChildElement (String parentName, String elementName) throws SAXException {
-		if (parentName == rootName) {
-			return (elementName == "SeriesName" ||
-					elementName == "id");
+	protected void willStartElement (String elementName) {
+		if (elementName == rootName) {
+			currentSeries= new SeriesFragment();
+			getResult().add(currentSeries);
 		}
-		return false;
-	}
-
-	@Override
-	protected void willStartParentElement (String parentName) {
-		currentSeries= new SeriesFragment();
-		((ArrayList<SeriesFragment>)getResult()).add(currentSeries);
 	}
 	
 	@Override
-	protected void parseChildElement (XMLElement element) throws SAXException {		
+	protected void parseElement (XMLElement element) throws SAXException {		
 		if (element.getParentName() == rootName) {
 			if (element.getName() == "SeriesName") {
 				currentSeries.setName(element.getContent());	
@@ -52,7 +40,7 @@ public class SearchResultsHandler extends SAXHandler<List<SeriesFragment>> {
 	}
 	
 	@Override
-	protected void finishedParentElement (String parentName) throws SAXException {
+	protected void finishedElement (String parentName) throws SAXException {
 		
 	}
 	

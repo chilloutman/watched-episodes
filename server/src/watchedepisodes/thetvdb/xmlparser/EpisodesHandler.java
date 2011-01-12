@@ -13,60 +13,50 @@ import chilloutman.xmlparser.XMLElement;
 import com.google.appengine.api.datastore.Text;
 
 public class EpisodesHandler extends SAXHandler<List<Episode>> {
-	
+
 	private Episode currentEpisode;
-	
+	private final String rootElement= "Episode";
+	private boolean skipCurrentEpisode;
+
 	@Override
 	protected ArrayList<Episode> getNewResult () throws SAXException {
 		return new ArrayList<Episode>();
 	}
 
-	@Override
-	protected boolean isRelevantParentElement (String elementName) throws SAXException {
-		return (elementName == "Episode");
+	protected void willStartElement (String elementName) throws SAXException {
+		if (elementName == rootElement) {
+			currentEpisode= new Episode();
+			skipCurrentEpisode= false;
+		}
 	}
 
 	@Override
-	protected void willStartParentElement (String parentName) throws SAXException {
-		currentEpisode= new Episode();
-	}
-	
-	@Override
-	protected boolean isRelevantChildElement (String parentName, String elementName) throws SAXException {
-		if (parentName == "Episode") {
-			return (elementName == "id" ||
-					elementName == "Language" ||
-					elementName == "EpisodeName" ||
-					elementName == "SeasonNumber" ||
-					elementName == "EpisodeNumber" ||
-					elementName == "Overview" ||
-					elementName == "FirstAired" ||
-					elementName == "Rating" ||
-					elementName == "Writer" ||
-					elementName == "Director" ||
-					elementName == "GuestStars");
+	protected void parseElement (XMLElement element) throws SAXException {
+		if (skipCurrentEpisode) {
+			return;
 		}
-		return false;
-	}
-	
-	@Override
-	protected void parseChildElement (XMLElement element) throws SAXException {
-		if (element.getParentName() == "Episode" && currentEpisode != null) {
-			if (element.getName() == "id") {
+
+		if (element.getParentName() == rootElement) {
+			if (element.getName() == "SeasonNumber") {
+				int seasonNumber= Integer.parseInt(element.getContent());
+				if (seasonNumber == 0) {
+					skipCurrentEpisode= true;
+				} else {
+					currentEpisode.setSeasonNumber(seasonNumber);
+				}
+			} else if (element.getName() == "EpisodeNumber") {
+				int episodeNumber= Integer.parseInt(element.getContent());
+				if (episodeNumber == 0) {
+					skipCurrentEpisode= true;
+				} else {
+					currentEpisode.setEpisodeNumber(episodeNumber);
+				}
+			} else if (element.getName() == "id") {
 				currentEpisode.setId(element.getContent());
 			} else if (element.getName() == "Language") {
 				currentEpisode.setLanguage(element.getContent());
 			} else if (element.getName() == "EpisodeName") {
 				currentEpisode.setEpisodeName(element.getContent());
-			} else if (element.getName() == "SeasonNumber") {				
-				int seasonNumber= Integer.parseInt(element.getContent());
-				if (seasonNumber == 0) {
-					currentEpisode= null;
-				} else {
-					currentEpisode.setSeasonNumber(seasonNumber);
-				}
-			} else if (element.getName() == "EpisodeNumber") {
-				currentEpisode.setEpisodeNumber(Integer.parseInt(element.getContent()));
 			} else if (element.getName() == "Overview") {
 				currentEpisode.setOverview(new Text(element.getContent()));
 			} else if (element.getName() == "FirstAired") {
@@ -85,8 +75,8 @@ public class EpisodesHandler extends SAXHandler<List<Episode>> {
 	}
 
 	@Override
-	protected void finishedParentElement (String parentName) throws SAXException {
-		if (currentEpisode != null) {
+	protected void finishedElement (String elementName) throws SAXException {
+		if (!skipCurrentEpisode && elementName == rootElement) {
 			try {
 				currentEpisode.generateKey();
 				getResult().add(currentEpisode);

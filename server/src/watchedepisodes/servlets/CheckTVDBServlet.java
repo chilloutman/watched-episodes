@@ -78,7 +78,7 @@ public class CheckTVDBServlet extends HttpServlet {
 		html.append("<h1>All Episodes:</h1>");
 		
 		try {
-			List<Episode> episodes= tvdb.getAllEpisodes("153021","en");
+			List<Episode> episodes= tvdb.getAllEpisodes("71663","en");
 			
 			int currentSeason= -1;
 			for (Episode e : episodes) {
