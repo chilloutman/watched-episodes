@@ -14,6 +14,7 @@
 
 NSUInteger numberOfRunningRequests;
 
+- (void)dispatchRequest:(Request *)request;
 - (void)hitServer:(Request *)request;
 - (void)requestStarted;
 - (void)requestFinished;
@@ -23,10 +24,19 @@ NSUInteger numberOfRunningRequests;
 
 @implementation CommunicationAgent
 
-- (void)sendRequestWithURL:(NSURL *)url delegate:(id<CommunicationDelegate>)delegate {	
+- (void)sendGETRequestWithURL:(NSURL *)url delegate:(id<CommunicationDelegate>)delegate {	
+	Request *request= [[Request alloc] initWithURL:url delegate:delegate protocolBuffers:NO];
+	[self dispatchRequest:request];
+}
+
+- (void)sendProtocolBuffersGETRequestWithURL:(NSURL *)url delegate:(id<CommunicationDelegate>)delegate {
+	Request *request= [[Request alloc] initWithURL:url delegate:delegate protocolBuffers:YES];
+	[self dispatchRequest:request];
+}
+
+- (void)dispatchRequest:(Request *)request {
 	dispatch_queue_t q= dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 	dispatch_async(q, ^ {
-		Request *request= [[Request alloc] initWithURL:url delegate:delegate];
 		[self hitServer:request];
 		[request release];
 	});

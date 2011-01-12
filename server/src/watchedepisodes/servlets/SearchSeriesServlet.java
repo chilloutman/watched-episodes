@@ -16,35 +16,29 @@ import watchedepisodes.tools.ServiceLocator;
 @SuppressWarnings("serial")
 public class SearchSeriesServlet extends AbstractServlet {
 	
-	private String seriesName;
-	
 	@Override
-	public void doGet (HttpServletRequest request, HttpServletResponse response) {
-		getParameters(request);
-		
+	public void doGet (HttpServletRequest request, HttpServletResponse response) {		
 		TVDB tvdb= ServiceLocator.getTVDBInstance();
 		try {
-			List<SeriesFragment> results = tvdb.searchSeries(seriesName, language);
-			writeResponse(response, results);
+			List<SeriesFragment> results = tvdb.searchSeries(getSeriesName(request), getLanguage(request));
+			writeResponse(response, request, results);
 		} catch (TVDBException e) {
 			response.setStatus(500);
 			// TODO: Return error description
 		}
 	}
 	
-	@Override
-	protected void getParameters(HttpServletRequest request) {
-		super.getParameters(request);
-		
-		seriesName= request.getParameter("name");
+	private String getSeriesName(HttpServletRequest request) {		
+		String seriesName= request.getParameter("name");
 		if (seriesName == null) {
-			return;
+			// TODO handle invalid request
 		}
+		return seriesName;
 	}
 	
-	private void writeResponse (HttpServletResponse response, List<SeriesFragment> results) {
+	private void writeResponse (HttpServletResponse response, HttpServletRequest request, List<SeriesFragment> results) {
 		try {
-			if (responseType.equals(ResponseTypes.ProtocolBuffers)) {
+			if (clientAcceptsProtocolBuffers(request)) {
 				writeProtobuf(response, results);
 			} else {
 				writeHtml(response, results);
@@ -56,7 +50,7 @@ public class SearchSeriesServlet extends AbstractServlet {
 	}
 	
 	private void writeProtobuf (HttpServletResponse response, List<SeriesFragment> results) throws IOException {
-		response.setContentType("application/x-protobuf");
+		response.setContentType(protocolBuffers);
 		
 		PBSearchResults.Builder searchResults= PBSearchResults.newBuilder();
 		
@@ -67,12 +61,13 @@ public class SearchSeriesServlet extends AbstractServlet {
 			searchResults.addSeries(series);
 		}
 		
-		response.setBufferSize(searchResults.build().getSerializedSize());
-		searchResults.build().writeTo(response.getOutputStream());
+		PBSearchResults protobuf= searchResults.build();
+		response.setBufferSize(protobuf.getSerializedSize());
+		protobuf.writeTo(response.getOutputStream());
 	}
 	
 	private void writeHtml (HttpServletResponse response, List<SeriesFragment> results) throws IOException {
-		response.setContentType("text/html");
+		response.setContentType(Html);
 		
 		response.getWriter().println("<h1>Search Results:</h1>");
 		for (SeriesFragment s : results) {

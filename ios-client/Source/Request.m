@@ -11,6 +11,10 @@
 
 @interface Request ()
 
+@property (nonatomic, assign) id<CommunicationDelegate> delegate;
+@property (nonatomic, retain) NSURL *url;
+@property (nonatomic, assign) BOOL protobuf;
+
 - (NSURLRequest *)createGETRequest;
 - (BOOL)checkResponse:(NSHTTPURLResponse *)response;
 - (void)handleHTTPError:(NSInteger)errorCode;
@@ -22,12 +26,13 @@
 
 @implementation Request
 
-@synthesize delegate, url;
+@synthesize url, delegate, protobuf;
 
-- (id)initWithURL:(NSURL *)u delegate:(id<CommunicationDelegate>)d {
+- (id)initWithURL:(NSURL *)u delegate:(id<CommunicationDelegate>)d protocolBuffers:(BOOL)expectProtobuf {
 	if (self= [super init]) {
 		self.url= u;
 		self.delegate= d;
+		self.protobuf= expectProtobuf;
 	}
 	return self;
 }
@@ -47,6 +52,9 @@
 	NSMutableURLRequest *request= [NSMutableURLRequest requestWithURL:self.url];
 	[request setHTTPMethod:@"GET"];
 	[request setTimeoutInterval:30];
+	if (self.protobuf) {
+		[request addValue:@"application/x-protobuf" forHTTPHeaderField:@"Accept"];
+	}
 	return request;
 }
 
@@ -64,16 +72,15 @@
 }
 
 - (void)requestSucceded:(NSData *)data {
+	[self.delegate receivedResponse:data];
 	dispatch_async(dispatch_get_main_queue(), ^ {
-		[self.delegate requestDidSuccedWithURL:self.url response:data];
+		[self.delegate requestDidSuccedWithURL:self.url];
 	});
 }
 
 - (void)requestFailed {
-	
-	
 	dispatch_async(dispatch_get_main_queue(), ^ {
-		[self.delegate requestDidFailWithURL:self.url ];
+		[self.delegate requestDidFailWithURL:self.url];
 	});
 }
 

@@ -9,20 +9,22 @@
 #import "SearchSeriesViewController.h"
 #import "SearchSeriesModel.h"
 
+
 @interface SearchSeriesViewController ()
 
 @property (nonatomic, retain) NSArray *searchResults;
 @property (nonatomic, retain) SearchSeriesModel *model;
+@property (nonatomic, retain) NSString *lastSearchString;
 
-- (void)performSearch;
-- (BOOL)checkResponse:(NSHTTPURLResponse *)response;
+- (void)search;
+- (BOOL)shouldSearch:(NSString *)searchString;
 
 @end
 
+
 @implementation SearchSeriesViewController
 
-@synthesize searchResultsTable, searchField;
-@synthesize model, searchResults;
+@synthesize model, searchResults, lastSearchString;
 
 /*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
@@ -37,9 +39,7 @@
     [super viewDidLoad];
 }
 */
-
-// - (void)viewWillAppear:(BOOL)animated { }
-
+							  
 - (NSString *)nibName {
 	return @"SearchSeries";
 }
@@ -52,33 +52,36 @@
 	return model;
 }
 
-- (IBAction)search:(UIButton *)sender {
-	[self performSearch];
-}
-
-- (void)performSearch {
-	[self.model searchSeries:self.searchField.text];
-}
-
-- (BOOL)checkResponse:(NSHTTPURLResponse *)response {
-	if ([response statusCode] == 200) {
-		NSDictionary *headers= [response allHeaderFields];
-		NSLog(@"%@", [headers objectForKey:@"Content-Type"]);
-		return ([[headers objectForKey:@"Content-Type"] isEqualToString:@"application/x-protobuf"]);
-	} else {
-		return NO;
+- (void)search {
+	NSString *searchString= self.searchDisplayController.searchBar.text;
+	if ([self shouldSearch:searchString]) {
+		[self.model searchSeries:searchString];
 	}
+}
+
+- (BOOL)shouldSearch:(NSString *)searchString {
+	searchString= [searchString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+	return (searchString &&
+			![searchString isEqualToString:@""]);
 }
 
 #pragma mark SearchSeriesModelDelegate
 
 - (void)searchResultsUpdated:(NSArray *)results {
 	self.searchResults= results;
-	[self.searchResultsTable reloadData];
+	[self.searchDisplayController.searchResultsTableView reloadData];
 }
 
-#pragma mark UITextFieldDelegate
+#pragma mark UISearchDisplay
 
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+	[self search];
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+	// TODO: This would allow searching without the need of hitting the search key.
+	return NO;
+}
 
 #pragma mark UITableViewDelegate
 
@@ -111,16 +114,13 @@
 }
 
 - (void)viewDidUnload {
-	self.searchResultsTable= nil;
-	self.searchField= nil;
 	self.searchResults= nil;
 }
 
 - (void)dealloc {
-	self.searchResultsTable= nil;
-	self.searchField= nil;
-	self.searchResults= nil;
 	self.model= nil;
+	self.searchResults= nil;
+	self.lastSearchString= nil;
     [super dealloc];
 }
 

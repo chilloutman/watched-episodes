@@ -14,6 +14,7 @@
 	
 }
 
-- (void)sendRequestWithURL:(NSURL *)url delegate:(id<CommunicationDelegate>)delegate;
+- (void)sendGETRequestWithURL:(NSURL *)url delegate:(id<CommunicationDelegate>)delegate;
+- (void)sendProtocolBuffersGETRequestWithURL:(NSURL *)url delegate:(id<CommunicationDelegate>)delegate;
 
 @end

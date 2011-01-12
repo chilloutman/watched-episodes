@@ -9,16 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "SearchSeriesModel.h"
 
-@interface SearchSeriesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, SearchSeriesModelDelegate> {
+
+@interface SearchSeriesViewController : UIViewController <UISearchDisplayDelegate, SearchSeriesModelDelegate> {
 	SearchSeriesModel *model;
-	UITableView *searchResultsTable;
-	UITextField *searchField;
+	NSString *lastSearchString;
 }
-
-@property (nonatomic, retain) IBOutlet UITableView *searchResultsTable;
-@property (nonatomic, retain) IBOutlet UITextField *searchField;
-
-- (IBAction)search:(UIButton *)sender;
 
 @end
 

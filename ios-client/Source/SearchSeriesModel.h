@@ -19,9 +19,11 @@
 
 @interface SearchSeriesModel : NSObject <CommunicationDelegate> {
 	id<SearchSeriesModelDelegate> delegate;
+	NSArray *seachResults;
 }
 
 @property (nonatomic, assign) id<SearchSeriesModelDelegate> delegate; 
+
 - (void)searchSeries:(NSString *)seriesName;
 
 @end

@@ -13,12 +13,10 @@
 @interface Request : NSObject {
 	id<CommunicationDelegate> delegate;
 	NSURL *url;
+	BOOL protobuf;
 }
 
-@property (nonatomic, assign) id<CommunicationDelegate> delegate;
-@property (nonatomic, retain) NSURL *url;
-
-- (id)initWithURL:(NSURL *)u delegate:(id<CommunicationDelegate>)d;
+- (id)initWithURL:(NSURL *)u delegate:(id<CommunicationDelegate>)d protocolBuffers:(BOOL)expectProtobuf;
 - (void)excecute;
 
 @end
