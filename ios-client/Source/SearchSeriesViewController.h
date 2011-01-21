@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "SearchSeriesModel.h"
 
+@class SeriesDetailViewController;
 
 @interface SearchSeriesViewController : UIViewController <UISearchDisplayDelegate, SearchSeriesModelDelegate> {
 	SearchSeriesModel *model;
+	SeriesDetailViewController *seriesController;
 	NSString *lastSearchString;
 }
 

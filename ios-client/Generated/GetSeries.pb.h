@@ -13,32 +13,32 @@
 
 @interface PBSeries : PBGeneratedMessage {
 @private
-  BOOL hasId_:1;
+  BOOL hasSeriesId_:1;
   BOOL hasLanguage_:1;
-  BOOL hasName_:1;
+  BOOL hasSeriesName_:1;
   BOOL hasOverview_:1;
   BOOL hasFirstAired_:1;
   BOOL hasBanner_:1;
   BOOL hasImdbId_:1;
-  NSString* id;
+  NSString* seriesId;
   NSString* language;
-  NSString* name;
+  NSString* seriesName;
   NSString* overview;
   NSString* firstAired;
   NSString* banner;
   NSString* imdbId;
   NSMutableArray* mutableActorsList;
 }
-- (BOOL) hasId;
+- (BOOL) hasSeriesId;
 - (BOOL) hasLanguage;
-- (BOOL) hasName;
+- (BOOL) hasSeriesName;
 - (BOOL) hasOverview;
 - (BOOL) hasFirstAired;
 - (BOOL) hasBanner;
 - (BOOL) hasImdbId;
-@property (readonly, retain) NSString* id;
+@property (readonly, retain) NSString* seriesId;
 @property (readonly, retain) NSString* language;
-@property (readonly, retain) NSString* name;
+@property (readonly, retain) NSString* seriesName;
 @property (readonly, retain) NSString* overview;
 @property (readonly, retain) NSString* firstAired;
 @property (readonly, retain) NSString* banner;
@@ -80,20 +80,20 @@
 - (PBSeries_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
 - (PBSeries_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
 
-- (BOOL) hasId;
-- (NSString*) id;
-- (PBSeries_Builder*) setId:(NSString*) value;
-- (PBSeries_Builder*) clearId;
+- (BOOL) hasSeriesId;
+- (NSString*) seriesId;
+- (PBSeries_Builder*) setSeriesId:(NSString*) value;
+- (PBSeries_Builder*) clearSeriesId;
 
 - (BOOL) hasLanguage;
 - (NSString*) language;
 - (PBSeries_Builder*) setLanguage:(NSString*) value;
 - (PBSeries_Builder*) clearLanguage;
 
-- (BOOL) hasName;
-- (NSString*) name;
-- (PBSeries_Builder*) setName:(NSString*) value;
-- (PBSeries_Builder*) clearName;
+- (BOOL) hasSeriesName;
+- (NSString*) seriesName;
+- (PBSeries_Builder*) setSeriesName:(NSString*) value;
+- (PBSeries_Builder*) clearSeriesName;
 
 - (BOOL) hasOverview;
 - (NSString*) overview;

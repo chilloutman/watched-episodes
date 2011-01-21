@@ -31,12 +31,12 @@ public final class GetSeriesProtocol {
       return watchedepisodes.servlets.protocols.GetSeriesProtocol.internal_static_PBSeries_fieldAccessorTable;
     }
     
-    // required string id = 1;
-    public static final int ID_FIELD_NUMBER = 1;
-    private boolean hasId;
-    private java.lang.String id_ = "";
-    public boolean hasId() { return hasId; }
-    public java.lang.String getId() { return id_; }
+    // required string seriesId = 1;
+    public static final int SERIESID_FIELD_NUMBER = 1;
+    private boolean hasSeriesId;
+    private java.lang.String seriesId_ = "";
+    public boolean hasSeriesId() { return hasSeriesId; }
+    public java.lang.String getSeriesId() { return seriesId_; }
     
     // required string language = 2;
     public static final int LANGUAGE_FIELD_NUMBER = 2;
@@ -45,12 +45,12 @@ public final class GetSeriesProtocol {
     public boolean hasLanguage() { return hasLanguage; }
     public java.lang.String getLanguage() { return language_; }
     
-    // required string name = 3;
-    public static final int NAME_FIELD_NUMBER = 3;
-    private boolean hasName;
-    private java.lang.String name_ = "";
-    public boolean hasName() { return hasName; }
-    public java.lang.String getName() { return name_; }
+    // required string seriesName = 3;
+    public static final int SERIESNAME_FIELD_NUMBER = 3;
+    private boolean hasSeriesName;
+    private java.lang.String seriesName_ = "";
+    public boolean hasSeriesName() { return hasSeriesName; }
+    public java.lang.String getSeriesName() { return seriesName_; }
     
     // required string overview = 4;
     public static final int OVERVIEW_FIELD_NUMBER = 4;
@@ -93,9 +93,9 @@ public final class GetSeriesProtocol {
     public java.lang.String getImdbId() { return imdbId_; }
     
     public final boolean isInitialized() {
-      if (!hasId) return false;
+      if (!hasSeriesId) return false;
       if (!hasLanguage) return false;
-      if (!hasName) return false;
+      if (!hasSeriesName) return false;
       if (!hasOverview) return false;
       if (!hasFirstAired) return false;
       if (!hasBanner) return false;
@@ -105,14 +105,14 @@ public final class GetSeriesProtocol {
     
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (hasId()) {
-        output.writeString(1, getId());
+      if (hasSeriesId()) {
+        output.writeString(1, getSeriesId());
       }
       if (hasLanguage()) {
         output.writeString(2, getLanguage());
       }
-      if (hasName()) {
-        output.writeString(3, getName());
+      if (hasSeriesName()) {
+        output.writeString(3, getSeriesName());
       }
       if (hasOverview()) {
         output.writeString(4, getOverview());
@@ -138,17 +138,17 @@ public final class GetSeriesProtocol {
       if (size != -1) return size;
     
       size = 0;
-      if (hasId()) {
+      if (hasSeriesId()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(1, getId());
+          .computeStringSize(1, getSeriesId());
       }
       if (hasLanguage()) {
         size += com.google.protobuf.CodedOutputStream
           .computeStringSize(2, getLanguage());
       }
-      if (hasName()) {
+      if (hasSeriesName()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(3, getName());
+          .computeStringSize(3, getSeriesName());
       }
       if (hasOverview()) {
         size += com.google.protobuf.CodedOutputStream
@@ -328,14 +328,14 @@ public final class GetSeriesProtocol {
       
       public Builder mergeFrom(watchedepisodes.servlets.protocols.GetSeriesProtocol.PBSeries other) {
         if (other == watchedepisodes.servlets.protocols.GetSeriesProtocol.PBSeries.getDefaultInstance()) return this;
-        if (other.hasId()) {
-          setId(other.getId());
+        if (other.hasSeriesId()) {
+          setSeriesId(other.getSeriesId());
         }
         if (other.hasLanguage()) {
           setLanguage(other.getLanguage());
         }
-        if (other.hasName()) {
-          setName(other.getName());
+        if (other.hasSeriesName()) {
+          setSeriesName(other.getSeriesName());
         }
         if (other.hasOverview()) {
           setOverview(other.getOverview());
@@ -381,7 +381,7 @@ public final class GetSeriesProtocol {
               break;
             }
             case 10: {
-              setId(input.readString());
+              setSeriesId(input.readString());
               break;
             }
             case 18: {
@@ -389,7 +389,7 @@ public final class GetSeriesProtocol {
               break;
             }
             case 26: {
-              setName(input.readString());
+              setSeriesName(input.readString());
               break;
             }
             case 34: {
@@ -417,24 +417,24 @@ public final class GetSeriesProtocol {
       }
       
       
-      // required string id = 1;
-      public boolean hasId() {
-        return result.hasId();
+      // required string seriesId = 1;
+      public boolean hasSeriesId() {
+        return result.hasSeriesId();
       }
-      public java.lang.String getId() {
-        return result.getId();
+      public java.lang.String getSeriesId() {
+        return result.getSeriesId();
       }
-      public Builder setId(java.lang.String value) {
+      public Builder setSeriesId(java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  result.hasId = true;
-        result.id_ = value;
+  result.hasSeriesId = true;
+        result.seriesId_ = value;
         return this;
       }
-      public Builder clearId() {
-        result.hasId = false;
-        result.id_ = getDefaultInstance().getId();
+      public Builder clearSeriesId() {
+        result.hasSeriesId = false;
+        result.seriesId_ = getDefaultInstance().getSeriesId();
         return this;
       }
       
@@ -459,24 +459,24 @@ public final class GetSeriesProtocol {
         return this;
       }
       
-      // required string name = 3;
-      public boolean hasName() {
-        return result.hasName();
+      // required string seriesName = 3;
+      public boolean hasSeriesName() {
+        return result.hasSeriesName();
       }
-      public java.lang.String getName() {
-        return result.getName();
+      public java.lang.String getSeriesName() {
+        return result.getSeriesName();
       }
-      public Builder setName(java.lang.String value) {
+      public Builder setSeriesName(java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  result.hasName = true;
-        result.name_ = value;
+  result.hasSeriesName = true;
+        result.seriesName_ = value;
         return this;
       }
-      public Builder clearName() {
-        result.hasName = false;
-        result.name_ = getDefaultInstance().getName();
+      public Builder clearSeriesName() {
+        result.hasSeriesName = false;
+        result.seriesName_ = getDefaultInstance().getSeriesName();
         return this;
       }
       
@@ -628,12 +628,12 @@ public final class GetSeriesProtocol {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\020get_series.proto\"\214\001\n\010PBSeries\022\n\n\002id\030\001 " +
-      "\002(\t\022\020\n\010language\030\002 \002(\t\022\014\n\004name\030\003 \002(\t\022\020\n\010o" +
-      "verview\030\004 \002(\t\022\022\n\nfirstAired\030\005 \002(\t\022\016\n\006act" +
-      "ors\030\006 \003(\t\022\016\n\006banner\030\007 \002(\t\022\016\n\006imdbId\030\010 \002(" +
-      "\tB7\n\"watchedepisodes.servlets.protocolsB" +
-      "\021GetSeriesProtocol"
+      "\n\020get_series.proto\"\230\001\n\010PBSeries\022\020\n\010serie" +
+      "sId\030\001 \002(\t\022\020\n\010language\030\002 \002(\t\022\022\n\nseriesNam" +
+      "e\030\003 \002(\t\022\020\n\010overview\030\004 \002(\t\022\022\n\nfirstAired\030" +
+      "\005 \002(\t\022\016\n\006actors\030\006 \003(\t\022\016\n\006banner\030\007 \002(\t\022\016\n" +
+      "\006imdbId\030\010 \002(\tB7\n\"watchedepisodes.servlet" +
+      "s.protocolsB\021GetSeriesProtocol"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -645,7 +645,7 @@ public final class GetSeriesProtocol {
           internal_static_PBSeries_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBSeries_descriptor,
-              new java.lang.String[] { "Id", "Language", "Name", "Overview", "FirstAired", "Actors", "Banner", "ImdbId", },
+              new java.lang.String[] { "SeriesId", "Language", "SeriesName", "Overview", "FirstAired", "Actors", "Banner", "ImdbId", },
               watchedepisodes.servlets.protocols.GetSeriesProtocol.PBSeries.class,
               watchedepisodes.servlets.protocols.GetSeriesProtocol.PBSeries.Builder.class);
           return null;

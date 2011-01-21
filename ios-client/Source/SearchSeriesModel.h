@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CommunicationDelegate.h"
-
+#import "SeriesSummary.h"
 
 @protocol SearchSeriesModelDelegate
 @required

@@ -3,8 +3,8 @@ option java_outer_classname = "SearchSeriesProtocol";
 
 message PBSearchResults {
 	message PBSeriesSummary { 
-		required string id = 1;
-		required string name = 2;
+		required string seriesId = 1;
+		required string seriesName = 2;
 	}
 
 	repeated PBSeriesSummary series = 1;

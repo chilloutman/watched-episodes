@@ -20,9 +20,9 @@ static PBExtensionRegistry* extensionRegistry = nil;
 @end
 
 @interface PBSeries ()
-@property (retain) NSString* id;
+@property (retain) NSString* seriesId;
 @property (retain) NSString* language;
-@property (retain) NSString* name;
+@property (retain) NSString* seriesName;
 @property (retain) NSString* overview;
 @property (retain) NSString* firstAired;
 @property (retain) NSMutableArray* mutableActorsList;
@@ -32,13 +32,13 @@ static PBExtensionRegistry* extensionRegistry = nil;
 
 @implementation PBSeries
 
-- (BOOL) hasId {
-  return !!hasId_;
+- (BOOL) hasSeriesId {
+  return !!hasSeriesId_;
 }
-- (void) setHasId:(BOOL) value {
-  hasId_ = !!value;
+- (void) setHasSeriesId:(BOOL) value {
+  hasSeriesId_ = !!value;
 }
-@synthesize id;
+@synthesize seriesId;
 - (BOOL) hasLanguage {
   return !!hasLanguage_;
 }
@@ -46,13 +46,13 @@ static PBExtensionRegistry* extensionRegistry = nil;
   hasLanguage_ = !!value;
 }
 @synthesize language;
-- (BOOL) hasName {
-  return !!hasName_;
+- (BOOL) hasSeriesName {
+  return !!hasSeriesName_;
 }
-- (void) setHasName:(BOOL) value {
-  hasName_ = !!value;
+- (void) setHasSeriesName:(BOOL) value {
+  hasSeriesName_ = !!value;
 }
-@synthesize name;
+@synthesize seriesName;
 - (BOOL) hasOverview {
   return !!hasOverview_;
 }
@@ -83,9 +83,9 @@ static PBExtensionRegistry* extensionRegistry = nil;
 }
 @synthesize imdbId;
 - (void) dealloc {
-  self.id = nil;
+  self.seriesId = nil;
   self.language = nil;
-  self.name = nil;
+  self.seriesName = nil;
   self.overview = nil;
   self.firstAired = nil;
   self.mutableActorsList = nil;
@@ -95,9 +95,9 @@ static PBExtensionRegistry* extensionRegistry = nil;
 }
 - (id) init {
   if ((self = [super init])) {
-    self.id = @"";
+    self.seriesId = @"";
     self.language = @"";
-    self.name = @"";
+    self.seriesName = @"";
     self.overview = @"";
     self.firstAired = @"";
     self.banner = @"";
@@ -125,13 +125,13 @@ static PBSeries* defaultPBSeriesInstance = nil;
   return value;
 }
 - (BOOL) isInitialized {
-  if (!self.hasId) {
+  if (!self.hasSeriesId) {
     return NO;
   }
   if (!self.hasLanguage) {
     return NO;
   }
-  if (!self.hasName) {
+  if (!self.hasSeriesName) {
     return NO;
   }
   if (!self.hasOverview) {
@@ -149,14 +149,14 @@ static PBSeries* defaultPBSeriesInstance = nil;
   return YES;
 }
 - (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
-  if (self.hasId) {
-    [output writeString:1 value:self.id];
+  if (self.hasSeriesId) {
+    [output writeString:1 value:self.seriesId];
   }
   if (self.hasLanguage) {
     [output writeString:2 value:self.language];
   }
-  if (self.hasName) {
-    [output writeString:3 value:self.name];
+  if (self.hasSeriesName) {
+    [output writeString:3 value:self.seriesName];
   }
   if (self.hasOverview) {
     [output writeString:4 value:self.overview];
@@ -182,14 +182,14 @@ static PBSeries* defaultPBSeriesInstance = nil;
   }
 
   size = 0;
-  if (self.hasId) {
-    size += computeStringSize(1, self.id);
+  if (self.hasSeriesId) {
+    size += computeStringSize(1, self.seriesId);
   }
   if (self.hasLanguage) {
     size += computeStringSize(2, self.language);
   }
-  if (self.hasName) {
-    size += computeStringSize(3, self.name);
+  if (self.hasSeriesName) {
+    size += computeStringSize(3, self.seriesName);
   }
   if (self.hasOverview) {
     size += computeStringSize(4, self.overview);
@@ -286,14 +286,14 @@ static PBSeries* defaultPBSeriesInstance = nil;
   if (other == [PBSeries defaultInstance]) {
     return self;
   }
-  if (other.hasId) {
-    [self setId:other.id];
+  if (other.hasSeriesId) {
+    [self setSeriesId:other.seriesId];
   }
   if (other.hasLanguage) {
     [self setLanguage:other.language];
   }
-  if (other.hasName) {
-    [self setName:other.name];
+  if (other.hasSeriesName) {
+    [self setSeriesName:other.seriesName];
   }
   if (other.hasOverview) {
     [self setOverview:other.overview];
@@ -335,7 +335,7 @@ static PBSeries* defaultPBSeriesInstance = nil;
         break;
       }
       case 10: {
-        [self setId:[input readString]];
+        [self setSeriesId:[input readString]];
         break;
       }
       case 18: {
@@ -343,7 +343,7 @@ static PBSeries* defaultPBSeriesInstance = nil;
         break;
       }
       case 26: {
-        [self setName:[input readString]];
+        [self setSeriesName:[input readString]];
         break;
       }
       case 34: {
@@ -369,20 +369,20 @@ static PBSeries* defaultPBSeriesInstance = nil;
     }
   }
 }
-- (BOOL) hasId {
-  return result.hasId;
+- (BOOL) hasSeriesId {
+  return result.hasSeriesId;
 }
-- (NSString*) id {
-  return result.id;
+- (NSString*) seriesId {
+  return result.seriesId;
 }
-- (PBSeries_Builder*) setId:(NSString*) value {
-  result.hasId = YES;
-  result.id = value;
+- (PBSeries_Builder*) setSeriesId:(NSString*) value {
+  result.hasSeriesId = YES;
+  result.seriesId = value;
   return self;
 }
-- (PBSeries_Builder*) clearId {
-  result.hasId = NO;
-  result.id = @"";
+- (PBSeries_Builder*) clearSeriesId {
+  result.hasSeriesId = NO;
+  result.seriesId = @"";
   return self;
 }
 - (BOOL) hasLanguage {
@@ -401,20 +401,20 @@ static PBSeries* defaultPBSeriesInstance = nil;
   result.language = @"";
   return self;
 }
-- (BOOL) hasName {
-  return result.hasName;
+- (BOOL) hasSeriesName {
+  return result.hasSeriesName;
 }
-- (NSString*) name {
-  return result.name;
+- (NSString*) seriesName {
+  return result.seriesName;
 }
-- (PBSeries_Builder*) setName:(NSString*) value {
-  result.hasName = YES;
-  result.name = value;
+- (PBSeries_Builder*) setSeriesName:(NSString*) value {
+  result.hasSeriesName = YES;
+  result.seriesName = value;
   return self;
 }
-- (PBSeries_Builder*) clearName {
-  result.hasName = NO;
-  result.name = @"";
+- (PBSeries_Builder*) clearSeriesName {
+  result.hasSeriesName = NO;
+  result.seriesName = @"";
   return self;
 }
 - (BOOL) hasOverview {

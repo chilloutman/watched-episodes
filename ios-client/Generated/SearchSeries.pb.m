@@ -112,35 +112,35 @@ static PBSearchResults* defaultPBSearchResultsInstance = nil;
 @end
 
 @interface PBSearchResults_PBSeriesSummary ()
-@property (retain) NSString* id;
-@property (retain) NSString* name;
+@property (retain) NSString* seriesId;
+@property (retain) NSString* seriesName;
 @end
 
 @implementation PBSearchResults_PBSeriesSummary
 
-- (BOOL) hasId {
-  return !!hasId_;
+- (BOOL) hasSeriesId {
+  return !!hasSeriesId_;
 }
-- (void) setHasId:(BOOL) value {
-  hasId_ = !!value;
+- (void) setHasSeriesId:(BOOL) value {
+  hasSeriesId_ = !!value;
 }
-@synthesize id;
-- (BOOL) hasName {
-  return !!hasName_;
+@synthesize seriesId;
+- (BOOL) hasSeriesName {
+  return !!hasSeriesName_;
 }
-- (void) setHasName:(BOOL) value {
-  hasName_ = !!value;
+- (void) setHasSeriesName:(BOOL) value {
+  hasSeriesName_ = !!value;
 }
-@synthesize name;
+@synthesize seriesName;
 - (void) dealloc {
-  self.id = nil;
-  self.name = nil;
+  self.seriesId = nil;
+  self.seriesName = nil;
   [super dealloc];
 }
 - (id) init {
   if ((self = [super init])) {
-    self.id = @"";
-    self.name = @"";
+    self.seriesId = @"";
+    self.seriesName = @"";
   }
   return self;
 }
@@ -157,20 +157,20 @@ static PBSearchResults_PBSeriesSummary* defaultPBSearchResults_PBSeriesSummaryIn
   return defaultPBSearchResults_PBSeriesSummaryInstance;
 }
 - (BOOL) isInitialized {
-  if (!self.hasId) {
+  if (!self.hasSeriesId) {
     return NO;
   }
-  if (!self.hasName) {
+  if (!self.hasSeriesName) {
     return NO;
   }
   return YES;
 }
 - (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
-  if (self.hasId) {
-    [output writeString:1 value:self.id];
+  if (self.hasSeriesId) {
+    [output writeString:1 value:self.seriesId];
   }
-  if (self.hasName) {
-    [output writeString:2 value:self.name];
+  if (self.hasSeriesName) {
+    [output writeString:2 value:self.seriesName];
   }
   [self.unknownFields writeToCodedOutputStream:output];
 }
@@ -181,11 +181,11 @@ static PBSearchResults_PBSeriesSummary* defaultPBSearchResults_PBSeriesSummaryIn
   }
 
   size = 0;
-  if (self.hasId) {
-    size += computeStringSize(1, self.id);
+  if (self.hasSeriesId) {
+    size += computeStringSize(1, self.seriesId);
   }
-  if (self.hasName) {
-    size += computeStringSize(2, self.name);
+  if (self.hasSeriesName) {
+    size += computeStringSize(2, self.seriesName);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
@@ -262,11 +262,11 @@ static PBSearchResults_PBSeriesSummary* defaultPBSearchResults_PBSeriesSummaryIn
   if (other == [PBSearchResults_PBSeriesSummary defaultInstance]) {
     return self;
   }
-  if (other.hasId) {
-    [self setId:other.id];
+  if (other.hasSeriesId) {
+    [self setSeriesId:other.seriesId];
   }
-  if (other.hasName) {
-    [self setName:other.name];
+  if (other.hasSeriesName) {
+    [self setSeriesName:other.seriesName];
   }
   [self mergeUnknownFields:other.unknownFields];
   return self;
@@ -290,46 +290,46 @@ static PBSearchResults_PBSeriesSummary* defaultPBSearchResults_PBSeriesSummaryIn
         break;
       }
       case 10: {
-        [self setId:[input readString]];
+        [self setSeriesId:[input readString]];
         break;
       }
       case 18: {
-        [self setName:[input readString]];
+        [self setSeriesName:[input readString]];
         break;
       }
     }
   }
 }
-- (BOOL) hasId {
-  return result.hasId;
+- (BOOL) hasSeriesId {
+  return result.hasSeriesId;
 }
-- (NSString*) id {
-  return result.id;
+- (NSString*) seriesId {
+  return result.seriesId;
 }
-- (PBSearchResults_PBSeriesSummary_Builder*) setId:(NSString*) value {
-  result.hasId = YES;
-  result.id = value;
+- (PBSearchResults_PBSeriesSummary_Builder*) setSeriesId:(NSString*) value {
+  result.hasSeriesId = YES;
+  result.seriesId = value;
   return self;
 }
-- (PBSearchResults_PBSeriesSummary_Builder*) clearId {
-  result.hasId = NO;
-  result.id = @"";
+- (PBSearchResults_PBSeriesSummary_Builder*) clearSeriesId {
+  result.hasSeriesId = NO;
+  result.seriesId = @"";
   return self;
 }
-- (BOOL) hasName {
-  return result.hasName;
+- (BOOL) hasSeriesName {
+  return result.hasSeriesName;
 }
-- (NSString*) name {
-  return result.name;
+- (NSString*) seriesName {
+  return result.seriesName;
 }
-- (PBSearchResults_PBSeriesSummary_Builder*) setName:(NSString*) value {
-  result.hasName = YES;
-  result.name = value;
+- (PBSearchResults_PBSeriesSummary_Builder*) setSeriesName:(NSString*) value {
+  result.hasSeriesName = YES;
+  result.seriesName = value;
   return self;
 }
-- (PBSearchResults_PBSeriesSummary_Builder*) clearName {
-  result.hasName = NO;
-  result.name = @"";
+- (PBSearchResults_PBSeriesSummary_Builder*) clearSeriesName {
+  result.hasSeriesName = NO;
+  result.seriesName = @"";
   return self;
 }
 @end

@@ -39,15 +39,15 @@
 
 @interface PBSearchResults_PBSeriesSummary : PBGeneratedMessage {
 @private
-  BOOL hasId_:1;
-  BOOL hasName_:1;
-  NSString* id;
-  NSString* name;
+  BOOL hasSeriesId_:1;
+  BOOL hasSeriesName_:1;
+  NSString* seriesId;
+  NSString* seriesName;
 }
-- (BOOL) hasId;
-- (BOOL) hasName;
-@property (readonly, retain) NSString* id;
-@property (readonly, retain) NSString* name;
+- (BOOL) hasSeriesId;
+- (BOOL) hasSeriesName;
+@property (readonly, retain) NSString* seriesId;
+@property (readonly, retain) NSString* seriesName;
 
 + (PBSearchResults_PBSeriesSummary*) defaultInstance;
 - (PBSearchResults_PBSeriesSummary*) defaultInstance;
@@ -83,15 +83,15 @@
 - (PBSearchResults_PBSeriesSummary_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
 - (PBSearchResults_PBSeriesSummary_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
 
-- (BOOL) hasId;
-- (NSString*) id;
-- (PBSearchResults_PBSeriesSummary_Builder*) setId:(NSString*) value;
-- (PBSearchResults_PBSeriesSummary_Builder*) clearId;
+- (BOOL) hasSeriesId;
+- (NSString*) seriesId;
+- (PBSearchResults_PBSeriesSummary_Builder*) setSeriesId:(NSString*) value;
+- (PBSearchResults_PBSeriesSummary_Builder*) clearSeriesId;
 
-- (BOOL) hasName;
-- (NSString*) name;
-- (PBSearchResults_PBSeriesSummary_Builder*) setName:(NSString*) value;
-- (PBSearchResults_PBSeriesSummary_Builder*) clearName;
+- (BOOL) hasSeriesName;
+- (NSString*) seriesName;
+- (PBSearchResults_PBSeriesSummary_Builder*) setSeriesName:(NSString*) value;
+- (PBSearchResults_PBSeriesSummary_Builder*) clearSeriesName;
 @end
 
 @interface PBSearchResults_Builder : PBGeneratedMessage_Builder {

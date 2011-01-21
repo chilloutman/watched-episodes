@@ -1,4 +1,4 @@
-    //
+//
 //  RootViewController.m
 //  WatchedEpisodes
 //
@@ -7,7 +7,7 @@
 //
 
 #import "RootViewController.h"
-#import "SearchSeriesViewController.h"
+#import "SearchSeriesTab.h"
 
 
 @interface RootViewController ()
@@ -22,7 +22,7 @@
 @synthesize tabController;
 
 - (void)loadView {
-	NSArray *viewControllers= [NSArray arrayWithObjects:[[[SearchSeriesViewController alloc] init] autorelease], nil];
+	NSArray *viewControllers= [NSArray arrayWithObjects:[[[SearchSeriesTab alloc] init] autorelease], nil];
 	
 	self.tabController= [[[UITabBarController alloc] init] autorelease];
 	[self.tabController setViewControllers:viewControllers];

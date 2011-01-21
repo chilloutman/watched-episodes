@@ -14,9 +14,9 @@ public abstract class ProtocolFactory {
 	
 	public static GeneratedMessage buildGetSeriesProto (Series s) {
 		PBSeries.Builder series= PBSeries.newBuilder();
-		series.setId(s.getId());
+		series.setSeriesId(s.getId());
 		series.setLanguage(s.getLanguage());
-		series.setName(s.getName());
+		series.setSeriesName(s.getName());
 		series.setOverview(s.getOverview().toString());
 		series.setFirstAired(s.getFirstAired());
 		series.addAllActors(s.getActors());
@@ -31,8 +31,8 @@ public abstract class ProtocolFactory {
 		
 		for (SeriesFragment s : results) {
 			PBSeriesSummary.Builder series= PBSeriesSummary.newBuilder();
-			series.setId(s.getId());
-			series.setName(s.getName());
+			series.setSeriesId(s.getId());
+			series.setSeriesName(s.getName());
 			searchResults.addSeries(series);
 		}
 		

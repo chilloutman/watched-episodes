@@ -28,7 +28,7 @@
 
 - (void)searchSeries:(NSString *)seriesName {
 	NSString *searchTerm= [seriesName URLEncodedString];
-	NSURL *url= [NSURL URLWithString:[NSString stringWithFormat:@"%@/searchSeries?name=%@&t=protobuf", ServerURL, searchTerm]];
+	NSURL *url= [NSURL URLWithString:[NSString stringWithFormat:@"%@/searchSeries?name=%@", ServerURL, searchTerm]];
 	
 	CommunicationAgent *com= [ServiceLocator singletonForClass:[CommunicationAgent class]];
 	[com sendProtocolBuffersGETRequestWithURL:url delegate:self];
@@ -43,7 +43,7 @@
 	NSMutableArray *results= [NSMutableArray arrayWithCapacity:[parsedResults count]];
 	
 	for (PBSearchResults_PBSeriesSummary *series in parsedResults) {
-		[results addObject:[series name]];
+		[results addObject:[SeriesSummary seriesFromProtoMessage:series]];
 	}
 	self.searchResults= results;
 }

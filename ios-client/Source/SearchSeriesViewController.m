@@ -8,12 +8,14 @@
 
 #import "SearchSeriesViewController.h"
 #import "SearchSeriesModel.h"
+#import "SeriesDetailViewController.h"
 
 
 @interface SearchSeriesViewController ()
 
 @property (nonatomic, retain) NSArray *searchResults;
 @property (nonatomic, retain) SearchSeriesModel *model;
+@property (nonatomic, retain) SeriesDetailViewController *seriesController;
 @property (nonatomic, retain) NSString *lastSearchString;
 
 - (void)search;
@@ -24,7 +26,7 @@
 
 @implementation SearchSeriesViewController
 
-@synthesize model, searchResults, lastSearchString;
+@synthesize model, seriesController, searchResults, lastSearchString;
 
 /*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
@@ -37,7 +39,7 @@
     [super viewDidLoad];
 	self.title= @"Find";
 }
-							  
+
 - (NSString *)nibName {
 	return @"SearchSeries";
 }
@@ -48,6 +50,13 @@
 		model.delegate= self;
 	}
 	return model;
+}
+
+- (SeriesDetailViewController *)seriesController {
+	if (!seriesController) {
+		seriesController= [[SeriesDetailViewController alloc] init];
+	}
+	return seriesController;
 }
 
 - (void)search {
@@ -81,7 +90,7 @@
 	return NO;
 }
 
-#pragma mark UITableViewDelegate
+#pragma mark UITableView
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	return [self.searchResults count];
@@ -95,9 +104,16 @@
 		cell= [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 	}
 	
-	cell.textLabel.text= [self.searchResults objectAtIndex:indexPath.row];
+	SeriesSummary *series= [self.searchResults objectAtIndex:indexPath.row];
+	cell.textLabel.text= series.seriesName;
 				
 	return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	SeriesSummary *series= [self.searchResults objectAtIndex:indexPath.row];
+	[self.seriesController displayDetailsForSeries:series.seriesId];
+	[self.navigationController pushViewController:self.seriesController animated:YES];
 }
 
 #pragma mark -

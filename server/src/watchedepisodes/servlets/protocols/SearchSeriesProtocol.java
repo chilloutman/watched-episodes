@@ -55,33 +55,33 @@ public final class SearchSeriesProtocol {
         return watchedepisodes.servlets.protocols.SearchSeriesProtocol.internal_static_PBSearchResults_PBSeriesSummary_fieldAccessorTable;
       }
       
-      // required string id = 1;
-      public static final int ID_FIELD_NUMBER = 1;
-      private boolean hasId;
-      private java.lang.String id_ = "";
-      public boolean hasId() { return hasId; }
-      public java.lang.String getId() { return id_; }
+      // required string seriesId = 1;
+      public static final int SERIESID_FIELD_NUMBER = 1;
+      private boolean hasSeriesId;
+      private java.lang.String seriesId_ = "";
+      public boolean hasSeriesId() { return hasSeriesId; }
+      public java.lang.String getSeriesId() { return seriesId_; }
       
-      // required string name = 2;
-      public static final int NAME_FIELD_NUMBER = 2;
-      private boolean hasName;
-      private java.lang.String name_ = "";
-      public boolean hasName() { return hasName; }
-      public java.lang.String getName() { return name_; }
+      // required string seriesName = 2;
+      public static final int SERIESNAME_FIELD_NUMBER = 2;
+      private boolean hasSeriesName;
+      private java.lang.String seriesName_ = "";
+      public boolean hasSeriesName() { return hasSeriesName; }
+      public java.lang.String getSeriesName() { return seriesName_; }
       
       public final boolean isInitialized() {
-        if (!hasId) return false;
-        if (!hasName) return false;
+        if (!hasSeriesId) return false;
+        if (!hasSeriesName) return false;
         return true;
       }
       
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
-        if (hasId()) {
-          output.writeString(1, getId());
+        if (hasSeriesId()) {
+          output.writeString(1, getSeriesId());
         }
-        if (hasName()) {
-          output.writeString(2, getName());
+        if (hasSeriesName()) {
+          output.writeString(2, getSeriesName());
         }
         getUnknownFields().writeTo(output);
       }
@@ -92,13 +92,13 @@ public final class SearchSeriesProtocol {
         if (size != -1) return size;
       
         size = 0;
-        if (hasId()) {
+        if (hasSeriesId()) {
           size += com.google.protobuf.CodedOutputStream
-            .computeStringSize(1, getId());
+            .computeStringSize(1, getSeriesId());
         }
-        if (hasName()) {
+        if (hasSeriesName()) {
           size += com.google.protobuf.CodedOutputStream
-            .computeStringSize(2, getName());
+            .computeStringSize(2, getSeriesName());
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -249,11 +249,11 @@ public final class SearchSeriesProtocol {
         
         public Builder mergeFrom(watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary other) {
           if (other == watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary.getDefaultInstance()) return this;
-          if (other.hasId()) {
-            setId(other.getId());
+          if (other.hasSeriesId()) {
+            setSeriesId(other.getSeriesId());
           }
-          if (other.hasName()) {
-            setName(other.getName());
+          if (other.hasSeriesName()) {
+            setSeriesName(other.getSeriesName());
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
@@ -281,11 +281,11 @@ public final class SearchSeriesProtocol {
                 break;
               }
               case 10: {
-                setId(input.readString());
+                setSeriesId(input.readString());
                 break;
               }
               case 18: {
-                setName(input.readString());
+                setSeriesName(input.readString());
                 break;
               }
             }
@@ -293,45 +293,45 @@ public final class SearchSeriesProtocol {
         }
         
         
-        // required string id = 1;
-        public boolean hasId() {
-          return result.hasId();
+        // required string seriesId = 1;
+        public boolean hasSeriesId() {
+          return result.hasSeriesId();
         }
-        public java.lang.String getId() {
-          return result.getId();
+        public java.lang.String getSeriesId() {
+          return result.getSeriesId();
         }
-        public Builder setId(java.lang.String value) {
+        public Builder setSeriesId(java.lang.String value) {
           if (value == null) {
     throw new NullPointerException();
   }
-  result.hasId = true;
-          result.id_ = value;
+  result.hasSeriesId = true;
+          result.seriesId_ = value;
           return this;
         }
-        public Builder clearId() {
-          result.hasId = false;
-          result.id_ = getDefaultInstance().getId();
+        public Builder clearSeriesId() {
+          result.hasSeriesId = false;
+          result.seriesId_ = getDefaultInstance().getSeriesId();
           return this;
         }
         
-        // required string name = 2;
-        public boolean hasName() {
-          return result.hasName();
+        // required string seriesName = 2;
+        public boolean hasSeriesName() {
+          return result.hasSeriesName();
         }
-        public java.lang.String getName() {
-          return result.getName();
+        public java.lang.String getSeriesName() {
+          return result.getSeriesName();
         }
-        public Builder setName(java.lang.String value) {
+        public Builder setSeriesName(java.lang.String value) {
           if (value == null) {
     throw new NullPointerException();
   }
-  result.hasName = true;
-          result.name_ = value;
+  result.hasSeriesName = true;
+          result.seriesName_ = value;
           return this;
         }
-        public Builder clearName() {
-          result.hasName = false;
-          result.name_ = getDefaultInstance().getName();
+        public Builder clearSeriesName() {
+          result.hasSeriesName = false;
+          result.seriesName_ = getDefaultInstance().getSeriesName();
           return this;
         }
       }
@@ -657,11 +657,12 @@ public final class SearchSeriesProtocol {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023search_series.proto\"p\n\017PBSearchResults" +
+      "\n\023search_series.proto\"|\n\017PBSearchResults" +
       "\0220\n\006series\030\001 \003(\0132 .PBSearchResults.PBSer" +
-      "iesSummary\032+\n\017PBSeriesSummary\022\n\n\002id\030\001 \002(" +
-      "\t\022\014\n\004name\030\002 \002(\tB:\n\"watchedepisodes.servl" +
-      "ets.protocolsB\024SearchSeriesProtocol"
+      "iesSummary\0327\n\017PBSeriesSummary\022\020\n\010seriesI" +
+      "d\030\001 \002(\t\022\022\n\nseriesName\030\002 \002(\tB:\n\"watchedep" +
+      "isodes.servlets.protocolsB\024SearchSeriesP" +
+      "rotocol"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -681,7 +682,7 @@ public final class SearchSeriesProtocol {
           internal_static_PBSearchResults_PBSeriesSummary_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBSearchResults_PBSeriesSummary_descriptor,
-              new java.lang.String[] { "Id", "Name", },
+              new java.lang.String[] { "SeriesId", "SeriesName", },
               watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary.class,
               watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary.Builder.class);
           return null;
