@@ -31,28 +31,28 @@ public final class SearchSeriesProtocol {
       return watchedepisodes.servlets.protocols.SearchSeriesProtocol.internal_static_PBSearchResults_fieldAccessorTable;
     }
     
-    public static final class PBSeries extends
+    public static final class PBSeriesSummary extends
         com.google.protobuf.GeneratedMessage {
-      // Use PBSeries.newBuilder() to construct.
-      private PBSeries() {}
+      // Use PBSeriesSummary.newBuilder() to construct.
+      private PBSeriesSummary() {}
       
-      private static final PBSeries defaultInstance = new PBSeries();
-      public static PBSeries getDefaultInstance() {
+      private static final PBSeriesSummary defaultInstance = new PBSeriesSummary();
+      public static PBSeriesSummary getDefaultInstance() {
         return defaultInstance;
       }
       
-      public PBSeries getDefaultInstanceForType() {
+      public PBSeriesSummary getDefaultInstanceForType() {
         return defaultInstance;
       }
       
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return watchedepisodes.servlets.protocols.SearchSeriesProtocol.internal_static_PBSearchResults_PBSeries_descriptor;
+        return watchedepisodes.servlets.protocols.SearchSeriesProtocol.internal_static_PBSearchResults_PBSeriesSummary_descriptor;
       }
       
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return watchedepisodes.servlets.protocols.SearchSeriesProtocol.internal_static_PBSearchResults_PBSeries_fieldAccessorTable;
+        return watchedepisodes.servlets.protocols.SearchSeriesProtocol.internal_static_PBSearchResults_PBSeriesSummary_fieldAccessorTable;
       }
       
       // required string id = 1;
@@ -105,57 +105,57 @@ public final class SearchSeriesProtocol {
         return size;
       }
       
-      public static watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries parseFrom(
+      public static watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return newBuilder().mergeFrom(data).buildParsed();
       }
-      public static watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries parseFrom(
+      public static watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary parseFrom(
           com.google.protobuf.ByteString data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return newBuilder().mergeFrom(data, extensionRegistry)
                  .buildParsed();
       }
-      public static watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries parseFrom(byte[] data)
+      public static watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary parseFrom(byte[] data)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return newBuilder().mergeFrom(data).buildParsed();
       }
-      public static watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries parseFrom(
+      public static watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary parseFrom(
           byte[] data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return newBuilder().mergeFrom(data, extensionRegistry)
                  .buildParsed();
       }
-      public static watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries parseFrom(java.io.InputStream input)
+      public static watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary parseFrom(java.io.InputStream input)
           throws java.io.IOException {
         return newBuilder().mergeFrom(input).buildParsed();
       }
-      public static watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries parseFrom(
+      public static watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary parseFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return newBuilder().mergeFrom(input, extensionRegistry)
                  .buildParsed();
       }
-      public static watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries parseDelimitedFrom(java.io.InputStream input)
+      public static watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary parseDelimitedFrom(java.io.InputStream input)
           throws java.io.IOException {
         return newBuilder().mergeDelimitedFrom(input).buildParsed();
       }
-      public static watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries parseDelimitedFrom(
+      public static watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary parseDelimitedFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
                  .buildParsed();
       }
-      public static watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries parseFrom(
+      public static watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary parseFrom(
           com.google.protobuf.CodedInputStream input)
           throws java.io.IOException {
         return newBuilder().mergeFrom(input).buildParsed();
       }
-      public static watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries parseFrom(
+      public static watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary parseFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -165,25 +165,25 @@ public final class SearchSeriesProtocol {
       
       public static Builder newBuilder() { return Builder.create(); }
       public Builder newBuilderForType() { return newBuilder(); }
-      public static Builder newBuilder(watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries prototype) {
+      public static Builder newBuilder(watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary prototype) {
         return newBuilder().mergeFrom(prototype);
       }
       public Builder toBuilder() { return newBuilder(this); }
       
       public static final class Builder extends
           com.google.protobuf.GeneratedMessage.Builder<Builder> {
-        private watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries result;
+        private watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary result;
         
-        // Construct using watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries.newBuilder()
+        // Construct using watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary.newBuilder()
         private Builder() {}
         
         private static Builder create() {
           Builder builder = new Builder();
-          builder.result = new watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries();
+          builder.result = new watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary();
           return builder;
         }
         
-        protected watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries internalGetResult() {
+        protected watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary internalGetResult() {
           return result;
         }
         
@@ -192,7 +192,7 @@ public final class SearchSeriesProtocol {
             throw new IllegalStateException(
               "Cannot call clear() after build().");
           }
-          result = new watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries();
+          result = new watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary();
           return this;
         }
         
@@ -202,24 +202,24 @@ public final class SearchSeriesProtocol {
         
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries.getDescriptor();
+          return watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary.getDescriptor();
         }
         
-        public watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries getDefaultInstanceForType() {
-          return watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries.getDefaultInstance();
+        public watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary getDefaultInstanceForType() {
+          return watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary.getDefaultInstance();
         }
         
         public boolean isInitialized() {
           return result.isInitialized();
         }
-        public watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries build() {
+        public watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary build() {
           if (result != null && !isInitialized()) {
             throw newUninitializedMessageException(result);
           }
           return buildPartial();
         }
         
-        private watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries buildParsed()
+        private watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary buildParsed()
             throws com.google.protobuf.InvalidProtocolBufferException {
           if (!isInitialized()) {
             throw newUninitializedMessageException(
@@ -228,27 +228,27 @@ public final class SearchSeriesProtocol {
           return buildPartial();
         }
         
-        public watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries buildPartial() {
+        public watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary buildPartial() {
           if (result == null) {
             throw new IllegalStateException(
               "build() has already been called on this Builder.");
           }
-          watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries returnMe = result;
+          watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary returnMe = result;
           result = null;
           return returnMe;
         }
         
         public Builder mergeFrom(com.google.protobuf.Message other) {
-          if (other instanceof watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries) {
-            return mergeFrom((watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries)other);
+          if (other instanceof watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary) {
+            return mergeFrom((watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary)other);
           } else {
             super.mergeFrom(other);
             return this;
           }
         }
         
-        public Builder mergeFrom(watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries other) {
-          if (other == watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries.getDefaultInstance()) return this;
+        public Builder mergeFrom(watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary other) {
+          if (other == watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary.getDefaultInstance()) return this;
           if (other.hasId()) {
             setId(other.getId());
           }
@@ -345,20 +345,20 @@ public final class SearchSeriesProtocol {
       }
     }
     
-    // repeated .PBSearchResults.PBSeries series = 1;
+    // repeated .PBSearchResults.PBSeriesSummary series = 1;
     public static final int SERIES_FIELD_NUMBER = 1;
-    private java.util.List<watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries> series_ =
+    private java.util.List<watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary> series_ =
       java.util.Collections.emptyList();
-    public java.util.List<watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries> getSeriesList() {
+    public java.util.List<watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary> getSeriesList() {
       return series_;
     }
     public int getSeriesCount() { return series_.size(); }
-    public watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries getSeries(int index) {
+    public watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary getSeries(int index) {
       return series_.get(index);
     }
     
     public final boolean isInitialized() {
-      for (watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries element : getSeriesList()) {
+      for (watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary element : getSeriesList()) {
         if (!element.isInitialized()) return false;
       }
       return true;
@@ -366,7 +366,7 @@ public final class SearchSeriesProtocol {
     
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      for (watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries element : getSeriesList()) {
+      for (watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary element : getSeriesList()) {
         output.writeMessage(1, element);
       }
       getUnknownFields().writeTo(output);
@@ -378,7 +378,7 @@ public final class SearchSeriesProtocol {
       if (size != -1) return size;
     
       size = 0;
-      for (watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries element : getSeriesList()) {
+      for (watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary element : getSeriesList()) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, element);
       }
@@ -537,7 +537,7 @@ public final class SearchSeriesProtocol {
         if (other == watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.getDefaultInstance()) return this;
         if (!other.series_.isEmpty()) {
           if (result.series_.isEmpty()) {
-            result.series_ = new java.util.ArrayList<watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries>();
+            result.series_ = new java.util.ArrayList<watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary>();
           }
           result.series_.addAll(other.series_);
         }
@@ -567,7 +567,7 @@ public final class SearchSeriesProtocol {
               break;
             }
             case 10: {
-              watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries.Builder subBuilder = watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries.newBuilder();
+              watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary.Builder subBuilder = watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addSeries(subBuilder.buildPartial());
               break;
@@ -577,48 +577,48 @@ public final class SearchSeriesProtocol {
       }
       
       
-      // repeated .PBSearchResults.PBSeries series = 1;
-      public java.util.List<watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries> getSeriesList() {
+      // repeated .PBSearchResults.PBSeriesSummary series = 1;
+      public java.util.List<watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary> getSeriesList() {
         return java.util.Collections.unmodifiableList(result.series_);
       }
       public int getSeriesCount() {
         return result.getSeriesCount();
       }
-      public watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries getSeries(int index) {
+      public watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary getSeries(int index) {
         return result.getSeries(index);
       }
-      public Builder setSeries(int index, watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries value) {
+      public Builder setSeries(int index, watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary value) {
         if (value == null) {
           throw new NullPointerException();
         }
         result.series_.set(index, value);
         return this;
       }
-      public Builder setSeries(int index, watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries.Builder builderForValue) {
+      public Builder setSeries(int index, watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary.Builder builderForValue) {
         result.series_.set(index, builderForValue.build());
         return this;
       }
-      public Builder addSeries(watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries value) {
+      public Builder addSeries(watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary value) {
         if (value == null) {
           throw new NullPointerException();
         }
         if (result.series_.isEmpty()) {
-          result.series_ = new java.util.ArrayList<watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries>();
+          result.series_ = new java.util.ArrayList<watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary>();
         }
         result.series_.add(value);
         return this;
       }
-      public Builder addSeries(watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries.Builder builderForValue) {
+      public Builder addSeries(watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary.Builder builderForValue) {
         if (result.series_.isEmpty()) {
-          result.series_ = new java.util.ArrayList<watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries>();
+          result.series_ = new java.util.ArrayList<watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary>();
         }
         result.series_.add(builderForValue.build());
         return this;
       }
       public Builder addAllSeries(
-          java.lang.Iterable<? extends watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries> values) {
+          java.lang.Iterable<? extends watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary> values) {
         if (result.series_.isEmpty()) {
-          result.series_ = new java.util.ArrayList<watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries>();
+          result.series_ = new java.util.ArrayList<watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary>();
         }
         super.addAll(values, result.series_);
         return this;
@@ -644,10 +644,10 @@ public final class SearchSeriesProtocol {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_PBSearchResults_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_PBSearchResults_PBSeries_descriptor;
+    internal_static_PBSearchResults_PBSeriesSummary_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_PBSearchResults_PBSeries_fieldAccessorTable;
+      internal_static_PBSearchResults_PBSeriesSummary_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -657,11 +657,11 @@ public final class SearchSeriesProtocol {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023search_series.proto\"b\n\017PBSearchResults" +
-      "\022)\n\006series\030\001 \003(\0132\031.PBSearchResults.PBSer" +
-      "ies\032$\n\010PBSeries\022\n\n\002id\030\001 \002(\t\022\014\n\004name\030\002 \002(" +
-      "\tB:\n\"watchedepisodes.servlets.protocolsB" +
-      "\024SearchSeriesProtocol"
+      "\n\023search_series.proto\"p\n\017PBSearchResults" +
+      "\0220\n\006series\030\001 \003(\0132 .PBSearchResults.PBSer" +
+      "iesSummary\032+\n\017PBSeriesSummary\022\n\n\002id\030\001 \002(" +
+      "\t\022\014\n\004name\030\002 \002(\tB:\n\"watchedepisodes.servl" +
+      "ets.protocolsB\024SearchSeriesProtocol"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -676,14 +676,14 @@ public final class SearchSeriesProtocol {
               new java.lang.String[] { "Series", },
               watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.class,
               watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.Builder.class);
-          internal_static_PBSearchResults_PBSeries_descriptor =
+          internal_static_PBSearchResults_PBSeriesSummary_descriptor =
             internal_static_PBSearchResults_descriptor.getNestedTypes().get(0);
-          internal_static_PBSearchResults_PBSeries_fieldAccessorTable = new
+          internal_static_PBSearchResults_PBSeriesSummary_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_PBSearchResults_PBSeries_descriptor,
+              internal_static_PBSearchResults_PBSeriesSummary_descriptor,
               new java.lang.String[] { "Id", "Name", },
-              watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries.class,
-              watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeries.Builder.class);
+              watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary.class,
+              watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary.Builder.class);
           return null;
         }
       };

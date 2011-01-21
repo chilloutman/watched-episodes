@@ -42,7 +42,7 @@
 	NSArray *parsedResults= [[PBSearchResults parseFromData:responseData] seriesList];
 	NSMutableArray *results= [NSMutableArray arrayWithCapacity:[parsedResults count]];
 	
-	for (PBSearchResults_PBSeries *series in parsedResults) {
+	for (PBSearchResults_PBSeriesSummary *series in parsedResults) {
 		[results addObject:[series name]];
 	}
 	self.searchResults= results;
