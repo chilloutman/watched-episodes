@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "SeriesModel.h"
 
-@interface SeriesDetailViewController : UIViewController <SeriesModelDelegate> {
+@interface SeriesDetailViewController : UIViewController <SeriesModelDelegate, UITextViewDelegate> {
 	SeriesModel *model;
+	NSString *currentSeriesId;
+	
 	UILabel *nameLabel;
 	UITextView *overviewView;
 	UIImageView *bannerView;

@@ -12,14 +12,17 @@
 
 @interface SeriesDetailViewController ()
 
+- (void)resetUI;
+
 @property (nonatomic, retain) SeriesModel *model;
+@property (nonatomic, copy) NSString *currentSeriesId;
 
 @end
 
 
 @implementation SeriesDetailViewController
 
-@synthesize model;
+@synthesize model, currentSeriesId;
 @synthesize nameLabel, overviewView, bannerView;
 
 - (NSString *)nibName {
@@ -28,6 +31,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	NSLog(@"View will appear.");
 }
 
 - (SeriesModel *)model {
@@ -39,7 +46,15 @@
 }
 
 - (void)displayDetailsForSeries:(NSString *)seriesId {
-	[self.model getSeries:seriesId];
+	if (seriesId != self.currentSeriesId) {
+		[self.model getSeries:seriesId];
+		[self resetUI];
+	}
+}
+
+- (void)resetUI {
+	self.nameLabel.text= nil;
+	self.overviewView.text= nil;
 }
 
 #pragma mark SeriesModelDelegate
@@ -47,6 +62,12 @@
 - (void)seriesUpdated:(Series *)updatedSeries {
 	self.nameLabel.text= updatedSeries.seriesName;
 	self.overviewView.text= updatedSeries.overview;
+}
+
+#pragma mark UITextViewDelegate
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+	return NO;
 }
 
 #pragma mark -
