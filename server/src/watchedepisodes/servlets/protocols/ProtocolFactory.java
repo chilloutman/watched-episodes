@@ -17,7 +17,7 @@ public abstract class ProtocolFactory {
 		series.setSeriesId(s.getId());
 		series.setLanguage(s.getLanguage());
 		series.setSeriesName(s.getName());
-		series.setOverview(s.getOverview().toString());
+		series.setOverview(s.getOverview().getValue());
 		series.setFirstAired(s.getFirstAired());
 		series.addAllActors(s.getActors());
 		series.setBanner(s.getBanner());
