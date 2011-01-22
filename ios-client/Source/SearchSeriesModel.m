@@ -31,14 +31,14 @@
 	NSURL *url= [NSURL URLWithString:[NSString stringWithFormat:@"%@/searchSeries?name=%@", ServerURL, searchTerm]];
 	
 	CommunicationAgent *com= [ServiceLocator singletonForClass:[CommunicationAgent class]];
-	[com sendProtocolBuffersGETRequestWithURL:url delegate:self];
+	[com sendProtocolBuffersGETRequestWithURL:url requestId:nil delegate:self];
 }
 
-- (void)requestDidSuccedWithURL:(NSURL *)url {
+- (void)requestDidSucceed:(id<NSObject>)requestId {
 	[self.delegate searchResultsUpdated:self.searchResults];
 }
 
-- (void)receivedResponse:(NSData *)responseData {
+- (void)receivedResponse:(NSData *)responseData requestId:(id<NSObject>)requestId {
 	NSArray *parsedResults= [[PBSearchResults parseFromData:responseData] seriesList];
 	NSMutableArray *results= [NSMutableArray arrayWithCapacity:[parsedResults count]];
 	
@@ -48,7 +48,7 @@
 	self.searchResults= results;
 }
 
-- (void)requestDidFailWithURL:(NSURL *)url {
+- (void)requestDidFail:(id<NSObject>)requestId {
 	[self.delegate searchResultsUpdated:[NSArray arrayWithObject:@"Connection Failed"]];
 }
 

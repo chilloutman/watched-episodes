@@ -13,7 +13,6 @@
 
 @property (nonatomic, assign) id<CommunicationDelegate> delegate;
 @property (nonatomic, retain) NSURL *url;
-@property (nonatomic, assign) BOOL protobuf;
 
 - (NSURLRequest *)createGETRequest;
 - (BOOL)checkResponse:(NSHTTPURLResponse *)response;
@@ -26,13 +25,12 @@
 
 @implementation Request
 
-@synthesize url, delegate, protobuf;
+@synthesize url, delegate, protobuf, requestId;
 
-- (id)initWithURL:(NSURL *)u delegate:(id<CommunicationDelegate>)d protocolBuffers:(BOOL)expectProtobuf {
+- (id)initWithURL:(NSURL *)u delegate:(id<CommunicationDelegate>)d {
 	if (self= [super init]) {
 		self.url= u;
 		self.delegate= d;
-		self.protobuf= expectProtobuf;
 	}
 	return self;
 }
@@ -72,15 +70,15 @@
 }
 
 - (void)requestSucceded:(NSData *)data {
-	[self.delegate receivedResponse:data];
+	[self.delegate receivedResponse:data requestId:self.requestId];
 	dispatch_async(dispatch_get_main_queue(), ^ {
-		[self.delegate requestDidSuccedWithURL:self.url];
+		[self.delegate requestDidSucceed:self.requestId];
 	});
 }
 
 - (void)requestFailed {
 	dispatch_async(dispatch_get_main_queue(), ^ {
-		[self.delegate requestDidFailWithURL:self.url];
+		[self.delegate requestDidFail:self.requestId];
 	});
 }
 

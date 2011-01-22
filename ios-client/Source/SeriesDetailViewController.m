@@ -47,8 +47,9 @@
 
 - (void)displayDetailsForSeries:(NSString *)seriesId {
 	if (seriesId != self.currentSeriesId) {
-		[self.model getSeries:seriesId];
+		[self.model loadSeries:seriesId];
 		[self resetUI];
+		self.currentSeriesId= seriesId;
 	}
 }
 
@@ -59,9 +60,15 @@
 
 #pragma mark SeriesModelDelegate
 
-- (void)seriesUpdated:(Series *)updatedSeries {
-	self.nameLabel.text= updatedSeries.seriesName;
-	self.overviewView.text= updatedSeries.overview;
+- (void)loadedSeries:(Series *)series {
+	self.nameLabel.text= series.seriesName;
+	self.overviewView.text= series.overview;
+	[self.model loadSeriesBanner:series.banner];
+}
+
+- (void)loadedSeriesBanner:(UIImage *)banner {
+	self.nameLabel= nil;
+	self.bannerView.image= banner;
 }
 
 #pragma mark UITextViewDelegate

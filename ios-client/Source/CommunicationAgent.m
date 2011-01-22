@@ -24,13 +24,16 @@ NSUInteger numberOfRunningRequests;
 
 @implementation CommunicationAgent
 
-- (void)sendGETRequestWithURL:(NSURL *)url delegate:(id<CommunicationDelegate>)delegate {	
-	Request *request= [[Request alloc] initWithURL:url delegate:delegate protocolBuffers:NO];
+- (void)sendGETRequestWithURL:(NSURL *)url requestId:(id<NSObject>)requestId delegate:(id<CommunicationDelegate>)delegate {	
+	Request *request= [[Request alloc] initWithURL:url delegate:delegate];
+	request.requestId= requestId;
 	[self dispatchRequest:request];
 }
 
-- (void)sendProtocolBuffersGETRequestWithURL:(NSURL *)url delegate:(id<CommunicationDelegate>)delegate {
-	Request *request= [[Request alloc] initWithURL:url delegate:delegate protocolBuffers:YES];
+- (void)sendProtocolBuffersGETRequestWithURL:(NSURL *)url requestId:(id<NSObject>)requestId delegate:(id<CommunicationDelegate>)delegate {
+	Request *request= [[Request alloc] initWithURL:url delegate:delegate];
+	request.protobuf= YES;
+	request.requestId= requestId;
 	[self dispatchRequest:request];
 }
 

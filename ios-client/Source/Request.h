@@ -16,7 +16,10 @@
 	BOOL protobuf;
 }
 
-- (id)initWithURL:(NSURL *)u delegate:(id<CommunicationDelegate>)d protocolBuffers:(BOOL)expectProtobuf;
+@property (nonatomic, assign) BOOL protobuf;
+@property (nonatomic, retain) id<NSObject> requestId;
+
+- (id)initWithURL:(NSURL *)u delegate:(id<CommunicationDelegate>)d;
 - (void)excecute;
 
 @end

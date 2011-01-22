@@ -11,8 +11,8 @@
 
 @protocol CommunicationDelegate
 
-- (void)requestDidSuccedWithURL:(NSURL *)url; // Gets called from main thread
-- (void)requestDidFailWithURL:(NSURL *)url; // Gets called from main thread
-- (void)receivedResponse:(NSData *)responseData; // Gets called from background thread
+- (void)requestDidSucceed:(id <NSObject>)requestId; // Gets called from main thread
+- (void)requestDidFail:(id <NSObject>)requestId; // Gets called from main thread
+- (void)receivedResponse:(NSData *)responseData requestId:(id <NSObject>)requestId; // Gets called from background thread
 
 @end
