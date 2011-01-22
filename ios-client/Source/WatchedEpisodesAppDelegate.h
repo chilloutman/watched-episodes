@@ -12,11 +12,11 @@
 
 @interface WatchedEpisodesAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
-    RootViewController *viewController;
+	UITabBarController *tabController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet RootViewController *viewController;
+@property (nonatomic, retain) UITabBarController *tabController;
 
 @end
 

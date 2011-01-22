@@ -7,18 +7,22 @@
 //
 
 #import "WatchedEpisodesAppDelegate.h"
-#import "RootViewController.h"
+#import "SearchSeriesTab.h"
 
 @implementation WatchedEpisodesAppDelegate
 
 @synthesize window;
-@synthesize viewController;
+@synthesize tabController;
 
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-
-    [self.window addSubview:viewController.view];
+	NSArray *viewControllers= [NSArray arrayWithObjects:[[[SearchSeriesTab alloc] init] autorelease], nil];
+	
+	self.tabController= [[[UITabBarController alloc] init] autorelease];
+	[self.tabController setViewControllers:viewControllers];
+	
+    [self.window addSubview:self.tabController.view];
     [self.window makeKeyAndVisible];
 
     return YES;
@@ -74,8 +78,8 @@
 
 
 - (void)dealloc {
-    [viewController release];
-    [window release];
+	self.tabController= nil;
+	self.window= nil;
     [super dealloc];
 }
 

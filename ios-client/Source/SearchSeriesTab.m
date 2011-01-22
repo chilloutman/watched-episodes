@@ -25,13 +25,14 @@
 - (void)loadView {
 	self.title= @"Find";
 	
-	self.rootController= [[SearchSeriesViewController alloc] init];
-	self.navController= [[UINavigationController alloc] initWithRootViewController:self.rootController];
-	[self.rootController release];
+	self.rootController= [[[SearchSeriesViewController alloc] init] autorelease];
+	self.navController= [[[UINavigationController alloc] initWithRootViewController:self.rootController] autorelease];
 	
-	CGRect frame = [[navController navigationBar] frame];
-	frame.origin.y = 0;
-	[[self.navController navigationBar] setFrame:frame];
+	// Remove status bar spacing
+	CGRect f= navController.navigationBar.frame;
+	f.origin.y= 0;
+	self.navController.navigationBar.frame= f;
+	
 	self.view= self.navController.view;
 }
 
@@ -39,6 +40,12 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	return YES;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+	// WTF... But it's the best thing I came up with that works
+	self.navController.navigationBarHidden= YES;
+	self.navController.navigationBarHidden= NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,12 +61,10 @@
 	self.rootController= nil;
 }
 
-
 - (void)dealloc {
 	self.navController= nil;
 	self.rootController= nil;
 	[super dealloc];
 }
-
 
 @end
