@@ -20,6 +20,7 @@
 @implementation SeriesDetailViewController
 
 @synthesize model;
+@synthesize nameLabel, overviewView, bannerView;
 
 - (NSString *)nibName {
 	return @"SeriesDetail";
@@ -44,9 +45,8 @@
 #pragma mark SeriesModelDelegate
 
 - (void)seriesUpdated:(Series *)updatedSeries {
-	UIAlertView *alert= [[UIAlertView alloc] initWithTitle:updatedSeries.seriesName message:updatedSeries.overview delegate:nil cancelButtonTitle:@"AWESOME!" otherButtonTitles:nil];
-	[alert show];
-	[alert autorelease];
+	self.nameLabel.text= updatedSeries.seriesName;
+	self.overviewView.text= updatedSeries.overview;
 }
 
 #pragma mark -

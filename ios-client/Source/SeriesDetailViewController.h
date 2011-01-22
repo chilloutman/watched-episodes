@@ -10,10 +10,16 @@
 #import "SeriesModel.h"
 
 @interface SeriesDetailViewController : UIViewController <SeriesModelDelegate> {
-@private
 	SeriesModel *model;
+	UILabel *nameLabel;
+	UITextView *overviewView;
+	UIImageView *bannerView;
 }
 
 - (void)displayDetailsForSeries:(NSString *)seriesId;
+
+@property (nonatomic, retain) IBOutlet UILabel *nameLabel;
+@property (nonatomic, retain) IBOutlet UITextView *overviewView;
+@property (nonatomic, retain) IBOutlet UIImageView *bannerView;
 
 @end
