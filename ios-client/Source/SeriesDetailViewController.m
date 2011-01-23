@@ -56,6 +56,7 @@
 - (void)resetUI {
 	self.nameLabel.text= nil;
 	self.overviewView.text= nil;
+	self.bannerView.image= nil;
 }
 
 #pragma mark SeriesModelDelegate
