@@ -167,13 +167,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EF12EF9D12EC8FE1007E380E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EF4AD02E12EA24C30058F78E /* BusinessObjects */,
+				EF8D79EE12DA0C380064C5B5 /* SearchSeriesModel.h */,
+				EF8D79EF12DA0C380064C5B5 /* SearchSeriesModel.m */,
+				EF4AD02412EA23BD0058F78E /* SeriesModel.h */,
+				EF4AD02512EA23BD0058F78E /* SeriesModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		EF4AD01912EA220A0058F78E /* SeriesDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
 				EF4AD01A12EA22A60058F78E /* SeriesDetailViewController.h */,
 				EF4AD01B12EA22A60058F78E /* SeriesDetailViewController.m */,
-				EF4AD02412EA23BD0058F78E /* SeriesModel.h */,
-				EF4AD02512EA23BD0058F78E /* SeriesModel.m */,
 			);
 			name = SeriesDetailScreen;
 			sourceTree = "<group>";
@@ -198,9 +208,9 @@
 				EF8D79D312DA087D0064C5B5 /* ServiceLocator.m */,
 				EF8D76EC12D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.h */,
 				EF8D76ED12D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.m */,
-				EF4AD02E12EA24C30058F78E /* BusinessObjects */,
 				EF8D79C112DA068F0064C5B5 /* SearchScreen */,
 				EF4AD01912EA220A0058F78E /* SeriesDetailScreen */,
+				EF12EF9D12EC8FE1007E380E /* Model */,
 				EF8D79A612DA02170064C5B5 /* Communication */,
 				EF8D76F312D8DEE40064C5B5 /* Other */,
 			);
@@ -268,8 +278,6 @@
 				EF4AD08612EA31190058F78E /* SearchSeriesTab.m */,
 				EF8D76EE12D8DEDA0064C5B5 /* SearchSeriesViewController.h */,
 				EF8D76EF12D8DEDA0064C5B5 /* SearchSeriesViewController.m */,
-				EF8D79EE12DA0C380064C5B5 /* SearchSeriesModel.h */,
-				EF8D79EF12DA0C380064C5B5 /* SearchSeriesModel.m */,
 			);
 			name = SearchScreen;
 			sourceTree = "<group>";
