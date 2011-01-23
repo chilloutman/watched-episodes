@@ -10,26 +10,20 @@
 #import "CommunicationDelegate.h"
 #import "Series.h"
 
-@class SeriesBannerLoader;
-
-@protocol SeriesModelDelegate
+@protocol SeriesLoaderDelegate
 @required
 - (void)loadedSeries:(Series *)updatedSeries;
-- (void)loadedSeriesBanner:(UIImage *)banner;
 
 @end
 
 
-@interface SeriesModel : NSObject<CommunicationDelegate> {
-	id<SeriesModelDelegate> delegate;
-	SeriesBannerLoader *bannerLoader;
+@interface SeriesLoader : NSObject<CommunicationDelegate> {
+	id<SeriesLoaderDelegate> delegate;
 	Series *series;
-	UIImage *banner;
 }
 
-@property (nonatomic, assign) id<SeriesModelDelegate> delegate;
+@property (nonatomic, assign) id<SeriesLoaderDelegate> delegate;
 
 - (void)loadSeries:(NSString *)seriesId;
-- (void)loadSeriesBanner:(NSString *)bannerPath;
 
 @end

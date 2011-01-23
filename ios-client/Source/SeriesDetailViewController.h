@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SeriesModel.h"
+#import "SeriesLoader.h"
+#import "SeriesBannerLoader.h"
 
-@interface SeriesDetailViewController : UIViewController <SeriesModelDelegate, UITextViewDelegate> {
-	SeriesModel *model;
+@interface SeriesDetailViewController : UIViewController <SeriesLoaderDelegate, SeriesBannerLoaderDelegate, UITextViewDelegate> {
+	SeriesLoader *seriesLoader;
+	SeriesBannerLoader *bannerLoader;
 	NSString *currentSeriesId;
 	
 	UILabel *nameLabel;

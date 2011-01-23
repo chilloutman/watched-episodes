@@ -7,14 +7,15 @@
 //
 
 #import "SeriesDetailViewController.h"
-#import "SeriesModel.h"
+#import "SeriesLoader.h"
 
 
 @interface SeriesDetailViewController ()
 
 - (void)resetUI;
 
-@property (nonatomic, retain) SeriesModel *model;
+@property (nonatomic, retain) SeriesLoader *seriesLoader;
+@property (nonatomic, retain) SeriesBannerLoader *bannerLoader;
 @property (nonatomic, copy) NSString *currentSeriesId;
 
 @end
@@ -22,7 +23,7 @@
 
 @implementation SeriesDetailViewController
 
-@synthesize model, currentSeriesId;
+@synthesize seriesLoader, bannerLoader, currentSeriesId;
 @synthesize nameLabel, overviewView, bannerView;
 
 - (NSString *)nibName {
@@ -37,17 +38,25 @@
 	NSLog(@"View will appear.");
 }
 
-- (SeriesModel *)model {
-	if (!model) {
-		model= [[SeriesModel alloc] init];
-		model.delegate= self;
+- (SeriesLoader *)seriesLoader {
+	if (!seriesLoader) {
+		seriesLoader= [[SeriesLoader alloc] init];
+		seriesLoader.delegate= self;
 	}
-	return model;
+	return seriesLoader;
+}
+
+- (SeriesBannerLoader *)bannerLoader {
+	if (!bannerLoader) {
+		bannerLoader= [[SeriesBannerLoader alloc] init];
+		bannerLoader.delegate= self;
+	}
+	return bannerLoader;
 }
 
 - (void)displayDetailsForSeries:(NSString *)seriesId {
 	if (seriesId != self.currentSeriesId) {
-		[self.model loadSeries:seriesId];
+		[self.seriesLoader loadSeries:seriesId];
 		[self resetUI];
 		self.currentSeriesId= seriesId;
 	}
@@ -64,7 +73,7 @@
 - (void)loadedSeries:(Series *)series {
 	self.nameLabel.text= series.seriesName;
 	self.overviewView.text= series.overview;
-	[self.model loadSeriesBanner:series.banner];
+	[self.bannerLoader loadSeriesBanner:series.banner];
 }
 
 - (void)loadedSeriesBanner:(UIImage *)banner {

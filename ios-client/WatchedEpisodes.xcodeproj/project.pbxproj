@@ -12,9 +12,10 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		2899E5220DE3E06400AC0155 /* SearchSeries.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* SearchSeries.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		EF12EFA112EC90C2007E380E /* SeriesBannerLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF12EFA012EC90C2007E380E /* SeriesBannerLoader.m */; };
 		EF4AD01D12EA22A60058F78E /* SeriesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4AD01B12EA22A60058F78E /* SeriesDetailViewController.m */; };
 		EF4AD01E12EA22A60058F78E /* SeriesDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF4AD01C12EA22A60058F78E /* SeriesDetail.xib */; };
-		EF4AD02612EA23BD0058F78E /* SeriesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4AD02512EA23BD0058F78E /* SeriesModel.m */; };
+		EF4AD02612EA23BD0058F78E /* SeriesLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4AD02512EA23BD0058F78E /* SeriesLoader.m */; };
 		EF4AD02912EA23F10058F78E /* GetSeries.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4AD02812EA23F10058F78E /* GetSeries.pb.m */; };
 		EF4AD03112EA252C0058F78E /* Series.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4AD03012EA252C0058F78E /* Series.m */; };
 		EF4AD07612EA2EEB0058F78E /* SeriesSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4AD07512EA2EEB0058F78E /* SeriesSummary.m */; };
@@ -71,11 +72,13 @@
 		2899E5210DE3E06400AC0155 /* SearchSeries.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchSeries.xib; sourceTree = "<group>"; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* WatchedEpisodes-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "WatchedEpisodes-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		EF12EF9F12EC90C2007E380E /* SeriesBannerLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeriesBannerLoader.h; sourceTree = "<group>"; };
+		EF12EFA012EC90C2007E380E /* SeriesBannerLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeriesBannerLoader.m; sourceTree = "<group>"; };
 		EF4AD01A12EA22A60058F78E /* SeriesDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeriesDetailViewController.h; sourceTree = "<group>"; };
 		EF4AD01B12EA22A60058F78E /* SeriesDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeriesDetailViewController.m; sourceTree = "<group>"; };
 		EF4AD01C12EA22A60058F78E /* SeriesDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeriesDetail.xib; sourceTree = "<group>"; };
-		EF4AD02412EA23BD0058F78E /* SeriesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeriesModel.h; sourceTree = "<group>"; };
-		EF4AD02512EA23BD0058F78E /* SeriesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeriesModel.m; sourceTree = "<group>"; };
+		EF4AD02412EA23BD0058F78E /* SeriesLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeriesLoader.h; sourceTree = "<group>"; };
+		EF4AD02512EA23BD0058F78E /* SeriesLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeriesLoader.m; sourceTree = "<group>"; };
 		EF4AD02712EA23F10058F78E /* GetSeries.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetSeries.pb.h; sourceTree = "<group>"; };
 		EF4AD02812EA23F10058F78E /* GetSeries.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetSeries.pb.m; sourceTree = "<group>"; };
 		EF4AD02F12EA252C0058F78E /* Series.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Series.h; sourceTree = "<group>"; };
@@ -173,8 +176,10 @@
 				EF4AD02E12EA24C30058F78E /* BusinessObjects */,
 				EF8D79EE12DA0C380064C5B5 /* SearchSeriesModel.h */,
 				EF8D79EF12DA0C380064C5B5 /* SearchSeriesModel.m */,
-				EF4AD02412EA23BD0058F78E /* SeriesModel.h */,
-				EF4AD02512EA23BD0058F78E /* SeriesModel.m */,
+				EF4AD02412EA23BD0058F78E /* SeriesLoader.h */,
+				EF4AD02512EA23BD0058F78E /* SeriesLoader.m */,
+				EF12EF9F12EC90C2007E380E /* SeriesBannerLoader.h */,
+				EF12EFA012EC90C2007E380E /* SeriesBannerLoader.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -386,11 +391,12 @@
 				EF8D79D412DA087D0064C5B5 /* ServiceLocator.m in Sources */,
 				EF8D79F012DA0C380064C5B5 /* SearchSeriesModel.m in Sources */,
 				EF4AD01D12EA22A60058F78E /* SeriesDetailViewController.m in Sources */,
-				EF4AD02612EA23BD0058F78E /* SeriesModel.m in Sources */,
+				EF4AD02612EA23BD0058F78E /* SeriesLoader.m in Sources */,
 				EF4AD02912EA23F10058F78E /* GetSeries.pb.m in Sources */,
 				EF4AD03112EA252C0058F78E /* Series.m in Sources */,
 				EF4AD07612EA2EEB0058F78E /* SeriesSummary.m in Sources */,
 				EF4AD08712EA31190058F78E /* SearchSeriesTab.m in Sources */,
+				EF12EFA112EC90C2007E380E /* SeriesBannerLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
