@@ -30,6 +30,7 @@
 		EF8D79F012DA0C380064C5B5 /* SearchSeriesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D79EF12DA0C380064C5B5 /* SearchSeriesModel.m */; };
 		EFFD078F12F0BE1E00F9075B /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD078E12F0BE1E00F9075B /* FavoritesViewController.m */; };
 		EFFD079512F0BE7A00F9075B /* NavigationControllerTab.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */; };
+		EFFD085312F0C8FA00F9075B /* FavoritesMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD085212F0C8FA00F9075B /* FavoritesMananger.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,8 @@
 		EFFD078E12F0BE1E00F9075B /* FavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesViewController.m; sourceTree = "<group>"; };
 		EFFD079312F0BE7A00F9075B /* NavigationControllerTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationControllerTab.h; sourceTree = "<group>"; };
 		EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationControllerTab.m; sourceTree = "<group>"; };
+		EFFD085112F0C8FA00F9075B /* FavoritesMananger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesMananger.h; sourceTree = "<group>"; };
+		EFFD085212F0C8FA00F9075B /* FavoritesMananger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesMananger.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,7 +170,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EF12EF9D12EC8FE1007E380E /* Model */ = {
+		EF12EF9D12EC8FE1007E380E /* Loader */ = {
 			isa = PBXGroup;
 			children = (
 				EF8D79EE12DA0C380064C5B5 /* SearchSeriesModel.h */,
@@ -177,7 +180,7 @@
 				EF12EF9F12EC90C2007E380E /* SeriesBannerLoader.h */,
 				EF12EFA012EC90C2007E380E /* SeriesBannerLoader.m */,
 			);
-			name = Model;
+			name = Loader;
 			sourceTree = "<group>";
 		};
 		EF8D76E912D8DEDA0064C5B5 /* Source */ = {
@@ -192,7 +195,8 @@
 				EFFD079312F0BE7A00F9075B /* NavigationControllerTab.h */,
 				EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */,
 				EFFD084F12F0C6F000F9075B /* Screens */,
-				EF12EF9D12EC8FE1007E380E /* Model */,
+				EF12EF9D12EC8FE1007E380E /* Loader */,
+				EFFD085012F0C8CB00F9075B /* Model */,
 				EF8D79A612DA02170064C5B5 /* Communication */,
 				EF8D76F312D8DEE40064C5B5 /* Other */,
 			);
@@ -264,6 +268,15 @@
 				EF4AD01B12EA22A60058F78E /* SeriesDetailViewController.m */,
 			);
 			name = Screens;
+			sourceTree = "<group>";
+		};
+		EFFD085012F0C8CB00F9075B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EFFD085112F0C8FA00F9075B /* FavoritesMananger.h */,
+				EFFD085212F0C8FA00F9075B /* FavoritesMananger.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,6 +388,7 @@
 				EF12EFA112EC90C2007E380E /* SeriesBannerLoader.m in Sources */,
 				EFFD078F12F0BE1E00F9075B /* FavoritesViewController.m in Sources */,
 				EFFD079512F0BE7A00F9075B /* NavigationControllerTab.m in Sources */,
+				EFFD085312F0C8FA00F9075B /* FavoritesMananger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

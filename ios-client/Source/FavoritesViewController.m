@@ -7,19 +7,19 @@
 //
 
 #import "FavoritesViewController.h"
-
+#import "FavoritesMananger.h"
 
 @implementation FavoritesViewController
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	favoritesManager= [ServiceLocator singletonForClass:[FavoritesMananger class]];
 }
 
-/*
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+    [self.tableView	reloadData];
 }
-*/
+
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -43,33 +43,26 @@
 }
 */
 
+#pragma mark UITableView
 
-#pragma mark -
-#pragma mark Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-	return 0;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)t {
+	return 1;
 }
 
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return 0;
+- (NSInteger)tableView:(UITableView *)t numberOfRowsInSection:(NSInteger)section {
+    return [favoritesManager.allFavoriteSeries count];
 }
 
-
-// Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)t cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier= @"Cell";
     
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell= [t dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell= [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    // Configure the cell...
+	PBSeries *series= [favoritesManager.allFavoriteSeries objectAtIndex:indexPath.row];
+    cell.textLabel.text= series.seriesName;
     
     return cell;
 }

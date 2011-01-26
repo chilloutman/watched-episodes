@@ -8,7 +8,7 @@
 
 #import "SeriesDetailViewController.h"
 #import "SeriesLoader.h"
-
+#import "FavoritesMananger.h"
 
 @interface SeriesDetailViewController ()
 
@@ -16,26 +16,18 @@
 
 @property (nonatomic, retain) SeriesLoader *seriesLoader;
 @property (nonatomic, retain) SeriesBannerLoader *bannerLoader;
-@property (nonatomic, copy) NSString *currentSeriesId;
+@property (nonatomic, retain) PBSeries *currentSeries;
 
 @end
 
 
 @implementation SeriesDetailViewController
 
-@synthesize seriesLoader, bannerLoader, currentSeriesId;
+@synthesize seriesLoader, bannerLoader, currentSeries;
 @synthesize nameLabel, overviewView, bannerView;
 
 - (NSString *)nibName {
 	return @"SeriesDetail";
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-	NSLog(@"View will appear.");
 }
 
 - (SeriesLoader *)seriesLoader {
@@ -54,11 +46,21 @@
 	return bannerLoader;
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+	[self resetUI];
+	UIBarButtonItem *faveButton= [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(faveSeries)];
+	self.navigationItem.rightBarButtonItem= faveButton;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	NSLog(@"View will appear.");
+}
+
 - (void)displayDetailsForSeries:(NSString *)seriesId {
-	if (seriesId != self.currentSeriesId) {
+	if (seriesId != self.currentSeries.seriesId) {
 		[self.seriesLoader loadSeries:seriesId];
 		[self resetUI];
-		self.currentSeriesId= seriesId;
 	}
 }
 
@@ -68,9 +70,15 @@
 	self.bannerView.image= nil;
 }
 
+- (void)faveSeries {
+	FavoritesMananger *manager= [ServiceLocator singletonForClass:[FavoritesMananger class]];
+	[manager addSeriesToFavorites:self.currentSeries];
+}
+
 #pragma mark SeriesModelDelegate
 
 - (void)loadedSeries:(PBSeries *)series {
+	self.currentSeries= series;
 	self.nameLabel.text= series.seriesName;
 	self.overviewView.text= series.overview;
 	[self.bannerLoader loadSeriesBanner:series.banner];

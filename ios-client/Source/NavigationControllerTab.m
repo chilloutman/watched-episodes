@@ -48,6 +48,10 @@
 	self.view= self.navController.view;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+	[self.navController.topViewController viewWillAppear:animated];
+}
+
 #pragma mark -
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

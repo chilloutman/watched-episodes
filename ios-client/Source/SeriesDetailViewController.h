@@ -13,7 +13,7 @@
 @interface SeriesDetailViewController : UIViewController <SeriesLoaderDelegate, SeriesBannerLoaderDelegate, UITextViewDelegate> {
 	SeriesLoader *seriesLoader;
 	SeriesBannerLoader *bannerLoader;
-	NSString *currentSeriesId;
+	PBSeries *currentSeries;
 	
 	UILabel *nameLabel;
 	UITextView *overviewView;
