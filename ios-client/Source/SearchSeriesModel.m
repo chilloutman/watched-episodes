@@ -8,7 +8,6 @@
 
 #import "SearchSeriesModel.h"
 
-#import "SearchSeries.pb.h"
 #import "NSString+URLEncoding.h"
 
 #import "ServiceLocator.h"
@@ -39,13 +38,7 @@
 }
 
 - (void)receivedResponse:(NSData *)responseData requestId:(id<NSObject>)requestId {
-	NSArray *parsedResults= [[PBSearchResults parseFromData:responseData] seriesList];
-	NSMutableArray *results= [NSMutableArray arrayWithCapacity:[parsedResults count]];
-	
-	for (PBSearchResults_PBSeriesSummary *series in parsedResults) {
-		[results addObject:[SeriesSummary seriesFromProtoMessage:series]];
-	}
-	self.searchResults= results;
+	self.searchResults= [[PBSearchResults parseFromData:responseData] seriesList];
 }
 
 - (void)requestDidFail:(id<NSObject>)requestId {

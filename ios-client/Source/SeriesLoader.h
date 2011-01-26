@@ -8,18 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import "CommunicationDelegate.h"
-#import "Series.h"
+#import "GetSeries.pb.h"
 
 @protocol SeriesLoaderDelegate
 @required
-- (void)loadedSeries:(Series *)updatedSeries;
+- (void)loadedSeries:(PBSeries *)updatedSeries;
 
 @end
 
 
 @interface SeriesLoader : NSObject<CommunicationDelegate> {
 	id<SeriesLoaderDelegate> delegate;
-	Series *series;
+	PBSeries *series;
 }
 
 @property (nonatomic, assign) id<SeriesLoaderDelegate> delegate;

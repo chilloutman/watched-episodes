@@ -12,8 +12,6 @@
 
 @interface CommunicationAgent ()
 
-NSUInteger numberOfRunningRequests;
-
 - (void)dispatchRequest:(Request *)request;
 - (void)hitServer:(Request *)request;
 - (void)requestStarted;

@@ -11,7 +11,7 @@
 
 
 @interface CommunicationAgent : NSObject {
-	
+	NSUInteger numberOfRunningRequests;
 }
 
 - (void)sendGETRequestWithURL:(NSURL *)url requestId:(id<NSObject>)requestId delegate:(id<CommunicationDelegate>)delegate;

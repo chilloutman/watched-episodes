@@ -70,7 +70,7 @@
 
 #pragma mark SeriesModelDelegate
 
-- (void)loadedSeries:(Series *)series {
+- (void)loadedSeries:(PBSeries *)series {
 	self.nameLabel.text= series.seriesName;
 	self.overviewView.text= series.overview;
 	[self.bannerLoader loadSeriesBanner:series.banner];

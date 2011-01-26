@@ -104,14 +104,14 @@
 		cell= [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 	}
 	
-	SeriesSummary *series= [self.searchResults objectAtIndex:indexPath.row];
+	PBSearchResults_PBSeriesSummary *series= [self.searchResults objectAtIndex:indexPath.row];
 	cell.textLabel.text= series.seriesName;
 				
 	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	SeriesSummary *series= [self.searchResults objectAtIndex:indexPath.row];
+	PBSearchResults_PBSeriesSummary *series= [self.searchResults objectAtIndex:indexPath.row];
 	[self.seriesController displayDetailsForSeries:series.seriesId];
 	[self.navigationController pushViewController:self.seriesController animated:YES];
 }

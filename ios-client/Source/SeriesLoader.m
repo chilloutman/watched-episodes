@@ -16,7 +16,7 @@
 
 @interface SeriesLoader ()
 
-@property (nonatomic, retain) Series *series;
+@property (nonatomic, retain) PBSeries *series;
 
 @end
 
@@ -36,8 +36,7 @@
 #pragma mark CommunicationDelegate
 
 - (void)receivedResponse:(NSData *)responseData requestId:(NSString *)requestId {
-	PBSeries *response= [PBSeries parseFromData:responseData];
-	self.series= [Series seriesFromProtoMessage:response];
+	self.series= [PBSeries parseFromData:responseData];
 }
 
 - (void)requestDidSucceed:(NSString *)requestId {
