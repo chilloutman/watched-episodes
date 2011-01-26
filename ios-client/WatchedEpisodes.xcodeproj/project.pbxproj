@@ -180,15 +180,6 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		EF4AD01912EA220A0058F78E /* SeriesDetailScreen */ = {
-			isa = PBXGroup;
-			children = (
-				EF4AD01A12EA22A60058F78E /* SeriesDetailViewController.h */,
-				EF4AD01B12EA22A60058F78E /* SeriesDetailViewController.m */,
-			);
-			name = SeriesDetailScreen;
-			sourceTree = "<group>";
-		};
 		EF8D76E912D8DEDA0064C5B5 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,9 +191,7 @@
 				EF8D76ED12D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.m */,
 				EFFD079312F0BE7A00F9075B /* NavigationControllerTab.h */,
 				EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */,
-				EF8D79C112DA068F0064C5B5 /* SearchScreen */,
-				EFFD078C12F0BDDD00F9075B /* FavoritesScreen */,
-				EF4AD01912EA220A0058F78E /* SeriesDetailScreen */,
+				EFFD084F12F0C6F000F9075B /* Screens */,
 				EF12EF9D12EC8FE1007E380E /* Model */,
 				EF8D79A612DA02170064C5B5 /* Communication */,
 				EF8D76F312D8DEE40064C5B5 /* Other */,
@@ -264,22 +253,17 @@
 			name = Communication;
 			sourceTree = "<group>";
 		};
-		EF8D79C112DA068F0064C5B5 /* SearchScreen */ = {
+		EFFD084F12F0C6F000F9075B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				EF8D76EE12D8DEDA0064C5B5 /* SearchSeriesViewController.h */,
 				EF8D76EF12D8DEDA0064C5B5 /* SearchSeriesViewController.m */,
-			);
-			name = SearchScreen;
-			sourceTree = "<group>";
-		};
-		EFFD078C12F0BDDD00F9075B /* FavoritesScreen */ = {
-			isa = PBXGroup;
-			children = (
 				EFFD078D12F0BE1E00F9075B /* FavoritesViewController.h */,
 				EFFD078E12F0BE1E00F9075B /* FavoritesViewController.m */,
+				EF4AD01A12EA22A60058F78E /* SeriesDetailViewController.h */,
+				EF4AD01B12EA22A60058F78E /* SeriesDetailViewController.m */,
 			);
-			name = FavoritesScreen;
+			name = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
