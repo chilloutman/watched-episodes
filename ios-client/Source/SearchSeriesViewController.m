@@ -37,7 +37,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.title= @"Find";
 }
 
 - (NSString *)nibName {

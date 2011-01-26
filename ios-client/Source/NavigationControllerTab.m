@@ -1,36 +1,48 @@
     //
-//  SearchSeriesRootController.m
+//  AbstractTab.m
 //  WatchedEpisodes
 //
-//  Created by Lucas Neiva on 1/21/11.
+//  Created by Lucas Neiva on 1/26/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "SearchSeriesTab.h"
-#import "SearchSeriesViewController.h"
+#import "NavigationControllerTab.h"
 
 
-@interface SearchSeriesTab ()
+@interface NavigationControllerTab ()
 
 @property (nonatomic, retain) UINavigationController * navController;
-@property (nonatomic, retain) SearchSeriesViewController *rootController;
+@property (nonatomic, retain) UIViewController *rootController;
+
+- (id)initWithRootControllerClass:(Class)controllerClass;
 
 @end
 
 
-@implementation SearchSeriesTab
+@implementation NavigationControllerTab
 
 @synthesize navController, rootController;
 
++ (NavigationControllerTab *)controllerWithRootControllerClass:(Class)controllerClass title:(NSString *)t {
+	NavigationControllerTab *tab= [[NavigationControllerTab alloc] initWithRootControllerClass:controllerClass];
+	tab.title= t;
+	return [tab autorelease];
+}
+
+- (id)initWithRootControllerClass:(Class)controllerClass {
+	if (self= [super init]) {
+		rootControllerClass= controllerClass;
+	}
+	return self;
+}
+
 - (void)loadView {
-	self.title= @"Find";
+	self.rootController= [[[rootControllerClass alloc] init] autorelease];
+	self.rootController.title= self.title;
 	
-	self.rootController= [[[SearchSeriesViewController alloc] init] autorelease];
 	self.navController= [[[UINavigationController alloc] initWithRootViewController:self.rootController] autorelease];
-	
-	// Remove status bar spacing
 	CGRect f= navController.navigationBar.frame;
-	f.origin.y= 0;
+	f.origin.y= 0; // Remove status bar spacing
 	self.navController.navigationBar.frame= f;
 	
 	self.view= self.navController.view;

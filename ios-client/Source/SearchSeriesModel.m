@@ -42,7 +42,7 @@
 }
 
 - (void)requestDidFail:(id<NSObject>)requestId {
-	[self.delegate searchResultsUpdated:[NSArray arrayWithObject:@"Connection Failed"]];
+	//[self.delegate searchResultsUpdated:[NSArray arrayWithObject:@"Connection Failed"]];
 }
 
 @end

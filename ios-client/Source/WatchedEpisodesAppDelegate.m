@@ -7,7 +7,10 @@
 //
 
 #import "WatchedEpisodesAppDelegate.h"
-#import "SearchSeriesTab.h"
+
+#import "NavigationControllerTab.h"
+#import "SearchSeriesViewController.h"
+#import "FavoritesViewController.h"
 
 @implementation WatchedEpisodesAppDelegate
 
@@ -16,11 +19,12 @@
 
 #pragma mark Application lifecycle
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-	NSArray *viewControllers= [NSArray arrayWithObjects:[[[SearchSeriesTab alloc] init] autorelease], nil];
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+	NavigationControllerTab *find= [NavigationControllerTab controllerWithRootControllerClass:[SearchSeriesViewController class] title:@"Find"];
+	NavigationControllerTab *favs= [NavigationControllerTab controllerWithRootControllerClass:[FavoritesViewController class] title:@"Favorites"];
 	
 	self.tabController= [[[UITabBarController alloc] init] autorelease];
-	[self.tabController setViewControllers:viewControllers];
+	[self.tabController setViewControllers:[NSArray arrayWithObjects:find, favs, nil]];
 	
     [self.window addSubview:self.tabController.view];
     [self.window makeKeyAndVisible];
