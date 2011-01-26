@@ -50,12 +50,12 @@ static PBSearchResults* defaultPBSearchResultsInstance = nil;
 - (NSArray*) seriesList {
   return mutableSeriesList;
 }
-- (PBSearchResults_PBSeriesSummary*) seriesAtIndex:(int32_t) index {
+- (PBSeriesSummary*) seriesAtIndex:(int32_t) index {
   id value = [mutableSeriesList objectAtIndex:index];
   return value;
 }
 - (BOOL) isInitialized {
-  for (PBSearchResults_PBSeriesSummary* element in self.seriesList) {
+  for (PBSeriesSummary* element in self.seriesList) {
     if (!element.isInitialized) {
       return NO;
     }
@@ -63,7 +63,7 @@ static PBSearchResults* defaultPBSearchResultsInstance = nil;
   return YES;
 }
 - (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
-  for (PBSearchResults_PBSeriesSummary* element in self.seriesList) {
+  for (PBSeriesSummary* element in self.seriesList) {
     [output writeMessage:1 value:element];
   }
   [self.unknownFields writeToCodedOutputStream:output];
@@ -75,7 +75,7 @@ static PBSearchResults* defaultPBSearchResultsInstance = nil;
   }
 
   size = 0;
-  for (PBSearchResults_PBSeriesSummary* element in self.seriesList) {
+  for (PBSeriesSummary* element in self.seriesList) {
     size += computeMessageSize(1, element);
   }
   size += self.unknownFields.serializedSize;
@@ -108,229 +108,6 @@ static PBSearchResults* defaultPBSearchResultsInstance = nil;
 }
 - (PBSearchResults_Builder*) builder {
   return [PBSearchResults builder];
-}
-@end
-
-@interface PBSearchResults_PBSeriesSummary ()
-@property (retain) NSString* seriesId;
-@property (retain) NSString* seriesName;
-@end
-
-@implementation PBSearchResults_PBSeriesSummary
-
-- (BOOL) hasSeriesId {
-  return !!hasSeriesId_;
-}
-- (void) setHasSeriesId:(BOOL) value {
-  hasSeriesId_ = !!value;
-}
-@synthesize seriesId;
-- (BOOL) hasSeriesName {
-  return !!hasSeriesName_;
-}
-- (void) setHasSeriesName:(BOOL) value {
-  hasSeriesName_ = !!value;
-}
-@synthesize seriesName;
-- (void) dealloc {
-  self.seriesId = nil;
-  self.seriesName = nil;
-  [super dealloc];
-}
-- (id) init {
-  if ((self = [super init])) {
-    self.seriesId = @"";
-    self.seriesName = @"";
-  }
-  return self;
-}
-static PBSearchResults_PBSeriesSummary* defaultPBSearchResults_PBSeriesSummaryInstance = nil;
-+ (void) initialize {
-  if (self == [PBSearchResults_PBSeriesSummary class]) {
-    defaultPBSearchResults_PBSeriesSummaryInstance = [[PBSearchResults_PBSeriesSummary alloc] init];
-  }
-}
-+ (PBSearchResults_PBSeriesSummary*) defaultInstance {
-  return defaultPBSearchResults_PBSeriesSummaryInstance;
-}
-- (PBSearchResults_PBSeriesSummary*) defaultInstance {
-  return defaultPBSearchResults_PBSeriesSummaryInstance;
-}
-- (BOOL) isInitialized {
-  if (!self.hasSeriesId) {
-    return NO;
-  }
-  if (!self.hasSeriesName) {
-    return NO;
-  }
-  return YES;
-}
-- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
-  if (self.hasSeriesId) {
-    [output writeString:1 value:self.seriesId];
-  }
-  if (self.hasSeriesName) {
-    [output writeString:2 value:self.seriesName];
-  }
-  [self.unknownFields writeToCodedOutputStream:output];
-}
-- (int32_t) serializedSize {
-  int32_t size = memoizedSerializedSize;
-  if (size != -1) {
-    return size;
-  }
-
-  size = 0;
-  if (self.hasSeriesId) {
-    size += computeStringSize(1, self.seriesId);
-  }
-  if (self.hasSeriesName) {
-    size += computeStringSize(2, self.seriesName);
-  }
-  size += self.unknownFields.serializedSize;
-  memoizedSerializedSize = size;
-  return size;
-}
-+ (PBSearchResults_PBSeriesSummary*) parseFromData:(NSData*) data {
-  return (PBSearchResults_PBSeriesSummary*)[[[PBSearchResults_PBSeriesSummary builder] mergeFromData:data] build];
-}
-+ (PBSearchResults_PBSeriesSummary*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (PBSearchResults_PBSeriesSummary*)[[[PBSearchResults_PBSeriesSummary builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
-}
-+ (PBSearchResults_PBSeriesSummary*) parseFromInputStream:(NSInputStream*) input {
-  return (PBSearchResults_PBSeriesSummary*)[[[PBSearchResults_PBSeriesSummary builder] mergeFromInputStream:input] build];
-}
-+ (PBSearchResults_PBSeriesSummary*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (PBSearchResults_PBSeriesSummary*)[[[PBSearchResults_PBSeriesSummary builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
-}
-+ (PBSearchResults_PBSeriesSummary*) parseFromCodedInputStream:(PBCodedInputStream*) input {
-  return (PBSearchResults_PBSeriesSummary*)[[[PBSearchResults_PBSeriesSummary builder] mergeFromCodedInputStream:input] build];
-}
-+ (PBSearchResults_PBSeriesSummary*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (PBSearchResults_PBSeriesSummary*)[[[PBSearchResults_PBSeriesSummary builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
-}
-+ (PBSearchResults_PBSeriesSummary_Builder*) builder {
-  return [[[PBSearchResults_PBSeriesSummary_Builder alloc] init] autorelease];
-}
-+ (PBSearchResults_PBSeriesSummary_Builder*) builderWithPrototype:(PBSearchResults_PBSeriesSummary*) prototype {
-  return [[PBSearchResults_PBSeriesSummary builder] mergeFrom:prototype];
-}
-- (PBSearchResults_PBSeriesSummary_Builder*) builder {
-  return [PBSearchResults_PBSeriesSummary builder];
-}
-@end
-
-@interface PBSearchResults_PBSeriesSummary_Builder()
-@property (retain) PBSearchResults_PBSeriesSummary* result;
-@end
-
-@implementation PBSearchResults_PBSeriesSummary_Builder
-@synthesize result;
-- (void) dealloc {
-  self.result = nil;
-  [super dealloc];
-}
-- (id) init {
-  if ((self = [super init])) {
-    self.result = [[[PBSearchResults_PBSeriesSummary alloc] init] autorelease];
-  }
-  return self;
-}
-- (PBGeneratedMessage*) internalGetResult {
-  return result;
-}
-- (PBSearchResults_PBSeriesSummary_Builder*) clear {
-  self.result = [[[PBSearchResults_PBSeriesSummary alloc] init] autorelease];
-  return self;
-}
-- (PBSearchResults_PBSeriesSummary_Builder*) clone {
-  return [PBSearchResults_PBSeriesSummary builderWithPrototype:result];
-}
-- (PBSearchResults_PBSeriesSummary*) defaultInstance {
-  return [PBSearchResults_PBSeriesSummary defaultInstance];
-}
-- (PBSearchResults_PBSeriesSummary*) build {
-  [self checkInitialized];
-  return [self buildPartial];
-}
-- (PBSearchResults_PBSeriesSummary*) buildPartial {
-  PBSearchResults_PBSeriesSummary* returnMe = [[result retain] autorelease];
-  self.result = nil;
-  return returnMe;
-}
-- (PBSearchResults_PBSeriesSummary_Builder*) mergeFrom:(PBSearchResults_PBSeriesSummary*) other {
-  if (other == [PBSearchResults_PBSeriesSummary defaultInstance]) {
-    return self;
-  }
-  if (other.hasSeriesId) {
-    [self setSeriesId:other.seriesId];
-  }
-  if (other.hasSeriesName) {
-    [self setSeriesName:other.seriesName];
-  }
-  [self mergeUnknownFields:other.unknownFields];
-  return self;
-}
-- (PBSearchResults_PBSeriesSummary_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
-  return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
-}
-- (PBSearchResults_PBSeriesSummary_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
-  while (YES) {
-    int32_t tag = [input readTag];
-    switch (tag) {
-      case 0:
-        [self setUnknownFields:[unknownFields build]];
-        return self;
-      default: {
-        if (![self parseUnknownField:input unknownFields:unknownFields extensionRegistry:extensionRegistry tag:tag]) {
-          [self setUnknownFields:[unknownFields build]];
-          return self;
-        }
-        break;
-      }
-      case 10: {
-        [self setSeriesId:[input readString]];
-        break;
-      }
-      case 18: {
-        [self setSeriesName:[input readString]];
-        break;
-      }
-    }
-  }
-}
-- (BOOL) hasSeriesId {
-  return result.hasSeriesId;
-}
-- (NSString*) seriesId {
-  return result.seriesId;
-}
-- (PBSearchResults_PBSeriesSummary_Builder*) setSeriesId:(NSString*) value {
-  result.hasSeriesId = YES;
-  result.seriesId = value;
-  return self;
-}
-- (PBSearchResults_PBSeriesSummary_Builder*) clearSeriesId {
-  result.hasSeriesId = NO;
-  result.seriesId = @"";
-  return self;
-}
-- (BOOL) hasSeriesName {
-  return result.hasSeriesName;
-}
-- (NSString*) seriesName {
-  return result.seriesName;
-}
-- (PBSearchResults_PBSeriesSummary_Builder*) setSeriesName:(NSString*) value {
-  result.hasSeriesName = YES;
-  result.seriesName = value;
-  return self;
-}
-- (PBSearchResults_PBSeriesSummary_Builder*) clearSeriesName {
-  result.hasSeriesName = NO;
-  result.seriesName = @"";
-  return self;
 }
 @end
 
@@ -404,7 +181,7 @@ static PBSearchResults_PBSeriesSummary* defaultPBSearchResults_PBSeriesSummaryIn
         break;
       }
       case 10: {
-        PBSearchResults_PBSeriesSummary_Builder* subBuilder = [PBSearchResults_PBSeriesSummary builder];
+        PBSeriesSummary_Builder* subBuilder = [PBSeriesSummary builder];
         [input readMessage:subBuilder extensionRegistry:extensionRegistry];
         [self addSeries:[subBuilder buildPartial]];
         break;
@@ -416,10 +193,10 @@ static PBSearchResults_PBSeriesSummary* defaultPBSearchResults_PBSeriesSummaryIn
   if (result.mutableSeriesList == nil) { return [NSArray array]; }
   return result.mutableSeriesList;
 }
-- (PBSearchResults_PBSeriesSummary*) seriesAtIndex:(int32_t) index {
+- (PBSeriesSummary*) seriesAtIndex:(int32_t) index {
   return [result seriesAtIndex:index];
 }
-- (PBSearchResults_Builder*) replaceSeriesAtIndex:(int32_t) index with:(PBSearchResults_PBSeriesSummary*) value {
+- (PBSearchResults_Builder*) replaceSeriesAtIndex:(int32_t) index with:(PBSeriesSummary*) value {
   [result.mutableSeriesList replaceObjectAtIndex:index withObject:value];
   return self;
 }
@@ -434,11 +211,234 @@ static PBSearchResults_PBSeriesSummary* defaultPBSearchResults_PBSeriesSummaryIn
   result.mutableSeriesList = nil;
   return self;
 }
-- (PBSearchResults_Builder*) addSeries:(PBSearchResults_PBSeriesSummary*) value {
+- (PBSearchResults_Builder*) addSeries:(PBSeriesSummary*) value {
   if (result.mutableSeriesList == nil) {
     result.mutableSeriesList = [NSMutableArray array];
   }
   [result.mutableSeriesList addObject:value];
+  return self;
+}
+@end
+
+@interface PBSeriesSummary ()
+@property (retain) NSString* seriesId;
+@property (retain) NSString* seriesName;
+@end
+
+@implementation PBSeriesSummary
+
+- (BOOL) hasSeriesId {
+  return !!hasSeriesId_;
+}
+- (void) setHasSeriesId:(BOOL) value {
+  hasSeriesId_ = !!value;
+}
+@synthesize seriesId;
+- (BOOL) hasSeriesName {
+  return !!hasSeriesName_;
+}
+- (void) setHasSeriesName:(BOOL) value {
+  hasSeriesName_ = !!value;
+}
+@synthesize seriesName;
+- (void) dealloc {
+  self.seriesId = nil;
+  self.seriesName = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+    self.seriesId = @"";
+    self.seriesName = @"";
+  }
+  return self;
+}
+static PBSeriesSummary* defaultPBSeriesSummaryInstance = nil;
++ (void) initialize {
+  if (self == [PBSeriesSummary class]) {
+    defaultPBSeriesSummaryInstance = [[PBSeriesSummary alloc] init];
+  }
+}
++ (PBSeriesSummary*) defaultInstance {
+  return defaultPBSeriesSummaryInstance;
+}
+- (PBSeriesSummary*) defaultInstance {
+  return defaultPBSeriesSummaryInstance;
+}
+- (BOOL) isInitialized {
+  if (!self.hasSeriesId) {
+    return NO;
+  }
+  if (!self.hasSeriesName) {
+    return NO;
+  }
+  return YES;
+}
+- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
+  if (self.hasSeriesId) {
+    [output writeString:1 value:self.seriesId];
+  }
+  if (self.hasSeriesName) {
+    [output writeString:2 value:self.seriesName];
+  }
+  [self.unknownFields writeToCodedOutputStream:output];
+}
+- (int32_t) serializedSize {
+  int32_t size = memoizedSerializedSize;
+  if (size != -1) {
+    return size;
+  }
+
+  size = 0;
+  if (self.hasSeriesId) {
+    size += computeStringSize(1, self.seriesId);
+  }
+  if (self.hasSeriesName) {
+    size += computeStringSize(2, self.seriesName);
+  }
+  size += self.unknownFields.serializedSize;
+  memoizedSerializedSize = size;
+  return size;
+}
++ (PBSeriesSummary*) parseFromData:(NSData*) data {
+  return (PBSeriesSummary*)[[[PBSeriesSummary builder] mergeFromData:data] build];
+}
++ (PBSeriesSummary*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (PBSeriesSummary*)[[[PBSeriesSummary builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
+}
++ (PBSeriesSummary*) parseFromInputStream:(NSInputStream*) input {
+  return (PBSeriesSummary*)[[[PBSeriesSummary builder] mergeFromInputStream:input] build];
+}
++ (PBSeriesSummary*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (PBSeriesSummary*)[[[PBSeriesSummary builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (PBSeriesSummary*) parseFromCodedInputStream:(PBCodedInputStream*) input {
+  return (PBSeriesSummary*)[[[PBSeriesSummary builder] mergeFromCodedInputStream:input] build];
+}
++ (PBSeriesSummary*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (PBSeriesSummary*)[[[PBSeriesSummary builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (PBSeriesSummary_Builder*) builder {
+  return [[[PBSeriesSummary_Builder alloc] init] autorelease];
+}
++ (PBSeriesSummary_Builder*) builderWithPrototype:(PBSeriesSummary*) prototype {
+  return [[PBSeriesSummary builder] mergeFrom:prototype];
+}
+- (PBSeriesSummary_Builder*) builder {
+  return [PBSeriesSummary builder];
+}
+@end
+
+@interface PBSeriesSummary_Builder()
+@property (retain) PBSeriesSummary* result;
+@end
+
+@implementation PBSeriesSummary_Builder
+@synthesize result;
+- (void) dealloc {
+  self.result = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+    self.result = [[[PBSeriesSummary alloc] init] autorelease];
+  }
+  return self;
+}
+- (PBGeneratedMessage*) internalGetResult {
+  return result;
+}
+- (PBSeriesSummary_Builder*) clear {
+  self.result = [[[PBSeriesSummary alloc] init] autorelease];
+  return self;
+}
+- (PBSeriesSummary_Builder*) clone {
+  return [PBSeriesSummary builderWithPrototype:result];
+}
+- (PBSeriesSummary*) defaultInstance {
+  return [PBSeriesSummary defaultInstance];
+}
+- (PBSeriesSummary*) build {
+  [self checkInitialized];
+  return [self buildPartial];
+}
+- (PBSeriesSummary*) buildPartial {
+  PBSeriesSummary* returnMe = [[result retain] autorelease];
+  self.result = nil;
+  return returnMe;
+}
+- (PBSeriesSummary_Builder*) mergeFrom:(PBSeriesSummary*) other {
+  if (other == [PBSeriesSummary defaultInstance]) {
+    return self;
+  }
+  if (other.hasSeriesId) {
+    [self setSeriesId:other.seriesId];
+  }
+  if (other.hasSeriesName) {
+    [self setSeriesName:other.seriesName];
+  }
+  [self mergeUnknownFields:other.unknownFields];
+  return self;
+}
+- (PBSeriesSummary_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
+  return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
+}
+- (PBSeriesSummary_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
+  while (YES) {
+    int32_t tag = [input readTag];
+    switch (tag) {
+      case 0:
+        [self setUnknownFields:[unknownFields build]];
+        return self;
+      default: {
+        if (![self parseUnknownField:input unknownFields:unknownFields extensionRegistry:extensionRegistry tag:tag]) {
+          [self setUnknownFields:[unknownFields build]];
+          return self;
+        }
+        break;
+      }
+      case 10: {
+        [self setSeriesId:[input readString]];
+        break;
+      }
+      case 18: {
+        [self setSeriesName:[input readString]];
+        break;
+      }
+    }
+  }
+}
+- (BOOL) hasSeriesId {
+  return result.hasSeriesId;
+}
+- (NSString*) seriesId {
+  return result.seriesId;
+}
+- (PBSeriesSummary_Builder*) setSeriesId:(NSString*) value {
+  result.hasSeriesId = YES;
+  result.seriesId = value;
+  return self;
+}
+- (PBSeriesSummary_Builder*) clearSeriesId {
+  result.hasSeriesId = NO;
+  result.seriesId = @"";
+  return self;
+}
+- (BOOL) hasSeriesName {
+  return result.hasSeriesName;
+}
+- (NSString*) seriesName {
+  return result.seriesName;
+}
+- (PBSeriesSummary_Builder*) setSeriesName:(NSString*) value {
+  result.hasSeriesName = YES;
+  result.seriesName = value;
+  return self;
+}
+- (PBSeriesSummary_Builder*) clearSeriesName {
+  result.hasSeriesName = NO;
+  result.seriesName = @"";
   return self;
 }
 @end

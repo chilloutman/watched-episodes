@@ -6,7 +6,7 @@ import watchedepisodes.entities.Series;
 import watchedepisodes.entities.SeriesFragment;
 import watchedepisodes.servlets.protocols.GetSeriesProtocol.PBSeries;
 import watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults;
-import watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults.PBSeriesSummary;
+import watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSeriesSummary;
 
 import com.google.protobuf.GeneratedMessage;
 
