@@ -24,7 +24,7 @@
 @implementation SeriesDetailViewController
 
 @synthesize seriesLoader, bannerLoader, currentSeries;
-@synthesize nameLabel, overviewView, bannerView;
+@synthesize nameLabel, overviewView, bannerView, spindicator;
 
 - (NSString *)nibName {
 	return @"SeriesDetail";
@@ -61,6 +61,7 @@
 	if (seriesId != self.currentSeries.seriesId) {
 		[self.seriesLoader loadSeries:seriesId];
 		[self resetUI];
+		[self.spindicator startAnimating];
 	}
 }
 
@@ -78,6 +79,7 @@
 #pragma mark SeriesModelDelegate
 
 - (void)loadedSeries:(PBSeries *)series {
+	[self.spindicator stopAnimating];
 	self.currentSeries= series;
 	self.nameLabel.text= series.seriesName;
 	self.overviewView.text= series.overview;
@@ -114,10 +116,12 @@
     // e.g. self.myOutlet = nil;
 }
 
-
 - (void)dealloc {
+	self.nameLabel= nil;
+	self.overviewView= nil;
+	self.bannerView= nil;
+	self.spindicator= nil;
     [super dealloc];
 }
-
 
 @end

@@ -18,6 +18,7 @@
 	UILabel *nameLabel;
 	UITextView *overviewView;
 	UIImageView *bannerView;
+	UIActivityIndicatorView *spindicator;
 }
 
 - (void)displayDetailsForSeries:(NSString *)seriesId;
@@ -25,5 +26,6 @@
 @property (nonatomic, retain) IBOutlet UILabel *nameLabel;
 @property (nonatomic, retain) IBOutlet UITextView *overviewView;
 @property (nonatomic, retain) IBOutlet UIImageView *bannerView;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *spindicator;
 
 @end
