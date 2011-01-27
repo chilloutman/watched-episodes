@@ -2,7 +2,13 @@
 
 #import "ProtocolBuffers.h"
 
+#import "ProtocolTypes.pb.h"
+
+@class GetSeriesResponse;
+@class GetSeriesResponse_Builder;
 @class PBSeries;
+@class PBSeriesSummary;
+@class PBSeriesSummary_Builder;
 @class PBSeries_Builder;
 
 @interface GetSeriesRoot : NSObject {
@@ -11,115 +17,53 @@
 + (void) registerAllExtensions:(PBMutableExtensionRegistry*) registry;
 @end
 
-@interface PBSeries : PBGeneratedMessage {
+@interface GetSeriesResponse : PBGeneratedMessage {
 @private
-  BOOL hasSeriesId_:1;
-  BOOL hasLanguage_:1;
-  BOOL hasSeriesName_:1;
-  BOOL hasOverview_:1;
-  BOOL hasFirstAired_:1;
-  BOOL hasBanner_:1;
-  BOOL hasImdbId_:1;
-  NSString* seriesId;
-  NSString* language;
-  NSString* seriesName;
-  NSString* overview;
-  NSString* firstAired;
-  NSString* banner;
-  NSString* imdbId;
-  NSMutableArray* mutableActorsList;
+  BOOL hasSeries_:1;
+  PBSeries* series;
 }
-- (BOOL) hasSeriesId;
-- (BOOL) hasLanguage;
-- (BOOL) hasSeriesName;
-- (BOOL) hasOverview;
-- (BOOL) hasFirstAired;
-- (BOOL) hasBanner;
-- (BOOL) hasImdbId;
-@property (readonly, retain) NSString* seriesId;
-@property (readonly, retain) NSString* language;
-@property (readonly, retain) NSString* seriesName;
-@property (readonly, retain) NSString* overview;
-@property (readonly, retain) NSString* firstAired;
-@property (readonly, retain) NSString* banner;
-@property (readonly, retain) NSString* imdbId;
-- (NSArray*) actorsList;
-- (NSString*) actorsAtIndex:(int32_t) index;
+- (BOOL) hasSeries;
+@property (readonly, retain) PBSeries* series;
 
-+ (PBSeries*) defaultInstance;
-- (PBSeries*) defaultInstance;
++ (GetSeriesResponse*) defaultInstance;
+- (GetSeriesResponse*) defaultInstance;
 
 - (BOOL) isInitialized;
 - (void) writeToCodedOutputStream:(PBCodedOutputStream*) output;
-- (PBSeries_Builder*) builder;
-+ (PBSeries_Builder*) builder;
-+ (PBSeries_Builder*) builderWithPrototype:(PBSeries*) prototype;
+- (GetSeriesResponse_Builder*) builder;
++ (GetSeriesResponse_Builder*) builder;
++ (GetSeriesResponse_Builder*) builderWithPrototype:(GetSeriesResponse*) prototype;
 
-+ (PBSeries*) parseFromData:(NSData*) data;
-+ (PBSeries*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
-+ (PBSeries*) parseFromInputStream:(NSInputStream*) input;
-+ (PBSeries*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
-+ (PBSeries*) parseFromCodedInputStream:(PBCodedInputStream*) input;
-+ (PBSeries*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (GetSeriesResponse*) parseFromData:(NSData*) data;
++ (GetSeriesResponse*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (GetSeriesResponse*) parseFromInputStream:(NSInputStream*) input;
++ (GetSeriesResponse*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (GetSeriesResponse*) parseFromCodedInputStream:(PBCodedInputStream*) input;
++ (GetSeriesResponse*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
 @end
 
-@interface PBSeries_Builder : PBGeneratedMessage_Builder {
+@interface GetSeriesResponse_Builder : PBGeneratedMessage_Builder {
 @private
-  PBSeries* result;
+  GetSeriesResponse* result;
 }
 
-- (PBSeries*) defaultInstance;
+- (GetSeriesResponse*) defaultInstance;
 
-- (PBSeries_Builder*) clear;
-- (PBSeries_Builder*) clone;
+- (GetSeriesResponse_Builder*) clear;
+- (GetSeriesResponse_Builder*) clone;
 
-- (PBSeries*) build;
-- (PBSeries*) buildPartial;
+- (GetSeriesResponse*) build;
+- (GetSeriesResponse*) buildPartial;
 
-- (PBSeries_Builder*) mergeFrom:(PBSeries*) other;
-- (PBSeries_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
-- (PBSeries_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
+- (GetSeriesResponse_Builder*) mergeFrom:(GetSeriesResponse*) other;
+- (GetSeriesResponse_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
+- (GetSeriesResponse_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
 
-- (BOOL) hasSeriesId;
-- (NSString*) seriesId;
-- (PBSeries_Builder*) setSeriesId:(NSString*) value;
-- (PBSeries_Builder*) clearSeriesId;
-
-- (BOOL) hasLanguage;
-- (NSString*) language;
-- (PBSeries_Builder*) setLanguage:(NSString*) value;
-- (PBSeries_Builder*) clearLanguage;
-
-- (BOOL) hasSeriesName;
-- (NSString*) seriesName;
-- (PBSeries_Builder*) setSeriesName:(NSString*) value;
-- (PBSeries_Builder*) clearSeriesName;
-
-- (BOOL) hasOverview;
-- (NSString*) overview;
-- (PBSeries_Builder*) setOverview:(NSString*) value;
-- (PBSeries_Builder*) clearOverview;
-
-- (BOOL) hasFirstAired;
-- (NSString*) firstAired;
-- (PBSeries_Builder*) setFirstAired:(NSString*) value;
-- (PBSeries_Builder*) clearFirstAired;
-
-- (NSArray*) actorsList;
-- (NSString*) actorsAtIndex:(int32_t) index;
-- (PBSeries_Builder*) replaceActorsAtIndex:(int32_t) index with:(NSString*) value;
-- (PBSeries_Builder*) addActors:(NSString*) value;
-- (PBSeries_Builder*) addAllActors:(NSArray*) values;
-- (PBSeries_Builder*) clearActorsList;
-
-- (BOOL) hasBanner;
-- (NSString*) banner;
-- (PBSeries_Builder*) setBanner:(NSString*) value;
-- (PBSeries_Builder*) clearBanner;
-
-- (BOOL) hasImdbId;
-- (NSString*) imdbId;
-- (PBSeries_Builder*) setImdbId:(NSString*) value;
-- (PBSeries_Builder*) clearImdbId;
+- (BOOL) hasSeries;
+- (PBSeries*) series;
+- (GetSeriesResponse_Builder*) setSeries:(PBSeries*) value;
+- (GetSeriesResponse_Builder*) setSeriesBuilder:(PBSeries_Builder*) builderForValue;
+- (GetSeriesResponse_Builder*) mergeSeries:(PBSeries*) value;
+- (GetSeriesResponse_Builder*) clearSeries;
 @end
 

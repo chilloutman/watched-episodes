@@ -36,7 +36,7 @@
 #pragma mark CommunicationDelegate
 
 - (void)receivedResponse:(NSData *)responseData requestId:(NSString *)requestId {
-	self.series= [PBSeries parseFromData:responseData];
+	self.series= [GetSeriesResponse parseFromData:responseData].series;
 }
 
 - (void)requestDidSucceed:(NSString *)requestId {

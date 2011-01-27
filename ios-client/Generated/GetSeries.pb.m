@@ -12,6 +12,7 @@ static PBExtensionRegistry* extensionRegistry = nil;
   if (self == [GetSeriesRoot class]) {
     PBMutableExtensionRegistry* registry = [PBMutableExtensionRegistry registry];
     [self registerAllExtensions:registry];
+    [ProtocolTypesRoot registerAllExtensions:registry];
     extensionRegistry = [registry retain];
   }
 }
@@ -19,159 +20,53 @@ static PBExtensionRegistry* extensionRegistry = nil;
 }
 @end
 
-@interface PBSeries ()
-@property (retain) NSString* seriesId;
-@property (retain) NSString* language;
-@property (retain) NSString* seriesName;
-@property (retain) NSString* overview;
-@property (retain) NSString* firstAired;
-@property (retain) NSMutableArray* mutableActorsList;
-@property (retain) NSString* banner;
-@property (retain) NSString* imdbId;
+@interface GetSeriesResponse ()
+@property (retain) PBSeries* series;
 @end
 
-@implementation PBSeries
+@implementation GetSeriesResponse
 
-- (BOOL) hasSeriesId {
-  return !!hasSeriesId_;
+- (BOOL) hasSeries {
+  return !!hasSeries_;
 }
-- (void) setHasSeriesId:(BOOL) value {
-  hasSeriesId_ = !!value;
+- (void) setHasSeries:(BOOL) value {
+  hasSeries_ = !!value;
 }
-@synthesize seriesId;
-- (BOOL) hasLanguage {
-  return !!hasLanguage_;
-}
-- (void) setHasLanguage:(BOOL) value {
-  hasLanguage_ = !!value;
-}
-@synthesize language;
-- (BOOL) hasSeriesName {
-  return !!hasSeriesName_;
-}
-- (void) setHasSeriesName:(BOOL) value {
-  hasSeriesName_ = !!value;
-}
-@synthesize seriesName;
-- (BOOL) hasOverview {
-  return !!hasOverview_;
-}
-- (void) setHasOverview:(BOOL) value {
-  hasOverview_ = !!value;
-}
-@synthesize overview;
-- (BOOL) hasFirstAired {
-  return !!hasFirstAired_;
-}
-- (void) setHasFirstAired:(BOOL) value {
-  hasFirstAired_ = !!value;
-}
-@synthesize firstAired;
-@synthesize mutableActorsList;
-- (BOOL) hasBanner {
-  return !!hasBanner_;
-}
-- (void) setHasBanner:(BOOL) value {
-  hasBanner_ = !!value;
-}
-@synthesize banner;
-- (BOOL) hasImdbId {
-  return !!hasImdbId_;
-}
-- (void) setHasImdbId:(BOOL) value {
-  hasImdbId_ = !!value;
-}
-@synthesize imdbId;
+@synthesize series;
 - (void) dealloc {
-  self.seriesId = nil;
-  self.language = nil;
-  self.seriesName = nil;
-  self.overview = nil;
-  self.firstAired = nil;
-  self.mutableActorsList = nil;
-  self.banner = nil;
-  self.imdbId = nil;
+  self.series = nil;
   [super dealloc];
 }
 - (id) init {
   if ((self = [super init])) {
-    self.seriesId = @"";
-    self.language = @"";
-    self.seriesName = @"";
-    self.overview = @"";
-    self.firstAired = @"";
-    self.banner = @"";
-    self.imdbId = @"";
+    self.series = [PBSeries defaultInstance];
   }
   return self;
 }
-static PBSeries* defaultPBSeriesInstance = nil;
+static GetSeriesResponse* defaultGetSeriesResponseInstance = nil;
 + (void) initialize {
-  if (self == [PBSeries class]) {
-    defaultPBSeriesInstance = [[PBSeries alloc] init];
+  if (self == [GetSeriesResponse class]) {
+    defaultGetSeriesResponseInstance = [[GetSeriesResponse alloc] init];
   }
 }
-+ (PBSeries*) defaultInstance {
-  return defaultPBSeriesInstance;
++ (GetSeriesResponse*) defaultInstance {
+  return defaultGetSeriesResponseInstance;
 }
-- (PBSeries*) defaultInstance {
-  return defaultPBSeriesInstance;
-}
-- (NSArray*) actorsList {
-  return mutableActorsList;
-}
-- (NSString*) actorsAtIndex:(int32_t) index {
-  id value = [mutableActorsList objectAtIndex:index];
-  return value;
+- (GetSeriesResponse*) defaultInstance {
+  return defaultGetSeriesResponseInstance;
 }
 - (BOOL) isInitialized {
-  if (!self.hasSeriesId) {
+  if (!self.hasSeries) {
     return NO;
   }
-  if (!self.hasLanguage) {
-    return NO;
-  }
-  if (!self.hasSeriesName) {
-    return NO;
-  }
-  if (!self.hasOverview) {
-    return NO;
-  }
-  if (!self.hasFirstAired) {
-    return NO;
-  }
-  if (!self.hasBanner) {
-    return NO;
-  }
-  if (!self.hasImdbId) {
+  if (!self.series.isInitialized) {
     return NO;
   }
   return YES;
 }
 - (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
-  if (self.hasSeriesId) {
-    [output writeString:1 value:self.seriesId];
-  }
-  if (self.hasLanguage) {
-    [output writeString:2 value:self.language];
-  }
-  if (self.hasSeriesName) {
-    [output writeString:3 value:self.seriesName];
-  }
-  if (self.hasOverview) {
-    [output writeString:4 value:self.overview];
-  }
-  if (self.hasFirstAired) {
-    [output writeString:5 value:self.firstAired];
-  }
-  for (NSString* element in self.mutableActorsList) {
-    [output writeString:6 value:element];
-  }
-  if (self.hasBanner) {
-    [output writeString:7 value:self.banner];
-  }
-  if (self.hasImdbId) {
-    [output writeString:8 value:self.imdbId];
+  if (self.hasSeries) {
+    [output writeMessage:1 value:self.series];
   }
   [self.unknownFields writeToCodedOutputStream:output];
 }
@@ -182,73 +77,47 @@ static PBSeries* defaultPBSeriesInstance = nil;
   }
 
   size = 0;
-  if (self.hasSeriesId) {
-    size += computeStringSize(1, self.seriesId);
-  }
-  if (self.hasLanguage) {
-    size += computeStringSize(2, self.language);
-  }
-  if (self.hasSeriesName) {
-    size += computeStringSize(3, self.seriesName);
-  }
-  if (self.hasOverview) {
-    size += computeStringSize(4, self.overview);
-  }
-  if (self.hasFirstAired) {
-    size += computeStringSize(5, self.firstAired);
-  }
-  {
-    int32_t dataSize = 0;
-    for (NSString* element in self.mutableActorsList) {
-      dataSize += computeStringSizeNoTag(element);
-    }
-    size += dataSize;
-    size += 1 * self.mutableActorsList.count;
-  }
-  if (self.hasBanner) {
-    size += computeStringSize(7, self.banner);
-  }
-  if (self.hasImdbId) {
-    size += computeStringSize(8, self.imdbId);
+  if (self.hasSeries) {
+    size += computeMessageSize(1, self.series);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
   return size;
 }
-+ (PBSeries*) parseFromData:(NSData*) data {
-  return (PBSeries*)[[[PBSeries builder] mergeFromData:data] build];
++ (GetSeriesResponse*) parseFromData:(NSData*) data {
+  return (GetSeriesResponse*)[[[GetSeriesResponse builder] mergeFromData:data] build];
 }
-+ (PBSeries*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (PBSeries*)[[[PBSeries builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
++ (GetSeriesResponse*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (GetSeriesResponse*)[[[GetSeriesResponse builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
 }
-+ (PBSeries*) parseFromInputStream:(NSInputStream*) input {
-  return (PBSeries*)[[[PBSeries builder] mergeFromInputStream:input] build];
++ (GetSeriesResponse*) parseFromInputStream:(NSInputStream*) input {
+  return (GetSeriesResponse*)[[[GetSeriesResponse builder] mergeFromInputStream:input] build];
 }
-+ (PBSeries*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (PBSeries*)[[[PBSeries builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
++ (GetSeriesResponse*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (GetSeriesResponse*)[[[GetSeriesResponse builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
 }
-+ (PBSeries*) parseFromCodedInputStream:(PBCodedInputStream*) input {
-  return (PBSeries*)[[[PBSeries builder] mergeFromCodedInputStream:input] build];
++ (GetSeriesResponse*) parseFromCodedInputStream:(PBCodedInputStream*) input {
+  return (GetSeriesResponse*)[[[GetSeriesResponse builder] mergeFromCodedInputStream:input] build];
 }
-+ (PBSeries*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (PBSeries*)[[[PBSeries builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
++ (GetSeriesResponse*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (GetSeriesResponse*)[[[GetSeriesResponse builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
 }
-+ (PBSeries_Builder*) builder {
-  return [[[PBSeries_Builder alloc] init] autorelease];
++ (GetSeriesResponse_Builder*) builder {
+  return [[[GetSeriesResponse_Builder alloc] init] autorelease];
 }
-+ (PBSeries_Builder*) builderWithPrototype:(PBSeries*) prototype {
-  return [[PBSeries builder] mergeFrom:prototype];
++ (GetSeriesResponse_Builder*) builderWithPrototype:(GetSeriesResponse*) prototype {
+  return [[GetSeriesResponse builder] mergeFrom:prototype];
 }
-- (PBSeries_Builder*) builder {
-  return [PBSeries builder];
+- (GetSeriesResponse_Builder*) builder {
+  return [GetSeriesResponse builder];
 }
 @end
 
-@interface PBSeries_Builder()
-@property (retain) PBSeries* result;
+@interface GetSeriesResponse_Builder()
+@property (retain) GetSeriesResponse* result;
 @end
 
-@implementation PBSeries_Builder
+@implementation GetSeriesResponse_Builder
 @synthesize result;
 - (void) dealloc {
   self.result = nil;
@@ -256,70 +125,46 @@ static PBSeries* defaultPBSeriesInstance = nil;
 }
 - (id) init {
   if ((self = [super init])) {
-    self.result = [[[PBSeries alloc] init] autorelease];
+    self.result = [[[GetSeriesResponse alloc] init] autorelease];
   }
   return self;
 }
 - (PBGeneratedMessage*) internalGetResult {
   return result;
 }
-- (PBSeries_Builder*) clear {
-  self.result = [[[PBSeries alloc] init] autorelease];
+- (GetSeriesResponse_Builder*) clear {
+  self.result = [[[GetSeriesResponse alloc] init] autorelease];
   return self;
 }
-- (PBSeries_Builder*) clone {
-  return [PBSeries builderWithPrototype:result];
+- (GetSeriesResponse_Builder*) clone {
+  return [GetSeriesResponse builderWithPrototype:result];
 }
-- (PBSeries*) defaultInstance {
-  return [PBSeries defaultInstance];
+- (GetSeriesResponse*) defaultInstance {
+  return [GetSeriesResponse defaultInstance];
 }
-- (PBSeries*) build {
+- (GetSeriesResponse*) build {
   [self checkInitialized];
   return [self buildPartial];
 }
-- (PBSeries*) buildPartial {
-  PBSeries* returnMe = [[result retain] autorelease];
+- (GetSeriesResponse*) buildPartial {
+  GetSeriesResponse* returnMe = [[result retain] autorelease];
   self.result = nil;
   return returnMe;
 }
-- (PBSeries_Builder*) mergeFrom:(PBSeries*) other {
-  if (other == [PBSeries defaultInstance]) {
+- (GetSeriesResponse_Builder*) mergeFrom:(GetSeriesResponse*) other {
+  if (other == [GetSeriesResponse defaultInstance]) {
     return self;
   }
-  if (other.hasSeriesId) {
-    [self setSeriesId:other.seriesId];
-  }
-  if (other.hasLanguage) {
-    [self setLanguage:other.language];
-  }
-  if (other.hasSeriesName) {
-    [self setSeriesName:other.seriesName];
-  }
-  if (other.hasOverview) {
-    [self setOverview:other.overview];
-  }
-  if (other.hasFirstAired) {
-    [self setFirstAired:other.firstAired];
-  }
-  if (other.mutableActorsList.count > 0) {
-    if (result.mutableActorsList == nil) {
-      result.mutableActorsList = [NSMutableArray array];
-    }
-    [result.mutableActorsList addObjectsFromArray:other.mutableActorsList];
-  }
-  if (other.hasBanner) {
-    [self setBanner:other.banner];
-  }
-  if (other.hasImdbId) {
-    [self setImdbId:other.imdbId];
+  if (other.hasSeries) {
+    [self mergeSeries:other.series];
   }
   [self mergeUnknownFields:other.unknownFields];
   return self;
 }
-- (PBSeries_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
+- (GetSeriesResponse_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
   return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
 }
-- (PBSeries_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+- (GetSeriesResponse_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
   PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
   while (YES) {
     int32_t tag = [input readTag];
@@ -335,181 +180,45 @@ static PBSeries* defaultPBSeriesInstance = nil;
         break;
       }
       case 10: {
-        [self setSeriesId:[input readString]];
-        break;
-      }
-      case 18: {
-        [self setLanguage:[input readString]];
-        break;
-      }
-      case 26: {
-        [self setSeriesName:[input readString]];
-        break;
-      }
-      case 34: {
-        [self setOverview:[input readString]];
-        break;
-      }
-      case 42: {
-        [self setFirstAired:[input readString]];
-        break;
-      }
-      case 50: {
-        [self addActors:[input readString]];
-        break;
-      }
-      case 58: {
-        [self setBanner:[input readString]];
-        break;
-      }
-      case 66: {
-        [self setImdbId:[input readString]];
+        PBSeries_Builder* subBuilder = [PBSeries builder];
+        if (self.hasSeries) {
+          [subBuilder mergeFrom:self.series];
+        }
+        [input readMessage:subBuilder extensionRegistry:extensionRegistry];
+        [self setSeries:[subBuilder buildPartial]];
         break;
       }
     }
   }
 }
-- (BOOL) hasSeriesId {
-  return result.hasSeriesId;
+- (BOOL) hasSeries {
+  return result.hasSeries;
 }
-- (NSString*) seriesId {
-  return result.seriesId;
+- (PBSeries*) series {
+  return result.series;
 }
-- (PBSeries_Builder*) setSeriesId:(NSString*) value {
-  result.hasSeriesId = YES;
-  result.seriesId = value;
+- (GetSeriesResponse_Builder*) setSeries:(PBSeries*) value {
+  result.hasSeries = YES;
+  result.series = value;
   return self;
 }
-- (PBSeries_Builder*) clearSeriesId {
-  result.hasSeriesId = NO;
-  result.seriesId = @"";
-  return self;
+- (GetSeriesResponse_Builder*) setSeriesBuilder:(PBSeries_Builder*) builderForValue {
+  return [self setSeries:[builderForValue build]];
 }
-- (BOOL) hasLanguage {
-  return result.hasLanguage;
-}
-- (NSString*) language {
-  return result.language;
-}
-- (PBSeries_Builder*) setLanguage:(NSString*) value {
-  result.hasLanguage = YES;
-  result.language = value;
-  return self;
-}
-- (PBSeries_Builder*) clearLanguage {
-  result.hasLanguage = NO;
-  result.language = @"";
-  return self;
-}
-- (BOOL) hasSeriesName {
-  return result.hasSeriesName;
-}
-- (NSString*) seriesName {
-  return result.seriesName;
-}
-- (PBSeries_Builder*) setSeriesName:(NSString*) value {
-  result.hasSeriesName = YES;
-  result.seriesName = value;
-  return self;
-}
-- (PBSeries_Builder*) clearSeriesName {
-  result.hasSeriesName = NO;
-  result.seriesName = @"";
-  return self;
-}
-- (BOOL) hasOverview {
-  return result.hasOverview;
-}
-- (NSString*) overview {
-  return result.overview;
-}
-- (PBSeries_Builder*) setOverview:(NSString*) value {
-  result.hasOverview = YES;
-  result.overview = value;
-  return self;
-}
-- (PBSeries_Builder*) clearOverview {
-  result.hasOverview = NO;
-  result.overview = @"";
-  return self;
-}
-- (BOOL) hasFirstAired {
-  return result.hasFirstAired;
-}
-- (NSString*) firstAired {
-  return result.firstAired;
-}
-- (PBSeries_Builder*) setFirstAired:(NSString*) value {
-  result.hasFirstAired = YES;
-  result.firstAired = value;
-  return self;
-}
-- (PBSeries_Builder*) clearFirstAired {
-  result.hasFirstAired = NO;
-  result.firstAired = @"";
-  return self;
-}
-- (NSArray*) actorsList {
-  if (result.mutableActorsList == nil) {
-    return [NSArray array];
+- (GetSeriesResponse_Builder*) mergeSeries:(PBSeries*) value {
+  if (result.hasSeries &&
+      result.series != [PBSeries defaultInstance]) {
+    result.series =
+      [[[PBSeries builderWithPrototype:result.series] mergeFrom:value] buildPartial];
+  } else {
+    result.series = value;
   }
-  return result.mutableActorsList;
-}
-- (NSString*) actorsAtIndex:(int32_t) index {
-  return [result actorsAtIndex:index];
-}
-- (PBSeries_Builder*) replaceActorsAtIndex:(int32_t) index with:(NSString*) value {
-  [result.mutableActorsList replaceObjectAtIndex:index withObject:value];
+  result.hasSeries = YES;
   return self;
 }
-- (PBSeries_Builder*) addActors:(NSString*) value {
-  if (result.mutableActorsList == nil) {
-    result.mutableActorsList = [NSMutableArray array];
-  }
-  [result.mutableActorsList addObject:value];
-  return self;
-}
-- (PBSeries_Builder*) addAllActors:(NSArray*) values {
-  if (result.mutableActorsList == nil) {
-    result.mutableActorsList = [NSMutableArray array];
-  }
-  [result.mutableActorsList addObjectsFromArray:values];
-  return self;
-}
-- (PBSeries_Builder*) clearActorsList {
-  result.mutableActorsList = nil;
-  return self;
-}
-- (BOOL) hasBanner {
-  return result.hasBanner;
-}
-- (NSString*) banner {
-  return result.banner;
-}
-- (PBSeries_Builder*) setBanner:(NSString*) value {
-  result.hasBanner = YES;
-  result.banner = value;
-  return self;
-}
-- (PBSeries_Builder*) clearBanner {
-  result.hasBanner = NO;
-  result.banner = @"";
-  return self;
-}
-- (BOOL) hasImdbId {
-  return result.hasImdbId;
-}
-- (NSString*) imdbId {
-  return result.imdbId;
-}
-- (PBSeries_Builder*) setImdbId:(NSString*) value {
-  result.hasImdbId = YES;
-  result.imdbId = value;
-  return self;
-}
-- (PBSeries_Builder*) clearImdbId {
-  result.hasImdbId = NO;
-  result.imdbId = @"";
+- (GetSeriesResponse_Builder*) clearSeries {
+  result.hasSeries = NO;
+  result.series = [PBSeries defaultInstance];
   return self;
 }
 @end

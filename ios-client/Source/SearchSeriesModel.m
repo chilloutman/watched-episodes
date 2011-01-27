@@ -38,7 +38,7 @@
 }
 
 - (void)receivedResponse:(NSData *)responseData requestId:(id<NSObject>)requestId {
-	self.searchResults= [[PBSearchResults parseFromData:responseData] seriesList];
+	self.searchResults= [[SearchSeriesResponse parseFromData:responseData] seriesList];
 }
 
 - (void)requestDidFail:(id<NSObject>)requestId {

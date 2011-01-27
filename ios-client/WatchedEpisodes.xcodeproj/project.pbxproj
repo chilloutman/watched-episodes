@@ -31,6 +31,8 @@
 		EFFD078F12F0BE1E00F9075B /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD078E12F0BE1E00F9075B /* FavoritesViewController.m */; };
 		EFFD079512F0BE7A00F9075B /* NavigationControllerTab.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */; };
 		EFFD085312F0C8FA00F9075B /* FavoritesMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD085212F0C8FA00F9075B /* FavoritesMananger.m */; };
+		EFFD08B512F21BBC00F9075B /* GetAllEpisodes.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD08B212F21BBC00F9075B /* GetAllEpisodes.pb.m */; };
+		EFFD08B612F21BBC00F9075B /* ProtocolTypes.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD08B412F21BBC00F9075B /* ProtocolTypes.pb.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +113,10 @@
 		EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationControllerTab.m; sourceTree = "<group>"; };
 		EFFD085112F0C8FA00F9075B /* FavoritesMananger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesMananger.h; sourceTree = "<group>"; };
 		EFFD085212F0C8FA00F9075B /* FavoritesMananger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesMananger.m; sourceTree = "<group>"; };
+		EFFD08B112F21BBC00F9075B /* GetAllEpisodes.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetAllEpisodes.pb.h; sourceTree = "<group>"; };
+		EFFD08B212F21BBC00F9075B /* GetAllEpisodes.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetAllEpisodes.pb.m; sourceTree = "<group>"; };
+		EFFD08B312F21BBC00F9075B /* ProtocolTypes.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolTypes.pb.h; sourceTree = "<group>"; };
+		EFFD08B412F21BBC00F9075B /* ProtocolTypes.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolTypes.pb.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +243,10 @@
 		EF8D790212D933AB0064C5B5 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				EFFD08B312F21BBC00F9075B /* ProtocolTypes.pb.h */,
+				EFFD08B412F21BBC00F9075B /* ProtocolTypes.pb.m */,
+				EFFD08B112F21BBC00F9075B /* GetAllEpisodes.pb.h */,
+				EFFD08B212F21BBC00F9075B /* GetAllEpisodes.pb.m */,
 				EF4AD02712EA23F10058F78E /* GetSeries.pb.h */,
 				EF4AD02812EA23F10058F78E /* GetSeries.pb.m */,
 				EF8D790312D933AB0064C5B5 /* SearchSeries.pb.h */,
@@ -389,6 +399,8 @@
 				EFFD078F12F0BE1E00F9075B /* FavoritesViewController.m in Sources */,
 				EFFD079512F0BE7A00F9075B /* NavigationControllerTab.m in Sources */,
 				EFFD085312F0C8FA00F9075B /* FavoritesMananger.m in Sources */,
+				EFFD08B512F21BBC00F9075B /* GetAllEpisodes.pb.m in Sources */,
+				EFFD08B612F21BBC00F9075B /* ProtocolTypes.pb.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

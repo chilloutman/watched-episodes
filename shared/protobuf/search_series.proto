@@ -1,11 +1,9 @@
 option java_package = "watchedepisodes.servlets.protocols";
 option java_outer_classname = "SearchSeriesProtocol";
 
-message PBSearchResults {
+import "protocol_types.proto";
+
+message SearchSeriesResponse {
 	repeated PBSeriesSummary series = 1;
 }
 
-message PBSeriesSummary { 
-	required string seriesId = 1;
-	required string seriesName = 2;
-}

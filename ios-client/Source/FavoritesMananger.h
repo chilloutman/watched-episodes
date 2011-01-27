@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GetSeries.pb.h"
+#import "ProtocolTypes.pb.h"
 
 @interface FavoritesMananger : NSObject {
 	NSMutableArray *favoriteSeries;

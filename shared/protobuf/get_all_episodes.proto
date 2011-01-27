@@ -1,0 +1,4 @@
+option java_package = "watchedepisodes.servlets.protocols";
+option java_outer_classname = "GetAllEpisodesProtocol";
+
+import "protocol_types.proto";

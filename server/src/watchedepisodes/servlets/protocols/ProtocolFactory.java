@@ -4,9 +4,10 @@ import java.util.List;
 
 import watchedepisodes.entities.Series;
 import watchedepisodes.entities.SeriesFragment;
-import watchedepisodes.servlets.protocols.GetSeriesProtocol.PBSeries;
-import watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSearchResults;
-import watchedepisodes.servlets.protocols.SearchSeriesProtocol.PBSeriesSummary;
+import watchedepisodes.servlets.protocols.GetSeriesProtocol.GetSeriesResponse;
+import watchedepisodes.servlets.protocols.ProtocolTypes.PBSeries;
+import watchedepisodes.servlets.protocols.ProtocolTypes.PBSeriesSummary;
+import watchedepisodes.servlets.protocols.SearchSeriesProtocol.SearchSeriesResponse;
 
 import com.google.protobuf.GeneratedMessage;
 
@@ -23,11 +24,14 @@ public abstract class ProtocolFactory {
 		series.setBanner(s.getBanner());
 		series.setImdbId(s.getImdbId());
 		
-		return series.build();
+		GetSeriesResponse.Builder response= GetSeriesResponse.newBuilder();
+		response.setSeries(series);
+		
+		return response.build();
 	}
 	
 	public static GeneratedMessage buildSearchResultsProto (List<SeriesFragment> results) {
-		PBSearchResults.Builder searchResults= PBSearchResults.newBuilder();
+		SearchSeriesResponse.Builder searchResults= SearchSeriesResponse.newBuilder();
 		
 		for (SeriesFragment s : results) {
 			PBSeriesSummary.Builder series= PBSeriesSummary.newBuilder();

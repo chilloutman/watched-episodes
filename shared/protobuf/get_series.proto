@@ -1,13 +1,8 @@
 option java_package = "watchedepisodes.servlets.protocols";
 option java_outer_classname = "GetSeriesProtocol";
 
-message PBSeries {
-	required string seriesId = 1;
-	required string language = 2;
-	required string seriesName = 3;
-	required string overview = 4;
-	required string firstAired = 5;
-	repeated string actors = 6;
-	required string banner = 7;
-	required string imdbId = 8;
+import "protocol_types.proto";
+
+message GetSeriesResponse {
+	required PBSeries series = 1;
 }
