@@ -10,10 +10,13 @@
 #import "SeriesLoader.h"
 #import "SeriesBannerLoader.h"
 
+@class FavoritesMananger;
+
 @interface SeriesDetailViewController : UIViewController <SeriesLoaderDelegate, SeriesBannerLoaderDelegate, UITextViewDelegate> {
 	SeriesLoader *seriesLoader;
 	SeriesBannerLoader *bannerLoader;
 	PBSeries *currentSeries;
+	FavoritesMananger *favorites;
 	
 	UILabel *nameLabel;
 	UITextView *overviewView;

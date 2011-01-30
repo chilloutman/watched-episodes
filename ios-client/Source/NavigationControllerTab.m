@@ -23,9 +23,11 @@
 
 @synthesize navController, rootController;
 
-+ (NavigationControllerTab *)controllerWithRootControllerClass:(Class)controllerClass title:(NSString *)t {
++ (NavigationControllerTab *)controllerWithRootController:(Class)controllerClass tabBarItem:(UITabBarItem *)item {
 	NavigationControllerTab *tab= [[NavigationControllerTab alloc] initWithRootControllerClass:controllerClass];
-	tab.title= t;
+	tab.title= item.title;
+	tab.tabBarItem= item;
+	
 	return [tab autorelease];
 }
 

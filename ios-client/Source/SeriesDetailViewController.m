@@ -7,14 +7,13 @@
 //
 
 #import "SeriesDetailViewController.h"
-#import "SeriesLoader.h"
 #import "FavoritesMananger.h"
-
 
 @interface SeriesDetailViewController ()
 
 - (void)resetUI;
 - (void)loadSeriesForSeriesId:(NSString *)seriesId;
+- (void)updateFaveButton;
 
 @property (nonatomic, retain) SeriesLoader *seriesLoader;
 @property (nonatomic, retain) SeriesBannerLoader *bannerLoader;
@@ -50,18 +49,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.navigationItem.rightBarButtonItem= self.faveButton;
+	[self updateFaveButton];
 	[self resetUI];
+	favorites= [ServiceLocator singletonForClass:[FavoritesMananger class]];
 }
 
 - (void)displayDetailsForSeriesWithId:(NSString *)seriesId {
 	if (![seriesId isEqualToString:self.currentSeries.seriesId]) {
-		PBSeries *series= [[ServiceLocator singletonForClass:[FavoritesMananger class]] seriesForSeriesId:seriesId];
+		PBSeries *series= [favorites seriesForSeriesId:seriesId];
 		if (series) {
 			[self displayDetailsForSeries:series];
-			self.navigationItem.rightBarButtonItem= nil;
 		} else {
 			[self loadSeriesForSeriesId:seriesId];
-			self.navigationItem.rightBarButtonItem= self.faveButton;
 		}
 	}
 }
@@ -75,9 +75,11 @@
 - (void)displayDetailsForSeries:(PBSeries *)series {
 	[self.spindicator stopAnimating];
 	self.currentSeries= series;
+	[self.bannerLoader loadSeriesBanner:series.banner];
+
 	self.nameLabel.text= series.seriesName;
 	self.overviewView.text= series.overview;
-	[self.bannerLoader loadSeriesBanner:series.banner];
+	[self updateFaveButton];
 }
 
 - (void)resetUI {
@@ -89,6 +91,17 @@
 - (IBAction)faveSeries {
 	FavoritesMananger *manager= [ServiceLocator singletonForClass:[FavoritesMananger class]];
 	[manager addSeriesToFavorites:self.currentSeries];
+	[self updateFaveButton];
+}
+
+- (void)updateFaveButton {
+	if ([favorites isInFavorites:self.currentSeries.seriesId]) {
+		self.faveButton.enabled= NO;
+		self.faveButton.image= [UIImage imageNamed:@"Heart"];
+	} else {
+		self.faveButton.enabled= YES;
+		self.faveButton.image= [UIImage imageNamed:@"HeartAlt"];
+	}
 }
 
 #pragma mark SeriesModelDelegate

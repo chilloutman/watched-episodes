@@ -117,10 +117,9 @@
 				<object class="IBUISimulatedTabBarMetrics" key="IBUISimulatedBottomBarMetrics"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
-			<object class="IBUIBarButtonItem" id="979592338">
+			<object class="IBUIBarButtonItem" id="400645435">
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<int key="IBUIStyle">1</int>
-				<int key="IBUISystemItemIdentifier">11</int>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -178,14 +177,14 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">faveButton</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="979592338"/>
+						<reference key="destination" ref="400645435"/>
 					</object>
 					<int key="connectionID">15</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">faveSeries</string>
-						<reference key="source" ref="979592338"/>
+						<reference key="source" ref="400645435"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">16</int>
@@ -247,7 +246,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">14</int>
-						<reference key="object" ref="979592338"/>
+						<reference key="object" ref="400645435"/>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">faveButton</string>
 					</object>

@@ -15,6 +15,6 @@
 	Class rootControllerClass;
 }
 
-+ (NavigationControllerTab *)controllerWithRootControllerClass:(Class)controllerClass title:(NSString *)t;
++ (NavigationControllerTab *)controllerWithRootController:(Class)controllerClass tabBarItem:(UITabBarItem *)item;
 
 @end

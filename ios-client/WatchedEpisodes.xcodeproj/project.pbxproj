@@ -34,6 +34,12 @@
 		EFFD08B512F21BBC00F9075B /* GetAllEpisodes.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD08B212F21BBC00F9075B /* GetAllEpisodes.pb.m */; };
 		EFFD08B612F21BBC00F9075B /* ProtocolTypes.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD08B412F21BBC00F9075B /* ProtocolTypes.pb.m */; };
 		EFFD093512F22BE700F9075B /* FileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD093412F22BE700F9075B /* FileHelper.m */; };
+		EFFD0AE912F5D29100F9075B /* Find@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EFFD0AE812F5D29100F9075B /* Find@2x.png */; };
+		EFFD0AEE12F5D2E400F9075B /* Find.png in Resources */ = {isa = PBXBuildFile; fileRef = EFFD0AED12F5D2E400F9075B /* Find.png */; };
+		EFFD0B0712F5D46900F9075B /* Heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EFFD0B0612F5D46900F9075B /* Heart@2x.png */; };
+		EFFD0B0912F5D47F00F9075B /* Heart.png in Resources */ = {isa = PBXBuildFile; fileRef = EFFD0B0812F5D47F00F9075B /* Heart.png */; };
+		EFFD0B1912F5D4F700F9075B /* HeartAlt.png in Resources */ = {isa = PBXBuildFile; fileRef = EFFD0B1812F5D4F700F9075B /* HeartAlt.png */; };
+		EFFD0B1B12F5D50D00F9075B /* HeartAlt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EFFD0B1A12F5D50D00F9075B /* HeartAlt@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +126,12 @@
 		EFFD08B412F21BBC00F9075B /* ProtocolTypes.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolTypes.pb.m; sourceTree = "<group>"; };
 		EFFD093312F22BE700F9075B /* FileHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileHelper.h; sourceTree = "<group>"; };
 		EFFD093412F22BE700F9075B /* FileHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileHelper.m; sourceTree = "<group>"; };
+		EFFD0AE812F5D29100F9075B /* Find@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Find@2x.png"; path = "../../../iOS/A bunch of stuff/270 White ToolBar Icons/@2x Retina Icons/Find@2x.png"; sourceTree = SOURCE_ROOT; };
+		EFFD0AED12F5D2E400F9075B /* Find.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Find.png; sourceTree = "<group>"; };
+		EFFD0B0612F5D46900F9075B /* Heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Heart@2x.png"; sourceTree = "<group>"; };
+		EFFD0B0812F5D47F00F9075B /* Heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Heart.png; sourceTree = "<group>"; };
+		EFFD0B1812F5D4F700F9075B /* HeartAlt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HeartAlt.png; sourceTree = "<group>"; };
+		EFFD0B1A12F5D50D00F9075B /* HeartAlt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HeartAlt@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +176,7 @@
 				EF4AD01C12EA22A60058F78E /* SeriesDetail.xib */,
 				2899E5210DE3E06400AC0155 /* SearchSeries.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				EFFD0AEC12F5D2A200F9075B /* Images */,
 				8D1107310486CEB800E47090 /* WatchedEpisodes-Info.plist */,
 			);
 			name = Resources;
@@ -302,6 +315,19 @@
 			name = Util;
 			sourceTree = "<group>";
 		};
+		EFFD0AEC12F5D2A200F9075B /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				EFFD0B1812F5D4F700F9075B /* HeartAlt.png */,
+				EFFD0B1A12F5D50D00F9075B /* HeartAlt@2x.png */,
+				EFFD0B0812F5D47F00F9075B /* Heart.png */,
+				EFFD0B0612F5D46900F9075B /* Heart@2x.png */,
+				EFFD0AED12F5D2E400F9075B /* Find.png */,
+				EFFD0AE812F5D29100F9075B /* Find@2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -385,6 +411,12 @@
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				2899E5220DE3E06400AC0155 /* SearchSeries.xib in Resources */,
 				EF4AD01E12EA22A60058F78E /* SeriesDetail.xib in Resources */,
+				EFFD0AE912F5D29100F9075B /* Find@2x.png in Resources */,
+				EFFD0AEE12F5D2E400F9075B /* Find.png in Resources */,
+				EFFD0B0712F5D46900F9075B /* Heart@2x.png in Resources */,
+				EFFD0B0912F5D47F00F9075B /* Heart.png in Resources */,
+				EFFD0B1912F5D4F700F9075B /* HeartAlt.png in Resources */,
+				EFFD0B1B12F5D50D00F9075B /* HeartAlt@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
