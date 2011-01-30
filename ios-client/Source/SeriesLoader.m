@@ -30,7 +30,7 @@
 	NSURL *url= [NSURL URLWithString:[NSString stringWithFormat:@"%@/getSeries?id=%@", ServerURL, seriesId]];
 	
 	CommunicationAgent *com= [ServiceLocator singletonForClass:[CommunicationAgent class]];
-	[com sendProtocolBuffersGETRequestWithURL:url requestId:nil delegate:self];
+	[com sendProtocolBuffersGETRequestWithURL:url delegate:self];
 }
 
 #pragma mark CommunicationDelegate

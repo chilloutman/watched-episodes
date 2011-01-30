@@ -22,6 +22,14 @@
 
 @implementation CommunicationAgent
 
+- (void)sendGETRequestWithURL:(NSURL *)url delegate:(id<CommunicationDelegate>)delegate {
+	[self sendGETRequestWithURL:url requestId:nil delegate:delegate];
+}
+
+- (void)sendProtocolBuffersGETRequestWithURL:(NSURL *)url delegate:(id<CommunicationDelegate>)delegate {
+	[self sendProtocolBuffersGETRequestWithURL:url requestId:nil delegate:delegate];
+}
+
 - (void)sendGETRequestWithURL:(NSURL *)url requestId:(id<NSObject>)requestId delegate:(id<CommunicationDelegate>)delegate {	
 	Request *request= [[Request alloc] initWithURL:url delegate:delegate];
 	request.requestId= requestId;

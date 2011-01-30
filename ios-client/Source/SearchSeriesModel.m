@@ -30,7 +30,7 @@
 	NSURL *url= [NSURL URLWithString:[NSString stringWithFormat:@"%@/searchSeries?name=%@", ServerURL, searchTerm]];
 	
 	CommunicationAgent *com= [ServiceLocator singletonForClass:[CommunicationAgent class]];
-	[com sendProtocolBuffersGETRequestWithURL:url requestId:nil delegate:self];
+	[com sendProtocolBuffersGETRequestWithURL:url delegate:self];
 }
 
 - (void)requestDidSucceed:(id<NSObject>)requestId {

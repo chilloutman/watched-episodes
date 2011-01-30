@@ -9,11 +9,13 @@
 #import "ServiceLocator.h"
 #import "SynthesizeSingleton.h"
 
+
 @interface ServiceLocator ()
 
 @property (nonatomic, retain) NSMutableDictionary *singletons;
 
 @end
+
 
 @implementation ServiceLocator
 
