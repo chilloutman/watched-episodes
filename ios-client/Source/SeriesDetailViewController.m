@@ -10,9 +10,11 @@
 #import "SeriesLoader.h"
 #import "FavoritesMananger.h"
 
+
 @interface SeriesDetailViewController ()
 
 - (void)resetUI;
+- (void)loadSeriesForSeriesId:(NSString *)seriesId;
 
 @property (nonatomic, retain) SeriesLoader *seriesLoader;
 @property (nonatomic, retain) SeriesBannerLoader *bannerLoader;
@@ -53,16 +55,21 @@
 	self.navigationItem.rightBarButtonItem= faveButton;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-	NSLog(@"View will appear.");
+- (void)displayDetailsForSeriesWithId:(NSString *)seriesId {
+	if (![seriesId isEqualToString:self.currentSeries.seriesId]) {
+		PBSeries *series= [[ServiceLocator singletonForClass:[FavoritesMananger class]] seriesForSeriesId:seriesId];
+		if (series) {
+			[self displayDetailsForSeries:series];
+		} else {
+			[self loadSeriesForSeriesId:seriesId];
+		}
+	}
 }
 
-- (void)displayDetailsForUnloadedSeries:(NSString *)seriesId {
-	if (![seriesId isEqualToString:self.currentSeries.seriesId]) {
-		[self.seriesLoader loadSeries:seriesId];
-		[self resetUI];
-		[self.spindicator startAnimating];
-	}
+- (void)loadSeriesForSeriesId:(NSString *)seriesId {
+	[self.seriesLoader loadSeries:seriesId];
+	[self resetUI];
+	[self.spindicator startAnimating];
 }
 
 - (void)displayDetailsForSeries:(PBSeries *)series {

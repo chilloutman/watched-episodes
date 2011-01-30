@@ -110,9 +110,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	PBSeriesSummary *series= [self.searchResults objectAtIndex:indexPath.row];
-	[self.seriesController displayDetailsForUnloadedSeries:series.seriesId];
 	[self.navigationController pushViewController:self.seriesController animated:YES];
+	PBSeriesSummary *series= [self.searchResults objectAtIndex:indexPath.row];
+	[self.seriesController displayDetailsForSeriesWithId:series.seriesId];
 }
 
 #pragma mark -

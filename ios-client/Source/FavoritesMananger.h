@@ -10,12 +10,13 @@
 #import "ProtocolTypes.pb.h"
 
 @interface FavoritesMananger : NSObject {
-	NSMutableArray *favoriteSeries;
+	NSMutableDictionary *favoriteSeries;
 }
 
 @property (nonatomic, readonly) NSArray *allFavoriteSeries;
 
 - (void)addSeriesToFavorites:(PBSeries *)series;
 - (BOOL)isInFavorites:(NSString *)seriesId;
+- (PBSeries *)seriesForSeriesId:(NSString *)seriesId;
 
 @end

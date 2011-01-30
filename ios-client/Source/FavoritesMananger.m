@@ -12,7 +12,7 @@
 
 @interface FavoritesMananger ()
 
-@property (nonatomic, retain) NSMutableArray *favoriteSeries;
+@property (nonatomic, retain) NSMutableDictionary *favoriteSeries;
 
 - (void)loadFavoritesFromFilessystem;
 - (void)persistSeries:(PBSeries *)series;
@@ -28,7 +28,7 @@
 
 - (id)init {
 	if (self= [super init]) {
-		self.favoriteSeries= [NSMutableArray array];
+		self.favoriteSeries= [NSMutableDictionary dictionary];
 		[self loadFavoritesFromFilessystem];
 	}
 	return self;
@@ -43,29 +43,28 @@
 	while (file= [dirEnum nextObject]) {
 		if ([[file pathExtension] isEqualToString:@"series"]) {
 			PBSeries *series= [PBSeries parseFromData:[fileManager contentsAtPath:[seriesDirectory stringByAppendingPathComponent:file]]];
-			[self.favoriteSeries addObject:series];
+			[self.favoriteSeries setObject:series forKey:series.seriesId];
 		}
 	}
 }
 
 - (NSArray *)allFavoriteSeries {
-	return [NSArray arrayWithArray:self.favoriteSeries];
+	return [self.favoriteSeries allValues];
+}
+
+- (PBSeries *)seriesForSeriesId:(NSString *)seriesId {
+	return [self.favoriteSeries objectForKey:seriesId];
 }
 
 - (void)addSeriesToFavorites:(PBSeries *)series {
 	if (![self isInFavorites:series.seriesId]) {
-		[self.favoriteSeries addObject:series];
+		[self.favoriteSeries setObject:series forKey:series.seriesId];
 		[self persistSeries:series];
 	}
 }
 
 - (BOOL)isInFavorites:(NSString *)seriesId {
-	for (PBSeries *series in self.favoriteSeries) {
-		if ([series.seriesId isEqualToString:seriesId]) {
-			return YES;
-		}
-	}
-	return NO;
+	return ([self seriesForSeriesId:seriesId]) ? YES : NO;
 }
 
 - (void)persistSeries:(PBSeries *)series {
