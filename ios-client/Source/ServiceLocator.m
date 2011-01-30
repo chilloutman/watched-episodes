@@ -25,6 +25,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ServiceLocator)
 	if (!service) {
 		service= [[serviceClass alloc] init];
 		[[ServiceLocator shared].singletons setObject:service forKey:serviceClass];
+		[service release];
 	}
 	return service;
 }
