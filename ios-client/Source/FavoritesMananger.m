@@ -41,7 +41,6 @@
 	
 	NSString *file;
 	while (file= [dirEnum nextObject]) {
-		NSLog(@"%@", file);
 		if ([[file pathExtension] isEqualToString:@"series"]) {
 			PBSeries *series= [PBSeries parseFromData:[fileManager contentsAtPath:[seriesDirectory stringByAppendingPathComponent:file]]];
 			[self.favoriteSeries addObject:series];

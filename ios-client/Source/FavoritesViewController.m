@@ -8,8 +8,19 @@
 
 #import "FavoritesViewController.h"
 #import "FavoritesMananger.h"
+#import "SeriesDetailViewController.h"
+
+
+@interface FavoritesViewController ()
+
+@property (nonatomic, retain) SeriesDetailViewController *seriesController;
+
+@end
+
 
 @implementation FavoritesViewController
+
+@synthesize seriesController;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -17,14 +28,13 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self.tableView	reloadData];
+	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
 }
 
-/*
 - (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+	[self.tableView	reloadData];
 }
-*/
+
 /*
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -35,13 +45,17 @@
     [super viewDidDisappear:animated];
 }
 */
-/*
-// Override to allow orientations other than the default portrait orientation.
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations.
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	return YES;
 }
-*/
+
+- (SeriesDetailViewController *)seriesController {
+	if (!seriesController) {
+		seriesController= [[SeriesDetailViewController alloc] init];
+	}
+	return seriesController;
+}
 
 #pragma mark UITableView
 
@@ -107,24 +121,12 @@
 }
 */
 
-
-#pragma mark -
-#pragma mark Table view delegate
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-    */
+    [self.navigationController pushViewController:self.seriesController animated:YES];
+	[self.seriesController displayDetailsForSeries:[favoritesManager.allFavoriteSeries objectAtIndex:indexPath.row]];
 }
 
-
 #pragma mark -
-#pragma mark Memory management
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -134,12 +136,11 @@
 }
 
 - (void)viewDidUnload {
-    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
+    self.seriesController= nil;
 }
 
-
 - (void)dealloc {
+	self.seriesController= nil;
     [super dealloc];
 }
 

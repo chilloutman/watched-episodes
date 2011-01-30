@@ -57,12 +57,20 @@
 	NSLog(@"View will appear.");
 }
 
-- (void)displayDetailsForSeries:(NSString *)seriesId {
-	if (seriesId != self.currentSeries.seriesId) {
+- (void)displayDetailsForUnloadedSeries:(NSString *)seriesId {
+	if (![seriesId isEqualToString:self.currentSeries.seriesId]) {
 		[self.seriesLoader loadSeries:seriesId];
 		[self resetUI];
 		[self.spindicator startAnimating];
 	}
+}
+
+- (void)displayDetailsForSeries:(PBSeries *)series {
+	[self.spindicator stopAnimating];
+	self.currentSeries= series;
+	self.nameLabel.text= series.seriesName;
+	self.overviewView.text= series.overview;
+	[self.bannerLoader loadSeriesBanner:series.banner];
 }
 
 - (void)resetUI {
@@ -79,11 +87,7 @@
 #pragma mark SeriesModelDelegate
 
 - (void)loadedSeries:(PBSeries *)series {
-	[self.spindicator stopAnimating];
-	self.currentSeries= series;
-	self.nameLabel.text= series.seriesName;
-	self.overviewView.text= series.overview;
-	[self.bannerLoader loadSeriesBanner:series.banner];
+	[self displayDetailsForSeries:series];
 }
 
 - (void)loadedSeriesBanner:(UIImage *)banner {
@@ -106,17 +110,20 @@
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc. that aren't in use.
+	// Release any cached data, images, etc. that aren't in use.
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    self.currentSeries= nil;
+	self.bannerLoader= nil;
+	self.seriesLoader= nil;
 }
 
 - (void)dealloc {
+	self.bannerLoader= nil;
+	self.seriesLoader= nil;
+	self.currentSeries= nil;
 	self.nameLabel= nil;
 	self.overviewView= nil;
 	self.bannerView= nil;

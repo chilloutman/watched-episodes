@@ -41,15 +41,29 @@
 	self.rootController.title= self.title;
 	
 	self.navController= [[[UINavigationController alloc] initWithRootViewController:self.rootController] autorelease];
+	self.navController.delegate= self;
 	CGRect f= navController.navigationBar.frame;
 	f.origin.y= 0; // Remove status bar spacing
 	self.navController.navigationBar.frame= f;
 	
-	self.view= self.navController.view;
+	self.view= [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+	[self.view addSubview:self.navController.view];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[self.navController.topViewController viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[self.navController.topViewController viewDidAppear:animated];
+}
+
+- (void)navigationController:(UINavigationController *)n willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+	[viewController viewWillAppear:animated];
+}
+
+- (void)navigationController:(UINavigationController *)n didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+	[viewController viewDidAppear:animated];
 }
 
 #pragma mark -

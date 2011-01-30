@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class FavoritesMananger;
+@class FavoritesMananger, SeriesDetailViewController;
 
 @interface FavoritesViewController : UITableViewController {
 	FavoritesMananger *favoritesManager;
+	SeriesDetailViewController *seriesController;
 }
 
 @end

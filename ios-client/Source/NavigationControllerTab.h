@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface NavigationControllerTab : UIViewController {
+@interface NavigationControllerTab : UIViewController <UINavigationControllerDelegate> {
 	UINavigationController *navController;
 	UIViewController *rootController;
 	Class rootControllerClass;

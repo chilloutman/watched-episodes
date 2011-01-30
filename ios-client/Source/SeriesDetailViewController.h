@@ -21,7 +21,8 @@
 	UIActivityIndicatorView *spindicator;
 }
 
-- (void)displayDetailsForSeries:(NSString *)seriesId;
+- (void)displayDetailsForUnloadedSeries:(NSString *)seriesId;
+- (void)displayDetailsForSeries:(PBSeries *)series;
 
 @property (nonatomic, retain) IBOutlet UILabel *nameLabel;
 @property (nonatomic, retain) IBOutlet UITextView *overviewView;
