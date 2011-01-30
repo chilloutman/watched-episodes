@@ -26,7 +26,7 @@
 @implementation SeriesDetailViewController
 
 @synthesize seriesLoader, bannerLoader, currentSeries;
-@synthesize nameLabel, overviewView, bannerView, spindicator;
+@synthesize nameLabel, overviewView, bannerView, spindicator, faveButton;
 
 - (NSString *)nibName {
 	return @"SeriesDetail";
@@ -51,8 +51,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self resetUI];
-	UIBarButtonItem *faveButton= [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(faveSeries)];
-	self.navigationItem.rightBarButtonItem= faveButton;
 }
 
 - (void)displayDetailsForSeriesWithId:(NSString *)seriesId {
@@ -60,8 +58,10 @@
 		PBSeries *series= [[ServiceLocator singletonForClass:[FavoritesMananger class]] seriesForSeriesId:seriesId];
 		if (series) {
 			[self displayDetailsForSeries:series];
+			self.navigationItem.rightBarButtonItem= nil;
 		} else {
 			[self loadSeriesForSeriesId:seriesId];
+			self.navigationItem.rightBarButtonItem= self.faveButton;
 		}
 	}
 }
@@ -86,7 +86,7 @@
 	self.bannerView.image= nil;
 }
 
-- (void)faveSeries {
+- (IBAction)faveSeries {
 	FavoritesMananger *manager= [ServiceLocator singletonForClass:[FavoritesMananger class]];
 	[manager addSeriesToFavorites:self.currentSeries];
 }
@@ -98,7 +98,7 @@
 }
 
 - (void)loadedSeriesBanner:(UIImage *)banner {
-	self.nameLabel= nil;
+	self.nameLabel.text= nil;
 	self.bannerView.image= banner;
 }
 
@@ -125,9 +125,14 @@
     self.currentSeries= nil;
 	self.bannerLoader= nil;
 	self.seriesLoader= nil;
+	self.faveButton= nil;
+	self.overviewView= nil;
+	self.bannerView= nil;
+	self.spindicator= nil;
 }
 
 - (void)dealloc {
+	self.faveButton= nil;
 	self.bannerLoader= nil;
 	self.seriesLoader= nil;
 	self.currentSeries= nil;

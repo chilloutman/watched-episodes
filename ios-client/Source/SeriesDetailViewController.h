@@ -19,14 +19,18 @@
 	UITextView *overviewView;
 	UIImageView *bannerView;
 	UIActivityIndicatorView *spindicator;
+	UIBarButtonItem *faveButton;
 }
-
-- (void)displayDetailsForSeriesWithId:(NSString *)seriesId;
-- (void)displayDetailsForSeries:(PBSeries *)series;
 
 @property (nonatomic, retain) IBOutlet UILabel *nameLabel;
 @property (nonatomic, retain) IBOutlet UITextView *overviewView;
 @property (nonatomic, retain) IBOutlet UIImageView *bannerView;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *spindicator;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *faveButton;
+
+- (IBAction)faveSeries;
+
+- (void)displayDetailsForSeriesWithId:(NSString *)seriesId;
+- (void)displayDetailsForSeries:(PBSeries *)series;
 
 @end
