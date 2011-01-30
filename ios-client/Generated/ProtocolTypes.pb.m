@@ -737,3 +737,664 @@ static PBSeriesSummary* defaultPBSeriesSummaryInstance = nil;
 }
 @end
 
+@interface PBEpisode ()
+@property (retain) NSString* episodeId;
+@property (retain) NSString* language;
+@property (retain) NSString* seriesId;
+@property (retain) NSString* episodeName;
+@property int32_t seasonNumber;
+@property int32_t episodeNumber;
+@property (retain) NSString* overview;
+@property (retain) NSString* firstAired;
+@property (retain) NSString* rating;
+@property (retain) NSString* writer;
+@property (retain) NSString* director;
+@property (retain) NSMutableArray* mutableGuestStarsList;
+@end
+
+@implementation PBEpisode
+
+- (BOOL) hasEpisodeId {
+  return !!hasEpisodeId_;
+}
+- (void) setHasEpisodeId:(BOOL) value {
+  hasEpisodeId_ = !!value;
+}
+@synthesize episodeId;
+- (BOOL) hasLanguage {
+  return !!hasLanguage_;
+}
+- (void) setHasLanguage:(BOOL) value {
+  hasLanguage_ = !!value;
+}
+@synthesize language;
+- (BOOL) hasSeriesId {
+  return !!hasSeriesId_;
+}
+- (void) setHasSeriesId:(BOOL) value {
+  hasSeriesId_ = !!value;
+}
+@synthesize seriesId;
+- (BOOL) hasEpisodeName {
+  return !!hasEpisodeName_;
+}
+- (void) setHasEpisodeName:(BOOL) value {
+  hasEpisodeName_ = !!value;
+}
+@synthesize episodeName;
+- (BOOL) hasSeasonNumber {
+  return !!hasSeasonNumber_;
+}
+- (void) setHasSeasonNumber:(BOOL) value {
+  hasSeasonNumber_ = !!value;
+}
+@synthesize seasonNumber;
+- (BOOL) hasEpisodeNumber {
+  return !!hasEpisodeNumber_;
+}
+- (void) setHasEpisodeNumber:(BOOL) value {
+  hasEpisodeNumber_ = !!value;
+}
+@synthesize episodeNumber;
+- (BOOL) hasOverview {
+  return !!hasOverview_;
+}
+- (void) setHasOverview:(BOOL) value {
+  hasOverview_ = !!value;
+}
+@synthesize overview;
+- (BOOL) hasFirstAired {
+  return !!hasFirstAired_;
+}
+- (void) setHasFirstAired:(BOOL) value {
+  hasFirstAired_ = !!value;
+}
+@synthesize firstAired;
+- (BOOL) hasRating {
+  return !!hasRating_;
+}
+- (void) setHasRating:(BOOL) value {
+  hasRating_ = !!value;
+}
+@synthesize rating;
+- (BOOL) hasWriter {
+  return !!hasWriter_;
+}
+- (void) setHasWriter:(BOOL) value {
+  hasWriter_ = !!value;
+}
+@synthesize writer;
+- (BOOL) hasDirector {
+  return !!hasDirector_;
+}
+- (void) setHasDirector:(BOOL) value {
+  hasDirector_ = !!value;
+}
+@synthesize director;
+@synthesize mutableGuestStarsList;
+- (void) dealloc {
+  self.episodeId = nil;
+  self.language = nil;
+  self.seriesId = nil;
+  self.episodeName = nil;
+  self.overview = nil;
+  self.firstAired = nil;
+  self.rating = nil;
+  self.writer = nil;
+  self.director = nil;
+  self.mutableGuestStarsList = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+    self.episodeId = @"";
+    self.language = @"";
+    self.seriesId = @"";
+    self.episodeName = @"";
+    self.seasonNumber = 0;
+    self.episodeNumber = 0;
+    self.overview = @"";
+    self.firstAired = @"";
+    self.rating = @"";
+    self.writer = @"";
+    self.director = @"";
+  }
+  return self;
+}
+static PBEpisode* defaultPBEpisodeInstance = nil;
++ (void) initialize {
+  if (self == [PBEpisode class]) {
+    defaultPBEpisodeInstance = [[PBEpisode alloc] init];
+  }
+}
++ (PBEpisode*) defaultInstance {
+  return defaultPBEpisodeInstance;
+}
+- (PBEpisode*) defaultInstance {
+  return defaultPBEpisodeInstance;
+}
+- (NSArray*) guestStarsList {
+  return mutableGuestStarsList;
+}
+- (NSString*) guestStarsAtIndex:(int32_t) index {
+  id value = [mutableGuestStarsList objectAtIndex:index];
+  return value;
+}
+- (BOOL) isInitialized {
+  if (!self.hasEpisodeId) {
+    return NO;
+  }
+  if (!self.hasLanguage) {
+    return NO;
+  }
+  if (!self.hasSeriesId) {
+    return NO;
+  }
+  if (!self.hasEpisodeName) {
+    return NO;
+  }
+  if (!self.hasSeasonNumber) {
+    return NO;
+  }
+  if (!self.hasEpisodeNumber) {
+    return NO;
+  }
+  if (!self.hasOverview) {
+    return NO;
+  }
+  if (!self.hasFirstAired) {
+    return NO;
+  }
+  if (!self.hasRating) {
+    return NO;
+  }
+  if (!self.hasWriter) {
+    return NO;
+  }
+  if (!self.hasDirector) {
+    return NO;
+  }
+  return YES;
+}
+- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
+  if (self.hasEpisodeId) {
+    [output writeString:1 value:self.episodeId];
+  }
+  if (self.hasLanguage) {
+    [output writeString:2 value:self.language];
+  }
+  if (self.hasSeriesId) {
+    [output writeString:3 value:self.seriesId];
+  }
+  if (self.hasEpisodeName) {
+    [output writeString:4 value:self.episodeName];
+  }
+  if (self.hasSeasonNumber) {
+    [output writeInt32:5 value:self.seasonNumber];
+  }
+  if (self.hasEpisodeNumber) {
+    [output writeInt32:6 value:self.episodeNumber];
+  }
+  if (self.hasOverview) {
+    [output writeString:7 value:self.overview];
+  }
+  if (self.hasFirstAired) {
+    [output writeString:8 value:self.firstAired];
+  }
+  if (self.hasRating) {
+    [output writeString:9 value:self.rating];
+  }
+  if (self.hasWriter) {
+    [output writeString:10 value:self.writer];
+  }
+  if (self.hasDirector) {
+    [output writeString:11 value:self.director];
+  }
+  for (NSString* element in self.mutableGuestStarsList) {
+    [output writeString:12 value:element];
+  }
+  [self.unknownFields writeToCodedOutputStream:output];
+}
+- (int32_t) serializedSize {
+  int32_t size = memoizedSerializedSize;
+  if (size != -1) {
+    return size;
+  }
+
+  size = 0;
+  if (self.hasEpisodeId) {
+    size += computeStringSize(1, self.episodeId);
+  }
+  if (self.hasLanguage) {
+    size += computeStringSize(2, self.language);
+  }
+  if (self.hasSeriesId) {
+    size += computeStringSize(3, self.seriesId);
+  }
+  if (self.hasEpisodeName) {
+    size += computeStringSize(4, self.episodeName);
+  }
+  if (self.hasSeasonNumber) {
+    size += computeInt32Size(5, self.seasonNumber);
+  }
+  if (self.hasEpisodeNumber) {
+    size += computeInt32Size(6, self.episodeNumber);
+  }
+  if (self.hasOverview) {
+    size += computeStringSize(7, self.overview);
+  }
+  if (self.hasFirstAired) {
+    size += computeStringSize(8, self.firstAired);
+  }
+  if (self.hasRating) {
+    size += computeStringSize(9, self.rating);
+  }
+  if (self.hasWriter) {
+    size += computeStringSize(10, self.writer);
+  }
+  if (self.hasDirector) {
+    size += computeStringSize(11, self.director);
+  }
+  {
+    int32_t dataSize = 0;
+    for (NSString* element in self.mutableGuestStarsList) {
+      dataSize += computeStringSizeNoTag(element);
+    }
+    size += dataSize;
+    size += 1 * self.mutableGuestStarsList.count;
+  }
+  size += self.unknownFields.serializedSize;
+  memoizedSerializedSize = size;
+  return size;
+}
++ (PBEpisode*) parseFromData:(NSData*) data {
+  return (PBEpisode*)[[[PBEpisode builder] mergeFromData:data] build];
+}
++ (PBEpisode*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (PBEpisode*)[[[PBEpisode builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
+}
++ (PBEpisode*) parseFromInputStream:(NSInputStream*) input {
+  return (PBEpisode*)[[[PBEpisode builder] mergeFromInputStream:input] build];
+}
++ (PBEpisode*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (PBEpisode*)[[[PBEpisode builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (PBEpisode*) parseFromCodedInputStream:(PBCodedInputStream*) input {
+  return (PBEpisode*)[[[PBEpisode builder] mergeFromCodedInputStream:input] build];
+}
++ (PBEpisode*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (PBEpisode*)[[[PBEpisode builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (PBEpisode_Builder*) builder {
+  return [[[PBEpisode_Builder alloc] init] autorelease];
+}
++ (PBEpisode_Builder*) builderWithPrototype:(PBEpisode*) prototype {
+  return [[PBEpisode builder] mergeFrom:prototype];
+}
+- (PBEpisode_Builder*) builder {
+  return [PBEpisode builder];
+}
+@end
+
+@interface PBEpisode_Builder()
+@property (retain) PBEpisode* result;
+@end
+
+@implementation PBEpisode_Builder
+@synthesize result;
+- (void) dealloc {
+  self.result = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+    self.result = [[[PBEpisode alloc] init] autorelease];
+  }
+  return self;
+}
+- (PBGeneratedMessage*) internalGetResult {
+  return result;
+}
+- (PBEpisode_Builder*) clear {
+  self.result = [[[PBEpisode alloc] init] autorelease];
+  return self;
+}
+- (PBEpisode_Builder*) clone {
+  return [PBEpisode builderWithPrototype:result];
+}
+- (PBEpisode*) defaultInstance {
+  return [PBEpisode defaultInstance];
+}
+- (PBEpisode*) build {
+  [self checkInitialized];
+  return [self buildPartial];
+}
+- (PBEpisode*) buildPartial {
+  PBEpisode* returnMe = [[result retain] autorelease];
+  self.result = nil;
+  return returnMe;
+}
+- (PBEpisode_Builder*) mergeFrom:(PBEpisode*) other {
+  if (other == [PBEpisode defaultInstance]) {
+    return self;
+  }
+  if (other.hasEpisodeId) {
+    [self setEpisodeId:other.episodeId];
+  }
+  if (other.hasLanguage) {
+    [self setLanguage:other.language];
+  }
+  if (other.hasSeriesId) {
+    [self setSeriesId:other.seriesId];
+  }
+  if (other.hasEpisodeName) {
+    [self setEpisodeName:other.episodeName];
+  }
+  if (other.hasSeasonNumber) {
+    [self setSeasonNumber:other.seasonNumber];
+  }
+  if (other.hasEpisodeNumber) {
+    [self setEpisodeNumber:other.episodeNumber];
+  }
+  if (other.hasOverview) {
+    [self setOverview:other.overview];
+  }
+  if (other.hasFirstAired) {
+    [self setFirstAired:other.firstAired];
+  }
+  if (other.hasRating) {
+    [self setRating:other.rating];
+  }
+  if (other.hasWriter) {
+    [self setWriter:other.writer];
+  }
+  if (other.hasDirector) {
+    [self setDirector:other.director];
+  }
+  if (other.mutableGuestStarsList.count > 0) {
+    if (result.mutableGuestStarsList == nil) {
+      result.mutableGuestStarsList = [NSMutableArray array];
+    }
+    [result.mutableGuestStarsList addObjectsFromArray:other.mutableGuestStarsList];
+  }
+  [self mergeUnknownFields:other.unknownFields];
+  return self;
+}
+- (PBEpisode_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
+  return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
+}
+- (PBEpisode_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
+  while (YES) {
+    int32_t tag = [input readTag];
+    switch (tag) {
+      case 0:
+        [self setUnknownFields:[unknownFields build]];
+        return self;
+      default: {
+        if (![self parseUnknownField:input unknownFields:unknownFields extensionRegistry:extensionRegistry tag:tag]) {
+          [self setUnknownFields:[unknownFields build]];
+          return self;
+        }
+        break;
+      }
+      case 10: {
+        [self setEpisodeId:[input readString]];
+        break;
+      }
+      case 18: {
+        [self setLanguage:[input readString]];
+        break;
+      }
+      case 26: {
+        [self setSeriesId:[input readString]];
+        break;
+      }
+      case 34: {
+        [self setEpisodeName:[input readString]];
+        break;
+      }
+      case 40: {
+        [self setSeasonNumber:[input readInt32]];
+        break;
+      }
+      case 48: {
+        [self setEpisodeNumber:[input readInt32]];
+        break;
+      }
+      case 58: {
+        [self setOverview:[input readString]];
+        break;
+      }
+      case 66: {
+        [self setFirstAired:[input readString]];
+        break;
+      }
+      case 74: {
+        [self setRating:[input readString]];
+        break;
+      }
+      case 82: {
+        [self setWriter:[input readString]];
+        break;
+      }
+      case 90: {
+        [self setDirector:[input readString]];
+        break;
+      }
+      case 98: {
+        [self addGuestStars:[input readString]];
+        break;
+      }
+    }
+  }
+}
+- (BOOL) hasEpisodeId {
+  return result.hasEpisodeId;
+}
+- (NSString*) episodeId {
+  return result.episodeId;
+}
+- (PBEpisode_Builder*) setEpisodeId:(NSString*) value {
+  result.hasEpisodeId = YES;
+  result.episodeId = value;
+  return self;
+}
+- (PBEpisode_Builder*) clearEpisodeId {
+  result.hasEpisodeId = NO;
+  result.episodeId = @"";
+  return self;
+}
+- (BOOL) hasLanguage {
+  return result.hasLanguage;
+}
+- (NSString*) language {
+  return result.language;
+}
+- (PBEpisode_Builder*) setLanguage:(NSString*) value {
+  result.hasLanguage = YES;
+  result.language = value;
+  return self;
+}
+- (PBEpisode_Builder*) clearLanguage {
+  result.hasLanguage = NO;
+  result.language = @"";
+  return self;
+}
+- (BOOL) hasSeriesId {
+  return result.hasSeriesId;
+}
+- (NSString*) seriesId {
+  return result.seriesId;
+}
+- (PBEpisode_Builder*) setSeriesId:(NSString*) value {
+  result.hasSeriesId = YES;
+  result.seriesId = value;
+  return self;
+}
+- (PBEpisode_Builder*) clearSeriesId {
+  result.hasSeriesId = NO;
+  result.seriesId = @"";
+  return self;
+}
+- (BOOL) hasEpisodeName {
+  return result.hasEpisodeName;
+}
+- (NSString*) episodeName {
+  return result.episodeName;
+}
+- (PBEpisode_Builder*) setEpisodeName:(NSString*) value {
+  result.hasEpisodeName = YES;
+  result.episodeName = value;
+  return self;
+}
+- (PBEpisode_Builder*) clearEpisodeName {
+  result.hasEpisodeName = NO;
+  result.episodeName = @"";
+  return self;
+}
+- (BOOL) hasSeasonNumber {
+  return result.hasSeasonNumber;
+}
+- (int32_t) seasonNumber {
+  return result.seasonNumber;
+}
+- (PBEpisode_Builder*) setSeasonNumber:(int32_t) value {
+  result.hasSeasonNumber = YES;
+  result.seasonNumber = value;
+  return self;
+}
+- (PBEpisode_Builder*) clearSeasonNumber {
+  result.hasSeasonNumber = NO;
+  result.seasonNumber = 0;
+  return self;
+}
+- (BOOL) hasEpisodeNumber {
+  return result.hasEpisodeNumber;
+}
+- (int32_t) episodeNumber {
+  return result.episodeNumber;
+}
+- (PBEpisode_Builder*) setEpisodeNumber:(int32_t) value {
+  result.hasEpisodeNumber = YES;
+  result.episodeNumber = value;
+  return self;
+}
+- (PBEpisode_Builder*) clearEpisodeNumber {
+  result.hasEpisodeNumber = NO;
+  result.episodeNumber = 0;
+  return self;
+}
+- (BOOL) hasOverview {
+  return result.hasOverview;
+}
+- (NSString*) overview {
+  return result.overview;
+}
+- (PBEpisode_Builder*) setOverview:(NSString*) value {
+  result.hasOverview = YES;
+  result.overview = value;
+  return self;
+}
+- (PBEpisode_Builder*) clearOverview {
+  result.hasOverview = NO;
+  result.overview = @"";
+  return self;
+}
+- (BOOL) hasFirstAired {
+  return result.hasFirstAired;
+}
+- (NSString*) firstAired {
+  return result.firstAired;
+}
+- (PBEpisode_Builder*) setFirstAired:(NSString*) value {
+  result.hasFirstAired = YES;
+  result.firstAired = value;
+  return self;
+}
+- (PBEpisode_Builder*) clearFirstAired {
+  result.hasFirstAired = NO;
+  result.firstAired = @"";
+  return self;
+}
+- (BOOL) hasRating {
+  return result.hasRating;
+}
+- (NSString*) rating {
+  return result.rating;
+}
+- (PBEpisode_Builder*) setRating:(NSString*) value {
+  result.hasRating = YES;
+  result.rating = value;
+  return self;
+}
+- (PBEpisode_Builder*) clearRating {
+  result.hasRating = NO;
+  result.rating = @"";
+  return self;
+}
+- (BOOL) hasWriter {
+  return result.hasWriter;
+}
+- (NSString*) writer {
+  return result.writer;
+}
+- (PBEpisode_Builder*) setWriter:(NSString*) value {
+  result.hasWriter = YES;
+  result.writer = value;
+  return self;
+}
+- (PBEpisode_Builder*) clearWriter {
+  result.hasWriter = NO;
+  result.writer = @"";
+  return self;
+}
+- (BOOL) hasDirector {
+  return result.hasDirector;
+}
+- (NSString*) director {
+  return result.director;
+}
+- (PBEpisode_Builder*) setDirector:(NSString*) value {
+  result.hasDirector = YES;
+  result.director = value;
+  return self;
+}
+- (PBEpisode_Builder*) clearDirector {
+  result.hasDirector = NO;
+  result.director = @"";
+  return self;
+}
+- (NSArray*) guestStarsList {
+  if (result.mutableGuestStarsList == nil) {
+    return [NSArray array];
+  }
+  return result.mutableGuestStarsList;
+}
+- (NSString*) guestStarsAtIndex:(int32_t) index {
+  return [result guestStarsAtIndex:index];
+}
+- (PBEpisode_Builder*) replaceGuestStarsAtIndex:(int32_t) index with:(NSString*) value {
+  [result.mutableGuestStarsList replaceObjectAtIndex:index withObject:value];
+  return self;
+}
+- (PBEpisode_Builder*) addGuestStars:(NSString*) value {
+  if (result.mutableGuestStarsList == nil) {
+    result.mutableGuestStarsList = [NSMutableArray array];
+  }
+  [result.mutableGuestStarsList addObject:value];
+  return self;
+}
+- (PBEpisode_Builder*) addAllGuestStars:(NSArray*) values {
+  if (result.mutableGuestStarsList == nil) {
+    result.mutableGuestStarsList = [NSMutableArray array];
+  }
+  [result.mutableGuestStarsList addObjectsFromArray:values];
+  return self;
+}
+- (PBEpisode_Builder*) clearGuestStarsList {
+  result.mutableGuestStarsList = nil;
+  return self;
+}
+@end
+

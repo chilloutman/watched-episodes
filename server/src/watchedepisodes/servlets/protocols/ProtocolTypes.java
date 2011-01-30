@@ -928,6 +928,779 @@ public final class ProtocolTypes {
     }
   }
   
+  public static final class PBEpisode extends
+      com.google.protobuf.GeneratedMessage {
+    // Use PBEpisode.newBuilder() to construct.
+    private PBEpisode() {}
+    
+    private static final PBEpisode defaultInstance = new PBEpisode();
+    public static PBEpisode getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public PBEpisode getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return watchedepisodes.servlets.protocols.ProtocolTypes.internal_static_PBEpisode_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return watchedepisodes.servlets.protocols.ProtocolTypes.internal_static_PBEpisode_fieldAccessorTable;
+    }
+    
+    // required string episodeId = 1;
+    public static final int EPISODEID_FIELD_NUMBER = 1;
+    private boolean hasEpisodeId;
+    private java.lang.String episodeId_ = "";
+    public boolean hasEpisodeId() { return hasEpisodeId; }
+    public java.lang.String getEpisodeId() { return episodeId_; }
+    
+    // required string language = 2;
+    public static final int LANGUAGE_FIELD_NUMBER = 2;
+    private boolean hasLanguage;
+    private java.lang.String language_ = "";
+    public boolean hasLanguage() { return hasLanguage; }
+    public java.lang.String getLanguage() { return language_; }
+    
+    // required string seriesId = 3;
+    public static final int SERIESID_FIELD_NUMBER = 3;
+    private boolean hasSeriesId;
+    private java.lang.String seriesId_ = "";
+    public boolean hasSeriesId() { return hasSeriesId; }
+    public java.lang.String getSeriesId() { return seriesId_; }
+    
+    // required string episodeName = 4;
+    public static final int EPISODENAME_FIELD_NUMBER = 4;
+    private boolean hasEpisodeName;
+    private java.lang.String episodeName_ = "";
+    public boolean hasEpisodeName() { return hasEpisodeName; }
+    public java.lang.String getEpisodeName() { return episodeName_; }
+    
+    // required int32 seasonNumber = 5;
+    public static final int SEASONNUMBER_FIELD_NUMBER = 5;
+    private boolean hasSeasonNumber;
+    private int seasonNumber_ = 0;
+    public boolean hasSeasonNumber() { return hasSeasonNumber; }
+    public int getSeasonNumber() { return seasonNumber_; }
+    
+    // required int32 episodeNumber = 6;
+    public static final int EPISODENUMBER_FIELD_NUMBER = 6;
+    private boolean hasEpisodeNumber;
+    private int episodeNumber_ = 0;
+    public boolean hasEpisodeNumber() { return hasEpisodeNumber; }
+    public int getEpisodeNumber() { return episodeNumber_; }
+    
+    // required string overview = 7;
+    public static final int OVERVIEW_FIELD_NUMBER = 7;
+    private boolean hasOverview;
+    private java.lang.String overview_ = "";
+    public boolean hasOverview() { return hasOverview; }
+    public java.lang.String getOverview() { return overview_; }
+    
+    // required string firstAired = 8;
+    public static final int FIRSTAIRED_FIELD_NUMBER = 8;
+    private boolean hasFirstAired;
+    private java.lang.String firstAired_ = "";
+    public boolean hasFirstAired() { return hasFirstAired; }
+    public java.lang.String getFirstAired() { return firstAired_; }
+    
+    // required string rating = 9;
+    public static final int RATING_FIELD_NUMBER = 9;
+    private boolean hasRating;
+    private java.lang.String rating_ = "";
+    public boolean hasRating() { return hasRating; }
+    public java.lang.String getRating() { return rating_; }
+    
+    // required string writer = 10;
+    public static final int WRITER_FIELD_NUMBER = 10;
+    private boolean hasWriter;
+    private java.lang.String writer_ = "";
+    public boolean hasWriter() { return hasWriter; }
+    public java.lang.String getWriter() { return writer_; }
+    
+    // required string director = 11;
+    public static final int DIRECTOR_FIELD_NUMBER = 11;
+    private boolean hasDirector;
+    private java.lang.String director_ = "";
+    public boolean hasDirector() { return hasDirector; }
+    public java.lang.String getDirector() { return director_; }
+    
+    // repeated string guestStars = 12;
+    public static final int GUESTSTARS_FIELD_NUMBER = 12;
+    private java.util.List<java.lang.String> guestStars_ =
+      java.util.Collections.emptyList();
+    public java.util.List<java.lang.String> getGuestStarsList() {
+      return guestStars_;
+    }
+    public int getGuestStarsCount() { return guestStars_.size(); }
+    public java.lang.String getGuestStars(int index) {
+      return guestStars_.get(index);
+    }
+    
+    public final boolean isInitialized() {
+      if (!hasEpisodeId) return false;
+      if (!hasLanguage) return false;
+      if (!hasSeriesId) return false;
+      if (!hasEpisodeName) return false;
+      if (!hasSeasonNumber) return false;
+      if (!hasEpisodeNumber) return false;
+      if (!hasOverview) return false;
+      if (!hasFirstAired) return false;
+      if (!hasRating) return false;
+      if (!hasWriter) return false;
+      if (!hasDirector) return false;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (hasEpisodeId()) {
+        output.writeString(1, getEpisodeId());
+      }
+      if (hasLanguage()) {
+        output.writeString(2, getLanguage());
+      }
+      if (hasSeriesId()) {
+        output.writeString(3, getSeriesId());
+      }
+      if (hasEpisodeName()) {
+        output.writeString(4, getEpisodeName());
+      }
+      if (hasSeasonNumber()) {
+        output.writeInt32(5, getSeasonNumber());
+      }
+      if (hasEpisodeNumber()) {
+        output.writeInt32(6, getEpisodeNumber());
+      }
+      if (hasOverview()) {
+        output.writeString(7, getOverview());
+      }
+      if (hasFirstAired()) {
+        output.writeString(8, getFirstAired());
+      }
+      if (hasRating()) {
+        output.writeString(9, getRating());
+      }
+      if (hasWriter()) {
+        output.writeString(10, getWriter());
+      }
+      if (hasDirector()) {
+        output.writeString(11, getDirector());
+      }
+      for (java.lang.String element : getGuestStarsList()) {
+        output.writeString(12, element);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasEpisodeId()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(1, getEpisodeId());
+      }
+      if (hasLanguage()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(2, getLanguage());
+      }
+      if (hasSeriesId()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(3, getSeriesId());
+      }
+      if (hasEpisodeName()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(4, getEpisodeName());
+      }
+      if (hasSeasonNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, getSeasonNumber());
+      }
+      if (hasEpisodeNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, getEpisodeNumber());
+      }
+      if (hasOverview()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(7, getOverview());
+      }
+      if (hasFirstAired()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(8, getFirstAired());
+      }
+      if (hasRating()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(9, getRating());
+      }
+      if (hasWriter()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(10, getWriter());
+      }
+      if (hasDirector()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(11, getDirector());
+      }
+      {
+        int dataSize = 0;
+        for (java.lang.String element : getGuestStarsList()) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeStringSizeNoTag(element);
+        }
+        size += dataSize;
+        size += 1 * getGuestStarsList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input).buildParsed();
+    }
+    public static watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode result;
+      
+      // Construct using watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode();
+        return builder;
+      }
+      
+      protected watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode.getDescriptor();
+      }
+      
+      public watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode getDefaultInstanceForType() {
+        return watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        if (result.guestStars_ != java.util.Collections.EMPTY_LIST) {
+          result.guestStars_ =
+            java.util.Collections.unmodifiableList(result.guestStars_);
+        }
+        watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode) {
+          return mergeFrom((watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode other) {
+        if (other == watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode.getDefaultInstance()) return this;
+        if (other.hasEpisodeId()) {
+          setEpisodeId(other.getEpisodeId());
+        }
+        if (other.hasLanguage()) {
+          setLanguage(other.getLanguage());
+        }
+        if (other.hasSeriesId()) {
+          setSeriesId(other.getSeriesId());
+        }
+        if (other.hasEpisodeName()) {
+          setEpisodeName(other.getEpisodeName());
+        }
+        if (other.hasSeasonNumber()) {
+          setSeasonNumber(other.getSeasonNumber());
+        }
+        if (other.hasEpisodeNumber()) {
+          setEpisodeNumber(other.getEpisodeNumber());
+        }
+        if (other.hasOverview()) {
+          setOverview(other.getOverview());
+        }
+        if (other.hasFirstAired()) {
+          setFirstAired(other.getFirstAired());
+        }
+        if (other.hasRating()) {
+          setRating(other.getRating());
+        }
+        if (other.hasWriter()) {
+          setWriter(other.getWriter());
+        }
+        if (other.hasDirector()) {
+          setDirector(other.getDirector());
+        }
+        if (!other.guestStars_.isEmpty()) {
+          if (result.guestStars_.isEmpty()) {
+            result.guestStars_ = new java.util.ArrayList<java.lang.String>();
+          }
+          result.guestStars_.addAll(other.guestStars_);
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              setEpisodeId(input.readString());
+              break;
+            }
+            case 18: {
+              setLanguage(input.readString());
+              break;
+            }
+            case 26: {
+              setSeriesId(input.readString());
+              break;
+            }
+            case 34: {
+              setEpisodeName(input.readString());
+              break;
+            }
+            case 40: {
+              setSeasonNumber(input.readInt32());
+              break;
+            }
+            case 48: {
+              setEpisodeNumber(input.readInt32());
+              break;
+            }
+            case 58: {
+              setOverview(input.readString());
+              break;
+            }
+            case 66: {
+              setFirstAired(input.readString());
+              break;
+            }
+            case 74: {
+              setRating(input.readString());
+              break;
+            }
+            case 82: {
+              setWriter(input.readString());
+              break;
+            }
+            case 90: {
+              setDirector(input.readString());
+              break;
+            }
+            case 98: {
+              addGuestStars(input.readString());
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // required string episodeId = 1;
+      public boolean hasEpisodeId() {
+        return result.hasEpisodeId();
+      }
+      public java.lang.String getEpisodeId() {
+        return result.getEpisodeId();
+      }
+      public Builder setEpisodeId(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasEpisodeId = true;
+        result.episodeId_ = value;
+        return this;
+      }
+      public Builder clearEpisodeId() {
+        result.hasEpisodeId = false;
+        result.episodeId_ = getDefaultInstance().getEpisodeId();
+        return this;
+      }
+      
+      // required string language = 2;
+      public boolean hasLanguage() {
+        return result.hasLanguage();
+      }
+      public java.lang.String getLanguage() {
+        return result.getLanguage();
+      }
+      public Builder setLanguage(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasLanguage = true;
+        result.language_ = value;
+        return this;
+      }
+      public Builder clearLanguage() {
+        result.hasLanguage = false;
+        result.language_ = getDefaultInstance().getLanguage();
+        return this;
+      }
+      
+      // required string seriesId = 3;
+      public boolean hasSeriesId() {
+        return result.hasSeriesId();
+      }
+      public java.lang.String getSeriesId() {
+        return result.getSeriesId();
+      }
+      public Builder setSeriesId(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasSeriesId = true;
+        result.seriesId_ = value;
+        return this;
+      }
+      public Builder clearSeriesId() {
+        result.hasSeriesId = false;
+        result.seriesId_ = getDefaultInstance().getSeriesId();
+        return this;
+      }
+      
+      // required string episodeName = 4;
+      public boolean hasEpisodeName() {
+        return result.hasEpisodeName();
+      }
+      public java.lang.String getEpisodeName() {
+        return result.getEpisodeName();
+      }
+      public Builder setEpisodeName(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasEpisodeName = true;
+        result.episodeName_ = value;
+        return this;
+      }
+      public Builder clearEpisodeName() {
+        result.hasEpisodeName = false;
+        result.episodeName_ = getDefaultInstance().getEpisodeName();
+        return this;
+      }
+      
+      // required int32 seasonNumber = 5;
+      public boolean hasSeasonNumber() {
+        return result.hasSeasonNumber();
+      }
+      public int getSeasonNumber() {
+        return result.getSeasonNumber();
+      }
+      public Builder setSeasonNumber(int value) {
+        result.hasSeasonNumber = true;
+        result.seasonNumber_ = value;
+        return this;
+      }
+      public Builder clearSeasonNumber() {
+        result.hasSeasonNumber = false;
+        result.seasonNumber_ = 0;
+        return this;
+      }
+      
+      // required int32 episodeNumber = 6;
+      public boolean hasEpisodeNumber() {
+        return result.hasEpisodeNumber();
+      }
+      public int getEpisodeNumber() {
+        return result.getEpisodeNumber();
+      }
+      public Builder setEpisodeNumber(int value) {
+        result.hasEpisodeNumber = true;
+        result.episodeNumber_ = value;
+        return this;
+      }
+      public Builder clearEpisodeNumber() {
+        result.hasEpisodeNumber = false;
+        result.episodeNumber_ = 0;
+        return this;
+      }
+      
+      // required string overview = 7;
+      public boolean hasOverview() {
+        return result.hasOverview();
+      }
+      public java.lang.String getOverview() {
+        return result.getOverview();
+      }
+      public Builder setOverview(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasOverview = true;
+        result.overview_ = value;
+        return this;
+      }
+      public Builder clearOverview() {
+        result.hasOverview = false;
+        result.overview_ = getDefaultInstance().getOverview();
+        return this;
+      }
+      
+      // required string firstAired = 8;
+      public boolean hasFirstAired() {
+        return result.hasFirstAired();
+      }
+      public java.lang.String getFirstAired() {
+        return result.getFirstAired();
+      }
+      public Builder setFirstAired(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasFirstAired = true;
+        result.firstAired_ = value;
+        return this;
+      }
+      public Builder clearFirstAired() {
+        result.hasFirstAired = false;
+        result.firstAired_ = getDefaultInstance().getFirstAired();
+        return this;
+      }
+      
+      // required string rating = 9;
+      public boolean hasRating() {
+        return result.hasRating();
+      }
+      public java.lang.String getRating() {
+        return result.getRating();
+      }
+      public Builder setRating(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasRating = true;
+        result.rating_ = value;
+        return this;
+      }
+      public Builder clearRating() {
+        result.hasRating = false;
+        result.rating_ = getDefaultInstance().getRating();
+        return this;
+      }
+      
+      // required string writer = 10;
+      public boolean hasWriter() {
+        return result.hasWriter();
+      }
+      public java.lang.String getWriter() {
+        return result.getWriter();
+      }
+      public Builder setWriter(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasWriter = true;
+        result.writer_ = value;
+        return this;
+      }
+      public Builder clearWriter() {
+        result.hasWriter = false;
+        result.writer_ = getDefaultInstance().getWriter();
+        return this;
+      }
+      
+      // required string director = 11;
+      public boolean hasDirector() {
+        return result.hasDirector();
+      }
+      public java.lang.String getDirector() {
+        return result.getDirector();
+      }
+      public Builder setDirector(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasDirector = true;
+        result.director_ = value;
+        return this;
+      }
+      public Builder clearDirector() {
+        result.hasDirector = false;
+        result.director_ = getDefaultInstance().getDirector();
+        return this;
+      }
+      
+      // repeated string guestStars = 12;
+      public java.util.List<java.lang.String> getGuestStarsList() {
+        return java.util.Collections.unmodifiableList(result.guestStars_);
+      }
+      public int getGuestStarsCount() {
+        return result.getGuestStarsCount();
+      }
+      public java.lang.String getGuestStars(int index) {
+        return result.getGuestStars(index);
+      }
+      public Builder setGuestStars(int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.guestStars_.set(index, value);
+        return this;
+      }
+      public Builder addGuestStars(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  if (result.guestStars_.isEmpty()) {
+          result.guestStars_ = new java.util.ArrayList<java.lang.String>();
+        }
+        result.guestStars_.add(value);
+        return this;
+      }
+      public Builder addAllGuestStars(
+          java.lang.Iterable<? extends java.lang.String> values) {
+        if (result.guestStars_.isEmpty()) {
+          result.guestStars_ = new java.util.ArrayList<java.lang.String>();
+        }
+        super.addAll(values, result.guestStars_);
+        return this;
+      }
+      public Builder clearGuestStars() {
+        result.guestStars_ = java.util.Collections.emptyList();
+        return this;
+      }
+    }
+    
+    static {
+      watchedepisodes.servlets.protocols.ProtocolTypes.getDescriptor();
+    }
+    
+    static {
+      watchedepisodes.servlets.protocols.ProtocolTypes.internalForceInit();
+    }
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_PBSeries_descriptor;
   private static
@@ -938,6 +1711,11 @@ public final class ProtocolTypes {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_PBSeriesSummary_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_PBEpisode_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_PBEpisode_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -952,8 +1730,14 @@ public final class ProtocolTypes {
       "sName\030\003 \002(\t\022\020\n\010overview\030\004 \002(\t\022\022\n\nfirstAi" +
       "red\030\005 \002(\t\022\016\n\006actors\030\006 \003(\t\022\016\n\006banner\030\007 \002(" +
       "\t\022\016\n\006imdbId\030\010 \002(\t\"7\n\017PBSeriesSummary\022\020\n\010" +
-      "seriesId\030\001 \002(\t\022\022\n\nseriesName\030\002 \002(\tB$\n\"wa" +
-      "tchedepisodes.servlets.protocols"
+      "seriesId\030\001 \002(\t\022\022\n\nseriesName\030\002 \002(\t\"\360\001\n\tP" +
+      "BEpisode\022\021\n\tepisodeId\030\001 \002(\t\022\020\n\010language\030" +
+      "\002 \002(\t\022\020\n\010seriesId\030\003 \002(\t\022\023\n\013episodeName\030\004" +
+      " \002(\t\022\024\n\014seasonNumber\030\005 \002(\005\022\025\n\repisodeNum" +
+      "ber\030\006 \002(\005\022\020\n\010overview\030\007 \002(\t\022\022\n\nfirstAire",
+      "d\030\010 \002(\t\022\016\n\006rating\030\t \002(\t\022\016\n\006writer\030\n \002(\t\022" +
+      "\020\n\010director\030\013 \002(\t\022\022\n\nguestStars\030\014 \003(\tB$\n" +
+      "\"watchedepisodes.servlets.protocols"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -976,6 +1760,14 @@ public final class ProtocolTypes {
               new java.lang.String[] { "SeriesId", "SeriesName", },
               watchedepisodes.servlets.protocols.ProtocolTypes.PBSeriesSummary.class,
               watchedepisodes.servlets.protocols.ProtocolTypes.PBSeriesSummary.Builder.class);
+          internal_static_PBEpisode_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_PBEpisode_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_PBEpisode_descriptor,
+              new java.lang.String[] { "EpisodeId", "Language", "SeriesId", "EpisodeName", "SeasonNumber", "EpisodeNumber", "Overview", "FirstAired", "Rating", "Writer", "Director", "GuestStars", },
+              watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode.class,
+              watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode.Builder.class);
           return null;
         }
       };

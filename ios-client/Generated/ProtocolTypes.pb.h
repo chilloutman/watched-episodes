@@ -2,6 +2,8 @@
 
 #import "ProtocolBuffers.h"
 
+@class PBEpisode;
+@class PBEpisode_Builder;
 @class PBSeries;
 @class PBSeriesSummary;
 @class PBSeriesSummary_Builder;
@@ -180,5 +182,153 @@
 - (NSString*) seriesName;
 - (PBSeriesSummary_Builder*) setSeriesName:(NSString*) value;
 - (PBSeriesSummary_Builder*) clearSeriesName;
+@end
+
+@interface PBEpisode : PBGeneratedMessage {
+@private
+  BOOL hasSeasonNumber_:1;
+  BOOL hasEpisodeNumber_:1;
+  BOOL hasEpisodeId_:1;
+  BOOL hasLanguage_:1;
+  BOOL hasSeriesId_:1;
+  BOOL hasEpisodeName_:1;
+  BOOL hasOverview_:1;
+  BOOL hasFirstAired_:1;
+  BOOL hasRating_:1;
+  BOOL hasWriter_:1;
+  BOOL hasDirector_:1;
+  int32_t seasonNumber;
+  int32_t episodeNumber;
+  NSString* episodeId;
+  NSString* language;
+  NSString* seriesId;
+  NSString* episodeName;
+  NSString* overview;
+  NSString* firstAired;
+  NSString* rating;
+  NSString* writer;
+  NSString* director;
+  NSMutableArray* mutableGuestStarsList;
+}
+- (BOOL) hasEpisodeId;
+- (BOOL) hasLanguage;
+- (BOOL) hasSeriesId;
+- (BOOL) hasEpisodeName;
+- (BOOL) hasSeasonNumber;
+- (BOOL) hasEpisodeNumber;
+- (BOOL) hasOverview;
+- (BOOL) hasFirstAired;
+- (BOOL) hasRating;
+- (BOOL) hasWriter;
+- (BOOL) hasDirector;
+@property (readonly, retain) NSString* episodeId;
+@property (readonly, retain) NSString* language;
+@property (readonly, retain) NSString* seriesId;
+@property (readonly, retain) NSString* episodeName;
+@property (readonly) int32_t seasonNumber;
+@property (readonly) int32_t episodeNumber;
+@property (readonly, retain) NSString* overview;
+@property (readonly, retain) NSString* firstAired;
+@property (readonly, retain) NSString* rating;
+@property (readonly, retain) NSString* writer;
+@property (readonly, retain) NSString* director;
+- (NSArray*) guestStarsList;
+- (NSString*) guestStarsAtIndex:(int32_t) index;
+
++ (PBEpisode*) defaultInstance;
+- (PBEpisode*) defaultInstance;
+
+- (BOOL) isInitialized;
+- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output;
+- (PBEpisode_Builder*) builder;
++ (PBEpisode_Builder*) builder;
++ (PBEpisode_Builder*) builderWithPrototype:(PBEpisode*) prototype;
+
++ (PBEpisode*) parseFromData:(NSData*) data;
++ (PBEpisode*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (PBEpisode*) parseFromInputStream:(NSInputStream*) input;
++ (PBEpisode*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (PBEpisode*) parseFromCodedInputStream:(PBCodedInputStream*) input;
++ (PBEpisode*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
+@end
+
+@interface PBEpisode_Builder : PBGeneratedMessage_Builder {
+@private
+  PBEpisode* result;
+}
+
+- (PBEpisode*) defaultInstance;
+
+- (PBEpisode_Builder*) clear;
+- (PBEpisode_Builder*) clone;
+
+- (PBEpisode*) build;
+- (PBEpisode*) buildPartial;
+
+- (PBEpisode_Builder*) mergeFrom:(PBEpisode*) other;
+- (PBEpisode_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
+- (PBEpisode_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
+
+- (BOOL) hasEpisodeId;
+- (NSString*) episodeId;
+- (PBEpisode_Builder*) setEpisodeId:(NSString*) value;
+- (PBEpisode_Builder*) clearEpisodeId;
+
+- (BOOL) hasLanguage;
+- (NSString*) language;
+- (PBEpisode_Builder*) setLanguage:(NSString*) value;
+- (PBEpisode_Builder*) clearLanguage;
+
+- (BOOL) hasSeriesId;
+- (NSString*) seriesId;
+- (PBEpisode_Builder*) setSeriesId:(NSString*) value;
+- (PBEpisode_Builder*) clearSeriesId;
+
+- (BOOL) hasEpisodeName;
+- (NSString*) episodeName;
+- (PBEpisode_Builder*) setEpisodeName:(NSString*) value;
+- (PBEpisode_Builder*) clearEpisodeName;
+
+- (BOOL) hasSeasonNumber;
+- (int32_t) seasonNumber;
+- (PBEpisode_Builder*) setSeasonNumber:(int32_t) value;
+- (PBEpisode_Builder*) clearSeasonNumber;
+
+- (BOOL) hasEpisodeNumber;
+- (int32_t) episodeNumber;
+- (PBEpisode_Builder*) setEpisodeNumber:(int32_t) value;
+- (PBEpisode_Builder*) clearEpisodeNumber;
+
+- (BOOL) hasOverview;
+- (NSString*) overview;
+- (PBEpisode_Builder*) setOverview:(NSString*) value;
+- (PBEpisode_Builder*) clearOverview;
+
+- (BOOL) hasFirstAired;
+- (NSString*) firstAired;
+- (PBEpisode_Builder*) setFirstAired:(NSString*) value;
+- (PBEpisode_Builder*) clearFirstAired;
+
+- (BOOL) hasRating;
+- (NSString*) rating;
+- (PBEpisode_Builder*) setRating:(NSString*) value;
+- (PBEpisode_Builder*) clearRating;
+
+- (BOOL) hasWriter;
+- (NSString*) writer;
+- (PBEpisode_Builder*) setWriter:(NSString*) value;
+- (PBEpisode_Builder*) clearWriter;
+
+- (BOOL) hasDirector;
+- (NSString*) director;
+- (PBEpisode_Builder*) setDirector:(NSString*) value;
+- (PBEpisode_Builder*) clearDirector;
+
+- (NSArray*) guestStarsList;
+- (NSString*) guestStarsAtIndex:(int32_t) index;
+- (PBEpisode_Builder*) replaceGuestStarsAtIndex:(int32_t) index with:(NSString*) value;
+- (PBEpisode_Builder*) addGuestStars:(NSString*) value;
+- (PBEpisode_Builder*) addAllGuestStars:(NSArray*) values;
+- (PBEpisode_Builder*) clearGuestStarsList;
 @end
 

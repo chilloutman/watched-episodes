@@ -4,6 +4,8 @@
 
 #import "ProtocolTypes.pb.h"
 
+@class PBEpisode;
+@class PBEpisode_Builder;
 @class PBSeries;
 @class PBSeriesSummary;
 @class PBSeriesSummary_Builder;

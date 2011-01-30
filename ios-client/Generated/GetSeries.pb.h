@@ -6,6 +6,8 @@
 
 @class GetSeriesResponse;
 @class GetSeriesResponse_Builder;
+@class PBEpisode;
+@class PBEpisode_Builder;
 @class PBSeries;
 @class PBSeriesSummary;
 @class PBSeriesSummary_Builder;

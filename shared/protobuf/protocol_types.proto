@@ -15,3 +15,18 @@ message PBSeriesSummary {
 	required string seriesId = 1;
 	required string seriesName = 2;
 }
+
+message PBEpisode {
+	required string episodeId = 1;
+	required string language = 2;
+	required string seriesId = 3;
+	required string episodeName = 4;
+	required int32 seasonNumber = 5;
+	required int32 episodeNumber = 6;
+	required string overview = 7;
+	required string firstAired = 8;
+	required string rating = 9;
+	required string writer = 10;
+	required string director = 11;
+	repeated string guestStars = 12;
+}
