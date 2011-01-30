@@ -33,6 +33,7 @@
 		EFFD085312F0C8FA00F9075B /* FavoritesMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD085212F0C8FA00F9075B /* FavoritesMananger.m */; };
 		EFFD08B512F21BBC00F9075B /* GetAllEpisodes.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD08B212F21BBC00F9075B /* GetAllEpisodes.pb.m */; };
 		EFFD08B612F21BBC00F9075B /* ProtocolTypes.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD08B412F21BBC00F9075B /* ProtocolTypes.pb.m */; };
+		EFFD093512F22BE700F9075B /* FileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD093412F22BE700F9075B /* FileHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +118,8 @@
 		EFFD08B212F21BBC00F9075B /* GetAllEpisodes.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetAllEpisodes.pb.m; sourceTree = "<group>"; };
 		EFFD08B312F21BBC00F9075B /* ProtocolTypes.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolTypes.pb.h; sourceTree = "<group>"; };
 		EFFD08B412F21BBC00F9075B /* ProtocolTypes.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolTypes.pb.m; sourceTree = "<group>"; };
+		EFFD093312F22BE700F9075B /* FileHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileHelper.h; sourceTree = "<group>"; };
+		EFFD093412F22BE700F9075B /* FileHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,12 +197,11 @@
 			children = (
 				EF8D793312D9F9AA0064C5B5 /* Constants.h */,
 				EF8D793412D9F9AA0064C5B5 /* Constants.m */,
-				EF8D79D212DA087D0064C5B5 /* ServiceLocator.h */,
-				EF8D79D312DA087D0064C5B5 /* ServiceLocator.m */,
 				EF8D76EC12D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.h */,
 				EF8D76ED12D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.m */,
 				EFFD079312F0BE7A00F9075B /* NavigationControllerTab.h */,
 				EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */,
+				EFFD093212F22BAD00F9075B /* Util */,
 				EFFD084F12F0C6F000F9075B /* Screens */,
 				EF12EF9D12EC8FE1007E380E /* Loader */,
 				EFFD085012F0C8CB00F9075B /* Model */,
@@ -287,6 +289,17 @@
 				EFFD085212F0C8FA00F9075B /* FavoritesMananger.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		EFFD093212F22BAD00F9075B /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				EF8D79D212DA087D0064C5B5 /* ServiceLocator.h */,
+				EF8D79D312DA087D0064C5B5 /* ServiceLocator.m */,
+				EFFD093312F22BE700F9075B /* FileHelper.h */,
+				EFFD093412F22BE700F9075B /* FileHelper.m */,
+			);
+			name = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -401,6 +414,7 @@
 				EFFD085312F0C8FA00F9075B /* FavoritesMananger.m in Sources */,
 				EFFD08B512F21BBC00F9075B /* GetAllEpisodes.pb.m in Sources */,
 				EFFD08B612F21BBC00F9075B /* ProtocolTypes.pb.m in Sources */,
+				EFFD093512F22BE700F9075B /* FileHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

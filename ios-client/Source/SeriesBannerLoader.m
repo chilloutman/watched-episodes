@@ -9,6 +9,7 @@
 #import "SeriesBannerLoader.h"
 #import "ServiceLocator.h"
 #import "CommunicationAgent.h"
+#import "FileHelper.h"
 
 
 @interface SeriesBannerLoader () <CommunicationDelegate>
@@ -19,8 +20,6 @@
 - (void)storeBannerData:(NSData *)bannerData bannerPath:(NSString *)bannerPath;
 - (void)loadSeriesBannerFromServer:(NSString *)bannerPath;
 - (NSString *)cachePathForBanner:(NSString *)bannerPath;
-- (NSString *)bannersCachePath;
-- (BOOL)createDirectoryAtPath:(NSString *)path;
 
 @end
 
@@ -57,27 +56,13 @@
 }
 
 - (NSString *)cachePathForBanner:(NSString *)bannerPath {
-	NSString *bannersDirectory= [self bannersCachePath];
+	NSString *bannersDirectory= [FileHelper cachesDirectoryNamed:@"banners"];
 	NSString *bannerSubDirectory= [bannersDirectory stringByAppendingPathComponent:[bannerPath stringByDeletingLastPathComponent]];
-	if ([self createDirectoryAtPath:bannerSubDirectory]) {
+	if ([FileHelper createDirectoryAtPath:bannerSubDirectory]) {
 		return [bannersDirectory stringByAppendingPathComponent:bannerPath];
 	} else {
 		return nil;
 	}
-}
-
-- (NSString *)bannersCachePath {
-	NSString *cachesDirectory= [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-	NSString *bannersDirectory= [cachesDirectory stringByAppendingPathComponent:@"banners"];
-	if ([self createDirectoryAtPath:bannersDirectory]) {
-		return bannersDirectory;
-	} else {
-		return nil;
-	}
-}
-
-- (BOOL)createDirectoryAtPath:(NSString *)path {
-	return [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
 }
 
 #pragma mark CommunicationDelegate
