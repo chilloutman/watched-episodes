@@ -7,6 +7,7 @@ appengine-generated/*
 classes/*
 
 # Xcode user data & build directory
+xcuserdata
 *.pbxuser
 *.mode?v?
 *.perspectivev?
