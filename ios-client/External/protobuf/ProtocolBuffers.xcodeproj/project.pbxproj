@@ -721,7 +721,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = CommandLineTests;
-				SDKROOT = macosx10.5;
+				SDKROOT = "";
 			};
 			name = Debug;
 		};
@@ -753,7 +753,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = CommandLineTests;
-				SDKROOT = macosx10.5;
+				SDKROOT = "";
 				ZERO_LINK = NO;
 			};
 			name = Release;
