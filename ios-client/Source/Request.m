@@ -28,7 +28,7 @@
 @synthesize url, delegate, protobuf, requestId;
 
 - (id)initWithURL:(NSURL *)u delegate:(id<CommunicationDelegate>)d {
-	if (self= [super init]) {
+	if ((self = [super init]) != nil) {
 		self.url= u;
 		self.delegate= d;
 	}

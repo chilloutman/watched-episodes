@@ -22,7 +22,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	UITabBarItem *tabBarItem= [[[UITabBarItem alloc] initWithTitle:@"Find" image:[UIImage imageNamed:@"Find"] tag:0] autorelease];
 	NavigationControllerTab *find= [NavigationControllerTab controllerWithRootController:[SearchSeriesViewController class]
-																			  tabBarItem:tabBarItem];
+                                                                              tabBarItem:tabBarItem];
 	tabBarItem= [[[UITabBarItem alloc] initWithTitle:@"Favorites" image:[UIImage imageNamed:@"Heart"] tag:1] autorelease];
 	NavigationControllerTab *favs= [NavigationControllerTab controllerWithRootController:[FavoritesViewController class]
 																			  tabBarItem:tabBarItem];

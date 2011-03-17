@@ -27,7 +27,7 @@
 @synthesize favoriteSeries;
 
 - (id)init {
-	if (self= [super init]) {
+	if ((self= [super init]) != nil) {
 		self.favoriteSeries= [NSMutableDictionary dictionary];
 		[self loadFavoritesFromFilessystem];
 	}
@@ -40,7 +40,7 @@
 	NSDirectoryEnumerator *dirEnum= [fileManager enumeratorAtPath:seriesDirectory];
 	
 	NSString *file;
-	while (file= [dirEnum nextObject]) {
+	while ((file= [dirEnum nextObject]) != nil) {
 		if ([[file pathExtension] isEqualToString:@"series"]) {
 			PBSeries *series= [PBSeries parseFromData:[fileManager contentsAtPath:[seriesDirectory stringByAppendingPathComponent:file]]];
 			[self.favoriteSeries setObject:series forKey:series.seriesId];
