@@ -23,6 +23,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>getAllEpisodes</servlet-name>
+		<servlet-class>watchedepisodes.servlets.GetAllEpisodesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>getAllEpisodes</servlet-name>
+		<url-pattern>/getAllEpisodes</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>checktvdb</servlet-name>
 		<servlet-class>watchedepisodes.servlets.CheckTVDBServlet</servlet-class>
 	</servlet>

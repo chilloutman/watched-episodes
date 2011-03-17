@@ -9,6 +9,7 @@
 #import "SeriesDetailViewController.h"
 #import "FavoritesMananger.h"
 
+
 @interface SeriesDetailViewController ()
 
 - (void)resetUI;

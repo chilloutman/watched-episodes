@@ -66,7 +66,7 @@
 }
 
 - (void)handleHTTPError:(NSInteger)errorCode {
-	// TODO
+	NSLog(@"HTTP Error: %d", errorCode);
 }
 
 - (void)requestSucceded:(NSData *)data {

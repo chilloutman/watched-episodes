@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CommunicationDelegate.h"
 
 
 @protocol SeriesBannerLoaderDelegate 

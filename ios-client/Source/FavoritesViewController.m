@@ -9,6 +9,7 @@
 #import "FavoritesViewController.h"
 #import "FavoritesMananger.h"
 #import "SeriesDetailViewController.h"
+#import "EpisodesListViewController.h"
 
 
 @interface FavoritesViewController ()
@@ -122,8 +123,14 @@
 */
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.navigationController pushViewController:self.seriesController animated:YES];
-	[self.seriesController displayDetailsForSeries:[favoritesManager.allFavoriteSeries objectAtIndex:indexPath.row]];
+//	[self.navigationController pushViewController:self.seriesController animated:YES];
+//	[self.seriesController displayDetailsForSeries:[favoritesManager.allFavoriteSeries objectAtIndex:indexPath.row]];
+	
+	EpisodesListViewController *list = [[EpisodesListViewController alloc] init];
+	[self.navigationController pushViewController:list animated:YES];
+	[list displayEpisodesForSeriesWithId:[[favoritesManager.allFavoriteSeries objectAtIndex:indexPath.row] seriesId]];
+	[list release];
+	
 }
 
 #pragma mark -
