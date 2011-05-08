@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import watchedepisodes.entities.SeriesFragment;
 import watchedepisodes.servlets.protocols.ProtocolFactory;
-import watchedepisodes.thetvdb.TVDB;
-import watchedepisodes.thetvdb.TVDBException;
+import watchedepisodes.thetvdbapi.TVDB;
+import watchedepisodes.thetvdbapi.TVDBException;
 import watchedepisodes.tools.ServiceLocator;
 
 import com.google.protobuf.GeneratedMessage;

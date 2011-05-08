@@ -1,4 +1,4 @@
-package watchedepisodes.thetvdb;
+package watchedepisodes.thetvdbapi;
 
 import chilloutman.xmlparser.SAXHandler;
 

@@ -16,7 +16,7 @@ abstract class AbstractServlet extends HttpServlet {
 	String getLanguage (HttpServletRequest request) {
 		String language= request.getParameter("lang");
 		if (language == null) {
-			language= "en";
+			language = "en";
 		}
 		return language;
 	}

@@ -1,13 +1,16 @@
 package watchedepisodes.tools;
 
 import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 
-import watchedepisodes.thetvdb.TVDB;
+import watchedepisodes.DataManager;
+import watchedepisodes.thetvdbapi.TVDB;
 
 public abstract class ServiceLocator {
-	private static final TVDB tvdb= new TVDB("0629B785CE550C8D");
-	private static final PersistenceManagerFactory pmf= JDOHelper.getPersistenceManagerFactory("transactions-optional");
+	private static final TVDB tvdb = new TVDB("0629B785CE550C8D");
+	private static final PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("transactions-optional");
+	private static final DataManager dataManager = new DataManager();
 	
 	private ServiceLocator() { }
 	
@@ -15,7 +18,11 @@ public abstract class ServiceLocator {
 		return tvdb;
 	}
 	
-	public static PersistenceManagerFactory getPersistenceManagerFactory () {
-		return pmf;
+	public static PersistenceManager getPersistenceManager () {
+		return pmf.getPersistenceManager();
+	}
+	
+	public static DataManager getDataManager () {
+		return dataManager;
 	}
 }

@@ -1,4 +1,4 @@
-package watchedepisodes.thetvdb.xmlparser;
+package watchedepisodes.thetvdbapi.xmlparser;
 
 import java.io.IOException;
 import java.io.InputStream;

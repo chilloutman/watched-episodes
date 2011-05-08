@@ -1,12 +1,12 @@
-package watchedepisodes.thetvdb;
+package watchedepisodes.thetvdbapi;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import watchedepisodes.thetvdb.xmlparser.ParseException;
-import watchedepisodes.thetvdb.xmlparser.TVDBParser;
+import watchedepisodes.thetvdbapi.xmlparser.ParseException;
+import watchedepisodes.thetvdbapi.xmlparser.TVDBParser;
 
 class RequestAgent {
 	

@@ -1,4 +1,4 @@
-package watchedepisodes.thetvdb;
+package watchedepisodes.thetvdbapi;
 
 import org.xml.sax.helpers.DefaultHandler;
 

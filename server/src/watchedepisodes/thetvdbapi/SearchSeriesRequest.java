@@ -1,11 +1,11 @@
-package watchedepisodes.thetvdb;
+package watchedepisodes.thetvdbapi;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
 import watchedepisodes.entities.SeriesFragment;
-import watchedepisodes.thetvdb.xmlparser.SearchResultsHandler;
+import watchedepisodes.thetvdbapi.xmlparser.SearchResultsHandler;
 
 class SearchSeriesRequest extends AbstractRequest<List<SeriesFragment>> {
 	

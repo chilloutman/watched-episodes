@@ -1,7 +1,7 @@
-package watchedepisodes.thetvdb;
+package watchedepisodes.thetvdbapi;
 
 import watchedepisodes.entities.Series;
-import watchedepisodes.thetvdb.xmlparser.SeriesHandler;
+import watchedepisodes.thetvdbapi.xmlparser.SeriesHandler;
 
 class GetSeriesRequest extends AbstractRequest<Series> {
 	

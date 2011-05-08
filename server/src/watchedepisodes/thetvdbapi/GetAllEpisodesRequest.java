@@ -1,9 +1,9 @@
-package watchedepisodes.thetvdb;
+package watchedepisodes.thetvdbapi;
 
 import java.util.List;
 
 import watchedepisodes.entities.Episode;
-import watchedepisodes.thetvdb.xmlparser.EpisodesHandler;
+import watchedepisodes.thetvdbapi.xmlparser.EpisodesHandler;
 
 class GetAllEpisodesRequest extends AbstractRequest<List<Episode>> {
 	

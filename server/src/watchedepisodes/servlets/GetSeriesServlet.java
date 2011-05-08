@@ -1,18 +1,13 @@
 package watchedepisodes.servlets;
 
-import javax.jdo.JDOObjectNotFoundException;
-import javax.jdo.PersistenceManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import watchedepisodes.entities.Series;
 import watchedepisodes.servlets.protocols.ProtocolFactory;
-import watchedepisodes.thetvdb.TVDB;
-import watchedepisodes.thetvdb.TVDBException;
+import watchedepisodes.thetvdbapi.TVDBException;
 import watchedepisodes.tools.ServiceLocator;
 
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
 import com.google.protobuf.GeneratedMessage;
 
 @SuppressWarnings("serial")
@@ -22,49 +17,30 @@ public class GetSeriesServlet extends AbstractServlet {
 	private String language;
 	
 	public void doGet (HttpServletRequest request, HttpServletResponse response) {
-		id= request.getParameter("id");
-		language= getLanguage(request);
+		id = request.getParameter("id");
+		language = getLanguage(request);
 		
-		PersistenceManager pm= ServiceLocator.getPersistenceManagerFactory().getPersistenceManager();
-		Key key= KeyFactory.createKey(Series.class.getSimpleName(), id + language);
-		
-		Series series= null;
-		
+		Series series;
 		try {
-			series= pm.getObjectById(Series.class, key);
-		} catch (JDOObjectNotFoundException e) {
-			try {
-				series= fetchSeriesFromTVDB();
-				pm.makePersistent(series);
-			} catch (TVDBException e1) {
-				e1.printStackTrace();
-				response.setStatus(500);
-			}
-		}
-		
-		pm.close();
-		writeResponse(request, response, series);
-	}
-	
-	private Series fetchSeriesFromTVDB () throws TVDBException {
-		TVDB tvdb= ServiceLocator.getTVDBInstance();
-		return tvdb.getSeries(id, language);
+			series = ServiceLocator.getDataManager().getSeries(id, language);
+			writeResponse(request, response, series);
+		} catch (TVDBException e) {
+			e.printStackTrace();
+			response.setStatus(500);
+		}		
 	}
 	
 	private void writeResponse (HttpServletRequest request, HttpServletResponse response, Series series) {
 		if (clientAcceptsProtocolBuffers(request)) {
-			writeProtobufResponse(response, getProtocolMessage(series));
+			GeneratedMessage message = ProtocolFactory.buildGetSeriesProto(series);
+			writeProtobufResponse(response, message);
 		} else {
 			writeHtmlResponse(response, getHtml(series));
 		}
 	}
 	
-	private GeneratedMessage getProtocolMessage (Series series) {
-		return ProtocolFactory.buildGetSeriesProto(series);
-	}
-	
 	private String getHtml (Series series) {
-		StringBuilder html= new StringBuilder();
+		StringBuilder html = new StringBuilder();
 		
 		if (series == null) {
 			html.append("Could not get series with this id:" + id);
