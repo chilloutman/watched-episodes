@@ -17,6 +17,7 @@ class RequestAgent {
 		try {
 			parser.parse(xml, request.getHandler());
 		} catch (ParseException e) {
+			e.printStackTrace();
 			throw new TVDBException();
 		} finally {
 			try {

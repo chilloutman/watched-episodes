@@ -4,7 +4,7 @@ import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 
-import watchedepisodes.DataManager;
+import watchedepisodes.dao.DataManager;
 import watchedepisodes.thetvdbapi.TVDB;
 
 public abstract class ServiceLocator {

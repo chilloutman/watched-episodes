@@ -3,9 +3,9 @@ package watchedepisodes.servlets;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import watchedepisodes.dao.DataAccessException;
 import watchedepisodes.entities.Series;
 import watchedepisodes.servlets.protocols.ProtocolFactory;
-import watchedepisodes.thetvdbapi.TVDBException;
 import watchedepisodes.tools.ServiceLocator;
 
 import com.google.protobuf.GeneratedMessage;
@@ -24,10 +24,9 @@ public class GetSeriesServlet extends AbstractServlet {
 		try {
 			series = ServiceLocator.getDataManager().getSeries(id, language);
 			writeResponse(request, response, series);
-		} catch (TVDBException e) {
-			e.printStackTrace();
+		} catch (DataAccessException e) {
 			response.setStatus(500);
-		}		
+		}
 	}
 	
 	private void writeResponse (HttpServletRequest request, HttpServletResponse response, Series series) {

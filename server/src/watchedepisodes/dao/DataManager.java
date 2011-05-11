@@ -1,4 +1,4 @@
-package watchedepisodes;
+package watchedepisodes.dao;
 
 import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
@@ -11,20 +11,28 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
 public class DataManager {
+	private PersistenceManager pm = null;
 	
-	public Series getSeries (String id, String language) throws TVDBException {
-		PersistenceManager pm = ServiceLocator.getPersistenceManager();
+	public Series getSeries (String id, String language) throws DataAccessException {
+		pm = ServiceLocator.getPersistenceManager();
 		Key key= KeyFactory.createKey(Series.class.getSimpleName(), id + language);
-		Series series = null;
 		
 		try {
-			series = pm.getObjectById(Series.class, key);
+			return pm.getObjectById(Series.class, key);
 		} catch (JDOObjectNotFoundException e) {
-			series = ServiceLocator.getTVDBInstance().getSeries(id, language);
-			pm.makePersistent(series);
+			return fetchUncachedSeries(id, language);
+		} finally {
+			pm.close();
 		}
-		
-		pm.close();
-		return series;
+	}
+	
+	private Series fetchUncachedSeries (String id, String language) throws DataAccessException {
+		Series series = null;
+		try {
+			series = ServiceLocator.getTVDBInstance().getSeries(id, language);
+		} catch (TVDBException e) {
+			throw new DataAccessException();
+		}
+		return pm.makePersistent(series);
 	}
 }
