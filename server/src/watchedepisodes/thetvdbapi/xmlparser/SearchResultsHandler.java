@@ -23,7 +23,7 @@ public class SearchResultsHandler extends SAXHandler<List<SeriesFragment>> {
 	@Override
 	protected void willStartElement (String elementName) {
 		if (elementName == rootName) {
-			currentSeries= new SeriesFragment();
+			currentSeries = new SeriesFragment();
 			getResult().add(currentSeries);
 		}
 	}

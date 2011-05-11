@@ -18,10 +18,10 @@ public class TVDBParser {
 		try {
 			getParser().parse(xml, handler);
 		} catch (SAXException e) {
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 			throw new ParseException();
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 			throw new ParseException();
 		}
 	}
@@ -30,12 +30,12 @@ public class TVDBParser {
 		if (parser == null) {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			try {
-				parser= factory.newSAXParser();
+				parser = factory.newSAXParser();
 			} catch (ParserConfigurationException e) {
-				e.printStackTrace();
+				System.err.println(e.getMessage());
 				throw new ParseException();
 			} catch (SAXException e) {
-				e.printStackTrace();
+				System.err.println(e.getMessage()); 
 				throw new ParseException();
 			}
 		} else {

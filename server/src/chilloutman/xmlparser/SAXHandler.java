@@ -18,10 +18,10 @@ public abstract class SAXHandler<ResultType> extends DefaultHandler {
 	
 	@Override
 	public void startDocument () throws SAXException {
-		startTime= System.currentTimeMillis();
-		result= getNewResult();
-		elementStack= new Stack<XMLElement>();
-		currentValue= new StringBuilder();
+		startTime = System.currentTimeMillis();
+		result = getNewResult();
+		elementStack = new Stack<XMLElement>();
+		currentValue = new StringBuilder();
 	}
 	
 	protected abstract ResultType getNewResult () throws SAXException;
@@ -29,7 +29,7 @@ public abstract class SAXHandler<ResultType> extends DefaultHandler {
 	@Override
 	public void startElement (String uri, String localName, String qName, Attributes atts) throws SAXException {
 		willStartElement(qName);
-		XMLElement element= new XMLElement();
+		XMLElement element = new XMLElement();
 		element.setName(qName);
 		elementStack.push(element);
 	}
@@ -39,16 +39,16 @@ public abstract class SAXHandler<ResultType> extends DefaultHandler {
 	@Override
 	public void characters (char[] ch, int start, int length) throws SAXException {
 		if (!elementStack.empty()) {
-			String content= new String(ch).substring(start, start + length);
+			String content = new String(ch).substring(start, start + length);
 			currentValue.append(content);
 		} else {
-			System.out.println("Does this ever happen?");
+			System.err.println("XML-element named \"" + elementStack.peek().getName() + "\" has no content!");
 		}
 	}
 	
 	@Override
 	public void endElement (String uri, String localName, String qName) throws SAXException {
-		XMLElement element= elementStack.pop();
+		XMLElement element = elementStack.pop();
 		element.setContent(currentValue.toString().trim());
 		currentValue.delete(0, currentValue.length());
 		
@@ -58,7 +58,6 @@ public abstract class SAXHandler<ResultType> extends DefaultHandler {
 		
 		parseElement(element);
 		finishedElement(element.getName());
-		//element.reset();
 	}
 	
 	protected abstract void parseElement (XMLElement element) throws SAXException;
@@ -67,7 +66,7 @@ public abstract class SAXHandler<ResultType> extends DefaultHandler {
 	@Override
 	public void endDocument () throws SAXException {
 		parsingEnded();
-		System.out.println("TIME: " + ((System.currentTimeMillis() - startTime)));
+		System.out.println("Parsing time: " + (System.currentTimeMillis() - startTime) +" ms");
 	}
 	
 	protected abstract void parsingEnded () throws SAXException;

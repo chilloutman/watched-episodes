@@ -15,7 +15,7 @@ import com.google.appengine.api.datastore.Text;
 public class EpisodesHandler extends SAXHandler<List<Episode>> {
 
 	private Episode currentEpisode;
-	private final String rootElement= "Episode";
+	private final String rootElementName= "Episode";
 	private boolean skipCurrentEpisode;
 
 	@Override
@@ -24,9 +24,9 @@ public class EpisodesHandler extends SAXHandler<List<Episode>> {
 	}
 
 	protected void willStartElement (String elementName) throws SAXException {
-		if (elementName == rootElement) {
-			currentEpisode= new Episode();
-			skipCurrentEpisode= false;
+		if (elementName == rootElementName) {
+			currentEpisode = new Episode();
+			skipCurrentEpisode = false;
 		}
 	}
 
@@ -36,7 +36,7 @@ public class EpisodesHandler extends SAXHandler<List<Episode>> {
 			return;
 		}
 
-		if (element.getParentName() == rootElement) {
+		if (element.getParentName() == rootElementName) {
 			if (element.getName() == "SeasonNumber") {
 				int seasonNumber= Integer.parseInt(element.getContent());
 				if (seasonNumber == 0) {
@@ -45,7 +45,7 @@ public class EpisodesHandler extends SAXHandler<List<Episode>> {
 					currentEpisode.setSeasonNumber(seasonNumber);
 				}
 			} else if (element.getName() == "EpisodeNumber") {
-				int episodeNumber= Integer.parseInt(element.getContent());
+				int episodeNumber = Integer.parseInt(element.getContent());
 				if (episodeNumber == 0) {
 					skipCurrentEpisode= true;
 				} else {
@@ -76,7 +76,7 @@ public class EpisodesHandler extends SAXHandler<List<Episode>> {
 
 	@Override
 	protected void finishedElement (String elementName) throws SAXException {
-		if (!skipCurrentEpisode && elementName == rootElement) {
+		if (!skipCurrentEpisode && elementName == rootElementName) {
 			try {
 				currentEpisode.generateKey();
 				getResult().add(currentEpisode);
