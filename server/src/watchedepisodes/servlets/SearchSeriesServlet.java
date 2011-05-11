@@ -45,7 +45,7 @@ public class SearchSeriesServlet extends AbstractServlet {
 	}
 
 	private GeneratedMessage getProtocolMessage (List<SeriesFragment> results) {
-		return ProtocolFactory.buildSearchResultsProto(results);
+		return ProtocolFactory.buildSearchSeriesResponse(results);
 	}
 	
 	private String getHtml (List<SeriesFragment> results) {

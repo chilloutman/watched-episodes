@@ -66,7 +66,10 @@
 }
 
 - (void)handleHTTPError:(NSInteger)errorCode {
-	NSLog(@"HTTP Error: %d", errorCode);
+	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Server Error"
+													message:[NSString stringWithFormat:@"The Server Returned the following error code: %d", errorCode]
+												   delegate:nil cancelButtonTitle:@"OMG!" otherButtonTitles:nil];
+	[[alertView autorelease] show];
 }
 
 - (void)requestSucceded:(NSData *)data {

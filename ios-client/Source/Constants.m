@@ -9,7 +9,7 @@
 #import "TargetConditionals.h"
 
 #if TARGET_IPHONE_SIMULATOR
-NSString * const ServerURL= @"http://localhost:8080";
+NSString * const ServerURL= @"http://localhost:8888";
 #else
 NSString * const ServerURL= @"http://watched-episodes.appspot.com";
 #endif

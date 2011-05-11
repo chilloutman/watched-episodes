@@ -15,23 +15,25 @@ public class GetSeriesServlet extends AbstractServlet {
 	
 	private String id;
 	private String language;
+	private boolean protobuf;
 	
 	public void doGet (HttpServletRequest request, HttpServletResponse response) {
 		id = request.getParameter("id");
 		language = getLanguage(request);
+		protobuf = clientAcceptsProtocolBuffers(request);
 		
 		Series series;
 		try {
 			series = ServiceLocator.getDataManager().getSeries(id, language);
-			writeResponse(request, response, series);
+			writeResponse(response, series);
 		} catch (DataAccessException e) {
 			response.setStatus(500);
 		}
 	}
 	
-	private void writeResponse (HttpServletRequest request, HttpServletResponse response, Series series) {
-		if (clientAcceptsProtocolBuffers(request)) {
-			GeneratedMessage message = ProtocolFactory.buildGetSeriesProto(series);
+	private void writeResponse (HttpServletResponse response, Series series) {
+		if (protobuf) {
+			GeneratedMessage message = ProtocolFactory.buildGetSeriesResponse(series);
 			writeProtobufResponse(response, message);
 		} else {
 			writeHtmlResponse(response, getHtml(series));
