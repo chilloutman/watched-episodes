@@ -2,6 +2,11 @@ syntax: glob
 
 # GAE
 appengine-generated/*
+WEB-INF/lib/appengine-*.jar
+WEB-INF/lib/datanucleus-*.jar
+WEB-INF/lib/geronimo-*.jar
+WEB-INF/lib/jdo2-*.jar
+WEB-INF/lib/jsr107cache-*.jar
 
 # Java
 classes/*
