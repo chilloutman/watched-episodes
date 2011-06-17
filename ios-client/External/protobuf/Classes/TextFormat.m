@@ -16,6 +16,13 @@
 
 #import "Utilities.h"
 
+BOOL allZeroes(NSString* string);
+BOOL isOctal(unichar c);
+BOOL isDecimal(unichar c);
+BOOL isHex(unichar c);
+int32_t digitValue(unichar c);
+int32_t digitValue(unichar c);
+
 @implementation PBTextFormat
 
 
