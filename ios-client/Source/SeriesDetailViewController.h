@@ -17,6 +17,7 @@
 	SeriesBannerLoader *bannerLoader;
 	PBSeries *currentSeries;
 	FavoritesMananger *favorites;
+	BOOL showsFaveButton;
 	
 	UILabel *nameLabel;
 	UITextView *overviewView;
@@ -30,6 +31,8 @@
 @property (nonatomic, retain) IBOutlet UIImageView *bannerView;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *spindicator;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *faveButton;
+
+@property (nonatomic, assign) BOOL showsFaveButton;
 
 - (IBAction)faveSeries;
 

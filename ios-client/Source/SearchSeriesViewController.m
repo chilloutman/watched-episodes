@@ -54,6 +54,7 @@
 - (SeriesDetailViewController *)seriesController {
 	if (!seriesController) {
 		seriesController= [[SeriesDetailViewController alloc] init];
+		seriesController.showsFaveButton = YES;
 	}
 	return seriesController;
 }

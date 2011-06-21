@@ -25,7 +25,7 @@
 
 @implementation SeriesDetailViewController
 
-@synthesize seriesLoader, bannerLoader, currentSeries;
+@synthesize seriesLoader, bannerLoader, currentSeries, showsFaveButton;
 @synthesize nameLabel, overviewView, bannerView, spindicator, faveButton;
 
 - (NSString *)nibName {
@@ -49,11 +49,14 @@
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-	self.navigationItem.rightBarButtonItem= self.faveButton;
-	[self updateFaveButton];
+	self.title = @"Info";
+	if (showsFaveButton) {
+		self.navigationItem.rightBarButtonItem = self.faveButton;
+		[self updateFaveButton];
+	}
+	
 	[self resetUI];
-	favorites= [ServiceLocator singletonForClass:[FavoritesMananger class]];
+	favorites = [ServiceLocator singletonForClass:[FavoritesMananger class]];
 }
 
 - (void)displayDetailsForSeriesWithId:(NSString *)seriesId {

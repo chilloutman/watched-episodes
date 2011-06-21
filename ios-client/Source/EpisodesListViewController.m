@@ -7,9 +7,11 @@
 //
 
 #import "EpisodesListViewController.h"
+#import "SeriesDetailViewController.h"
 
 @interface EpisodesListViewController () <EpisodesLoaderDelegate>
 
+@property (nonatomic, copy) NSString *currentSeriesId;
 @property (nonatomic, retain) EpisodesLoader *episodesLoader;
 @property (nonatomic, retain) NSArray *episodes;
 
@@ -18,10 +20,21 @@
 
 @implementation EpisodesListViewController
 
-@synthesize episodesLoader, episodes;
+@synthesize currentSeriesId, episodesLoader, episodes;
 
 - (void)viewDidLoad {
-	
+	self.title = @"Episodes";
+	self.navigationItem.backBarButtonItem.title = @"Episodes";
+	UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithTitle:@"Series Info" style:UIBarButtonItemStyleBordered target:self action:@selector(showSeriesInfo)];
+	self.navigationItem.rightBarButtonItem = infoButton;
+	[infoButton release];
+}
+
+- (void)showSeriesInfo {
+	SeriesDetailViewController *seriesInfo = [[SeriesDetailViewController alloc] init];
+	[seriesInfo displayDetailsForSeriesWithId:self.currentSeriesId];
+	[self.navigationController pushViewController:seriesInfo animated:YES];
+	[seriesInfo release];
 }
 
 - (EpisodesLoader *)episodesLoader {
@@ -33,6 +46,7 @@
 }
 
 - (void)displayEpisodesForSeriesWithId:(NSString *)seriesId {
+	self.currentSeriesId = seriesId;
 	[self.episodesLoader loadAllEpisodesForSeries:seriesId];
 }
 

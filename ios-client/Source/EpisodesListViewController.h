@@ -10,6 +10,7 @@
 #import "EpisodesLoader.h"
 
 @interface EpisodesListViewController : UITableViewController {
+	NSString *currentSeriesId;
 	EpisodesLoader *episodesLoader;
 	NSArray *episodes;
 }
