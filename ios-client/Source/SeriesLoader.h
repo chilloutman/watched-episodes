@@ -7,17 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CommunicationDelegate.h"
+#import "AbstractLoader.h"
 #import "GetSeries.pb.h"
 
+
 @protocol SeriesLoaderDelegate
-@required
+
 - (void)loadedSeries:(PBSeries *)updatedSeries;
 
 @end
 
 
-@interface SeriesLoader : NSObject<CommunicationDelegate> {
+@interface SeriesLoader : AbstractLoader {
 	id<SeriesLoaderDelegate> delegate;
 	PBSeries *series;
 }

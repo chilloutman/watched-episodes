@@ -7,18 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "AbstractLoader.h"
 
 @protocol SeriesBannerLoaderDelegate 
-@required
+
 - (void)loadedSeriesBanner:(UIImage *)banner;
 
 @end
 
 
-@interface SeriesBannerLoader : NSObject {
+@interface SeriesBannerLoader : AbstractLoader {
 	id <SeriesBannerLoaderDelegate> delegate;
 	UIImage *banner;
+	NSString *currentBannerPath;
 }
 
 @property (nonatomic, assign) id<SeriesBannerLoaderDelegate> delegate;

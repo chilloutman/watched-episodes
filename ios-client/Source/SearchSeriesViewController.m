@@ -7,14 +7,14 @@
 //
 
 #import "SearchSeriesViewController.h"
-#import "SearchSeriesModel.h"
+#import "SearchLoader.h"
 #import "SeriesDetailViewController.h"
 
 
 @interface SearchSeriesViewController ()
 
 @property (nonatomic, retain) NSArray *searchResults;
-@property (nonatomic, retain) SearchSeriesModel *model;
+@property (nonatomic, retain) SearchLoader *model;
 @property (nonatomic, retain) SeriesDetailViewController *seriesController;
 @property (nonatomic, retain) NSString *lastSearchString;
 
@@ -43,9 +43,9 @@
 	return @"SearchSeries";
 }
 
-- (SearchSeriesModel *)model {
+- (SearchLoader *)model {
 	if (!model) {
-		model= [[SearchSeriesModel alloc] init];
+		model= [[SearchLoader alloc] init];
 		model.delegate= self;
 	}
 	return model;

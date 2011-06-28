@@ -1,5 +1,5 @@
 //
-//  SearchSeriesModel.h
+//  SearchLoader.h
 //  WatchedEpisodes
 //
 //  Created by Lucas Neiva on 1/9/11.
@@ -7,17 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CommunicationDelegate.h"
 #import "SearchSeries.pb.h"
+#import "AbstractLoader.h"
 
 @protocol SearchSeriesModelDelegate
-@required
+
 - (void)searchResultsUpdated:(NSArray *)searchResults;
 
 @end
 
 
-@interface SearchSeriesModel : NSObject <CommunicationDelegate> {
+@interface SearchLoader : AbstractLoader {
 	id<SearchSeriesModelDelegate> delegate;
 	NSArray *seachResults;
 }

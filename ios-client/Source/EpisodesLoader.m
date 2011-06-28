@@ -3,15 +3,14 @@
 //  WatchedEpisodes
 //
 //  Created by Lucas Neiva on 3/17/11.
-//  Copyright 2011 Ergon Informatik AG. All rights reserved.
+//  Copyright 2011 Lucas Neiva Informatik AG. All rights reserved.
 //
 
 #import "EpisodesLoader.h"
 #import	"Constants.h"
-#import "CommunicationAgent.h"
 #import "GetAllEpisodes.pb.h"
 
-@interface EpisodesLoader () <CommunicationDelegate>
+@interface EpisodesLoader () <ProtocolBuffersFetcherDelegate>
 
 @property (nonatomic, retain) NSArray *episodes;
 
@@ -24,22 +23,17 @@
 
 - (void)loadAllEpisodesForSeries:(NSString *)seriesId {
 	self.episodes = nil;
-	CommunicationAgent *com = [ServiceLocator singletonForClass:[CommunicationAgent class]];
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllEpisodes?id=%@", ServerURL, seriesId]];
-	[com sendProtocolBuffersGETRequestWithURL:url delegate:self];
+	[self.fetcher sendProtocolBuffersRequestWithURLString:[NSString stringWithFormat:@"%@/getAllEpisodes?id=%@", ServerURL, seriesId] delegate:self];
 }
 
-#pragma mark CommunicationDelegate
+#pragma mark ProtocolBuffersFetcherDelegate
 
-- (void)receivedResponse:(NSData *)responseData requestId:(NSString *)requestId {
-	self.episodes = [GetAllEpisodesResponse parseFromData:responseData].episodesList;
-}
-
-- (void)requestDidSucceed:(NSString *)requestId {
+- (void)processData:(NSData *)newData {
+	self.episodes = [GetAllEpisodesResponse parseFromData:newData].episodesList;
 	[self.delegate loadedEpisodes:self.episodes];
 }
 
-- (void)requestDidFail:(NSString *)requestId {
+- (void)connectionFailed {
 	self.episodes = nil;
 }
 

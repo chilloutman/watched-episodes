@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SearchSeriesModel.h"
+#import "SearchLoader.h"
 
 @class SeriesDetailViewController;
 
 @interface SearchSeriesViewController : UIViewController <UISearchDisplayDelegate, SearchSeriesModelDelegate> {
-	SearchSeriesModel *model;
+	SearchLoader *model;
 	SeriesDetailViewController *seriesController;
 	NSString *lastSearchString;
 }

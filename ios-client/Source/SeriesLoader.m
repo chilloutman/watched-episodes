@@ -1,5 +1,5 @@
 //
-//  SeriesModel.m
+//  SearchLoader.m
 //  WatchedEpisodes
 //
 //  Created by Lucas Neiva on 1/21/11.
@@ -7,14 +7,10 @@
 //
 
 #import "SeriesLoader.h"
-
 #import "GetSeries.pb.h"
 
-#import "ServiceLocator.h"
-#import "CommunicationAgent.h"
 
-
-@interface SeriesLoader ()
+@interface SeriesLoader () <ProtocolBuffersFetcherDelegate>
 
 @property (nonatomic, retain) PBSeries *series;
 
@@ -27,30 +23,24 @@
 @synthesize series;
 
 - (void)loadSeries:(NSString *)seriesId {
-	NSURL *url= [NSURL URLWithString:[NSString stringWithFormat:@"%@/getSeries?id=%@", ServerURL, seriesId]];
-	
-	CommunicationAgent *com= [ServiceLocator singletonForClass:[CommunicationAgent class]];
-	[com sendProtocolBuffersGETRequestWithURL:url delegate:self];
+	[self.fetcher sendProtocolBuffersRequestWithURLString:[NSString stringWithFormat:@"%@/getSeries?id=%@", ServerURL, seriesId] delegate:self];
 }
 
-#pragma mark CommunicationDelegate
+#pragma mark ProtocolBuffersFetcherDelegate
 
-- (void)receivedResponse:(NSData *)responseData requestId:(NSString *)requestId {
-	self.series= [GetSeriesResponse parseFromData:responseData].series;
-}
-
-- (void)requestDidSucceed:(NSString *)requestId {
+- (void)processData:(NSData *)newData {
+	self.series = [GetSeriesResponse parseFromData:newData].series;
 	[self.delegate loadedSeries:self.series];
 }
 
-- (void)requestDidFail:(NSString *)requestId {
+- (void)connectionFailed {
 	self.series= nil;
 }
 
 #pragma mark -
 
 - (void)dealloc {
-	self.series= nil;
+	self.series = nil;
 	[super dealloc];
 }
 

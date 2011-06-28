@@ -15,6 +15,9 @@
 		EF12EFA112EC90C2007E380E /* SeriesBannerLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF12EFA012EC90C2007E380E /* SeriesBannerLoader.m */; };
 		EF2AD7FB13327AD500585E3A /* EpisodesLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2AD7FA13327AD400585E3A /* EpisodesLoader.m */; };
 		EF2AD7FE1332800A00585E3A /* EpisodesListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2AD7FD1332800A00585E3A /* EpisodesListViewController.m */; };
+		EF36EDCB13BA37E000AEABC1 /* ProtocolBuffersFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = EF36EDCA13BA37E000AEABC1 /* ProtocolBuffersFetcher.m */; };
+		EF36EDD113BA496D00AEABC1 /* AbstractLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF36EDD013BA496D00AEABC1 /* AbstractLoader.m */; };
+		EF36EDD313BA579200AEABC1 /* SearchLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF36EDD213BA579200AEABC1 /* SearchLoader.m */; };
 		EF4AD01D12EA22A60058F78E /* SeriesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4AD01B12EA22A60058F78E /* SeriesDetailViewController.m */; };
 		EF4AD01E12EA22A60058F78E /* SeriesDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF4AD01C12EA22A60058F78E /* SeriesDetail.xib */; };
 		EF4AD02612EA23BD0058F78E /* SeriesLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4AD02512EA23BD0058F78E /* SeriesLoader.m */; };
@@ -26,10 +29,7 @@
 		EF8D790512D933AB0064C5B5 /* SearchSeries.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D790412D933AB0064C5B5 /* SearchSeries.pb.m */; };
 		EF8D790E12D934030064C5B5 /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8D78F812D933800064C5B5 /* libProtocolBuffers.a */; };
 		EF8D793512D9F9AA0064C5B5 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D793412D9F9AA0064C5B5 /* Constants.m */; };
-		EF8D79B312DA02500064C5B5 /* CommunicationAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D79AF12DA02500064C5B5 /* CommunicationAgent.m */; };
-		EF8D79B412DA02500064C5B5 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D79B212DA02500064C5B5 /* Request.m */; };
 		EF8D79D412DA087D0064C5B5 /* ServiceLocator.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D79D312DA087D0064C5B5 /* ServiceLocator.m */; };
-		EF8D79F012DA0C380064C5B5 /* SearchSeriesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D79EF12DA0C380064C5B5 /* SearchSeriesModel.m */; };
 		EFFD078F12F0BE1E00F9075B /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD078E12F0BE1E00F9075B /* FavoritesViewController.m */; };
 		EFFD079512F0BE7A00F9075B /* NavigationControllerTab.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */; };
 		EFFD085312F0C8FA00F9075B /* FavoritesMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD085212F0C8FA00F9075B /* FavoritesMananger.m */; };
@@ -85,10 +85,15 @@
 		8D1107310486CEB800E47090 /* WatchedEpisodes-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "WatchedEpisodes-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		EF12EF9F12EC90C2007E380E /* SeriesBannerLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeriesBannerLoader.h; sourceTree = "<group>"; };
 		EF12EFA012EC90C2007E380E /* SeriesBannerLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeriesBannerLoader.m; sourceTree = "<group>"; };
-		EF2AD7F913327AD300585E3A /* EpisodesLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EpisodesLoader.h; sourceTree = "<group>"; };
-		EF2AD7FA13327AD400585E3A /* EpisodesLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EpisodesLoader.m; sourceTree = "<group>"; };
-		EF2AD7FC1332800A00585E3A /* EpisodesListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EpisodesListViewController.h; sourceTree = "<group>"; };
-		EF2AD7FD1332800A00585E3A /* EpisodesListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EpisodesListViewController.m; sourceTree = "<group>"; };
+		EF2AD7F913327AD300585E3A /* EpisodesLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = EpisodesLoader.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		EF2AD7FA13327AD400585E3A /* EpisodesLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EpisodesLoader.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		EF2AD7FC1332800A00585E3A /* EpisodesListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = EpisodesListViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		EF2AD7FD1332800A00585E3A /* EpisodesListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EpisodesListViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		EF36EDC913BA37E000AEABC1 /* ProtocolBuffersFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolBuffersFetcher.h; sourceTree = "<group>"; };
+		EF36EDCA13BA37E000AEABC1 /* ProtocolBuffersFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolBuffersFetcher.m; sourceTree = "<group>"; };
+		EF36EDCF13BA496D00AEABC1 /* AbstractLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AbstractLoader.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		EF36EDD013BA496D00AEABC1 /* AbstractLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AbstractLoader.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		EF36EDD213BA579200AEABC1 /* SearchLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchLoader.m; sourceTree = "<group>"; };
 		EF4AD01A12EA22A60058F78E /* SeriesDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeriesDetailViewController.h; sourceTree = "<group>"; };
 		EF4AD01B12EA22A60058F78E /* SeriesDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeriesDetailViewController.m; sourceTree = "<group>"; };
 		EF4AD01C12EA22A60058F78E /* SeriesDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeriesDetail.xib; sourceTree = "<group>"; };
@@ -110,16 +115,10 @@
 		EF8D790412D933AB0064C5B5 /* SearchSeries.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSeries.pb.m; sourceTree = "<group>"; };
 		EF8D793312D9F9AA0064C5B5 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		EF8D793412D9F9AA0064C5B5 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
-		EF8D79AE12DA02500064C5B5 /* CommunicationAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunicationAgent.h; sourceTree = "<group>"; };
-		EF8D79AF12DA02500064C5B5 /* CommunicationAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunicationAgent.m; sourceTree = "<group>"; };
-		EF8D79B012DA02500064C5B5 /* CommunicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunicationDelegate.h; sourceTree = "<group>"; };
-		EF8D79B112DA02500064C5B5 /* Request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Request.h; sourceTree = "<group>"; };
-		EF8D79B212DA02500064C5B5 /* Request.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Request.m; sourceTree = "<group>"; };
 		EF8D79D212DA087D0064C5B5 /* ServiceLocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceLocator.h; sourceTree = "<group>"; };
 		EF8D79D312DA087D0064C5B5 /* ServiceLocator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceLocator.m; sourceTree = "<group>"; };
 		EF8D79D512DA09530064C5B5 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
-		EF8D79EE12DA0C380064C5B5 /* SearchSeriesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSeriesModel.h; sourceTree = "<group>"; };
-		EF8D79EF12DA0C380064C5B5 /* SearchSeriesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSeriesModel.m; sourceTree = "<group>"; };
+		EF8D79EE12DA0C380064C5B5 /* SearchLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchLoader.h; sourceTree = "<group>"; };
 		EFFD078D12F0BE1E00F9075B /* FavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesViewController.h; sourceTree = "<group>"; };
 		EFFD078E12F0BE1E00F9075B /* FavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesViewController.m; sourceTree = "<group>"; };
 		EFFD079312F0BE7A00F9075B /* NavigationControllerTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationControllerTab.h; sourceTree = "<group>"; };
@@ -201,8 +200,10 @@
 		EF12EF9D12EC8FE1007E380E /* Loader */ = {
 			isa = PBXGroup;
 			children = (
-				EF8D79EE12DA0C380064C5B5 /* SearchSeriesModel.h */,
-				EF8D79EF12DA0C380064C5B5 /* SearchSeriesModel.m */,
+				EF36EDCF13BA496D00AEABC1 /* AbstractLoader.h */,
+				EF36EDD013BA496D00AEABC1 /* AbstractLoader.m */,
+				EF8D79EE12DA0C380064C5B5 /* SearchLoader.h */,
+				EF36EDD213BA579200AEABC1 /* SearchLoader.m */,
 				EF4AD02412EA23BD0058F78E /* SeriesLoader.h */,
 				EF4AD02512EA23BD0058F78E /* SeriesLoader.m */,
 				EF12EF9F12EC90C2007E380E /* SeriesBannerLoader.h */,
@@ -281,11 +282,8 @@
 		EF8D79A612DA02170064C5B5 /* Communication */ = {
 			isa = PBXGroup;
 			children = (
-				EF8D79B012DA02500064C5B5 /* CommunicationDelegate.h */,
-				EF8D79AE12DA02500064C5B5 /* CommunicationAgent.h */,
-				EF8D79AF12DA02500064C5B5 /* CommunicationAgent.m */,
-				EF8D79B112DA02500064C5B5 /* Request.h */,
-				EF8D79B212DA02500064C5B5 /* Request.m */,
+				EF36EDC913BA37E000AEABC1 /* ProtocolBuffersFetcher.h */,
+				EF36EDCA13BA37E000AEABC1 /* ProtocolBuffersFetcher.m */,
 			);
 			name = Communication;
 			sourceTree = "<group>";
@@ -366,6 +364,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Lucas Neiva";
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "WatchedEpisodes" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -446,10 +445,7 @@
 				EF8D78B912D933500064C5B5 /* NSString+URLEncoding.m in Sources */,
 				EF8D790512D933AB0064C5B5 /* SearchSeries.pb.m in Sources */,
 				EF8D793512D9F9AA0064C5B5 /* Constants.m in Sources */,
-				EF8D79B312DA02500064C5B5 /* CommunicationAgent.m in Sources */,
-				EF8D79B412DA02500064C5B5 /* Request.m in Sources */,
 				EF8D79D412DA087D0064C5B5 /* ServiceLocator.m in Sources */,
-				EF8D79F012DA0C380064C5B5 /* SearchSeriesModel.m in Sources */,
 				EF4AD01D12EA22A60058F78E /* SeriesDetailViewController.m in Sources */,
 				EF4AD02612EA23BD0058F78E /* SeriesLoader.m in Sources */,
 				EF4AD02912EA23F10058F78E /* GetSeries.pb.m in Sources */,
@@ -462,6 +458,9 @@
 				EFFD093512F22BE700F9075B /* FileHelper.m in Sources */,
 				EF2AD7FB13327AD500585E3A /* EpisodesLoader.m in Sources */,
 				EF2AD7FE1332800A00585E3A /* EpisodesListViewController.m in Sources */,
+				EF36EDCB13BA37E000AEABC1 /* ProtocolBuffersFetcher.m in Sources */,
+				EF36EDD113BA496D00AEABC1 /* AbstractLoader.m in Sources */,
+				EF36EDD313BA579200AEABC1 /* SearchLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

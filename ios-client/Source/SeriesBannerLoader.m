@@ -8,13 +8,13 @@
 
 #import "SeriesBannerLoader.h"
 #import "ServiceLocator.h"
-#import "CommunicationAgent.h"
 #import "FileHelper.h"
 
 
-@interface SeriesBannerLoader () <CommunicationDelegate>
+@interface SeriesBannerLoader () <ProtocolBuffersFetcherDelegate>
 
 @property (nonatomic, retain) UIImage *banner;
+@property (nonatomic, copy) NSString *currentBannerPath;
 
 - (BOOL)loadSeriesBannerFromCache:(NSString *)bannerPath;
 - (void)storeBannerData:(NSData *)bannerData bannerPath:(NSString *)bannerPath;
@@ -26,7 +26,7 @@
 
 @implementation SeriesBannerLoader
 
-@synthesize delegate, banner;
+@synthesize delegate, banner, currentBannerPath;
 
 - (void)loadSeriesBanner:(NSString *)bannerPath {	
 	if (![self loadSeriesBannerFromCache:bannerPath]) {
@@ -46,9 +46,8 @@
 }
 
 - (void)loadSeriesBannerFromServer:(NSString *)bannerPath {
-	NSURL *url= [NSURL URLWithString:[@"http://www.thetvdb.com/banners/" stringByAppendingString:bannerPath]];
-	CommunicationAgent *com= [ServiceLocator singletonForClass:[CommunicationAgent class]];
-	[com sendProtocolBuffersGETRequestWithURL:url requestId:bannerPath delegate:self];
+	self.currentBannerPath = bannerPath;
+	[self.fetcher sendProtocolBuffersRequestWithURLString:[@"http://www.thetvdb.com/banners/" stringByAppendingString:bannerPath] delegate:self];
 }
 
 - (void)storeBannerData:(NSData *)bannerData bannerPath:(NSString *)bannerPath {
@@ -65,25 +64,24 @@
 	}
 }
 
-#pragma mark CommunicationDelegate
+#pragma mark ProtocolBuffersFetcherDelegate
 
-- (void)receivedResponse:(NSData *)responseData requestId:(NSString *)bannerPath {
-	self.banner= [UIImage imageWithData:responseData];
-	[self storeBannerData:responseData bannerPath:bannerPath];
-}
-
-- (void)requestDidSucceed:(NSString *)requestId {
+- (void)processData:(NSData *)newData {
+	self.banner = [UIImage imageWithData:newData];
 	[self.delegate loadedSeriesBanner:self.banner];
+	[self storeBannerData:newData bannerPath:self.currentBannerPath];
 }
 
-- (void)requestDidFail:(NSString *)requestId {
-	self.banner= nil;
+- (void)connectionFailed {
+	self.banner = nil;
+	self.currentBannerPath = nil;
 }
 
 #pragma mark -
 
 - (void)dealloc {
-	self.banner= nil;
+	self.banner = nil;
+	self.currentBannerPath = nil;
 	[super dealloc];
 }
 
