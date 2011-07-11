@@ -2,7 +2,7 @@ package watchedepisodes.thetvdbapi;
 
 import org.xml.sax.helpers.DefaultHandler;
 
-interface TVDBRequest {
-	String getURL ();
+public interface XMLRequest {
 	DefaultHandler getHandler ();
+	String getURL ();
 }

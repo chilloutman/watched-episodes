@@ -1,4 +1,4 @@
-package watchedepisodes.thetvdbapi.xmlparser;
+package watchedepisodes.thetvdbapi.xmlparser.handlers;
 
 import java.util.ArrayList;
 import java.util.List;

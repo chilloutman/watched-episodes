@@ -9,11 +9,10 @@ import watchedepisodes.thetvdbapi.xmlparser.ParseException;
 import watchedepisodes.thetvdbapi.xmlparser.TVDBParser;
 
 class RequestAgent {
+	private TVDBParser parser = new TVDBParser();
 	
-	private TVDBParser parser= new TVDBParser();
-	
-	void performRequest (TVDBRequest request) throws TVDBException {
-		InputStream xml= fetchURL(request.getURL());	
+	void performRequest (XMLRequest request) throws TVDBException {
+		InputStream xml = fetchURL(request.getURL());	
 		try {
 			parser.parse(xml, request.getHandler());
 		} catch (ParseException e) {
