@@ -8,6 +8,7 @@
 
 #import "EpisodesListViewController.h"
 #import "SeriesDetailViewController.h"
+#import "WatchedManager.h"
 
 @interface EpisodesListViewController () <EpisodesLoaderDelegate>
 
@@ -76,9 +77,17 @@
     }
     
 	PBEpisode *episode = [self.episodes objectAtIndex:indexPath.row];
-    cell.textLabel.text = episode.episodeName;
+	cell.textLabel.text = episode.episodeName;
+	WatchedManager *watchedManager = [ServiceLocator singletonForClass:[WatchedManager class]];
+	cell.accessoryType = ([watchedManager isEpisodeMarkedAsWatched:episode]) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	WatchedManager *watchedManager = [ServiceLocator singletonForClass:[WatchedManager class]];
+	[watchedManager markEpisodeAsWatched:[self.episodes objectAtIndex:indexPath.row]];
+	[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark -

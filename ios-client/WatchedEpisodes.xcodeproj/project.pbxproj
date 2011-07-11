@@ -42,6 +42,7 @@
 		EFFD0B0912F5D47F00F9075B /* Heart.png in Resources */ = {isa = PBXBuildFile; fileRef = EFFD0B0812F5D47F00F9075B /* Heart.png */; };
 		EFFD0B1912F5D4F700F9075B /* HeartAlt.png in Resources */ = {isa = PBXBuildFile; fileRef = EFFD0B1812F5D4F700F9075B /* HeartAlt.png */; };
 		EFFD0B1B12F5D50D00F9075B /* HeartAlt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EFFD0B1A12F5D50D00F9075B /* HeartAlt@2x.png */; };
+		EFFD259E13C236900051628A /* WatchedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD259D13C236900051628A /* WatchedManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +138,8 @@
 		EFFD0B0812F5D47F00F9075B /* Heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Heart.png; sourceTree = "<group>"; };
 		EFFD0B1812F5D4F700F9075B /* HeartAlt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HeartAlt.png; sourceTree = "<group>"; };
 		EFFD0B1A12F5D50D00F9075B /* HeartAlt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HeartAlt@2x.png"; sourceTree = "<group>"; };
+		EFFD259C13C236900051628A /* WatchedManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchedManager.h; sourceTree = "<group>"; };
+		EFFD259D13C236900051628A /* WatchedManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchedManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,11 +226,11 @@
 				EF8D76ED12D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.m */,
 				EFFD079312F0BE7A00F9075B /* NavigationControllerTab.h */,
 				EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */,
-				EFFD093212F22BAD00F9075B /* Util */,
 				EFFD084F12F0C6F000F9075B /* UI */,
 				EF12EF9D12EC8FE1007E380E /* Loader */,
 				EFFD085012F0C8CB00F9075B /* Model */,
 				EF8D79A612DA02170064C5B5 /* Communication */,
+				EFFD093212F22BAD00F9075B /* Util */,
 				EF8D76F312D8DEE40064C5B5 /* Other */,
 			);
 			path = Source;
@@ -308,6 +311,8 @@
 			children = (
 				EFFD085112F0C8FA00F9075B /* FavoritesMananger.h */,
 				EFFD085212F0C8FA00F9075B /* FavoritesMananger.m */,
+				EFFD259C13C236900051628A /* WatchedManager.h */,
+				EFFD259D13C236900051628A /* WatchedManager.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -461,6 +466,7 @@
 				EF36EDCB13BA37E000AEABC1 /* ProtocolBuffersFetcher.m in Sources */,
 				EF36EDD113BA496D00AEABC1 /* AbstractLoader.m in Sources */,
 				EF36EDD313BA579200AEABC1 /* SearchLoader.m in Sources */,
+				EFFD259E13C236900051628A /* WatchedManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
