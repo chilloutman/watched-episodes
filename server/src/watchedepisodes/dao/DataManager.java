@@ -12,6 +12,7 @@ import watchedepisodes.tools.ServiceLocator;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.protobuf.GeneratedMessage;
 
 public class DataManager {
 	private PersistenceManager pm = null;
@@ -42,6 +43,14 @@ public class DataManager {
 	public List<Episode> getAllEpisodes (String seriesId, String language) throws DataAccessException {
 		try {
 			return ServiceLocator.getTVDBInstance().getAllEpisodes(seriesId, language);
+		} catch (TVDBException e) {
+			throw new DataAccessException();
+		}
+	}
+	
+	public GeneratedMessage getGetAllEpisodesResponse (String seriesId, String language) throws DataAccessException {
+		try {
+			return ServiceLocator.getTVDBForProtobuf().getAllEpisodes(seriesId, language);
 		} catch (TVDBException e) {
 			throw new DataAccessException();
 		}

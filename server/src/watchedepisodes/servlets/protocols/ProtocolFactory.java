@@ -46,7 +46,7 @@ public abstract class ProtocolFactory {
 		return searchResults.build();
 	}
 	
-	public static GeneratedMessage buildGetAllSeriesResponse (List<Episode> episodes) {
+	public static GeneratedMessage buildGetAllEpisodesResponse (List<Episode> episodes) {
 		GetAllEpisodesResponse.Builder episodesResponse = GetAllEpisodesResponse.newBuilder();
 		
 		for (Episode e : episodes) {

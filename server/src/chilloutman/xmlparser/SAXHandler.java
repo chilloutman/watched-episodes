@@ -7,24 +7,18 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public abstract class SAXHandler<ResultType> extends DefaultHandler {
-	private ResultType result;
 	private Stack<XMLElement> elementStack;
 	private StringBuilder currentValue;
 	long startTime;
 	
-	public ResultType getResult () {
-		return result;
-	}
+	public abstract ResultType getResult ();
 	
 	@Override
 	public void startDocument () throws SAXException {
 		startTime = System.currentTimeMillis();
-		result = getNewResult();
 		elementStack = new Stack<XMLElement>();
 		currentValue = new StringBuilder();
 	}
-	
-	protected abstract ResultType getNewResult () throws SAXException;
 	
 	@Override
 	public void startElement (String uri, String localName, String qName, Attributes atts) throws SAXException {

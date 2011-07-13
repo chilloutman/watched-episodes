@@ -1,23 +1,25 @@
-package watchedepisodes.thetvdbapi.xmlparser.handlers;
+package watchedepisodes.thetvdbapi.xmlparser.protobuf;
 
 import java.util.ArrayList;
 
 import org.xml.sax.SAXException;
 
-import watchedepisodes.entities.Series;
+import watchedepisodes.servlets.protocols.GetSeriesProtocol.GetSeriesResponse;
+import watchedepisodes.servlets.protocols.ProtocolTypes.PBSeries;
 import chilloutman.xmlparser.SAXHandler;
 import chilloutman.xmlparser.XMLElement;
 
-import com.google.appengine.api.datastore.Text;
+import com.google.protobuf.GeneratedMessage;
 
-public class SeriesHandler extends SAXHandler<Series> {
-
+public class SeriesHandler extends SAXHandler<GeneratedMessage> {
 	private static final String rootName= "Series";
-	private Series series = new Series();
+	private PBSeries.Builder series = PBSeries.newBuilder();
 
 	@Override
-	public Series getResult () {
-		return series;
+	public GeneratedMessage getResult () {
+		GetSeriesResponse.Builder response = GetSeriesResponse.newBuilder();
+		response.setSeries(series);
+		return response.build();
 	}
 
 	@Override
@@ -29,19 +31,18 @@ public class SeriesHandler extends SAXHandler<Series> {
 	protected void parseElement (XMLElement element) {
 		if (element.getParentName() == rootName) {
 			if (element.getName() == "SeriesName") {
-				series.setName(element.getContent());
+				series.setSeriesName(element.getContent());
 			} else if (element.getName() == "id") {
-				series.setId(element.getContent());
+				series.setSeriesId(element.getContent());
 			} else if (element.getName() == "Actors") {
-				String[] actors= element.getContent().split("\\|");
+				String[] actors = element.getContent().split("\\|");
 				ArrayList<String> actorsList= new ArrayList<String>();
 				for (int i= 1; i < actors.length; i++) {
 					actorsList.add(actors[i]);
 				}
-				series.setActors(actorsList);
+				series.addAllActors(actorsList);
 			} else if (element.getName() == "Overview") {
-				Text overview= new Text(element.getContent());
-				series.setOverview(overview);
+				series.setOverview(element.getContent());
 			} else if (element.getName() == "banner") {
 				series.setBanner(element.getContent());
 			} else if (element.getName() == "IMDB_ID") {
@@ -56,13 +57,7 @@ public class SeriesHandler extends SAXHandler<Series> {
 
 	@Override
 	protected void finishedElement (String parentName) throws SAXException {
-		if (parentName == rootName) {
-			try {
-				series.generateKey();
-			} catch (Exception e) {
-				throw new SAXException(e);
-			}
-		}
+		
 	}
 
 	@Override

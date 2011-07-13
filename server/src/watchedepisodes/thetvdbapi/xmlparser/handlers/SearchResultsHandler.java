@@ -13,18 +13,19 @@ import chilloutman.xmlparser.XMLElement;
 public class SearchResultsHandler extends SAXHandler<List<SeriesFragment>> {
 	
 	private static final String rootName= "Series";
+	private ArrayList<SeriesFragment> searchResults = new ArrayList<SeriesFragment>();
 	private SeriesFragment currentSeries;
 	
 	@Override
-	protected ArrayList<SeriesFragment> getNewResult () throws SAXException {
-		return new ArrayList<SeriesFragment>();
+	public ArrayList<SeriesFragment> getResult () {
+		return searchResults;
 	}
 
 	@Override
 	protected void willStartElement (String elementName) {
 		if (elementName == rootName) {
 			currentSeries = new SeriesFragment();
-			getResult().add(currentSeries);
+			searchResults.add(currentSeries);
 		}
 	}
 	

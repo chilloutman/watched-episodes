@@ -1,32 +1,36 @@
-package watchedepisodes.thetvdbapi.xmlparser.handlers;
+package watchedepisodes.thetvdbapi.xmlparser.protobuf;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import org.xml.sax.SAXException;
 
-import watchedepisodes.entities.Episode;
+import watchedepisodes.servlets.protocols.GetAllEpisodesProtocol.GetAllEpisodesResponse;
+import watchedepisodes.servlets.protocols.ProtocolTypes.PBEpisode;
 import chilloutman.xmlparser.SAXHandler;
 import chilloutman.xmlparser.XMLElement;
 
-import com.google.appengine.api.datastore.Text;
+import com.google.protobuf.GeneratedMessage;
 
-public class EpisodesHandler extends SAXHandler<List<Episode>> {
+public class EpisodesHandler extends SAXHandler<GeneratedMessage> {
 	
-	private ArrayList<Episode> parsedEpisodes = new ArrayList<Episode>();
-	private Episode currentEpisode;
-	private final String rootElementName= "Episode";
+	private String seriesId;
+	private final String rootElementName = "Episode";
+	private GetAllEpisodesResponse.Builder episodesResponse = GetAllEpisodesResponse.newBuilder();
+	private PBEpisode.Builder currentEpisode;
 	private boolean skipCurrentEpisode;
-
+	
+	public EpisodesHandler (String seriesId) {
+		this.seriesId = seriesId;
+	}
+	
 	@Override
-	public List<Episode> getResult () {
-		return parsedEpisodes;
+	public GeneratedMessage getResult () {
+		return episodesResponse.build();
 	}
 
 	protected void willStartElement (String elementName) throws SAXException {
 		if (elementName == rootElementName) {
-			currentEpisode = new Episode();
+			currentEpisode = PBEpisode.newBuilder();
 			skipCurrentEpisode = false;
 		}
 	}
@@ -39,27 +43,27 @@ public class EpisodesHandler extends SAXHandler<List<Episode>> {
 
 		if (element.getParentName() == rootElementName) {
 			if (element.getName() == "SeasonNumber") {
-				int seasonNumber= Integer.parseInt(element.getContent());
+				int seasonNumber = Integer.parseInt(element.getContent());
 				if (seasonNumber == 0) {
-					skipCurrentEpisode= true;
+					skipCurrentEpisode = true;
 				} else {
 					currentEpisode.setSeasonNumber(seasonNumber);
 				}
 			} else if (element.getName() == "EpisodeNumber") {
 				int episodeNumber = Integer.parseInt(element.getContent());
 				if (episodeNumber == 0) {
-					skipCurrentEpisode= true;
+					skipCurrentEpisode = true;
 				} else {
 					currentEpisode.setEpisodeNumber(episodeNumber);
 				}
 			} else if (element.getName() == "id") {
-				currentEpisode.setId(element.getContent());
+				currentEpisode.setEpisodeId(element.getContent());
 			} else if (element.getName() == "Language") {
 				currentEpisode.setLanguage(element.getContent());
 			} else if (element.getName() == "EpisodeName") {
 				currentEpisode.setEpisodeName(element.getContent());
 			} else if (element.getName() == "Overview") {
-				currentEpisode.setOverview(new Text(element.getContent()));
+				currentEpisode.setOverview(element.getContent());
 			} else if (element.getName() == "FirstAired") {
 				currentEpisode.setFirstAired(element.getContent());
 			} else if (element.getName() == "Rating") {
@@ -69,8 +73,8 @@ public class EpisodesHandler extends SAXHandler<List<Episode>> {
 			} else if (element.getName() == "Director") {
 				currentEpisode.setDirector(element.getContent());
 			} else if (element.getName() == "GuestStars") {
-				String[] actors= element.getContent().split("\\|");
-				currentEpisode.setGuestStars(Arrays.asList(actors));
+				String[] actors = element.getContent().split("\\|");
+				currentEpisode.addAllGuestStars(Arrays.asList(actors));
 			}
 		}
 	}
@@ -78,12 +82,8 @@ public class EpisodesHandler extends SAXHandler<List<Episode>> {
 	@Override
 	protected void finishedElement (String elementName) throws SAXException {
 		if (!skipCurrentEpisode && elementName == rootElementName) {
-			try {
-				currentEpisode.generateKey();
-				parsedEpisodes.add(currentEpisode);
-			} catch (Exception e) {
-				throw new SAXException(e);
-			}
+			currentEpisode.setSeriesId(seriesId);
+			episodesResponse.addEpisodes(currentEpisode);
 		}
 	}
 
@@ -91,5 +91,4 @@ public class EpisodesHandler extends SAXHandler<List<Episode>> {
 	protected void parsingEnded () throws SAXException {
 
 	}
-
 }
