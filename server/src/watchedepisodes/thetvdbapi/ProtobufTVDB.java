@@ -5,18 +5,16 @@ import watchedepisodes.thetvdbapi.xmlparser.protobuf.SeriesHandler;
 
 import com.google.protobuf.GeneratedMessage;
 
-public class TVDBForProtobuf extends AbstractTVDB {
+public class ProtobufTVDB extends AbstractTVDB <GeneratedMessage, GeneratedMessage, GeneratedMessage> {
 
-	public TVDBForProtobuf (String apiKey) {
+	public ProtobufTVDB (String apiKey) {
 		super(apiKey);
 	}
 	
-//	public GeneratedMessage searchSeries (String searchString, String language) throws TVDBException {
-//		String URL = URLFactory.getSearchSeriesURL(searchString, language);
-//		Request<List<SeriesFragment>> request =  new Request<List<SeriesFragment>>(URL, new SearchResultsHandler());
-//		agent.performRequest(request);
-//		return request.getHandler().getResult();
-//	}
+	@Override
+	public GeneratedMessage searchSeries (String searchString, String language) throws TVDBException {
+		return null;
+	}
 	
 	public GeneratedMessage getSeries (String id, String language) throws TVDBException {
 		String URL = URLFactory.getGetSeriesURL(id, language);

@@ -12,6 +12,7 @@ import watchedepisodes.tools.ServiceLocator;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.repackaged.com.google.protobuf.Service;
 import com.google.protobuf.GeneratedMessage;
 
 public class DataManager {
@@ -48,9 +49,26 @@ public class DataManager {
 		}
 	}
 	
-	public GeneratedMessage getGetAllEpisodesResponse (String seriesId, String language) throws DataAccessException {
+	public GeneratedMessage getMessageWithSearchResults (String searchString, String language, boolean withDebugData) throws DataAccessException {
 		try {
-			return ServiceLocator.getTVDBForProtobuf().getAllEpisodes(seriesId, language);
+			return ServiceLocator.getProtobufTVDB(withDebugData).searchSeries(searchString, language);
+		} catch (TVDBException e) {
+			throw new DataAccessException();
+		}
+	}
+	
+	public GeneratedMessage getMessageWithSeries (String seriesId, String language, boolean withDebugData) {
+		try {
+			return ServiceLocator.getProtobufTVDB(withDebugData).getSeries(seriesId, language);
+		} catch (TVDBException e) {
+			
+		}
+		return null;
+	}
+	
+	public GeneratedMessage getMessageWithAllEpisodes (String seriesId, String language, boolean withDebugData) throws DataAccessException {
+		try {
+			return ServiceLocator.getProtobufTVDB(withDebugData).getAllEpisodes(seriesId, language);
 		} catch (TVDBException e) {
 			throw new DataAccessException();
 		}

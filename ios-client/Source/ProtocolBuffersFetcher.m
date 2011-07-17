@@ -26,6 +26,9 @@
 
 - (void)sendProtocolBuffersRequestWithURLString:(NSString *)URL delegate:(id<ProtocolBuffersFetcherDelegate>)d {
 	self.delegate = d;
+#ifdef FAKEDATA
+    URL = [URL stringByAppendingString:@"&debug"];
+#endif
 	NSURLRequest *request = [self protocolBuffersRequestWithURL:[NSURL URLWithString:URL]];
 	self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
 }

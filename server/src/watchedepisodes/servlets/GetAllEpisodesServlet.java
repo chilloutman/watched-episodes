@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import watchedepisodes.dao.DataAccessException;
+import watchedepisodes.dao.DataManager;
 import watchedepisodes.entities.Episode;
 import watchedepisodes.tools.ServiceLocator;
 
@@ -27,8 +28,8 @@ public class GetAllEpisodesServlet extends AbstractServlet {
 
 		try {
 			if (protobuf) {
-				GeneratedMessage messange;
-				messange = ServiceLocator.getDataManager().getGetAllEpisodesResponse(seriesId, language);
+				DataManager dataManager = ServiceLocator.getDataManager();
+				GeneratedMessage messange = dataManager.getMessageWithAllEpisodes(seriesId, language, clientWantsDebugData(request));
 				writeProtobufResponse(response, messange);
 			} else {
 				List<Episode> episodes = ServiceLocator.getDataManager().getAllEpisodes(seriesId, language);

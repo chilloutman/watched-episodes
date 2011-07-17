@@ -10,11 +10,11 @@ import com.google.protobuf.GeneratedMessage;
 
 @SuppressWarnings("serial")
 abstract class AbstractServlet extends HttpServlet {
-	protected final String ProtocolBuffers= "application/x-protobuf";
-	protected final String Html= "text/html";
+	protected final String ProtocolBuffers = "application/x-protobuf";
+	protected final String Html = "text/html";
 
 	String getLanguage (HttpServletRequest request) {
-		String language= request.getParameter("lang");
+		String language = request.getParameter("lang");
 		if (language == null) {
 			language = "en";
 		}
@@ -25,11 +25,15 @@ abstract class AbstractServlet extends HttpServlet {
 		return (request.getHeader("Accept").equalsIgnoreCase(ProtocolBuffers));
 	}
 
-	void writeProtobufResponse (HttpServletResponse response, GeneratedMessage protobuf) {
+	boolean clientWantsDebugData (HttpServletRequest request) {
+		return (request.getParameter("debug") != null);
+	}
+
+	void writeProtobufResponse (HttpServletResponse response, GeneratedMessage message) {
 		try {
 			response.setContentType(ProtocolBuffers);
-			response.setBufferSize(protobuf.getSerializedSize());
-			protobuf.writeTo(response.getOutputStream());
+			response.setBufferSize(message.getSerializedSize());
+			message.writeTo(response.getOutputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
 			response.setStatus(500);
