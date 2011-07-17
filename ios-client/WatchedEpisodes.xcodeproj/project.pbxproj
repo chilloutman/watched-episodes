@@ -16,6 +16,7 @@
 		EF12EFA112EC90C2007E380E /* SeriesBannerLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF12EFA012EC90C2007E380E /* SeriesBannerLoader.m */; };
 		EF2AD7FB13327AD500585E3A /* EpisodesLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2AD7FA13327AD400585E3A /* EpisodesLoader.m */; };
 		EF2AD7FE1332800A00585E3A /* EpisodesListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2AD7FD1332800A00585E3A /* EpisodesListViewController.m */; };
+		EF3555E113D3503A00456DBD /* Find@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF3555E013D3503A00456DBD /* Find@2x.png */; };
 		EF36EDCB13BA37E000AEABC1 /* ProtocolBuffersFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = EF36EDCA13BA37E000AEABC1 /* ProtocolBuffersFetcher.m */; };
 		EF36EDD113BA496D00AEABC1 /* AbstractLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF36EDD013BA496D00AEABC1 /* AbstractLoader.m */; };
 		EF36EDD313BA579200AEABC1 /* SearchLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF36EDD213BA579200AEABC1 /* SearchLoader.m */; };
@@ -37,7 +38,6 @@
 		EFFD08B512F21BBC00F9075B /* GetAllEpisodes.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD08B212F21BBC00F9075B /* GetAllEpisodes.pb.m */; };
 		EFFD08B612F21BBC00F9075B /* ProtocolTypes.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD08B412F21BBC00F9075B /* ProtocolTypes.pb.m */; };
 		EFFD093512F22BE700F9075B /* FileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD093412F22BE700F9075B /* FileHelper.m */; };
-		EFFD0AE912F5D29100F9075B /* Find@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EFFD0AE812F5D29100F9075B /* Find@2x.png */; };
 		EFFD0AEE12F5D2E400F9075B /* Find.png in Resources */ = {isa = PBXBuildFile; fileRef = EFFD0AED12F5D2E400F9075B /* Find.png */; };
 		EFFD0B0712F5D46900F9075B /* Heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EFFD0B0612F5D46900F9075B /* Heart@2x.png */; };
 		EFFD0B0912F5D47F00F9075B /* Heart.png in Resources */ = {isa = PBXBuildFile; fileRef = EFFD0B0812F5D47F00F9075B /* Heart.png */; };
@@ -93,6 +93,7 @@
 		EF2AD7FA13327AD400585E3A /* EpisodesLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EpisodesLoader.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		EF2AD7FC1332800A00585E3A /* EpisodesListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = EpisodesListViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		EF2AD7FD1332800A00585E3A /* EpisodesListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EpisodesListViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		EF3555E013D3503A00456DBD /* Find@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Find@2x.png"; sourceTree = "<group>"; };
 		EF36EDC913BA37E000AEABC1 /* ProtocolBuffersFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolBuffersFetcher.h; sourceTree = "<group>"; };
 		EF36EDCA13BA37E000AEABC1 /* ProtocolBuffersFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolBuffersFetcher.m; sourceTree = "<group>"; };
 		EF36EDCF13BA496D00AEABC1 /* AbstractLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AbstractLoader.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -135,7 +136,6 @@
 		EFFD08B412F21BBC00F9075B /* ProtocolTypes.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolTypes.pb.m; sourceTree = "<group>"; };
 		EFFD093312F22BE700F9075B /* FileHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileHelper.h; sourceTree = "<group>"; };
 		EFFD093412F22BE700F9075B /* FileHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileHelper.m; sourceTree = "<group>"; };
-		EFFD0AE812F5D29100F9075B /* Find@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Find@2x.png"; path = "../../../iOS/A bunch of stuff/270 White ToolBar Icons/@2x Retina Icons/Find@2x.png"; sourceTree = SOURCE_ROOT; };
 		EFFD0AED12F5D2E400F9075B /* Find.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Find.png; sourceTree = "<group>"; };
 		EFFD0B0612F5D46900F9075B /* Heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Heart@2x.png"; sourceTree = "<group>"; };
 		EFFD0B0812F5D47F00F9075B /* Heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Heart.png; sourceTree = "<group>"; };
@@ -341,7 +341,7 @@
 				EFFD0B0812F5D47F00F9075B /* Heart.png */,
 				EFFD0B0612F5D46900F9075B /* Heart@2x.png */,
 				EFFD0AED12F5D2E400F9075B /* Find.png */,
-				EFFD0AE812F5D29100F9075B /* Find@2x.png */,
+				EF3555E013D3503A00456DBD /* Find@2x.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -433,12 +433,12 @@
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				2899E5220DE3E06400AC0155 /* SearchSeries.xib in Resources */,
 				EF4AD01E12EA22A60058F78E /* SeriesDetail.xib in Resources */,
-				EFFD0AE912F5D29100F9075B /* Find@2x.png in Resources */,
 				EFFD0AEE12F5D2E400F9075B /* Find.png in Resources */,
 				EFFD0B0712F5D46900F9075B /* Heart@2x.png in Resources */,
 				EFFD0B0912F5D47F00F9075B /* Heart.png in Resources */,
 				EFFD0B1912F5D4F700F9075B /* HeartAlt.png in Resources */,
 				EFFD0B1B12F5D50D00F9075B /* HeartAlt@2x.png in Resources */,
+				EF3555E113D3503A00456DBD /* Find@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +547,36 @@
 			};
 			name = Release;
 		};
+		EFBCDB5613D3582A00988FEC /* FakeData */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = iphoneos;
+			};
+			name = FakeData;
+		};
+		EFBCDB5713D3582A00988FEC /* FakeData */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Source/WatchedEpisodes_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = FAKEDATA;
+				INFOPLIST_FILE = "WatchedEpisodes-Info.plist";
+				PRODUCT_NAME = Watched;
+			};
+			name = FakeData;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -554,6 +584,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
+				EFBCDB5713D3582A00988FEC /* FakeData */,
 				1D6058950D05DD3E006BFB54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -563,6 +594,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
+				EFBCDB5613D3582A00988FEC /* FakeData */,
 				C01FCF5008A954540054247B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
