@@ -15,11 +15,7 @@
 
 @end
 
-@interface ProtocolBuffersFetcher : NSObject {
-	id<ProtocolBuffersFetcherDelegate> delegate;
-    NSURLConnection *connection;
-	NSMutableData *receivedData;
-}
+@interface ProtocolBuffersFetcher : NSObject
 
 - (void)sendProtocolBuffersRequestWithURLString:(NSString *)URL delegate:(id<ProtocolBuffersFetcherDelegate>)delegate;
 - (void)cancelConnection;

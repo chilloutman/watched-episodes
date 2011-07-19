@@ -8,9 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ServiceLocator : NSObject {
-	NSMutableDictionary *singletons;
-}
+@interface ServiceLocator : NSObject
 
 + (id)singletonForClass:(Class)serviceClass;
 

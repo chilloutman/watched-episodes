@@ -23,9 +23,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ServiceLocator)
 @synthesize singletons;
 
 + (id)singletonForClass:(Class)serviceClass {
-	id service= [[ServiceLocator shared].singletons objectForKey:serviceClass];
-	if (!service) {
-		service= [[serviceClass alloc] init];
+	id service = [[ServiceLocator shared].singletons objectForKey:serviceClass];
+	if (service == nil) {
+		service = [[serviceClass alloc] init];
 		[[ServiceLocator shared].singletons setObject:service forKey:serviceClass];
 		[service release];
 	}
@@ -34,7 +34,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ServiceLocator)
 
 - (NSMutableDictionary *)singletons {
 	if (!singletons) {
-		singletons= [[NSMutableDictionary alloc] init];
+		singletons = [[NSMutableDictionary alloc] init];
 	}
 	return singletons;
 }

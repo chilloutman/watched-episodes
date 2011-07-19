@@ -7,10 +7,13 @@
 //
 
 #import "ProtocolBuffersFetcher.h"
+#import "ServiceLocator.h"
+#import "CommunicationManager.h"
 
 
 @interface ProtocolBuffersFetcher ()
 
+@property (nonatomic, readonly) CommunicationManager * communicationManager;
 @property (nonatomic, retain) NSURLConnection *connection;
 @property (nonatomic, retain) NSMutableData *receivedData;
 @property (nonatomic, assign) id<ProtocolBuffersFetcherDelegate> delegate;
@@ -24,6 +27,10 @@
 
 @synthesize connection, receivedData, delegate;
 
+- (CommunicationManager *)communicationManager {
+    return [ServiceLocator singletonForClass:[CommunicationManager class]];
+}
+
 - (void)sendProtocolBuffersRequestWithURLString:(NSString *)URL delegate:(id<ProtocolBuffersFetcherDelegate>)d {
 	self.delegate = d;
 #ifdef FAKEDATA
@@ -31,6 +38,7 @@
 #endif
 	NSURLRequest *request = [self protocolBuffersRequestWithURL:[NSURL URLWithString:URL]];
 	self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
+    [self.communicationManager startedConnection];
 }
 
 - (NSURLRequest *)protocolBuffersRequestWithURL:(NSURL *)URL {
@@ -41,6 +49,7 @@
 }
 
 - (void)cancelConnection {
+    [self.connection cancel];
 	self.delegate = nil;
 	self.connection = nil;
 	self.receivedData = nil;
@@ -49,8 +58,14 @@
 #pragma mark NSURLConnection
 
 - (void)connection:(NSURLConnection *)c didReceiveResponse:(NSHTTPURLResponse *)response {
-	long long contentLength = [response expectedContentLength];
-	self.receivedData = (contentLength == NSURLResponseUnknownLength) ? [NSMutableData data] : [NSMutableData dataWithCapacity:contentLength];	
+    if (response.statusCode == 200) {
+        long long contentLength = [response expectedContentLength];
+        self.receivedData = (contentLength == NSURLResponseUnknownLength) ? [NSMutableData data] : [NSMutableData dataWithCapacity:contentLength];
+    } else {
+        [self.communicationManager finnishedConnection];
+        NSLog(@"Connection Error: %d", response.statusCode);
+        [self cancelConnection];
+    }
 }
 
 - (void)connection:(NSURLConnection *)aConnection didReceiveData:(NSData *)newData {
@@ -60,6 +75,7 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
 	[self.delegate processData:self.receivedData];
 	[self cancelConnection];
+    [self.communicationManager finnishedConnection];
 }
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
