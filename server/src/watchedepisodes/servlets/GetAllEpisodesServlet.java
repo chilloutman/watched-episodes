@@ -7,9 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import watchedepisodes.dao.DataAccessException;
-import watchedepisodes.dao.DataManager;
 import watchedepisodes.entities.Episode;
+import watchedepisodes.thetvdbapi.ProtobufTVDB;
+import watchedepisodes.thetvdbapi.TVDBException;
 import watchedepisodes.tools.ServiceLocator;
 
 import com.google.protobuf.GeneratedMessage;
@@ -28,14 +28,14 @@ public class GetAllEpisodesServlet extends AbstractServlet {
 
 		try {
 			if (protobuf) {
-				DataManager dataManager = ServiceLocator.getDataManager();
-				GeneratedMessage messange = dataManager.getMessageWithAllEpisodes(seriesId, language, clientWantsDebugData(request));
-				writeProtobufResponse(response, messange);
+				ProtobufTVDB tvdb = ServiceLocator.getProtobufTVDB(clientWantsDebugData(request));
+				GeneratedMessage message = tvdb.getAllEpisodes(seriesId, language);
+				writeProtobufResponse(response, message);
 			} else {
-				List<Episode> episodes = ServiceLocator.getDataManager().getAllEpisodes(seriesId, language);
+				List <Episode> episodes = ServiceLocator.getTVDBInstance().getAllEpisodes(seriesId, language);
 				writeHtmlResponse(response, getHtml(episodes));
 			}
-		} catch (DataAccessException e) {
+		} catch (TVDBException e) {
 			response.setStatus(500);
 		}
 	}

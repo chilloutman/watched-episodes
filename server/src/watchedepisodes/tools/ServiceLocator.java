@@ -14,7 +14,7 @@ public abstract class ServiceLocator {
 	private static ProtobufTVDB protobufTVDB;
 	private static ProtobufTVDB offlineTVDB;
 	private static PersistenceManagerFactory pmf;
-	private static final DataManager dataManager = new DataManager();
+	private static DataManager dataManager;
 	
 	private ServiceLocator() { }
 	
@@ -45,6 +45,7 @@ public abstract class ServiceLocator {
 	}
 	
 	public static DataManager getDataManager () {
+		if (dataManager == null) dataManager = new DataManager();
 		return dataManager;
 	}
 }

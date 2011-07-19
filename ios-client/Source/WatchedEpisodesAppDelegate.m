@@ -20,14 +20,14 @@
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-	UITabBarItem *tabBarItem= [[[UITabBarItem alloc] initWithTitle:@"Find" image:[UIImage imageNamed:@"Find"] tag:0] autorelease];
-	NavigationControllerTab *find= [NavigationControllerTab controllerWithRootController:[SearchSeriesViewController class]
+	UITabBarItem *tabBarItem = [[[UITabBarItem alloc] initWithTitle:@"Find" image:[UIImage imageNamed:@"Find"] tag:0] autorelease];
+	NavigationControllerTab *find = [NavigationControllerTab controllerWithRootController:[SearchSeriesViewController class]
                                                                               tabBarItem:tabBarItem];
-	tabBarItem= [[[UITabBarItem alloc] initWithTitle:@"Favorites" image:[UIImage imageNamed:@"Heart"] tag:1] autorelease];
-	NavigationControllerTab *favs= [NavigationControllerTab controllerWithRootController:[FavoritesViewController class]
+	tabBarItem = [[[UITabBarItem alloc] initWithTitle:@"Favorites" image:[UIImage imageNamed:@"Heart"] tag:1] autorelease];
+	NavigationControllerTab *favs = [NavigationControllerTab controllerWithRootController:[FavoritesViewController class]
 																			  tabBarItem:tabBarItem];
 	
-	self.tabController= [[[UITabBarController alloc] init] autorelease];
+	self.tabController = [[[UITabBarController alloc] init] autorelease];
 	[self.tabController setViewControllers:[NSArray arrayWithObjects:find, favs, nil]];
 	
     [self.window addSubview:self.tabController.view];
@@ -86,8 +86,8 @@
 
 
 - (void)dealloc {
-	self.tabController= nil;
-	self.window= nil;
+	self.tabController = nil;
+	self.window = nil;
     [super dealloc];
 }
 

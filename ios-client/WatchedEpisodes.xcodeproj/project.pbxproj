@@ -93,7 +93,7 @@
 		AAB1059213D587E900683DC4 /* CommunicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunicationManager.h; sourceTree = "<group>"; };
 		AAB1059313D587E900683DC4 /* CommunicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunicationManager.m; sourceTree = "<group>"; };
 		AAB1059513D5993500683DC4 /* MessagePopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagePopupView.xib; sourceTree = "<group>"; };
-		AAB1059A13D59AC200683DC4 /* MessagePopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = MessagePopupView.h; sourceTree = "<group>"; };
+		AAB1059A13D59AC200683DC4 /* MessagePopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagePopupView.h; sourceTree = "<group>"; };
 		AAB1059B13D59AC200683DC4 /* MessagePopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagePopupView.m; sourceTree = "<group>"; };
 		EF12EF9F12EC90C2007E380E /* SeriesBannerLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeriesBannerLoader.h; sourceTree = "<group>"; };
 		EF12EFA012EC90C2007E380E /* SeriesBannerLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeriesBannerLoader.m; sourceTree = "<group>"; };
@@ -229,6 +229,15 @@
 			name = Loader;
 			sourceTree = "<group>";
 		};
+		EF5AA28413D5C64D00F6FBCF /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				AAB1059A13D59AC200683DC4 /* MessagePopupView.h */,
+				AAB1059B13D59AC200683DC4 /* MessagePopupView.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		EF8D76E912D8DEDA0064C5B5 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,6 +248,7 @@
 				EFFD079312F0BE7A00F9075B /* NavigationControllerTab.h */,
 				EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */,
 				EFFD084F12F0C6F000F9075B /* UIViewControllers */,
+				EF5AA28413D5C64D00F6FBCF /* UI */,
 				EF12EF9D12EC8FE1007E380E /* Loader */,
 				EFFD085012F0C8CB00F9075B /* Model */,
 				EF8D79A612DA02170064C5B5 /* Communication */,
@@ -301,8 +311,6 @@
 				EF36EDCA13BA37E000AEABC1 /* ProtocolBuffersFetcher.m */,
 				AAB1059213D587E900683DC4 /* CommunicationManager.h */,
 				AAB1059313D587E900683DC4 /* CommunicationManager.m */,
-				AAB1059A13D59AC200683DC4 /* MessagePopupView.h */,
-				AAB1059B13D59AC200683DC4 /* MessagePopupView.m */,
 			);
 			name = Communication;
 			sourceTree = "<group>";
