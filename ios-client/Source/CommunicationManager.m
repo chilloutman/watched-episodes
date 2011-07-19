@@ -7,6 +7,7 @@
 //
 
 #import "CommunicationManager.h"
+#import "MessagePopupView.h"
 
 @implementation CommunicationManager {
     NSUInteger numberOfConnections;
@@ -24,6 +25,12 @@
     if (numberOfConnections == 0) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     }
+}
+
+- (void)displayErrorMessageForStatusCode:(NSInteger)statusCode {
+    MessagePopupView *popupView = [MessagePopupView messagePopupView];
+    popupView.messageLabel.text = [NSString stringWithFormat:@"Could not connect to server. (%d)", statusCode];
+    [popupView show];
 }
 
 @end

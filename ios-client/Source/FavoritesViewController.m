@@ -47,10 +47,6 @@
 }
 */
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return YES;
-}
-
 - (SeriesDetailViewController *)seriesController {
 	if (!seriesController) {
 		seriesController= [[SeriesDetailViewController alloc] init];

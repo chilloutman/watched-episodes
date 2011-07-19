@@ -14,6 +14,8 @@
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		AA4ED15313D0670B007D07F5 /* WatchedStateDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4ED15213D0670B007D07F5 /* WatchedStateDocument.m */; };
 		AAB1059413D587E900683DC4 /* CommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB1059313D587E900683DC4 /* CommunicationManager.m */; };
+		AAB1059613D5993500683DC4 /* MessagePopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAB1059513D5993500683DC4 /* MessagePopupView.xib */; };
+		AAB1059C13D59AC300683DC4 /* MessagePopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB1059B13D59AC200683DC4 /* MessagePopupView.m */; };
 		EF12EFA112EC90C2007E380E /* SeriesBannerLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF12EFA012EC90C2007E380E /* SeriesBannerLoader.m */; };
 		EF2AD7FB13327AD500585E3A /* EpisodesLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2AD7FA13327AD400585E3A /* EpisodesLoader.m */; };
 		EF2AD7FE1332800A00585E3A /* EpisodesListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2AD7FD1332800A00585E3A /* EpisodesListViewController.m */; };
@@ -90,6 +92,9 @@
 		AA4ED15213D0670B007D07F5 /* WatchedStateDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchedStateDocument.m; sourceTree = "<group>"; };
 		AAB1059213D587E900683DC4 /* CommunicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunicationManager.h; sourceTree = "<group>"; };
 		AAB1059313D587E900683DC4 /* CommunicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunicationManager.m; sourceTree = "<group>"; };
+		AAB1059513D5993500683DC4 /* MessagePopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagePopupView.xib; sourceTree = "<group>"; };
+		AAB1059A13D59AC200683DC4 /* MessagePopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = MessagePopupView.h; sourceTree = "<group>"; };
+		AAB1059B13D59AC200683DC4 /* MessagePopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagePopupView.m; sourceTree = "<group>"; };
 		EF12EF9F12EC90C2007E380E /* SeriesBannerLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeriesBannerLoader.h; sourceTree = "<group>"; };
 		EF12EFA012EC90C2007E380E /* SeriesBannerLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeriesBannerLoader.m; sourceTree = "<group>"; };
 		EF2AD7F913327AD300585E3A /* EpisodesLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = EpisodesLoader.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -189,6 +194,7 @@
 			children = (
 				EF4AD01C12EA22A60058F78E /* SeriesDetail.xib */,
 				2899E5210DE3E06400AC0155 /* SearchSeries.xib */,
+				AAB1059513D5993500683DC4 /* MessagePopupView.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				EFFD0AEC12F5D2A200F9075B /* Images */,
 				8D1107310486CEB800E47090 /* WatchedEpisodes-Info.plist */,
@@ -232,7 +238,7 @@
 				EF8D76ED12D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.m */,
 				EFFD079312F0BE7A00F9075B /* NavigationControllerTab.h */,
 				EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */,
-				EFFD084F12F0C6F000F9075B /* UI */,
+				EFFD084F12F0C6F000F9075B /* UIViewControllers */,
 				EF12EF9D12EC8FE1007E380E /* Loader */,
 				EFFD085012F0C8CB00F9075B /* Model */,
 				EF8D79A612DA02170064C5B5 /* Communication */,
@@ -295,11 +301,13 @@
 				EF36EDCA13BA37E000AEABC1 /* ProtocolBuffersFetcher.m */,
 				AAB1059213D587E900683DC4 /* CommunicationManager.h */,
 				AAB1059313D587E900683DC4 /* CommunicationManager.m */,
+				AAB1059A13D59AC200683DC4 /* MessagePopupView.h */,
+				AAB1059B13D59AC200683DC4 /* MessagePopupView.m */,
 			);
 			name = Communication;
 			sourceTree = "<group>";
 		};
-		EFFD084F12F0C6F000F9075B /* UI */ = {
+		EFFD084F12F0C6F000F9075B /* UIViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				EF8D76EE12D8DEDA0064C5B5 /* SearchSeriesViewController.h */,
@@ -311,7 +319,7 @@
 				EF2AD7FC1332800A00585E3A /* EpisodesListViewController.h */,
 				EF2AD7FD1332800A00585E3A /* EpisodesListViewController.m */,
 			);
-			name = UI;
+			name = UIViewControllers;
 			sourceTree = "<group>";
 		};
 		EFFD085012F0C8CB00F9075B /* Model */ = {
@@ -444,6 +452,7 @@
 				EFFD0B1912F5D4F700F9075B /* HeartAlt.png in Resources */,
 				EFFD0B1B12F5D50D00F9075B /* HeartAlt@2x.png in Resources */,
 				EF3555E113D3503A00456DBD /* Find@2x.png in Resources */,
+				AAB1059613D5993500683DC4 /* MessagePopupView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +488,7 @@
 				EFFD259E13C236900051628A /* WatchedManager.m in Sources */,
 				AA4ED15313D0670B007D07F5 /* WatchedStateDocument.m in Sources */,
 				AAB1059413D587E900683DC4 /* CommunicationManager.m in Sources */,
+				AAB1059C13D59AC300683DC4 /* MessagePopupView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

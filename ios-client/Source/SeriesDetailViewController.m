@@ -34,7 +34,7 @@
 
 - (SeriesLoader *)seriesLoader {
 	if (!seriesLoader) {
-		seriesLoader= [[SeriesLoader alloc] init];
+		seriesLoader = [[SeriesLoader alloc] init];
 		seriesLoader.delegate= self;
 	}
 	return seriesLoader;
@@ -42,7 +42,7 @@
 
 - (SeriesBannerLoader *)bannerLoader {
 	if (!bannerLoader) {
-		bannerLoader= [[SeriesBannerLoader alloc] init];
+		bannerLoader = [[SeriesBannerLoader alloc] init];
 		bannerLoader.delegate= self;
 	}
 	return bannerLoader;
@@ -61,7 +61,7 @@
 
 - (void)displayDetailsForSeriesWithId:(NSString *)seriesId {
 	if (![seriesId isEqualToString:self.currentSeries.seriesId]) {
-		PBSeries *series= [favorites seriesForSeriesId:seriesId];
+		PBSeries *series = [favorites seriesForSeriesId:seriesId];
 		if (series) {
 			[self displayDetailsForSeries:series];
 		} else {
@@ -78,33 +78,33 @@
 
 - (void)displayDetailsForSeries:(PBSeries *)series {
 	[self.spindicator stopAnimating];
-	self.currentSeries= series;
+	self.currentSeries = series;
 	[self.bannerLoader loadSeriesBanner:series.banner];
 
-	self.nameLabel.text= series.seriesName;
-	self.overviewView.text= series.overview;
+	self.nameLabel.text = series.seriesName;
+	self.overviewView.text = series.overview;
 	[self updateFaveButton];
 }
 
 - (void)resetUI {
-	self.nameLabel.text= nil;
-	self.overviewView.text= nil;
-	self.bannerView.image= nil;
+	self.nameLabel.text = nil;
+	self.overviewView.text = nil;
+	self.bannerView.image = nil;
 }
 
 - (IBAction)faveSeries {
-	FavoritesMananger *manager= [ServiceLocator singletonForClass:[FavoritesMananger class]];
+	FavoritesMananger *manager = [ServiceLocator singletonForClass:[FavoritesMananger class]];
 	[manager addSeriesToFavorites:self.currentSeries];
 	[self updateFaveButton];
 }
 
 - (void)updateFaveButton {
 	if ([favorites isInFavorites:self.currentSeries.seriesId]) {
-		self.faveButton.enabled= NO;
-		self.faveButton.image= [UIImage imageNamed:@"Heart"];
+		self.faveButton.enabled = NO;
+		self.faveButton.image = [UIImage imageNamed:@"Heart"];
 	} else {
-		self.faveButton.enabled= YES;
-		self.faveButton.image= [UIImage imageNamed:@"HeartAlt"];
+		self.faveButton.enabled = YES;
+		self.faveButton.image = [UIImage imageNamed:@"HeartAlt"];
 	}
 }
 
@@ -115,8 +115,8 @@
 }
 
 - (void)loadedSeriesBanner:(UIImage *)banner {
-	self.nameLabel.text= nil;
-	self.bannerView.image= banner;
+	self.nameLabel.text = nil;
+	self.bannerView.image = banner;
 }
 
 #pragma mark UITextViewDelegate
@@ -127,10 +127,6 @@
 
 #pragma mark -
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return YES;
-}
-
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
@@ -139,24 +135,24 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    self.currentSeries= nil;
-	self.bannerLoader= nil;
-	self.seriesLoader= nil;
-	self.faveButton= nil;
-	self.overviewView= nil;
-	self.bannerView= nil;
-	self.spindicator= nil;
+    self.currentSeries = nil;
+	self.bannerLoader = nil;
+	self.seriesLoader = nil;
+	self.faveButton = nil;
+	self.overviewView = nil;
+	self.bannerView = nil;
+	self.spindicator = nil;
 }
 
 - (void)dealloc {
-	self.faveButton= nil;
-	self.bannerLoader= nil;
-	self.seriesLoader= nil;
-	self.currentSeries= nil;
-	self.nameLabel= nil;
-	self.overviewView= nil;
-	self.bannerView= nil;
-	self.spindicator= nil;
+	self.faveButton = nil;
+	self.bannerLoader = nil;
+	self.seriesLoader = nil;
+	self.currentSeries = nil;
+	self.nameLabel = nil;
+	self.overviewView = nil;
+	self.bannerView = nil;
+	self.spindicator = nil;
     [super dealloc];
 }
 

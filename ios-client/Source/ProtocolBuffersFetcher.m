@@ -63,7 +63,7 @@
         self.receivedData = (contentLength == NSURLResponseUnknownLength) ? [NSMutableData data] : [NSMutableData dataWithCapacity:contentLength];
     } else {
         [self.communicationManager finnishedConnection];
-        NSLog(@"Connection Error: %d", response.statusCode);
+        [self.communicationManager displayErrorMessageForStatusCode:response.statusCode];
         [self cancelConnection];
     }
 }

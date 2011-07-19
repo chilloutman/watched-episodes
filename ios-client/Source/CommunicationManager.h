@@ -13,4 +13,6 @@
 - (void)startedConnection;
 - (void)finnishedConnection;
 
+- (void)displayErrorMessageForStatusCode:(NSInteger)statusCode;
+
 @end
