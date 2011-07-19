@@ -109,6 +109,8 @@
 
 - (void)dealloc {
 	self.model = nil;
+    self.episodesLoader = nil;
+    self.currentSeriesId = nil;
 	[super dealloc];
 }
 

@@ -40,13 +40,10 @@
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     for (PBEpisode *episode in episodesArray) {
         NSString *season = [NSString stringWithFormat:@"%d", episode.seasonNumber];
-        NSLog(@"season: %@", season);
         NSMutableArray *episodes = [dictionary objectForKey:season];
         if (episodes == nil) {
-            NSLog(@"create");
             [dictionary setObject:[NSMutableArray arrayWithObject:episode] forKey:season];
         } else {
-            NSLog(@"add to existant");
             [episodes addObject:episode];
         }
     }
