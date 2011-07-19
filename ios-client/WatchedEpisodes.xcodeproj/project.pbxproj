@@ -27,6 +27,7 @@
 		EF4AD01E12EA22A60058F78E /* SeriesDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF4AD01C12EA22A60058F78E /* SeriesDetail.xib */; };
 		EF4AD02612EA23BD0058F78E /* SeriesLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4AD02512EA23BD0058F78E /* SeriesLoader.m */; };
 		EF4AD02912EA23F10058F78E /* GetSeries.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4AD02812EA23F10058F78E /* GetSeries.pb.m */; };
+		EF5AA29313D5E32A00F6FBCF /* EpisodesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5AA29213D5E32A00F6FBCF /* EpisodesModel.m */; };
 		EF8D76F012D8DEDA0064C5B5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D76EA12D8DEDA0064C5B5 /* main.m */; };
 		EF8D76F112D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D76ED12D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.m */; };
 		EF8D76F212D8DEDA0064C5B5 /* SearchSeriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D76EF12D8DEDA0064C5B5 /* SearchSeriesViewController.m */; };
@@ -114,6 +115,8 @@
 		EF4AD02512EA23BD0058F78E /* SeriesLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeriesLoader.m; sourceTree = "<group>"; };
 		EF4AD02712EA23F10058F78E /* GetSeries.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetSeries.pb.h; sourceTree = "<group>"; };
 		EF4AD02812EA23F10058F78E /* GetSeries.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetSeries.pb.m; sourceTree = "<group>"; };
+		EF5AA29113D5E32A00F6FBCF /* EpisodesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EpisodesModel.h; sourceTree = "<group>"; };
+		EF5AA29213D5E32A00F6FBCF /* EpisodesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EpisodesModel.m; sourceTree = "<group>"; };
 		EF8D76EA12D8DEDA0064C5B5 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EF8D76EB12D8DEDA0064C5B5 /* WatchedEpisodes_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchedEpisodes_Prefix.pch; sourceTree = "<group>"; };
 		EF8D76EC12D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchedEpisodesAppDelegate.h; sourceTree = "<group>"; };
@@ -248,9 +251,9 @@
 				EFFD079312F0BE7A00F9075B /* NavigationControllerTab.h */,
 				EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */,
 				EFFD084F12F0C6F000F9075B /* UIViewControllers */,
+				EFFD085012F0C8CB00F9075B /* Model */,
 				EF5AA28413D5C64D00F6FBCF /* UI */,
 				EF12EF9D12EC8FE1007E380E /* Loader */,
-				EFFD085012F0C8CB00F9075B /* Model */,
 				EF8D79A612DA02170064C5B5 /* Communication */,
 				EFFD093212F22BAD00F9075B /* Util */,
 				EF8D76F312D8DEE40064C5B5 /* Other */,
@@ -333,6 +336,8 @@
 		EFFD085012F0C8CB00F9075B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EF5AA29113D5E32A00F6FBCF /* EpisodesModel.h */,
+				EF5AA29213D5E32A00F6FBCF /* EpisodesModel.m */,
 				EFFD085112F0C8FA00F9075B /* FavoritesMananger.h */,
 				EFFD085212F0C8FA00F9075B /* FavoritesMananger.m */,
 				EFFD259C13C236900051628A /* WatchedManager.h */,
@@ -497,6 +502,7 @@
 				AA4ED15313D0670B007D07F5 /* WatchedStateDocument.m in Sources */,
 				AAB1059413D587E900683DC4 /* CommunicationManager.m in Sources */,
 				AAB1059C13D59AC300683DC4 /* MessagePopupView.m in Sources */,
+				EF5AA29313D5E32A00F6FBCF /* EpisodesModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,11 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "EpisodesLoader.h"
 
-@interface EpisodesListViewController : UITableViewController {
-	NSString *currentSeriesId;
-	EpisodesLoader *episodesLoader;
-	NSArray *episodes;
-}
+@interface EpisodesListViewController : UITableViewController
 
 - (void)displayEpisodesForSeriesWithId:(NSString *)seriesId;
 

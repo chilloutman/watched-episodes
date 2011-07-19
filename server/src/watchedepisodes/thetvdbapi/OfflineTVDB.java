@@ -47,8 +47,8 @@ public class OfflineTVDB extends ProtobufTVDB {
 	@Override
 	public GeneratedMessage getAllEpisodes(String seriesId, String language) throws TVDBException {
 		GetAllEpisodesResponse.Builder response = GetAllEpisodesResponse.newBuilder();
-		for (int seasonNumber = 0; seasonNumber < 2; seasonNumber++) {
-			for (int episodeNumber = 0; episodeNumber < 2; episodeNumber++) {
+		for (int seasonNumber = 1; seasonNumber < 4; seasonNumber++) {
+			for (int episodeNumber = 1; episodeNumber < 11; episodeNumber++) {
 				PBEpisode.Builder episodeBuilder = PBEpisode.newBuilder();
 				episodeBuilder.setSeriesId(seriesId);
 				episodeBuilder.setEpisodeName("Episode " + String.valueOf(seasonNumber) + "x" + String.valueOf(episodeNumber));

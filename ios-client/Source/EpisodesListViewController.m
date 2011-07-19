@@ -8,35 +8,26 @@
 
 #import "EpisodesListViewController.h"
 #import "SeriesDetailViewController.h"
+#import "EpisodesModel.h"
+#import "EpisodesLoader.h"
 #import "WatchedManager.h"
 
 @interface EpisodesListViewController () <EpisodesLoaderDelegate>
 
 @property (nonatomic, copy) NSString *currentSeriesId;
+@property (nonatomic, retain) EpisodesModel *model;
 @property (nonatomic, retain) EpisodesLoader *episodesLoader;
-@property (nonatomic, retain) NSArray *episodes;
+
+- (PBEpisode *)episodeForIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
 
-@implementation EpisodesListViewController
-
-@synthesize currentSeriesId, episodesLoader, episodes;
-
-- (void)viewDidLoad {
-	self.title = @"Episodes";
-	self.navigationItem.backBarButtonItem.title = @"Episodes";
-	UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithTitle:@"Series Info" style:UIBarButtonItemStyleBordered target:self action:@selector(showSeriesInfo)];
-	self.navigationItem.rightBarButtonItem = infoButton;
-	[infoButton release];
+@implementation EpisodesListViewController {
+    EpisodesLoader *episodesLoader;
 }
 
-- (void)showSeriesInfo {
-	SeriesDetailViewController *seriesInfo = [[SeriesDetailViewController alloc] init];
-	[seriesInfo displayDetailsForSeriesWithId:self.currentSeriesId];
-	[self.navigationController pushViewController:seriesInfo animated:YES];
-	[seriesInfo release];
-}
+@synthesize currentSeriesId, model, episodesLoader;
 
 - (EpisodesLoader *)episodesLoader {
 	if (!episodesLoader) {
@@ -44,6 +35,22 @@
 		episodesLoader.delegate = self;
 	}
 	return episodesLoader;
+}
+
+- (void)viewDidLoad {
+	self.title = @"Episodes";
+	self.navigationItem.backBarButtonItem.title = @"Episodes";
+	UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithTitle:@"Series Info" style:UIBarButtonItemStyleBordered target:self action:@selector(showSeriesInfo)];
+	self.navigationItem.rightBarButtonItem = infoButton;
+	[infoButton release];
+    self.model = [[[EpisodesModel alloc] init] autorelease];
+}
+
+- (void)showSeriesInfo {
+	SeriesDetailViewController *seriesInfo = [[SeriesDetailViewController alloc] init];
+	[seriesInfo displayDetailsForSeriesWithId:self.currentSeriesId];
+	[self.navigationController pushViewController:seriesInfo animated:YES];
+	[seriesInfo release];
 }
 
 - (void)displayEpisodesForSeriesWithId:(NSString *)seriesId {
@@ -54,18 +61,22 @@
 #pragma mark EpisodesLoaderDelegate
 
 - (void)loadedEpisodes:(NSArray *)loadedEpisodes {
-	self.episodes = loadedEpisodes;
+    self.model = [EpisodesModel modelWithEpisodes:loadedEpisodes];
 	[self.tableView reloadData];
 }
 
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)t {
-	return 1;
+	return [self.model numberOfseasons];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return [NSString stringWithFormat:@"Season %d", section+1];
 }
 
 - (NSInteger)tableView:(UITableView *)t numberOfRowsInSection:(NSInteger)section {
-    return [self.episodes count];
+    return [self.model numberOfEpisodesForSeason:section+1];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)t cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -76,7 +87,7 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-	PBEpisode *episode = [self.episodes objectAtIndex:indexPath.row];
+	PBEpisode *episode = [self episodeForIndexPath:indexPath];
 	cell.textLabel.text = episode.episodeName;
 	WatchedManager *watchedManager = [ServiceLocator singletonForClass:[WatchedManager class]];
 	cell.accessoryType = ([watchedManager isEpisodeMarkedAsWatched:episode]) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
@@ -86,14 +97,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	WatchedManager *watchedManager = [ServiceLocator singletonForClass:[WatchedManager class]];
-	[watchedManager markEpisodeAsWatched:[self.episodes objectAtIndex:indexPath.row]];
+	[watchedManager markEpisodeAsWatched:[self episodeForIndexPath:indexPath]];
 	[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (PBEpisode *)episodeForIndexPath:(NSIndexPath *)indexPath {
+    return [[self.model episodesForSeason:indexPath.section+1] objectAtIndex:indexPath.row];
 }
 
 #pragma mark -
 
 - (void)dealloc {
-	self.episodesLoader = nil;
+	self.model = nil;
 	[super dealloc];
 }
 
