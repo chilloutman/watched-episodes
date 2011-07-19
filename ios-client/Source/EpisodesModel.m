@@ -39,10 +39,9 @@
 - (NSDictionary *)seasonsDictionaryForEpisodes:(NSArray *)episodesArray {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     for (PBEpisode *episode in episodesArray) {
-        NSString *season = [NSString stringWithFormat:@"%d", episode.seasonNumber];
-        NSMutableArray *episodes = [dictionary objectForKey:season];
+        NSMutableArray *episodes = [dictionary objectForKey:episode.seasonString];
         if (episodes == nil) {
-            [dictionary setObject:[NSMutableArray arrayWithObject:episode] forKey:season];
+            [dictionary setObject:[NSMutableArray arrayWithObject:episode] forKey:episode.seasonString];
         } else {
             [episodes addObject:episode];
         }

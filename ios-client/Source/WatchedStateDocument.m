@@ -43,26 +43,19 @@
 
 - (void)markEpisodeAsWatched:(PBEpisode *)episode {
 	if (![self isEpisodeMarkedAsWatched:episode]) {
-		// TODO: Create categories to make do this string conversions
-		NSString *seasonNumber = [NSString stringWithFormat:@"%d", episode.seasonNumber];
-		NSString *episodeNumber = [NSString stringWithFormat:@"%d", episode.episodeNumber];
-		
-		NSMutableArray *season = [self.state objectForKey:seasonNumber];
+		NSMutableArray *season = [self.state objectForKey:episode.seasonString];
 		if (season == nil) {
-			season = [NSMutableArray arrayWithObject:episodeNumber];
-			[self.state setObject:season forKey:seasonNumber];
+			season = [NSMutableArray arrayWithObject:episode.episodeNumberString];
+			[self.state setObject:season forKey:episode.seasonString];
 		} else {
-			[season addObject:episodeNumber];
+			[season addObject:episode.episodeNumberString];
 		}
         [self updateChangeCount:UIDocumentChangeDone];
 	}
 }
 
 - (BOOL)isEpisodeMarkedAsWatched:(PBEpisode *)episode {
-	// TODO: Create categories to make do this string conversions
-	NSString *season = [NSString stringWithFormat:@"%d", episode.seasonNumber];
-	NSString *episodeNumber = [NSString stringWithFormat:@"%d", episode.episodeNumber];
-	return [[self.state objectForKey:season] containsObject:episodeNumber];
+	return [[self.state objectForKey:episode.seasonString] containsObject:episode.episodeNumberString];
 }
 
 @end

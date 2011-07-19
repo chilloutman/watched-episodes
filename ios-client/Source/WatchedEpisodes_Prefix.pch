@@ -7,4 +7,5 @@
     #import <UIKit/UIKit.h>
 	#import "Constants.h"
 	#import "ServiceLocator.h"
+    #import "ProtocolCategories.h"
 #endif
