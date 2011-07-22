@@ -10,6 +10,8 @@
 
 @interface CommunicationManager : NSObject
 
++ (CommunicationManager *)shared;
+
 - (void)startedConnection;
 - (void)finnishedConnection;
 

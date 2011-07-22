@@ -11,8 +11,10 @@
 
 @interface WatchedManager : NSObject
 
++ (WatchedManager *)shared;
 - (void)markEpisodeAsWatched:(PBEpisode *)episode;
 - (BOOL)isEpisodeMarkedAsWatched:(PBEpisode *)episode;
+- (void)loadWatchedStateForSeries:(NSString *)seriesId withCompletionHandler:(void (^) ())handler;
 - (NSUInteger)numberOfUnwatchedEpisodesForSeries:(PBSeries *)series;
 
 @end

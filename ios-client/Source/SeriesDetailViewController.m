@@ -7,7 +7,7 @@
 //
 
 #import "SeriesDetailViewController.h"
-#import "FavoritesMananger.h"
+#import "FavoritesManager.h"
 
 
 @interface SeriesDetailViewController ()
@@ -56,12 +56,11 @@
 	}
 	
 	[self resetUI];
-	favorites = [ServiceLocator singletonForClass:[FavoritesMananger class]];
 }
 
 - (void)displayDetailsForSeriesWithId:(NSString *)seriesId {
 	if (![seriesId isEqualToString:self.currentSeries.seriesId]) {
-		PBSeries *series = [favorites seriesForSeriesId:seriesId];
+		PBSeries *series = [[FavoritesManager shared] seriesForSeriesId:seriesId];
 		if (series) {
 			[self displayDetailsForSeries:series];
 		} else {
@@ -93,13 +92,12 @@
 }
 
 - (IBAction)faveSeries {
-	FavoritesMananger *manager = [ServiceLocator singletonForClass:[FavoritesMananger class]];
-	[manager addSeriesToFavorites:self.currentSeries];
+	[[FavoritesManager shared] addSeriesToFavorites:self.currentSeries];
 	[self updateFaveButton];
 }
 
 - (void)updateFaveButton {
-	if ([favorites isInFavorites:self.currentSeries.seriesId]) {
+	if ([[FavoritesManager shared] isInFavorites:self.currentSeries.seriesId]) {
 		self.faveButton.enabled = NO;
 		self.faveButton.image = [UIImage imageNamed:@"Heart"];
 	} else {

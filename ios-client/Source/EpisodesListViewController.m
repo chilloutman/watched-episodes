@@ -54,8 +54,13 @@
 }
 
 - (void)displayEpisodesForSeriesWithId:(NSString *)seriesId {
-	self.currentSeriesId = seriesId;
-	[self.episodesLoader loadAllEpisodesForSeries:seriesId];
+    if (![self.currentSeriesId isEqualToString:seriesId]) {
+        self.currentSeriesId = seriesId;
+        [self.episodesLoader loadAllEpisodesForSeries:seriesId];
+        [[WatchedManager shared] loadWatchedStateForSeries:seriesId withCompletionHandler:^ {
+            [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationAutomatic];
+        }];
+    }
 }
 
 #pragma mark EpisodesLoaderDelegate
@@ -80,7 +85,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)t cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier= @"Cell";
+    static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [t dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -89,15 +94,13 @@
     
 	PBEpisode *episode = [self episodeForIndexPath:indexPath];
 	cell.textLabel.text = episode.episodeName;
-	WatchedManager *watchedManager = [ServiceLocator singletonForClass:[WatchedManager class]];
-	cell.accessoryType = ([watchedManager isEpisodeMarkedAsWatched:episode]) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
-    
+    cell.accessoryType = ([[WatchedManager shared] isEpisodeMarkedAsWatched:episode]) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+	
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	WatchedManager *watchedManager = [ServiceLocator singletonForClass:[WatchedManager class]];
-	[watchedManager markEpisodeAsWatched:[self episodeForIndexPath:indexPath]];
+	[[WatchedManager shared] markEpisodeAsWatched:[self episodeForIndexPath:indexPath]];
 	[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
@@ -106,6 +109,10 @@
 }
 
 #pragma mark -
+
+- (void)viewDidUnload {
+    self.currentSeriesId = nil;
+}
 
 - (void)dealloc {
 	self.model = nil;

@@ -7,10 +7,15 @@
 //
 
 #import "CommunicationManager.h"
+#import "ServiceLocator.h"
 #import "MessagePopupView.h"
 
 @implementation CommunicationManager {
     NSUInteger numberOfConnections;
+}
+
++ (CommunicationManager *)shared {
+    return [ServiceLocator singletonForClass:[CommunicationManager class]];
 }
 
 - (void)startedConnection {

@@ -7,13 +7,11 @@
 //
 
 #import "ProtocolBuffersFetcher.h"
-#import "ServiceLocator.h"
 #import "CommunicationManager.h"
 
 
 @interface ProtocolBuffersFetcher ()
 
-@property (nonatomic, readonly) CommunicationManager * communicationManager;
 @property (nonatomic, retain) NSURLConnection *connection;
 @property (nonatomic, retain) NSMutableData *receivedData;
 @property (nonatomic, assign) id<ProtocolBuffersFetcherDelegate> delegate;
@@ -27,10 +25,6 @@
 
 @synthesize connection, receivedData, delegate;
 
-- (CommunicationManager *)communicationManager {
-    return [ServiceLocator singletonForClass:[CommunicationManager class]];
-}
-
 - (void)sendProtocolBuffersRequestWithURLString:(NSString *)URL delegate:(id<ProtocolBuffersFetcherDelegate>)d {
 	self.delegate = d;
 #ifdef FAKEDATA
@@ -38,7 +32,7 @@
 #endif
 	NSURLRequest *request = [self protocolBuffersRequestWithURL:[NSURL URLWithString:URL]];
 	self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
-    [self.communicationManager startedConnection];
+    [[CommunicationManager shared] startedConnection];
 }
 
 - (NSURLRequest *)protocolBuffersRequestWithURL:(NSURL *)URL {
@@ -62,8 +56,8 @@
         long long contentLength = [response expectedContentLength];
         self.receivedData = (contentLength == NSURLResponseUnknownLength) ? [NSMutableData data] : [NSMutableData dataWithCapacity:contentLength];
     } else {
-        [self.communicationManager finnishedConnection];
-        [self.communicationManager displayErrorMessageForStatusCode:response.statusCode];
+        [[CommunicationManager shared] finnishedConnection];
+        [[CommunicationManager shared] displayErrorMessageForStatusCode:response.statusCode];
         [self cancelConnection];
     }
 }
@@ -75,7 +69,7 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
 	[self.delegate processData:self.receivedData];
 	[self cancelConnection];
-    [self.communicationManager finnishedConnection];
+    [[CommunicationManager shared] finnishedConnection];
 }
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {

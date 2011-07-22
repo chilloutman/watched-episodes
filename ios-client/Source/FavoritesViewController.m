@@ -7,7 +7,7 @@
 //
 
 #import "FavoritesViewController.h"
-#import "FavoritesMananger.h"
+#import "FavoritesManager.h"
 #import "SeriesDetailViewController.h"
 #import "EpisodesListViewController.h"
 
@@ -25,7 +25,6 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	favoritesManager= [ServiceLocator singletonForClass:[FavoritesMananger class]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -61,7 +60,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)t numberOfRowsInSection:(NSInteger)section {
-    return [favoritesManager.allFavoriteSeries count];
+    return [[FavoritesManager shared].allFavoriteSeries count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)t cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -72,7 +71,7 @@
         cell= [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-	PBSeries *series= [favoritesManager.allFavoriteSeries objectAtIndex:indexPath.row];
+	PBSeries *series= [[FavoritesManager shared].allFavoriteSeries objectAtIndex:indexPath.row];
     cell.textLabel.text= series.seriesName;
     
     return cell;
@@ -124,7 +123,7 @@
 	
 	EpisodesListViewController *list = [[EpisodesListViewController alloc] init];
 	[self.navigationController pushViewController:list animated:YES];
-	[list displayEpisodesForSeriesWithId:[[favoritesManager.allFavoriteSeries objectAtIndex:indexPath.row] seriesId]];
+	[list displayEpisodesForSeriesWithId:[[[FavoritesManager shared].allFavoriteSeries objectAtIndex:indexPath.row] seriesId]];
 	[list release];
 	
 }

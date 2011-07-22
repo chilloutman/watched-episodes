@@ -20,9 +20,16 @@
 @synthesize state;
 
 + (WatchedStateDocument *)documentForSeries:(NSString *)seriesId {
+    return [[[WatchedStateDocument alloc] initWithSeries:seriesId] autorelease];
+}
+
+- (id)initWithSeries:(NSString *)seriesId {
     NSString *filePath = [[FileHelper documentDirectoryNamed:@"watched"] stringByAppendingPathComponent:seriesId];
-    WatchedStateDocument *document = [[WatchedStateDocument alloc] initWithFileURL:[NSURL fileURLWithPath:filePath isDirectory:NO]];
-    return [document autorelease];
+    self = [super initWithFileURL:[NSURL fileURLWithPath:filePath isDirectory:NO]];
+    if (self != nil) {
+        self.state = [NSMutableDictionary dictionary];
+    }
+    return self;
 }
 
 - (BOOL)loadFromContents:(id)contents ofType:(NSString *)typeName error:(NSError **)outError {

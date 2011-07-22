@@ -9,12 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "ProtocolTypes.pb.h"
 
-@interface FavoritesMananger : NSObject {
+@interface FavoritesManager : NSObject {
 	NSMutableDictionary *favoriteSeries;
 }
 
 @property (nonatomic, readonly) NSArray *allFavoriteSeries;
 
++ (FavoritesManager *)shared;
 - (void)addSeriesToFavorites:(PBSeries *)series;
 - (BOOL)isInFavorites:(NSString *)seriesId;
 - (PBSeries *)seriesForSeriesId:(NSString *)seriesId;

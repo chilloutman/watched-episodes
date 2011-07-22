@@ -6,11 +6,12 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "FavoritesMananger.h"
+#import "FavoritesManager.h"
 #import "FileHelper.h"
+#import "ServiceLocator.h"
 
 
-@interface FavoritesMananger ()
+@interface FavoritesManager ()
 
 @property (nonatomic, retain) NSMutableDictionary *favoriteSeries;
 
@@ -22,12 +23,17 @@
 @end
 
 
-@implementation FavoritesMananger
+@implementation FavoritesManager
 
 @synthesize favoriteSeries;
 
++ (FavoritesManager *)shared {
+    return [ServiceLocator singletonForClass:[FavoritesManager class]];
+}
+
 - (id)init {
-	if ((self= [super init]) != nil) {
+    self = [super init];
+	if (self != nil) {
 		self.favoriteSeries= [NSMutableDictionary dictionary];
 		[self loadFavoritesFromFilessystem];
 	}
@@ -40,9 +46,9 @@
 	NSDirectoryEnumerator *dirEnum= [fileManager enumeratorAtPath:seriesDirectory];
 	
 	NSString *file;
-	while ((file= [dirEnum nextObject]) != nil) {
+	while ((file = [dirEnum nextObject]) != nil) {
 		if ([[file pathExtension] isEqualToString:@"series"]) {
-			PBSeries *series= [PBSeries parseFromData:[fileManager contentsAtPath:[seriesDirectory stringByAppendingPathComponent:file]]];
+			PBSeries *series = [PBSeries parseFromData:[fileManager contentsAtPath:[seriesDirectory stringByAppendingPathComponent:file]]];
 			[self.favoriteSeries setObject:series forKey:series.seriesId];
 		}
 	}

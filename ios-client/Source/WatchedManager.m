@@ -8,6 +8,7 @@
 
 #import "WatchedManager.h"
 #import "FileHelper.h"
+#import "ServiceLocator.h"
 #import "WatchedStateDocument.h"
 
 @interface WatchedManager () {
@@ -20,6 +21,10 @@
 
 
 @implementation WatchedManager
+
++ (WatchedManager *)shared {
+    return [ServiceLocator singletonForClass:[WatchedManager class]];
+}
 
 - (id)init {
 	self = [super init];
@@ -37,10 +42,21 @@
 - (void)markEpisodeAsWatched:(PBEpisode *)episode {
     WatchedStateDocument *document = [self documentForSeries:episode.seriesId];
     [document markEpisodeAsWatched:episode];
-//    [document openWithCompletionHandler: ^ (BOOL success) {
-//        [document markEpisodeAsWatched:episode];
-//        [document closeWithCompletionHandler:^ (BOOL success) { }];
-//    }];
+}
+
+- (void)loadWatchedStateForSeries:(NSString *)seriesId withCompletionHandler:(void (^) ())handler {
+    WatchedStateDocument *document = [self documentForSeries:seriesId];
+    if (document.documentState == UIDocumentStateClosed) {
+        [document openWithCompletionHandler:^ (BOOL success) {
+            if (success) {
+                handler();
+            } else {
+                NSLog(@"Could not open document");
+            }
+        }];
+    } else {
+        handler();
+    }
 }
 
 - (BOOL)isEpisodeMarkedAsWatched:(PBEpisode *)episode {

@@ -7,7 +7,6 @@
 //
 
 #import "SeriesBannerLoader.h"
-#import "ServiceLocator.h"
 #import "FileHelper.h"
 
 
