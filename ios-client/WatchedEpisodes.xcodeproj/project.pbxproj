@@ -37,6 +37,8 @@
 		EF8D790E12D934030064C5B5 /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8D78F812D933800064C5B5 /* libProtocolBuffers.a */; };
 		EF8D793512D9F9AA0064C5B5 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D793412D9F9AA0064C5B5 /* Constants.m */; };
 		EF8D79D412DA087D0064C5B5 /* ServiceLocator.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D79D312DA087D0064C5B5 /* ServiceLocator.m */; };
+		EFA0351713D9AB62004EB261 /* SeriesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFA0351613D9AB62004EB261 /* SeriesCell.xib */; };
+		EFA0351A13D9ABF1004EB261 /* SeriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA0351913D9ABF1004EB261 /* SeriesCell.m */; };
 		EFFD078F12F0BE1E00F9075B /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD078E12F0BE1E00F9075B /* FavoritesViewController.m */; };
 		EFFD079512F0BE7A00F9075B /* NavigationControllerTab.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */; };
 		EFFD085312F0C8FA00F9075B /* FavoritesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD085212F0C8FA00F9075B /* FavoritesManager.m */; };
@@ -138,11 +140,14 @@
 		EF8D79D312DA087D0064C5B5 /* ServiceLocator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceLocator.m; sourceTree = "<group>"; };
 		EF8D79D512DA09530064C5B5 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
 		EF8D79EE12DA0C380064C5B5 /* SearchLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchLoader.h; sourceTree = "<group>"; };
+		EFA0351613D9AB62004EB261 /* SeriesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeriesCell.xib; sourceTree = "<group>"; };
+		EFA0351813D9ABF1004EB261 /* SeriesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeriesCell.h; sourceTree = "<group>"; };
+		EFA0351913D9ABF1004EB261 /* SeriesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeriesCell.m; sourceTree = "<group>"; };
 		EFFD078D12F0BE1E00F9075B /* FavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesViewController.h; sourceTree = "<group>"; };
 		EFFD078E12F0BE1E00F9075B /* FavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesViewController.m; sourceTree = "<group>"; };
 		EFFD079312F0BE7A00F9075B /* NavigationControllerTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationControllerTab.h; sourceTree = "<group>"; };
 		EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationControllerTab.m; sourceTree = "<group>"; };
-		EFFD085112F0C8FA00F9075B /* FavoritesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; path = FavoritesManager.h; sourceTree = "<group>"; };
+		EFFD085112F0C8FA00F9075B /* FavoritesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesManager.h; sourceTree = "<group>"; };
 		EFFD085212F0C8FA00F9075B /* FavoritesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesManager.m; sourceTree = "<group>"; };
 		EFFD08B112F21BBC00F9075B /* GetAllEpisodes.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetAllEpisodes.pb.h; sourceTree = "<group>"; };
 		EFFD08B212F21BBC00F9075B /* GetAllEpisodes.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetAllEpisodes.pb.m; sourceTree = "<group>"; };
@@ -202,6 +207,7 @@
 				2899E5210DE3E06400AC0155 /* SearchSeries.xib */,
 				AAB1059513D5993500683DC4 /* MessagePopupView.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				EFA0351613D9AB62004EB261 /* SeriesCell.xib */,
 				EFFD0AEC12F5D2A200F9075B /* Images */,
 				8D1107310486CEB800E47090 /* WatchedEpisodes-Info.plist */,
 			);
@@ -240,6 +246,8 @@
 			children = (
 				AAB1059A13D59AC200683DC4 /* MessagePopupView.h */,
 				AAB1059B13D59AC200683DC4 /* MessagePopupView.m */,
+				EFA0351813D9ABF1004EB261 /* SeriesCell.h */,
+				EFA0351913D9ABF1004EB261 /* SeriesCell.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -471,6 +479,7 @@
 				EFFD0B1B12F5D50D00F9075B /* HeartAlt@2x.png in Resources */,
 				EF3555E113D3503A00456DBD /* Find@2x.png in Resources */,
 				AAB1059613D5993500683DC4 /* MessagePopupView.xib in Resources */,
+				EFA0351713D9AB62004EB261 /* SeriesCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,6 +518,7 @@
 				AAB1059C13D59AC300683DC4 /* MessagePopupView.m in Sources */,
 				EF5AA29313D5E32A00F6FBCF /* EpisodesModel.m in Sources */,
 				EF5AA2A213D5F21B00F6FBCF /* ProtocolCategories.m in Sources */,
+				EFA0351A13D9ABF1004EB261 /* SeriesCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

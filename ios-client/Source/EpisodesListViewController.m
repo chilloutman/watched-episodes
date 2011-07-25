@@ -57,9 +57,6 @@
     if (![self.currentSeriesId isEqualToString:seriesId]) {
         self.currentSeriesId = seriesId;
         [self.episodesLoader loadAllEpisodesForSeries:seriesId];
-        [[WatchedManager shared] loadWatchedStateForSeries:seriesId withCompletionHandler:^ {
-            [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationAutomatic];
-        }];
     }
 }
 

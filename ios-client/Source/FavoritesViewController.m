@@ -8,8 +8,10 @@
 
 #import "FavoritesViewController.h"
 #import "FavoritesManager.h"
+#import "WatchedManager.h"
 #import "SeriesDetailViewController.h"
 #import "EpisodesListViewController.h"
+#import "SeriesCell.h"
 
 
 @interface FavoritesViewController ()
@@ -21,10 +23,14 @@
 
 @implementation FavoritesViewController
 
+static NSString *CellIdentifier = @"SeriesCell";
+
 @synthesize seriesController;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    UINib *cellNib = [UINib nibWithNibName:CellIdentifier bundle:nil];
+    [self.tableView registerNib:cellNib forCellReuseIdentifier:CellIdentifier];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -48,7 +54,7 @@
 
 - (SeriesDetailViewController *)seriesController {
 	if (!seriesController) {
-		seriesController= [[SeriesDetailViewController alloc] init];
+		seriesController = [[SeriesDetailViewController alloc] init];
 	}
 	return seriesController;
 }
@@ -64,15 +70,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)t cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier= @"Cell";
+    SeriesCell *cell = [t dequeueReusableCellWithIdentifier:CellIdentifier];
+    PBSeries *series = [[FavoritesManager shared].allFavoriteSeries objectAtIndex:indexPath.row];
+    cell.series = series;
     
-    UITableViewCell *cell= [t dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell= [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
-	PBSeries *series= [[FavoritesManager shared].allFavoriteSeries objectAtIndex:indexPath.row];
-    cell.textLabel.text= series.seriesName;
+    [[WatchedManager shared] loadWatchedStateForSeries:series.seriesId withCompletionHandler:^ {
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }];
     
     return cell;
 }

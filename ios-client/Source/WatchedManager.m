@@ -13,8 +13,10 @@
 
 @interface WatchedManager () {
 	NSMutableDictionary *documents;
+    NSMutableDictionary *openDocuments;
 }
 
+- (BOOL)documentHasBeenOpened:(WatchedStateDocument *)document;
 - (WatchedStateDocument *)documentForSeries:(NSString *)seriesId;
 
 @end
@@ -30,6 +32,7 @@
 	self = [super init];
 	if (self) {
 		documents = [[NSMutableDictionary alloc] init];
+        openDocuments = [[NSMutableDictionary alloc] init];
 	}
 	return self;
 }
@@ -46,7 +49,10 @@
 
 - (void)loadWatchedStateForSeries:(NSString *)seriesId withCompletionHandler:(void (^) ())handler {
     WatchedStateDocument *document = [self documentForSeries:seriesId];
-    if (document.documentState == UIDocumentStateClosed) {
+    if ([self documentHasBeenOpened:document]) {
+        handler();
+    } else {
+        [openDocuments setObject:document forKey:seriesId];
         [document openWithCompletionHandler:^ (BOOL success) {
             if (success) {
                 handler();
@@ -54,14 +60,16 @@
                 NSLog(@"Could not open document");
             }
         }];
-    } else {
-        handler();
     }
 }
 
 - (BOOL)isEpisodeMarkedAsWatched:(PBEpisode *)episode {
     WatchedStateDocument *document = [self documentForSeries:episode.seriesId];
     return [document isEpisodeMarkedAsWatched:episode];
+}
+
+- (BOOL)documentHasBeenOpened:(WatchedStateDocument *)document {
+    return ([[openDocuments allValues] containsObject:document]);
 }
 
 - (WatchedStateDocument *)documentForSeries:(NSString *)seriesId {
@@ -75,6 +83,7 @@
 
 - (void)dealloc {
 	[documents release];
+    [openDocuments release];
 	[super dealloc];
 }
 
