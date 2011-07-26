@@ -47,9 +47,9 @@
 }
 
 - (void)showSeriesInfo {
-	SeriesDetailViewController *seriesInfo = [[SeriesDetailViewController alloc] init];
-	[seriesInfo displayDetailsForSeriesWithId:self.currentSeriesId];
+	SeriesDetailViewController *seriesInfo = [[SeriesDetailViewController alloc] init];	
 	[self.navigationController pushViewController:seriesInfo animated:YES];
+    [seriesInfo displayDetailsForSeriesWithId:self.currentSeriesId];
 	[seriesInfo release];
 }
 

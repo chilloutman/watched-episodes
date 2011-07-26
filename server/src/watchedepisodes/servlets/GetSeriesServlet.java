@@ -4,9 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import watchedepisodes.dao.DataAccessException;
+import watchedepisodes.dao.DataManager;
 import watchedepisodes.entities.Series;
-import watchedepisodes.thetvdbapi.ProtobufTVDB;
-import watchedepisodes.thetvdbapi.TVDBException;
 import watchedepisodes.tools.ServiceLocator;
 
 import com.google.protobuf.GeneratedMessage;
@@ -22,18 +21,20 @@ public class GetSeriesServlet extends AbstractServlet {
 		language = getLanguage(request);
 		
 		try {
-			if (clientAcceptsProtocolBuffers(request)) {
-				ProtobufTVDB tvdb = ServiceLocator.getProtobufTVDB(clientAcceptsProtocolBuffers(request));
-				GeneratedMessage message = tvdb.getSeries(id, language);
-				writeProtobufResponse(response, message);
-			} else {
-				Series series = ServiceLocator.getDataManager().getSeries(id, language);
-				writeHtmlResponse(response, getHtml(series));
-			}
+			writeResponse(request, response);
 		} catch (DataAccessException e) {
 			response.setStatus(500);
-		} catch (TVDBException e) {
-			response.setStatus(500); 
+		}
+	}
+	
+	private void writeResponse (HttpServletRequest request, HttpServletResponse response) throws DataAccessException {
+		DataManager dataManager = ServiceLocator.getDataManager();
+		if (clientAcceptsProtocolBuffers(request)) {
+			GeneratedMessage message = dataManager.getGetSeriesMessage(id, language, clientWantsDebugData(request));
+			writeProtobufResponse(response, message);
+		} else {
+			Series series = dataManager.getSeries(id, language);
+			writeHtmlResponse(response, getHtml(series));
 		}
 	}
 	

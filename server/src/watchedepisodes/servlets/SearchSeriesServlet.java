@@ -21,7 +21,6 @@ public class SearchSeriesServlet extends AbstractServlet {
 	public void doGet (HttpServletRequest request, HttpServletResponse response) {
 		searchString = getSeriesName(request);
 		language = getLanguage(request);
-		
 		if (clientAcceptsProtocolBuffers(request)) {
 			try {
 				ProtobufTVDB tvdb = ServiceLocator.getProtobufTVDB(clientWantsDebugData(request));
