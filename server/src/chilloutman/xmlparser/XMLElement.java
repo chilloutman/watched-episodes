@@ -13,7 +13,7 @@ public class XMLElement {
 	}
 	
 	public String getParentName() {
-		return parentName;
+		return (parentName == null) ? "" : parentName;
 	}
 	public void setParentName(String parentName) {
 		this.parentName = parentName;

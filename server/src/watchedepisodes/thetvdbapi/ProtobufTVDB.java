@@ -1,5 +1,6 @@
 package watchedepisodes.thetvdbapi;
 
+import watchedepisodes.thetvdbapi.xmlparser.handlers.UpdatesHandler;
 import watchedepisodes.thetvdbapi.xmlparser.protobuf.EpisodesHandler;
 import watchedepisodes.thetvdbapi.xmlparser.protobuf.SearchHandler;
 import watchedepisodes.thetvdbapi.xmlparser.protobuf.SeriesHandler;
@@ -32,6 +33,13 @@ public class ProtobufTVDB extends AbstractTVDB <GeneratedMessage, GeneratedMessa
 	public GeneratedMessage getAllEpisodes (String seriesId, String language) throws TVDBException {
 		String URL = URLFactory.getGetAllEpisodesURL(seriesId, language);
 		Request<GeneratedMessage> request = new Request<GeneratedMessage>(URL, new EpisodesHandler(seriesId));
+		agent.performRequest(request);
+		return request.getHandler().getResult();
+	}
+	
+	public TVDBUpdates getUpdates (long unixTime) throws TVDBException {
+		String URL = URLFactory.getGetUpdatesURL(unixTime);
+		Request<TVDBUpdates> request = new Request<TVDBUpdates>(URL, new UpdatesHandler());
 		agent.performRequest(request);
 		return request.getHandler().getResult();
 	}

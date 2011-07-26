@@ -16,8 +16,6 @@ public class CachedResponse {
 	private long unixTime;
 	@Persistent
 	private Blob messsageBlob;
-	@Persistent
-	private String messageType;
 	
 	public CachedResponse() {
 		unixTime = System.currentTimeMillis() / 1000L;

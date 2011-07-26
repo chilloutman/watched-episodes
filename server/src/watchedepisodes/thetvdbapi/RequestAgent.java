@@ -12,6 +12,7 @@ class RequestAgent {
 	private TVDBParser parser = new TVDBParser();
 	
 	void performRequest (XMLRequest request) throws TVDBException {
+		System.out.println("Feching URL: " + request.getURL());
 		InputStream xml = fetchURL(request.getURL());	
 		try {
 			parser.parse(xml, request.getHandler());

@@ -1,10 +1,13 @@
 package watchedepisodes.tools;
 
 import javax.jdo.JDOHelper;
+import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 
 import watchedepisodes.dao.DataManager;
+import watchedepisodes.entities.ApplicationProperties;
+import watchedepisodes.entities.KeyMaster;
 import watchedepisodes.thetvdbapi.OfflineTVDB;
 import watchedepisodes.thetvdbapi.TVDB;
 import watchedepisodes.thetvdbapi.ProtobufTVDB;
@@ -47,5 +50,16 @@ public abstract class ServiceLocator {
 	public static DataManager getDataManager () {
 		if (dataManager == null) dataManager = new DataManager();
 		return dataManager;
+	}
+	
+	public static ApplicationProperties getApplicationProperties (PersistenceManager pm) {
+		ApplicationProperties properties;
+		try {
+			properties = pm.getObjectById(ApplicationProperties.class, KeyMaster.getApplicationPropertiesKey());
+		} catch (JDOObjectNotFoundException e) {
+			properties = new ApplicationProperties();
+			pm.makePersistent(properties);
+		}
+		return properties;
 	}
 }

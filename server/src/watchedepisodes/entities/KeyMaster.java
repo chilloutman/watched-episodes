@@ -11,5 +11,10 @@ public class KeyMaster {
 	public static Key getKeyForCachedGetSeriesResponse (String id, String language) {
 		String keyString = GetSeriesResponse.class.getSimpleName() + separator + id + separator + language;
 		return KeyFactory.createKey(CachedResponse.class.getSimpleName(), keyString);
-	} 
+	}
+	
+	public static Key getApplicationPropertiesKey () {
+		String className = ApplicationProperties.class.getSimpleName();
+		return KeyFactory.createKey(className, className);
+	}
 }
