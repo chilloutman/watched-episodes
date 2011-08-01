@@ -28,7 +28,7 @@ public class UpdatesHandler extends SAXHandler<TVDBUpdates> {
 		if (element.getParentName().equals(rootElement)) {
 			if (element.getName().equals("Series")) {
 				updates.addSeriesId(element.getContent());
-			} else if (element.getParentName().equals("Time")) {
+			} else if (element.getName().equals("Time")) {
 				updates.setUnixTime(Long.parseLong(element.getContent()));
 			}
 		}

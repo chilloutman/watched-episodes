@@ -57,8 +57,7 @@ public abstract class ServiceLocator {
 		try {
 			properties = pm.getObjectById(ApplicationProperties.class, KeyMaster.getApplicationPropertiesKey());
 		} catch (JDOObjectNotFoundException e) {
-			properties = new ApplicationProperties();
-			pm.makePersistent(properties);
+			properties = pm.makePersistent(new ApplicationProperties());
 		}
 		return properties;
 	}

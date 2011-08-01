@@ -1,5 +1,7 @@
 package watchedepisodes.servlets;
 
+import java.io.IOException;
+
 import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -30,12 +32,23 @@ public class RecacheServlet extends AbstractServlet {
 				invalidateEntireCache(pm);
 			} else {
 				long time = recache(pm, properties.getPreviousRecacheTime());
+				try {
+					response.getWriter().append("Returned time: " + time + "<br />");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				properties.setPreviousRecacheTime(time);
 			}
 		} catch (TVDBException e) {
 			response.setStatus(500);
 		} finally {
 			pm.close();
+		}
+		
+		try {
+			response.getWriter().append("" + System.currentTimeMillis() / 1000L);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -63,7 +76,7 @@ public class RecacheServlet extends AbstractServlet {
 			try {
 				CachedResponse response = pm.getObjectById(CachedResponse.class, key);
 				response.setMessage(tvdb.getSeries(seriesId, language));
-				response.setUnixTime(time);
+				response.setUnixTime(updates.getUnixTime());
 				System.out.println("Recached response with id " + key.getName());
 			} catch (JDOObjectNotFoundException e) {
 				// Ignore
