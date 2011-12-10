@@ -11,6 +11,7 @@
 #import "WatchedManager.h"
 #import "SeriesDetailViewController.h"
 #import "EpisodesListViewController.h"
+#import "LastWatchedEpisodeViewController.h"
 #import "SeriesCell.h"
 
 
@@ -125,11 +126,18 @@ static NSString *CellIdentifier = @"SeriesCell";
 //	[self.navigationController pushViewController:self.seriesController animated:YES];
 //	[self.seriesController displayDetailsForSeries:[favoritesManager.allFavoriteSeries objectAtIndex:indexPath.row]];
 	
-	EpisodesListViewController *list = [[EpisodesListViewController alloc] init];
-	[self.navigationController pushViewController:list animated:YES];
-	[list displayEpisodesForSeriesWithId:[[[FavoritesManager shared].allFavoriteSeries objectAtIndex:indexPath.row] seriesId]];
-	[list release];
+	PBSeries *series = [[FavoritesManager shared].allFavoriteSeries objectAtIndex:indexPath.row];
+//	NSString *seriesId = [series seriesId];
 	
+//	EpisodesListViewController *list = [[EpisodesListViewController alloc] init];
+//	[self.navigationController pushViewController:list animated:YES];
+//	[list displayEpisodesForSeriesWithId:[[[FavoritesManager shared].allFavoriteSeries objectAtIndex:indexPath.row] seriesId]];
+//	[list release];
+	
+	LastWatchedEpisodeViewController *lastWatched = [[LastWatchedEpisodeViewController alloc] init];
+	[self.navigationController pushViewController:lastWatched animated:YES];
+	[lastWatched displayLastWatchedEpisodeForSeries:series];
+	[lastWatched release];
 }
 
 #pragma mark -

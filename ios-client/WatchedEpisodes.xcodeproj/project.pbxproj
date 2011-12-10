@@ -37,6 +37,8 @@
 		EF8D790E12D934030064C5B5 /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8D78F812D933800064C5B5 /* libProtocolBuffers.a */; };
 		EF8D793512D9F9AA0064C5B5 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D793412D9F9AA0064C5B5 /* Constants.m */; };
 		EF8D79D412DA087D0064C5B5 /* ServiceLocator.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D79D312DA087D0064C5B5 /* ServiceLocator.m */; };
+		EF96D38B1493BDBF0060BD13 /* LastWatchedEpisodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96D3891493BDBF0060BD13 /* LastWatchedEpisodeViewController.m */; };
+		EF96D38C1493BDBF0060BD13 /* LastWatchedEpisode.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF96D38A1493BDBF0060BD13 /* LastWatchedEpisode.xib */; };
 		EFA0351713D9AB62004EB261 /* SeriesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFA0351613D9AB62004EB261 /* SeriesCell.xib */; };
 		EFA0351A13D9ABF1004EB261 /* SeriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA0351913D9ABF1004EB261 /* SeriesCell.m */; };
 		EFFD078F12F0BE1E00F9075B /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD078E12F0BE1E00F9075B /* FavoritesViewController.m */; };
@@ -140,6 +142,9 @@
 		EF8D79D312DA087D0064C5B5 /* ServiceLocator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceLocator.m; sourceTree = "<group>"; };
 		EF8D79D512DA09530064C5B5 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
 		EF8D79EE12DA0C380064C5B5 /* SearchLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchLoader.h; sourceTree = "<group>"; };
+		EF96D3881493BDBF0060BD13 /* LastWatchedEpisodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastWatchedEpisodeViewController.h; sourceTree = "<group>"; };
+		EF96D3891493BDBF0060BD13 /* LastWatchedEpisodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LastWatchedEpisodeViewController.m; sourceTree = "<group>"; };
+		EF96D38A1493BDBF0060BD13 /* LastWatchedEpisode.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LastWatchedEpisode.xib; path = Source/LastWatchedEpisode.xib; sourceTree = "<group>"; };
 		EFA0351613D9AB62004EB261 /* SeriesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeriesCell.xib; sourceTree = "<group>"; };
 		EFA0351813D9ABF1004EB261 /* SeriesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeriesCell.h; sourceTree = "<group>"; };
 		EFA0351913D9ABF1004EB261 /* SeriesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeriesCell.m; sourceTree = "<group>"; };
@@ -203,6 +208,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EF96D38A1493BDBF0060BD13 /* LastWatchedEpisode.xib */,
 				EF4AD01C12EA22A60058F78E /* SeriesDetail.xib */,
 				2899E5210DE3E06400AC0155 /* SearchSeries.xib */,
 				AAB1059513D5993500683DC4 /* MessagePopupView.xib */,
@@ -340,6 +346,8 @@
 				EF4AD01B12EA22A60058F78E /* SeriesDetailViewController.m */,
 				EF2AD7FC1332800A00585E3A /* EpisodesListViewController.h */,
 				EF2AD7FD1332800A00585E3A /* EpisodesListViewController.m */,
+				EF96D3881493BDBF0060BD13 /* LastWatchedEpisodeViewController.h */,
+				EF96D3891493BDBF0060BD13 /* LastWatchedEpisodeViewController.m */,
 			);
 			name = UIViewControllers;
 			sourceTree = "<group>";
@@ -480,6 +488,7 @@
 				EF3555E113D3503A00456DBD /* Find@2x.png in Resources */,
 				AAB1059613D5993500683DC4 /* MessagePopupView.xib in Resources */,
 				EFA0351713D9AB62004EB261 /* SeriesCell.xib in Resources */,
+				EF96D38C1493BDBF0060BD13 /* LastWatchedEpisode.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +528,7 @@
 				EF5AA29313D5E32A00F6FBCF /* EpisodesModel.m in Sources */,
 				EF5AA2A213D5F21B00F6FBCF /* ProtocolCategories.m in Sources */,
 				EFA0351A13D9ABF1004EB261 /* SeriesCell.m in Sources */,
+				EF96D38B1493BDBF0060BD13 /* LastWatchedEpisodeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

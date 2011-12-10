@@ -38,6 +38,7 @@
 }
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
 	self.title = @"Episodes";
 	self.navigationItem.backBarButtonItem.title = @"Episodes";
 	UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithTitle:@"Series Info" style:UIBarButtonItemStyleBordered target:self action:@selector(showSeriesInfo)];
