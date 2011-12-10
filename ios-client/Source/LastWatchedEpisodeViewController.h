@@ -8,13 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LastWatchedEpisodeViewController : UIViewController
+@interface LastWatchedEpisodeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 - (void)displayLastWatchedEpisodeForSeries:(PBSeries *)series;
 
 @property (nonatomic, retain) IBOutlet UIImageView *bannerView;
+@property (nonatomic, retain) IBOutlet UITableViewCell *allEpisodesCell;
+
+@property (nonatomic, retain) IBOutlet UITableViewCell *seasonCell;
 @property (nonatomic, retain) IBOutlet UILabel *seasonLabel;
 @property (nonatomic, retain) IBOutlet UIStepper *seasonStepper;
+
+@property (nonatomic, retain) IBOutlet UITableViewCell *episodeCell;
 @property (nonatomic, retain) IBOutlet UILabel *episodeLabel;
 @property (nonatomic, retain) IBOutlet UIStepper *episodeStepper;
 

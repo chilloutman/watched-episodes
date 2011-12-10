@@ -8,6 +8,7 @@
 
 #import "LastWatchedEpisodeViewController.h"
 #import "SeriesBannerLoader.h"
+#import "EpisodesListViewController.h"
 
 @interface LastWatchedEpisodeViewController () <SeriesBannerLoaderDelegate>
 
@@ -20,7 +21,9 @@
 @implementation LastWatchedEpisodeViewController
 
 @synthesize bannerLoader, currentSeriesId;
-@synthesize bannerView, seasonLabel, seasonStepper, episodeLabel, episodeStepper;
+@synthesize bannerView, allEpisodesCell;
+@synthesize seasonCell, seasonLabel, seasonStepper;
+@synthesize episodeCell, episodeLabel, episodeStepper;
 
 - (NSString *)nibName {
 	return @"LastWatchedEpisode";
@@ -35,11 +38,11 @@
 }
 
 - (void)displayLastWatchedEpisodeForSeries:(PBSeries *)series {
-	//if (![seriesId isEqualToString:self.currentSeriesId]) {
-		//self.currentSeriesId= seriesId;
+	if (![[series seriesId] isEqualToString:self.currentSeriesId]) {
+		self.currentSeriesId= [series seriesId];
 		self.bannerView.image = nil;
 		[self.bannerLoader loadSeriesBanner:series.banner];
-	//}
+	}
 }
 
 - (void)viewDidLoad {
@@ -64,13 +67,50 @@
 	self.bannerView.image = banner;
 }
 
+#pragma mark UITableView
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+	return 2;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	switch (section) {
+		case 0: return 2;
+		case 1: return 1;
+		default: return 0;
+	}
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	UITableViewCell *cell = nil;
+	
+	if (indexPath.section == 0) {
+		cell =  (indexPath.row == 0) ? self.seasonCell : self.episodeCell;
+	} else if (indexPath.section == 1) {
+		cell = self.allEpisodesCell;
+	}
+	
+	return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (self.allEpisodesCell.selected) {
+		EpisodesListViewController *episodesList= [[EpisodesListViewController alloc] init];
+		[self.navigationController pushViewController:episodesList animated:YES];
+		[episodesList displayEpisodesForSeriesWithId:self.currentSeriesId];
+		[episodesList release];
+	}
+}
+
 #pragma mark -
 
 - (void)viewDidUnload {
 	[super viewDidUnload];
 	self.bannerView = nil;
+	self.seasonCell = nil;
 	self.seasonLabel = nil;
 	self.seasonStepper = nil;
+	self.seasonCell = nil;
 	self.episodeLabel = nil;
 	self.episodeStepper = nil;
 }
@@ -78,6 +118,14 @@
 - (void)dealloc {
 	self.bannerLoader = nil;
 	self.currentSeriesId = nil;
+	
+	self.bannerView = nil;
+	self.seasonCell = nil;
+	self.seasonLabel = nil;
+	self.seasonStepper = nil;
+	self.seasonCell = nil;
+	self.episodeLabel = nil;
+	self.episodeStepper = nil;
 }
 
 - (void)didReceiveMemoryWarning {
