@@ -131,13 +131,13 @@ static NSString *CellIdentifier = @"SeriesCell";
 */
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[self.lastWatchedController displayLastWatchedEpisodeForSeries:[self seriesForIndexPath:indexPath]];
+	self.lastWatchedController.series = [self seriesForIndexPath:indexPath];
 	[self.navigationController pushViewController:self.lastWatchedController animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
 	[self.navigationController pushViewController:self.seriesController animated:YES];
-	[self.seriesController displayDetailsForSeries:[self seriesForIndexPath:indexPath]];
+	self.seriesController.seriesId = [self seriesForIndexPath:indexPath].seriesId;
 }
 
 - (PBSeries *)seriesForIndexPath:(NSIndexPath *)indexPath {

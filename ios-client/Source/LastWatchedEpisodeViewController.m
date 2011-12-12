@@ -13,7 +13,8 @@
 
 @interface LastWatchedEpisodeViewController () <SeriesBannerLoaderDelegate>
 
-@property (nonatomic, copy) NSString *currentSeriesId;
+- (void)refreshUI;
+
 @property (nonatomic, retain) SeriesBannerLoader *bannerLoader;
 
 @end
@@ -21,7 +22,7 @@
 
 @implementation LastWatchedEpisodeViewController
 
-@synthesize bannerLoader, currentSeriesId;
+@synthesize bannerLoader, series;
 @synthesize bannerView, allEpisodesCell;
 @synthesize seasonCell, seasonLabel, seasonStepper;
 @synthesize episodeCell, episodeLabel, episodeStepper;
@@ -38,18 +39,24 @@
 	return bannerLoader;
 }
 
-- (void)displayLastWatchedEpisodeForSeries:(PBSeries *)series {
-	if (![[series seriesId] isEqualToString:self.currentSeriesId]) {
-		self.currentSeriesId = [series seriesId];
-		self.bannerView.image = nil;
-		[self.bannerLoader loadSeriesBanner:series.banner];
+- (void)setSeries:(PBSeries *)newSeries {
+	if (![newSeries.seriesId isEqualToString:self.series.seriesId]) {
+		[series release];
+		series = [newSeries retain];
+		[self refreshUI];
 	}
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	self.episodeStepper.value = [[WatchedManager shared] lastWatchedEpisodeNumberForSeriesId:self.currentSeriesId];
+	[self refreshUI];
+}
+
+- (void)refreshUI {
+	self.bannerView.image = nil;
+	[self.bannerLoader loadSeriesBanner:self.series.banner];
+	self.episodeStepper.value = [[WatchedManager shared] lastWatchedEpisodeNumberForSeriesId:self.series.seriesId];
 	[self episodeStepperValueChanged:self.episodeStepper];
-	self.seasonStepper.value = [[WatchedManager shared] lastWatchedEpisodeSeasonNumberForSeriesId:self.currentSeriesId];
+	self.seasonStepper.value = [[WatchedManager shared] lastWatchedEpisodeSeasonNumberForSeriesId:self.series.seriesId];
 	[self seasonStepperValueChanged:self.seasonStepper];
 }
 
@@ -60,13 +67,13 @@
 - (IBAction)seasonStepperValueChanged:(UIStepper *)sender {
 	NSUInteger season = seasonStepper.value;
 	self.seasonLabel.text = [NSString stringWithFormat:@"Season %d", season];
-	[[WatchedManager shared] setLastWatchedEpisodeSeasonNumber:season forSeries:self.currentSeriesId];		
+	[[WatchedManager shared] setLastWatchedEpisodeSeasonNumber:season forSeries:self.series.seriesId];
 }
 
 - (IBAction)episodeStepperValueChanged:(UIStepper *)sender {
 	NSUInteger episode = episodeStepper.value;
 	self.episodeLabel.text = [NSString stringWithFormat:@"Episode %d", episode];
-	[[WatchedManager shared] setLastWatchedEpisodeNumber:episode forSeries:self.currentSeriesId];
+	[[WatchedManager shared] setLastWatchedEpisodeNumber:episode forSeries:self.series.seriesId];
 }
 
 #pragma mark SeriesBannerLoaderDelegate
@@ -105,7 +112,7 @@
 	if (self.allEpisodesCell.selected) {
 		EpisodesListViewController *episodesList= [[EpisodesListViewController alloc] init];
 		[self.navigationController pushViewController:episodesList animated:YES];
-		[episodesList displayEpisodesForSeriesWithId:self.currentSeriesId];
+		[episodesList displayEpisodesForSeriesWithId:self.series.seriesId];
 		[episodesList release];
 	}
 }
@@ -125,7 +132,7 @@
 
 - (void)dealloc {
 	self.bannerLoader = nil;
-	self.currentSeriesId = nil;
+	self.series = nil;
 	
 	self.bannerView = nil;
 	self.seasonCell = nil;
@@ -135,13 +142,5 @@
 	self.episodeLabel = nil;
 	self.episodeStepper = nil;
 }
-
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 
 @end

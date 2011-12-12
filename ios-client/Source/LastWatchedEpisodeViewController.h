@@ -10,7 +10,10 @@
 
 @interface LastWatchedEpisodeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-- (void)displayLastWatchedEpisodeForSeries:(PBSeries *)series;
+@property (nonatomic, retain) PBSeries *series;
+
+
+#pragma mark UI
 
 @property (nonatomic, retain) IBOutlet UIImageView *bannerView;
 @property (nonatomic, retain) IBOutlet UITableViewCell *allEpisodesCell;

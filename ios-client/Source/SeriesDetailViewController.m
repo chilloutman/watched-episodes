@@ -12,20 +12,21 @@
 
 @interface SeriesDetailViewController ()
 
+- (void)refreshUI;
 - (void)resetUI;
 - (void)loadSeriesForSeriesId:(NSString *)seriesId;
 - (void)updateFaveButton;
 
 @property (nonatomic, retain) SeriesLoader *seriesLoader;
 @property (nonatomic, retain) SeriesBannerLoader *bannerLoader;
-@property (nonatomic, retain) PBSeries *currentSeries;
+@property (nonatomic, retain) PBSeries *series;
 
 @end
 
 
 @implementation SeriesDetailViewController
 
-@synthesize seriesLoader, bannerLoader, currentSeries, showsFaveButton;
+@synthesize seriesLoader, bannerLoader, showsFaveButton, series=_series, seriesId=_seriesId;
 @synthesize nameLabel, overviewView, bannerView, spindicator, faveButton;
 
 - (NSString *)nibName {
@@ -58,15 +59,33 @@
 	[self resetUI];
 }
 
-- (void)displayDetailsForSeriesWithId:(NSString *)seriesId {
-	if (![seriesId isEqualToString:self.currentSeries.seriesId]) {
-		PBSeries *series = [[FavoritesManager shared] seriesForSeriesId:seriesId];
-		if (series) {
-			[self displayDetailsForSeries:series];
-		} else {
-			[self loadSeriesForSeriesId:seriesId];
-		}
+- (void)setSeries:(PBSeries *)series {
+	if (![series.seriesId isEqualToString:self.series.seriesId]) {
+		[_series release];
+		_series = [series retain];
+		
+		[self refreshUI];
 	}
+}
+
+- (void)setSeriesId:(NSString *)seriesId {
+	if (![seriesId isEqualToString:_seriesId]) {
+		[_seriesId release];
+		_seriesId = [seriesId copy];
+		
+		self.series = nil;
+		PBSeries *series = [[FavoritesManager shared] seriesForSeriesId:self.seriesId];
+		if (series) {
+			self.series = series;
+		} else {
+			[self loadSeriesForSeriesId:self.seriesId];
+		}
+
+	}
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[self refreshUI];
 }
 
 - (void)loadSeriesForSeriesId:(NSString *)seriesId {
@@ -75,13 +94,12 @@
 	[self.spindicator startAnimating];
 }
 
-- (void)displayDetailsForSeries:(PBSeries *)series {
+- (void)refreshUI {
 	[self.spindicator stopAnimating];
-	self.currentSeries = series;
-	[self.bannerLoader loadSeriesBanner:series.banner];
+	[self.bannerLoader loadSeriesBanner:self.series.banner];
 
-	self.nameLabel.text = series.seriesName;
-	self.overviewView.text = series.overview;
+	self.nameLabel.text = self.series.seriesName;
+	self.overviewView.text = self.series.overview;
 	[self updateFaveButton];
 }
 
@@ -92,12 +110,12 @@
 }
 
 - (IBAction)faveSeries {
-	[[FavoritesManager shared] addSeriesToFavorites:self.currentSeries];
+	[[FavoritesManager shared] addSeriesToFavorites:self.series];
 	[self updateFaveButton];
 }
 
 - (void)updateFaveButton {
-	if ([[FavoritesManager shared] isInFavorites:self.currentSeries.seriesId]) {
+	if ([[FavoritesManager shared] isInFavorites:self.seriesId]) {
 		self.faveButton.enabled = NO;
 		self.faveButton.image = [UIImage imageNamed:@"Heart"];
 	} else {
@@ -109,7 +127,7 @@
 #pragma mark SeriesModelDelegate
 
 - (void)loadedSeries:(PBSeries *)series {
-	[self displayDetailsForSeries:series];
+	self.series = series;
 }
 
 - (void)loadedSeriesBanner:(UIImage *)banner {
@@ -125,15 +143,8 @@
 
 #pragma mark -
 
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	// Release any cached data, images, etc. that aren't in use.
-}
-
 - (void)viewDidUnload {
     [super viewDidUnload];
-    self.currentSeries = nil;
 	self.bannerLoader = nil;
 	self.seriesLoader = nil;
 	self.faveButton = nil;
@@ -146,7 +157,8 @@
 	self.faveButton = nil;
 	self.bannerLoader = nil;
 	self.seriesLoader = nil;
-	self.currentSeries = nil;
+	self.series = nil;
+	self.seriesId = nil;
 	self.nameLabel = nil;
 	self.overviewView = nil;
 	self.bannerView = nil;
