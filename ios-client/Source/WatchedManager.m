@@ -9,11 +9,14 @@
 #import "WatchedManager.h"
 #import "ServiceLocator.h"
 #import "WatchedStateDocument.h"
+#import "FileHelper.h"
+
+
+NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAvailableNotification";
 
 
 @interface WatchedManager ()
 
-@property (nonatomic, assign) BOOL documentIsOpen; // Or "documentIsOpenning". UIDocumentState doens't provide that information
 @property (nonatomic, retain) WatchedStateDocument *document;
 
 @end
@@ -21,15 +24,25 @@
 
 @implementation WatchedManager
 
-@synthesize documentIsOpen, document;
+@synthesize document;
 
 + (WatchedManager *)shared {
 	return [ServiceLocator singletonForClass:[WatchedManager class]];
 }
 
+- (id)init {
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserverForName:UIDocumentStateChangedNotification object:self.document queue:[NSOperationQueue mainQueue] usingBlock:^ (NSNotification *n) {
+			NSLog(@"%d", self.document.documentState);
+		}];
+    }
+    return self;
+}
+
 - (WatchedStateDocument *)document {
 	if (!document) {
-		document= [[WatchedStateDocument alloc] init];
+		document = [[WatchedStateDocument alloc] init];
 	}
 	return document;
 }
@@ -67,11 +80,8 @@
 }
 
 - (void)loadLastWatchedEpisodesWithHandler:(void (^) ())handler {
-    if (self.documentIsOpen) {
-        handler();
-    } else {
-		self.documentIsOpen = YES;
-        [self.document openWithCompletionHandler:^ (BOOL success) {
+	if ([FileHelper fileExistsAtPath:self.document.fileURL.path]) {
+		[self.document openWithCompletionHandler:^ (BOOL success) {
             if (success) {
 				NSLog(@"Document was opened");
                 handler();
@@ -79,13 +89,22 @@
                 NSLog(@"Could not open document");
             }
         }];
-    }
+	} else {
+		[self.document saveToURL:self.document.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^ (BOOL success) {
+			NSLog(@"Document created");
+			handler();
+		}];
+	}
+}
+
+- (void)save {
+	[self.document savePresentedItemChangesWithCompletionHandler:^ (NSError *error) { }];
 }
 
 - (void)closeDocument {
-	self.documentIsOpen = NO;
 	[self.document closeWithCompletionHandler:^ (BOOL success) {
 		if (success) {
+			self.document = nil;
 			NSLog(@"Document was closed");
 		} else {
 			NSLog(@"Document could not be closed");

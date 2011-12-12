@@ -12,6 +12,7 @@
 @interface FileHelper ()
 
 + (NSString *)pathForDirectory:(NSString *)directoryName insearchPathDirectory:(NSSearchPathDirectory)searchPathDirectory;
++ (NSString *)specialDirectoryPath:(NSSearchPathDirectory)searchPathDirectory;
 
 @end
 
@@ -19,10 +20,7 @@
 @implementation FileHelper
 
 + (NSURL *)URLForDocumentNamed:(NSString *)documentName {
-	NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-	NSString *filePath = [documentsDirectory stringByAppendingPathComponent:documentName];
-	
-	[[NSFileManager defaultManager] createFileAtPath:filePath contents:[NSData data] attributes:nil];
+	NSString *filePath = [[self specialDirectoryPath:NSDocumentDirectory] stringByAppendingPathComponent:documentName];	
 	return [NSURL fileURLWithPath:filePath isDirectory:NO];
 }
 
@@ -35,9 +33,16 @@
 }
 
 + (NSString *)pathForDirectory:(NSString *)directoryName insearchPathDirectory:(NSSearchPathDirectory)searchPathDirectory {
-	NSString *specialDirectory= [NSSearchPathForDirectoriesInDomains(searchPathDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-	NSString *directoryPath= [specialDirectory stringByAppendingPathComponent:directoryName];
+	NSString *directoryPath = [[self specialDirectoryPath:searchPathDirectory] stringByAppendingPathComponent:directoryName];
 	return ([FileHelper createDirectoryAtPath:directoryPath]) ? directoryPath : nil;
+}
+
++ (NSString *)specialDirectoryPath:(NSSearchPathDirectory)searchPathDirectory {
+	return [NSSearchPathForDirectoriesInDomains(searchPathDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+}
+
++ (BOOL)fileExistsAtPath:(NSString *)path {
+	return [[NSFileManager defaultManager] fileExistsAtPath:path];
 }
 
 + (BOOL)createDirectoryAtPath:(NSString *)path {

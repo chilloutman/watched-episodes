@@ -9,11 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "ProtocolTypes.pb.h"
 
+extern NSString * const WatchedManagerDidFinishLoadingNotification; // Posted when the WatchedManager is done loading the watched state.
+
 @interface WatchedManager : NSObject
 
 + (WatchedManager *)shared;
 
 - (void)loadLastWatchedEpisodesWithHandler:(void (^) ())handler;
+- (void)save;
 - (void)closeDocument;
 
 - (void)setLastWatchedEpisode:(PBEpisode *)episode;

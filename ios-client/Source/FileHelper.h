@@ -14,7 +14,7 @@
 + (NSURL *)URLForDocumentNamed:(NSString *)documentName;
 + (NSString *)documentDirectoryNamed:(NSString *)directoryName;
 + (NSString *)cachesDirectoryNamed:(NSString *)directoryName;
-
++ (BOOL)fileExistsAtPath:(NSString *)path;
 + (BOOL)createDirectoryAtPath:(NSString *)path;
 
 @end

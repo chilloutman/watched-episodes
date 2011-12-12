@@ -40,19 +40,18 @@ static NSString *CellIdentifier = @"SeriesCell";
 - (void)viewWillAppear:(BOOL)animated {
 	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
 	
-	// Make sure the contents are loaded before updating the table view.
+	[[NSNotificationCenter defaultCenter] addObserverForName:WatchedManagerDidFinishLoadingNotification object:self queue:[NSOperationQueue mainQueue] usingBlock:^ (NSNotification *notification) {
+		[self.tableView reloadData];
+	}];
 	[self.tableView reloadData];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-	[self.tableView	reloadData];
-}
-
-/*
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:WatchedManagerDidFinishLoadingNotification object:[WatchedManager shared]];
 }
-*/
+
 /*
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];

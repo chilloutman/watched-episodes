@@ -39,28 +39,24 @@
 	return dictionary;
 }
 
-
 #pragma mark UIDocument
 
 - (BOOL)loadFromContents:(NSData *)contents ofType:(NSString *)typeName error:(NSError **)outError {
-	if (![contents isKindOfClass:NSData.class]) {
-		return NO;
-	}
-	
-	BOOL success = NO;
-    if (contents == nil || [contents length] == 0) {
-		self.lastWatchedEpisodes = [NSMutableDictionary dictionary];
-        success = YES;
-    } else {
-        self.lastWatchedEpisodes = [NSJSONSerialization JSONObjectWithData:contents options:NSJSONReadingMutableContainers error:NULL];
-        success = YES;
+	NSError *error = nil;
+	if ([contents length] > 0) {
+		self.lastWatchedEpisodes = [NSJSONSerialization JSONObjectWithData:contents options:NSJSONReadingMutableContainers error:&error];
     }
 	
-    return success;
+	if (error && outError) {
+		*outError = error;
+		return NO;
+	} else {
+		return YES;
+	}
 }
 
 - (NSData *)contentsForType:(NSString *)typeName error:(NSError **)outError {
-    return ([self.lastWatchedEpisodes count] > 0) ? [NSJSONSerialization dataWithJSONObject:self.lastWatchedEpisodes options:0 error:NULL] : [NSData data];
+    return ([self.lastWatchedEpisodes count] > 0) ? [NSJSONSerialization dataWithJSONObject:self.lastWatchedEpisodes options:0 error:outError] : [NSData data];
 }
 
 #pragma mark -
