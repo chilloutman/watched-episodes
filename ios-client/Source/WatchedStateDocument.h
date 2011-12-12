@@ -2,18 +2,14 @@
 //  WatchedStateDocument.h
 //  WatchedEpisodes
 //
-//  Created by Lucas Neiva on 7/15/11.
-//  Copyright 2011 Lucas Neiva. All rights reserved.
+//  Created by Lucas Neiva on 12/12/11.
+//  Copyright (c) 2011 Lucas Neiva. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "ProtocolTypes.pb.h"
 
 @interface WatchedStateDocument : UIDocument
 
-+ (WatchedStateDocument *)documentForSeries:(NSString *)seriesId;
-- (id)initWithSeries:(NSString *)seriesId;
-- (void)markEpisodeAsWatched:(PBEpisode *)episode;
-- (BOOL)isEpisodeMarkedAsWatched:(PBEpisode *)episode;
+- (NSMutableDictionary *)lastWatchedEpisodeDictionaryForSeries:(NSString *)seriesId;
 
 @end

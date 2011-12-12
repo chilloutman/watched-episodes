@@ -11,6 +11,7 @@
 
 @interface FileHelper : NSObject
 
++ (NSURL *)URLForDocumentNamed:(NSString *)documentName;
 + (NSString *)documentDirectoryNamed:(NSString *)directoryName;
 + (NSString *)cachesDirectoryNamed:(NSString *)directoryName;
 

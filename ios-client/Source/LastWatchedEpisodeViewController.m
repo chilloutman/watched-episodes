@@ -7,6 +7,7 @@
 //
 
 #import "LastWatchedEpisodeViewController.h"
+#import "WatchedManager.h"
 #import "SeriesBannerLoader.h"
 #import "EpisodesListViewController.h"
 
@@ -39,14 +40,17 @@
 
 - (void)displayLastWatchedEpisodeForSeries:(PBSeries *)series {
 	if (![[series seriesId] isEqualToString:self.currentSeriesId]) {
-		self.currentSeriesId= [series seriesId];
+		self.currentSeriesId = [series seriesId];
 		self.bannerView.image = nil;
 		[self.bannerLoader loadSeriesBanner:series.banner];
 	}
 }
 
-- (void)viewDidLoad {
-	[super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated {
+	self.episodeStepper.value = [[WatchedManager shared] lastWatchedEpisodeNumberForSeriesId:self.currentSeriesId];
+	[self episodeStepperValueChanged:self.episodeStepper];
+	self.seasonStepper.value = [[WatchedManager shared] lastWatchedEpisodeSeasonNumberForSeriesId:self.currentSeriesId];
+	[self seasonStepperValueChanged:self.seasonStepper];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -54,11 +58,15 @@
 }
 
 - (IBAction)seasonStepperValueChanged:(UIStepper *)sender {
-	self.seasonLabel.text = [NSString stringWithFormat:@"Season %.0lf", seasonStepper.value];
+	NSUInteger season = seasonStepper.value;
+	self.seasonLabel.text = [NSString stringWithFormat:@"Season %d", season];
+	[[WatchedManager shared] setLastWatchedEpisodeSeasonNumber:season forSeries:self.currentSeriesId];		
 }
 
 - (IBAction)episodeStepperValueChanged:(UIStepper *)sender {
-	self.episodeLabel.text = [NSString stringWithFormat:@"Episode %.0lf", episodeStepper.value];
+	NSUInteger episode = episodeStepper.value;
+	self.episodeLabel.text = [NSString stringWithFormat:@"Episode %d", episode];
+	[[WatchedManager shared] setLastWatchedEpisodeNumber:episode forSeries:self.currentSeriesId];
 }
 
 #pragma mark SeriesBannerLoaderDelegate

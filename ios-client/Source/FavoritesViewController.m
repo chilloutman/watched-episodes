@@ -39,6 +39,9 @@ static NSString *CellIdentifier = @"SeriesCell";
 
 - (void)viewWillAppear:(BOOL)animated {
 	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+	
+	// Make sure the contents are loaded before updating the table view.
+	[self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -84,11 +87,7 @@ static NSString *CellIdentifier = @"SeriesCell";
     SeriesCell *cell = [t dequeueReusableCellWithIdentifier:CellIdentifier];
     PBSeries *series = [[FavoritesManager shared].allFavoriteSeries objectAtIndex:indexPath.row];
     cell.series = series;
-    
-    [[WatchedManager shared] loadWatchedStateForSeries:series.seriesId withCompletionHandler:^ {
-        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }];
-    
+        
     return cell;
 }
 
@@ -133,8 +132,8 @@ static NSString *CellIdentifier = @"SeriesCell";
 */
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[self.navigationController pushViewController:self.lastWatchedController animated:YES];
 	[self.lastWatchedController displayLastWatchedEpisodeForSeries:[self seriesForIndexPath:indexPath]];
+	[self.navigationController pushViewController:self.lastWatchedController animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {

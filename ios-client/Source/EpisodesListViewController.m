@@ -98,8 +98,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[[WatchedManager shared] markEpisodeAsWatched:[self episodeForIndexPath:indexPath]];
-	[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+	// TODO Something could happen here. Episode details maybe?
 }
 
 - (PBEpisode *)episodeForIndexPath:(NSIndexPath *)indexPath {

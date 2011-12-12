@@ -2,8 +2,8 @@
 //  WatchedStateDocument.m
 //  WatchedEpisodes
 //
-//  Created by Lucas Neiva on 7/15/11.
-//  Copyright 2011 Lucas Neiva. All rights reserved.
+//  Created by Lucas Neiva on 12/12/11.
+//  Copyright (c) 2011 Lucas Neiva. All rights reserved.
 //
 
 #import "WatchedStateDocument.h"
@@ -11,58 +11,64 @@
 
 @interface WatchedStateDocument ()
 
-@property (nonatomic, retain) NSMutableDictionary *state;
+@property (nonatomic, retain) NSMutableDictionary *lastWatchedEpisodes;
 
 @end
 
+
 @implementation WatchedStateDocument
 
-@synthesize state;
+@synthesize lastWatchedEpisodes;
 
-+ (WatchedStateDocument *)documentForSeries:(NSString *)seriesId {
-    return [[[WatchedStateDocument alloc] initWithSeries:seriesId] autorelease];
+- (id)init {
+	NSURL *fileURL = [FileHelper URLForDocumentNamed:@"LastWatched.json"];
+	self = [super initWithFileURL:fileURL];
+	if (self) {
+		self.lastWatchedEpisodes = [NSMutableDictionary dictionary];
+	}
+	return self;
 }
 
-- (id)initWithSeries:(NSString *)seriesId {
-    NSString *filePath = [[FileHelper documentDirectoryNamed:@"watched"] stringByAppendingPathComponent:seriesId];
-    self = [super initWithFileURL:[NSURL fileURLWithPath:filePath isDirectory:NO]];
-    if (self != nil) {
-        self.state = [NSMutableDictionary dictionary];
-    }
-    return self;
+- (NSMutableDictionary *)lastWatchedEpisodeDictionaryForSeries:(NSString *)seriesId {
+	NSMutableDictionary *dictionary = [self.lastWatchedEpisodes objectForKey:seriesId];
+	if (!dictionary) {
+		dictionary = [NSMutableDictionary dictionary];
+		[self.lastWatchedEpisodes setObject:dictionary forKey:seriesId];
+	}
+	
+	return dictionary;
 }
 
-- (BOOL)loadFromContents:(id)contents ofType:(NSString *)typeName error:(NSError **)outError {
-    BOOL success = NO;
-    if (contents == nil) {
-        self.state = [NSMutableDictionary dictionary];
+
+#pragma mark UIDocument
+
+- (BOOL)loadFromContents:(NSData *)contents ofType:(NSString *)typeName error:(NSError **)outError {
+	if (![contents isKindOfClass:NSData.class]) {
+		return NO;
+	}
+	
+	BOOL success = NO;
+    if (contents == nil || [contents length] == 0) {
+		self.lastWatchedEpisodes = [NSMutableDictionary dictionary];
         success = YES;
     } else {
-        self.state = [NSJSONSerialization JSONObjectWithData:contents options:NSJSONReadingMutableContainers error:NULL];
+        self.lastWatchedEpisodes = [NSJSONSerialization JSONObjectWithData:contents options:NSJSONReadingMutableContainers error:NULL];
         success = YES;
     }
+	
     return success;
 }
 
-- (id)contentsForType:(NSString *)typeName error:(NSError **)outError {
-    return ([self.state count] > 0) ? [NSJSONSerialization dataWithJSONObject:self.state options:0 error:NULL] : [NSData data];
+- (NSData *)contentsForType:(NSString *)typeName error:(NSError **)outError {
+    return ([self.lastWatchedEpisodes count] > 0) ? [NSJSONSerialization dataWithJSONObject:self.lastWatchedEpisodes options:0 error:NULL] : [NSData data];
 }
 
-- (void)markEpisodeAsWatched:(PBEpisode *)episode {
-	if (![self isEpisodeMarkedAsWatched:episode]) {
-		NSMutableArray *season = [self.state objectForKey:episode.seasonString];
-		if (season == nil) {
-			season = [NSMutableArray arrayWithObject:episode.episodeNumberString];
-			[self.state setObject:season forKey:episode.seasonString];
-		} else {
-			[season addObject:episode.episodeNumberString];
-		}
-        [self updateChangeCount:UIDocumentChangeDone];
-	}
+#pragma mark -
+
+- (void)dealloc {
+	self.lastWatchedEpisodes = nil;
+	[super dealloc];
 }
 
-- (BOOL)isEpisodeMarkedAsWatched:(PBEpisode *)episode {
-	return [[self.state objectForKey:episode.seasonString] containsObject:episode.episodeNumberString];
-}
 
 @end

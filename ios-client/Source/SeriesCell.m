@@ -24,12 +24,16 @@
 }
 
 - (void)setSeries:(PBSeries *)seriesToDisplay {
-    if (series != seriesToDisplay) {
-        series = seriesToDisplay;
-        self.seriesNameLabel.text = series.seriesName;
-        NSUInteger unwatched = [[WatchedManager shared] numberOfUnwatchedEpisodesForSeries:series];
-        self.unwatchedLabel.text = [NSString stringWithFormat:@"%d unwatched", unwatched];
-    }
+	series = seriesToDisplay;
+	self.seriesNameLabel.text = series.seriesName;
+	
+	NSUInteger season = [[WatchedManager shared] lastWatchedEpisodeSeasonNumberForSeriesId:series.seriesId];
+	NSUInteger episode = [[WatchedManager shared] lastWatchedEpisodeNumberForSeriesId:series.seriesId];
+	if (season != 0 && episode != 0) {
+		self.unwatchedLabel.text = [NSString stringWithFormat:@"Season %d Episode %d", season, episode];
+	} else {
+		self.unwatchedLabel.text = @"";
+	}
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -39,8 +43,9 @@
 }
 
 - (void)dealloc {
-    [unwatchedLabel release];
-    [seriesNameLabel release];
+	self.unwatchedLabel = nil;
+	self.seriesNameLabel = nil;
     [super dealloc];
 }
+
 @end

@@ -12,9 +12,16 @@
 @interface WatchedManager : NSObject
 
 + (WatchedManager *)shared;
-- (void)markEpisodeAsWatched:(PBEpisode *)episode;
+
+- (void)loadLastWatchedEpisodesWithHandler:(void (^) ())handler;
+- (void)closeDocument;
+
+- (void)setLastWatchedEpisode:(PBEpisode *)episode;
+- (void)setLastWatchedEpisodeNumber:(NSUInteger)number forSeries:(NSString *)seriesId;
+- (void)setLastWatchedEpisodeSeasonNumber:(NSUInteger)number forSeries:(NSString *)seriesId;
+
 - (BOOL)isEpisodeMarkedAsWatched:(PBEpisode *)episode;
-- (void)loadWatchedStateForSeries:(NSString *)seriesId withCompletionHandler:(void (^) ())handler;
-- (NSUInteger)numberOfUnwatchedEpisodesForSeries:(PBSeries *)series;
+- (NSUInteger)lastWatchedEpisodeNumberForSeriesId:(NSString *)seriesId;
+- (NSUInteger)lastWatchedEpisodeSeasonNumberForSeriesId:(NSString *)seriesId;
 
 @end

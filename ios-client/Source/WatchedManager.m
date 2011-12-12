@@ -7,54 +7,73 @@
 //
 
 #import "WatchedManager.h"
-#import "FileHelper.h"
 #import "ServiceLocator.h"
 #import "WatchedStateDocument.h"
 
-@interface WatchedManager () {
-	NSMutableDictionary *documents;
-    NSMutableDictionary *openDocuments;
-}
 
-- (BOOL)documentHasBeenOpened:(WatchedStateDocument *)document;
-- (WatchedStateDocument *)documentForSeries:(NSString *)seriesId;
+@interface WatchedManager ()
+
+@property (nonatomic, assign) BOOL documentIsOpen; // Or "documentIsOpenning". UIDocumentState doens't provide that information
+@property (nonatomic, retain) WatchedStateDocument *document;
 
 @end
 
 
 @implementation WatchedManager
 
+@synthesize documentIsOpen, document;
+
 + (WatchedManager *)shared {
-    return [ServiceLocator singletonForClass:[WatchedManager class]];
+	return [ServiceLocator singletonForClass:[WatchedManager class]];
 }
 
-- (id)init {
-	self = [super init];
-	if (self) {
-		documents = [[NSMutableDictionary alloc] init];
-        openDocuments = [[NSMutableDictionary alloc] init];
+- (WatchedStateDocument *)document {
+	if (!document) {
+		document= [[WatchedStateDocument alloc] init];
 	}
-	return self;
+	return document;
 }
 
-- (NSUInteger)numberOfUnwatchedEpisodesForSeries:(PBSeries *)series {
-	// TODO: How to get the total episodes here? maybe make this "numberOfWatched"?
-	return 0;
+- (void)setLastWatchedEpisode:(PBEpisode *)episode {
+	NSMutableDictionary *lastWatched= [self.document lastWatchedEpisodeDictionaryForSeries:episode.seriesId];
+	[lastWatched setObject:[NSNumber numberWithUnsignedInteger:episode.episodeNumber] forKey:@"episode"];
+	[lastWatched setObject:[NSNumber numberWithUnsignedInteger:episode.seasonNumber] forKey:@"season"];
+	[self.document updateChangeCount:UIDocumentChangeDone];
 }
 
-- (void)markEpisodeAsWatched:(PBEpisode *)episode {
-    WatchedStateDocument *document = [self documentForSeries:episode.seriesId];
-    [document markEpisodeAsWatched:episode];
+- (void)setLastWatchedEpisodeNumber:(NSUInteger)number forSeries:(NSString *)seriesId {
+	NSMutableDictionary *lastWatched= [self.document lastWatchedEpisodeDictionaryForSeries:seriesId];
+	[lastWatched setObject:[NSNumber numberWithUnsignedInteger:number] forKey:@"episode"];
+	[self.document updateChangeCount:UIDocumentChangeDone];
 }
 
-- (void)loadWatchedStateForSeries:(NSString *)seriesId withCompletionHandler:(void (^) ())handler {
-    WatchedStateDocument *document = [self documentForSeries:seriesId];
-    if ([self documentHasBeenOpened:document]) {
+- (void)setLastWatchedEpisodeSeasonNumber:(NSUInteger)number forSeries:(NSString *)seriesId {
+	NSMutableDictionary *lastWatched= [self.document lastWatchedEpisodeDictionaryForSeries:seriesId];
+	[lastWatched setObject:[NSNumber numberWithUnsignedInteger:number] forKey:@"season"];
+	[self.document updateChangeCount:UIDocumentChangeDone];
+}
+
+- (BOOL)isEpisodeMarkedAsWatched:(PBEpisode *)episode {
+	return [episode seasonNumber] <= [self lastWatchedEpisodeSeasonNumberForSeriesId:episode.seriesId]
+	&& [episode episodeNumber] <= [self lastWatchedEpisodeNumberForSeriesId:episode.seriesId];
+}
+
+- (NSUInteger)lastWatchedEpisodeNumberForSeriesId:(NSString *)seriesId {
+	return [[[self.document lastWatchedEpisodeDictionaryForSeries:seriesId] objectForKey:@"episode"] unsignedIntegerValue];
+}
+			
+- (NSUInteger)lastWatchedEpisodeSeasonNumberForSeriesId:(NSString *)seriesId {
+	return [[[self.document lastWatchedEpisodeDictionaryForSeries:seriesId] objectForKey:@"season"] unsignedIntegerValue];
+}
+
+- (void)loadLastWatchedEpisodesWithHandler:(void (^) ())handler {
+    if (self.documentIsOpen) {
         handler();
     } else {
-        [openDocuments setObject:document forKey:seriesId];
-        [document openWithCompletionHandler:^ (BOOL success) {
+		self.documentIsOpen = YES;
+        [self.document openWithCompletionHandler:^ (BOOL success) {
             if (success) {
+				NSLog(@"Document was opened");
                 handler();
             } else {
                 NSLog(@"Could not open document");
@@ -63,27 +82,21 @@
     }
 }
 
-- (BOOL)isEpisodeMarkedAsWatched:(PBEpisode *)episode {
-    WatchedStateDocument *document = [self documentForSeries:episode.seriesId];
-    return [document isEpisodeMarkedAsWatched:episode];
+- (void)closeDocument {
+	self.documentIsOpen = NO;
+	[self.document closeWithCompletionHandler:^ (BOOL success) {
+		if (success) {
+			NSLog(@"Document was closed");
+		} else {
+			NSLog(@"Document could not be closed");
+		}
+	}];
 }
 
-- (BOOL)documentHasBeenOpened:(WatchedStateDocument *)document {
-    return ([[openDocuments allValues] containsObject:document]);
-}
-
-- (WatchedStateDocument *)documentForSeries:(NSString *)seriesId {
-    WatchedStateDocument *document = [documents objectForKey:seriesId];
-    if (!document) {
-        document = [WatchedStateDocument documentForSeries:seriesId];
-        [documents setObject:document forKey:seriesId];
-    }
-    return document;
-}
+#pragma mark -
 
 - (void)dealloc {
-	[documents release];
-    [openDocuments release];
+	self.document = nil;
 	[super dealloc];
 }
 

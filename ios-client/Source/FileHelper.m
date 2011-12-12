@@ -18,6 +18,14 @@
 
 @implementation FileHelper
 
++ (NSURL *)URLForDocumentNamed:(NSString *)documentName {
+	NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+	NSString *filePath = [documentsDirectory stringByAppendingPathComponent:documentName];
+	
+	[[NSFileManager defaultManager] createFileAtPath:filePath contents:[NSData data] attributes:nil];
+	return [NSURL fileURLWithPath:filePath isDirectory:NO];
+}
+
 + (NSString *)documentDirectoryNamed:(NSString *)directoryName {
 	return [FileHelper pathForDirectory:directoryName insearchPathDirectory:NSDocumentDirectory];
 }

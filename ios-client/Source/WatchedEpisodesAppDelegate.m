@@ -11,6 +11,7 @@
 #import "NavigationControllerTab.h"
 #import "SearchSeriesViewController.h"
 #import "FavoritesViewController.h"
+#import "WatchedManager.h"
 
 @implementation WatchedEpisodesAppDelegate
 
@@ -44,7 +45,6 @@
      */
 }
 
-
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     /*
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
@@ -52,20 +52,20 @@
      */
 }
 
-
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     /*
      Called as part of  transition from the background to the inactive state: here you can undo many of the changes made on entering the background.
      */
 }
 
-
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+	[[WatchedManager shared] loadLastWatchedEpisodesWithHandler:^ {
+		
+	}];
 }
-
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     /*
@@ -74,9 +74,7 @@
      */
 }
 
-
 #pragma mark -
-#pragma mark Memory management
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
     /*
@@ -84,12 +82,10 @@
      */
 }
 
-
 - (void)dealloc {
 	self.tabController = nil;
 	self.window = nil;
     [super dealloc];
 }
-
 
 @end

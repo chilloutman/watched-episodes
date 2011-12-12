@@ -6,7 +6,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet>
 		<servlet-name>searchSeries</servlet-name>
-		<servlet-class>watchedepisodes.servlets.SearchSeriesServlet</servlet-class>
+		<servlet-class>ch.neiva.watchedepisodes.servlets.SearchSeriesServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>searchSeries</servlet-name>
@@ -15,7 +15,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	
 	<servlet>
 		<servlet-name>getSeries</servlet-name>
-		<servlet-class>watchedepisodes.servlets.GetSeriesServlet</servlet-class>
+		<servlet-class>ch.neiva.watchedepisodes.servlets.GetSeriesServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>getSeries</servlet-name>
@@ -24,7 +24,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	
 	<servlet>
 		<servlet-name>getAllEpisodes</servlet-name>
-		<servlet-class>watchedepisodes.servlets.GetAllEpisodesServlet</servlet-class>
+		<servlet-class>ch.neiva.watchedepisodes.servlets.GetAllEpisodesServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>getAllEpisodes</servlet-name>
@@ -33,7 +33,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	
 	<servlet>
 		<servlet-name>recache</servlet-name>
-		<servlet-class>watchedepisodes.servlets.RecacheServlet</servlet-class>
+		<servlet-class>ch.neiva.watchedepisodes.servlets.RecacheServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>recache</servlet-name>
@@ -42,7 +42,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	
 	<servlet>
 		<servlet-name>checktvdb</servlet-name>
-		<servlet-class>watchedepisodes.servlets.CheckTVDBServlet</servlet-class>
+		<servlet-class>ch.neiva.watchedepisodes.servlets.CheckTVDBServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>checktvdb</servlet-name>
