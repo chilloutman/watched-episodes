@@ -10,38 +10,14 @@
 #import "NSString+URLEncoding.h"
 
 
-@interface SearchLoader () <ProtocolBuffersFetcherDelegate>
-
-@property (nonatomic, retain) NSArray *searchResults;
-
-@end
-
-
 @implementation SearchLoader
 
-@synthesize delegate, searchResults;
-
-- (void)searchSeries:(NSString *)seriesName {
+- (void)searchSeriesWithName:(NSString *)seriesName completionBlock:(SearchResultsBlock)block {
 	NSString *searchTerm = [seriesName URLEncodedString];
-	[self.fetcher sendProtocolBuffersRequestWithURLString:[NSString stringWithFormat:@"%@/searchSeries?name=%@", ServerURL, searchTerm] delegate:self];
-}
-
-#pragma mark ProtocolBuffersFetcherDelegate
-
-- (void)processData:(NSData *)newData {
-	self.searchResults= [[SearchSeriesResponse parseFromData:newData] seriesList];
-	[self.delegate searchResultsUpdated:self.searchResults];
-}
-
-- (void)connectionFailed {
-	//[self.delegate searchResultsUpdated:[NSArray arrayWithObject:@"Connection Failed"]];
-}
-
-#pragma mark -
-
-- (void)dealloc {
-	self.searchResults = nil;
-	[super dealloc];
+	[self.fetcher sendProtocolBuffersRequestWithURLString:[NSString stringWithFormat:@"%@/searchSeries?name=%@", ServerURL, searchTerm] completionBlock:^ (NSData *data) {
+		NSArray *searchResults = [[SearchSeriesResponse parseFromData:data] seriesList];
+		block(searchResults);
+	}];
 }
 
 @end

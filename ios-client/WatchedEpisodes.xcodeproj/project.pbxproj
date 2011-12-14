@@ -26,7 +26,7 @@
 		EF4AD01E12EA22A60058F78E /* SeriesDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF4AD01C12EA22A60058F78E /* SeriesDetail.xib */; };
 		EF4AD02612EA23BD0058F78E /* SeriesLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4AD02512EA23BD0058F78E /* SeriesLoader.m */; };
 		EF4AD02912EA23F10058F78E /* GetSeries.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4AD02812EA23F10058F78E /* GetSeries.pb.m */; };
-		EF5AA29313D5E32A00F6FBCF /* EpisodesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5AA29213D5E32A00F6FBCF /* EpisodesModel.m */; };
+		EF5AA29313D5E32A00F6FBCF /* EpisodesDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5AA29213D5E32A00F6FBCF /* EpisodesDataProvider.m */; };
 		EF5AA2A213D5F21B00F6FBCF /* ProtocolCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5AA2A113D5F21B00F6FBCF /* ProtocolCategories.m */; };
 		EF8D76F012D8DEDA0064C5B5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D76EA12D8DEDA0064C5B5 /* main.m */; };
 		EF8D76F112D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D76ED12D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.m */; };
@@ -118,8 +118,8 @@
 		EF4AD02512EA23BD0058F78E /* SeriesLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeriesLoader.m; sourceTree = "<group>"; };
 		EF4AD02712EA23F10058F78E /* GetSeries.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetSeries.pb.h; sourceTree = "<group>"; };
 		EF4AD02812EA23F10058F78E /* GetSeries.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetSeries.pb.m; sourceTree = "<group>"; };
-		EF5AA29113D5E32A00F6FBCF /* EpisodesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EpisodesModel.h; sourceTree = "<group>"; };
-		EF5AA29213D5E32A00F6FBCF /* EpisodesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EpisodesModel.m; sourceTree = "<group>"; };
+		EF5AA29113D5E32A00F6FBCF /* EpisodesDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; path = EpisodesDataProvider.h; sourceTree = "<group>"; };
+		EF5AA29213D5E32A00F6FBCF /* EpisodesDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EpisodesDataProvider.m; sourceTree = "<group>"; };
 		EF5AA2A013D5F21B00F6FBCF /* ProtocolCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolCategories.h; sourceTree = "<group>"; };
 		EF5AA2A113D5F21B00F6FBCF /* ProtocolCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolCategories.m; sourceTree = "<group>"; };
 		EF8D76EA12D8DEDA0064C5B5 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -364,8 +364,8 @@
 		EFFD085012F0C8CB00F9075B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				EF5AA29113D5E32A00F6FBCF /* EpisodesModel.h */,
-				EF5AA29213D5E32A00F6FBCF /* EpisodesModel.m */,
+				EF5AA29113D5E32A00F6FBCF /* EpisodesDataProvider.h */,
+				EF5AA29213D5E32A00F6FBCF /* EpisodesDataProvider.m */,
 				EFFD085112F0C8FA00F9075B /* FavoritesManager.h */,
 				EFFD085212F0C8FA00F9075B /* FavoritesManager.m */,
 				EFFD259C13C236900051628A /* WatchedManager.h */,
@@ -532,7 +532,7 @@
 				EFFD259E13C236900051628A /* WatchedManager.m in Sources */,
 				AAB1059413D587E900683DC4 /* CommunicationManager.m in Sources */,
 				AAB1059C13D59AC300683DC4 /* MessagePopupView.m in Sources */,
-				EF5AA29313D5E32A00F6FBCF /* EpisodesModel.m in Sources */,
+				EF5AA29313D5E32A00F6FBCF /* EpisodesDataProvider.m in Sources */,
 				EF5AA2A213D5F21B00F6FBCF /* ProtocolCategories.m in Sources */,
 				EFA0351A13D9ABF1004EB261 /* SeriesCell.m in Sources */,
 				EF96D38B1493BDBF0060BD13 /* LastWatchedEpisodeViewController.m in Sources */,

@@ -6,10 +6,10 @@
 //  Copyright 2011 Lucas Neiva. All rights reserved.
 //
 
-#import "EpisodesModel.h"
+#import "EpisodesDataProvider.h"
 
 
-@interface EpisodesModel ()
+@interface EpisodesDataProvider ()
 
 @property (nonatomic, retain) NSArray *allEpisodes;
 @property (nonatomic, retain) NSDictionary *seasonsDictionary;
@@ -19,12 +19,12 @@
 @end
 
 
-@implementation EpisodesModel
+@implementation EpisodesDataProvider
 
 @synthesize allEpisodes, seasonsDictionary;
 
-+ (EpisodesModel *)modelWithEpisodes:(NSArray *)episodes {
-    return [[[EpisodesModel alloc] initWithEpisodes:episodes] autorelease];
++ (EpisodesDataProvider *)providerWithEpisodes:(NSArray *)episodes {
+    return [[[EpisodesDataProvider alloc] initWithEpisodes:episodes] autorelease];
 }
 
 - (id)initWithEpisodes:(NSArray *)episodes {

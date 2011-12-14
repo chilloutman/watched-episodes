@@ -79,7 +79,7 @@ NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAv
 	return [[[self.document lastWatchedEpisodeDictionaryForSeries:seriesId] objectForKey:@"season"] unsignedIntegerValue];
 }
 
-- (void)loadLastWatchedEpisodesWithHandler:(void (^) ())handler {
+- (void)loadLastWatchedEpisodesWithCompletionBlock:(void (^) ())handler {
 	if ([FileHelper fileExistsAtPath:self.document.fileURL.path]) {
 		[self.document openWithCompletionHandler:^ (BOOL success) {
             if (success) {

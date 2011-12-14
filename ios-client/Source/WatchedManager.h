@@ -15,7 +15,7 @@ extern NSString * const WatchedManagerDidFinishLoadingNotification; // Posted wh
 
 + (WatchedManager *)shared;
 
-- (void)loadLastWatchedEpisodesWithHandler:(void (^) ())handler;
+- (void)loadLastWatchedEpisodesWithCompletionBlock:(void (^) ())handler;
 - (void)save;
 - (void)closeDocument;
 

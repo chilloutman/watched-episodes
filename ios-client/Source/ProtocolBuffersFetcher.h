@@ -8,16 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol ProtocolBuffersFetcherDelegate <NSObject>
+
+typedef void (^DataBlock) (NSData *dataOrNil);
+
+
+@protocol ProtocolBuffersFetcherDelegate
 
 - (void)processData:(NSData *)newData;
 - (void)connectionFailed;
 
 @end
 
+
 @interface ProtocolBuffersFetcher : NSObject
 
 - (void)sendProtocolBuffersRequestWithURLString:(NSString *)URL delegate:(id<ProtocolBuffersFetcherDelegate>)delegate;
+- (void)sendProtocolBuffersRequestWithURLString:(NSString *)URL completionBlock:(DataBlock)block;
+
 - (void)cancelConnection;
 
 @end

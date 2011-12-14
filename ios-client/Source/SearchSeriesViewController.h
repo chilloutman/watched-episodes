@@ -11,11 +11,7 @@
 
 @class SeriesDetailViewController;
 
-@interface SearchSeriesViewController : UIViewController <UISearchDisplayDelegate, SearchSeriesModelDelegate> {
-	SearchLoader *model;
-	SeriesDetailViewController *seriesController;
-	NSString *lastSearchString;
-}
+@interface SearchSeriesViewController : UIViewController <UISearchDisplayDelegate>
 
 @end
 

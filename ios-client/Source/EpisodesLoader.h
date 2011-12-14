@@ -11,20 +11,11 @@
 #import "AbstractLoader.h"
 
 
-@protocol EpisodesLoaderDelegate
-@required
-- (void)loadedEpisodes:(NSArray *)loadedEpisodes;
-
-@end
+typedef void (^EpisodesBlock) (NSArray *episodes);
 
 
-@interface EpisodesLoader : AbstractLoader {
-	id<EpisodesLoaderDelegate> delegate;
-	NSArray *episodes;
-}
+@interface EpisodesLoader : AbstractLoader
 
-@property (nonatomic, assign) id<EpisodesLoaderDelegate> delegate;
-
-- (void)loadAllEpisodesForSeries:(NSString *)seriesId;
+- (void)loadAllEpisodesForSeries:(NSString *)seriesId completionBlock:(EpisodesBlock)block;
 
 @end

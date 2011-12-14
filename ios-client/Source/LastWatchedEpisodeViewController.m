@@ -52,7 +52,7 @@
 
 - (void)refreshUI {
 	self.bannerView.image = nil;
-	[self.bannerLoader loadSeriesBanner:self.series.banner withHandler:^ (UIImage *banner) {
+	[self.bannerLoader loadSeriesBannerForBannerPath:self.series.banner completionBlock:^ (UIImage *banner) {
         self.bannerView.image = banner;
     }];
 	self.episodeStepper.value = [[WatchedManager shared] lastWatchedEpisodeNumberForSeriesId:self.series.seriesId];

@@ -8,14 +8,14 @@
 
 #import "EpisodesListViewController.h"
 #import "SeriesDetailViewController.h"
-#import "EpisodesModel.h"
+#import "EpisodesDataProvider.h"
 #import "EpisodesLoader.h"
 #import "WatchedManager.h"
 
-@interface EpisodesListViewController () <EpisodesLoaderDelegate>
+@interface EpisodesListViewController ()
 
 @property (nonatomic, copy) NSString *currentSeriesId;
-@property (nonatomic, retain) EpisodesModel *model;
+@property (nonatomic, retain) EpisodesDataProvider *model;
 @property (nonatomic, retain) EpisodesLoader *episodesLoader;
 
 - (PBEpisode *)episodeForIndexPath:(NSIndexPath *)indexPath;
@@ -30,7 +30,6 @@
 - (EpisodesLoader *)episodesLoader {
 	if (!episodesLoader) {
 		episodesLoader = [[EpisodesLoader alloc] init];
-		episodesLoader.delegate = self;
 	}
 	return episodesLoader;
 }
@@ -42,7 +41,7 @@
 	UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithTitle:@"Series Info" style:UIBarButtonItemStyleBordered target:self action:@selector(showSeriesInfo)];
 	self.navigationItem.rightBarButtonItem = infoButton;
 	[infoButton release];
-    self.model = [[[EpisodesModel alloc] init] autorelease];
+    self.model = [[[EpisodesDataProvider alloc] init] autorelease];
 }
 
 - (void)showSeriesInfo {
@@ -55,15 +54,11 @@
 - (void)displayEpisodesForSeriesWithId:(NSString *)seriesId {
     if (![self.currentSeriesId isEqualToString:seriesId]) {
         self.currentSeriesId = seriesId;
-        [self.episodesLoader loadAllEpisodesForSeries:seriesId];
+        [self.episodesLoader loadAllEpisodesForSeries:seriesId completionBlock:^ (NSArray *episodes) {
+			self.model = [EpisodesDataProvider providerWithEpisodes:episodes];
+			[self.tableView reloadData];
+		}];
     }
-}
-
-#pragma mark EpisodesLoaderDelegate
-
-- (void)loadedEpisodes:(NSArray *)loadedEpisodes {
-    self.model = [EpisodesModel modelWithEpisodes:loadedEpisodes];
-	[self.tableView reloadData];
 }
 
 #pragma mark UITableView

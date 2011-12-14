@@ -45,8 +45,7 @@
 
 - (SearchLoader *)model {
 	if (!model) {
-		model= [[SearchLoader alloc] init];
-		model.delegate= self;
+		model = [[SearchLoader alloc] init];
 	}
 	return model;
 }
@@ -60,9 +59,12 @@
 }
 
 - (void)search {
-	NSString *searchString= self.searchDisplayController.searchBar.text;
+	NSString *searchString = self.searchDisplayController.searchBar.text;
 	if ([self shouldSearch:searchString]) {
-		[self.model searchSeries:searchString];
+		[self.model searchSeriesWithName:searchString completionBlock:^ (NSArray *results) {
+			self.searchResults = results;
+			[self.searchDisplayController.searchResultsTableView reloadData];
+		}];
 	}
 }
 
@@ -70,13 +72,6 @@
 	searchString= [searchString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 	return (searchString &&
 			![searchString isEqualToString:@""]);
-}
-
-#pragma mark SearchSeriesModelDelegate
-
-- (void)searchResultsUpdated:(NSArray *)results {
-	self.searchResults= results;
-	[self.searchDisplayController.searchResultsTableView reloadData];
 }
 
 #pragma mark UISearchDisplay

@@ -10,11 +10,11 @@
 #import "AbstractLoader.h"
 
 
-typedef void(^ImageHandler)(UIImage *);
+typedef void (^ImageBlock) (UIImage *);
 
 
 @interface SeriesBannerLoader : AbstractLoader
 
-- (void)loadSeriesBanner:(NSString *)bannerPath withHandler:(ImageHandler)handler;
+- (void)loadSeriesBannerForBannerPath:(NSString *)bannerPath completionBlock:(ImageBlock)block;
 
 @end

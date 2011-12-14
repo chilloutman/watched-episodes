@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "EpisodesLoader.h"
 
-@interface EpisodesModel : NSObject
+@interface EpisodesDataProvider : NSObject
 
-+ (EpisodesModel *)modelWithEpisodes:(NSArray *)episodes;
++ (EpisodesDataProvider *)providerWithEpisodes:(NSArray *)episodes;
 - (id)initWithEpisodes:(NSArray *)episodes;
 
 - (NSUInteger)numberOfEpisodes;

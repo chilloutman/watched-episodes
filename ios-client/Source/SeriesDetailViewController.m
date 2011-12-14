@@ -36,7 +36,6 @@
 - (SeriesLoader *)seriesLoader {
 	if (!seriesLoader) {
 		seriesLoader = [[SeriesLoader alloc] init];
-		seriesLoader.delegate= self;
 	}
 	return seriesLoader;
 }
@@ -88,14 +87,16 @@
 }
 
 - (void)loadSeriesForSeriesId:(NSString *)seriesId {
-	[self.seriesLoader loadSeries:seriesId];
+	[self.seriesLoader loadSeriesForSeriesId:seriesId completionBlock:^ (PBSeries *series) {
+		self.series = series;
+	}];
 	[self resetUI];
 	[self.spindicator startAnimating];
 }
 
 - (void)refreshUI {
 	[self.spindicator stopAnimating];
-	[self.bannerLoader loadSeriesBanner:self.series.banner withHandler:^(UIImage *banner) {
+	[self.bannerLoader loadSeriesBannerForBannerPath:self.series.banner completionBlock:^(UIImage *banner) {
         self.nameLabel.text = nil;
         self.bannerView.image = banner;
     }];
@@ -124,12 +125,6 @@
 		self.faveButton.enabled = YES;
 		self.faveButton.image = [UIImage imageNamed:@"HeartAlt"];
 	}
-}
-
-#pragma mark SeriesModelDelegate
-
-- (void)loadedSeries:(PBSeries *)series {
-	self.series = series;
 }
 
 #pragma mark UITextViewDelegate

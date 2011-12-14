@@ -10,20 +10,12 @@
 #import "SearchSeries.pb.h"
 #import "AbstractLoader.h"
 
-@protocol SearchSeriesModelDelegate
 
-- (void)searchResultsUpdated:(NSArray *)searchResults;
-
-@end
+typedef void(^SearchResultsBlock)(NSArray *searchResults);
 
 
-@interface SearchLoader : AbstractLoader {
-	id<SearchSeriesModelDelegate> delegate;
-	NSArray *seachResults;
-}
+@interface SearchLoader : AbstractLoader
 
-@property (nonatomic, assign) id<SearchSeriesModelDelegate> delegate; 
-
-- (void)searchSeries:(NSString *)seriesName;
+- (void)searchSeriesWithName:(NSString *)seriesName completionBlock:(SearchResultsBlock)block;
 
 @end

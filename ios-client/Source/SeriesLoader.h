@@ -3,7 +3,7 @@
 //  WatchedEpisodes
 //
 //  Created by Lucas Neiva on 1/21/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Lucas Neiva. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,20 +11,10 @@
 #import "GetSeries.pb.h"
 
 
-@protocol SeriesLoaderDelegate
+typedef void (^SeriesBlock) (PBSeries *series);
 
-- (void)loadedSeries:(PBSeries *)updatedSeries;
+@interface SeriesLoader : AbstractLoader
 
-@end
-
-
-@interface SeriesLoader : AbstractLoader {
-	id<SeriesLoaderDelegate> delegate;
-	PBSeries *series;
-}
-
-@property (nonatomic, assign) id<SeriesLoaderDelegate> delegate;
-
-- (void)loadSeries:(NSString *)seriesId;
+- (void)loadSeriesForSeriesId:(NSString *)seriesId completionBlock:(SeriesBlock)block;
 
 @end
