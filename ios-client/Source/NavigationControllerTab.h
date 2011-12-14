@@ -1,5 +1,5 @@
 //
-//  AbstractTab.h
+//  NavigationControllerTab.h
 //  WatchedEpisodes
 //
 //  Created by Lucas Neiva on 1/26/11.
@@ -9,10 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface NavigationControllerTab : UINavigationController <UINavigationControllerDelegate> {
-	UIViewController *rootController;
-	Class rootControllerClass;
-}
+@interface NavigationControllerTab : UINavigationController <UINavigationControllerDelegate>
 
 + (NavigationControllerTab *)controllerWithRootController:(Class)controllerClass tabBarItem:(UITabBarItem *)item;
 

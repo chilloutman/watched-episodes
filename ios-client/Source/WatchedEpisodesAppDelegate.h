@@ -10,10 +10,7 @@
 
 @class RootViewController;
 
-@interface WatchedEpisodesAppDelegate : NSObject <UIApplicationDelegate> {
-    UIWindow *window;
-	UITabBarController *tabController;
-}
+@interface WatchedEpisodesAppDelegate : NSObject <UIApplicationDelegate>
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) UITabBarController *tabController;
