@@ -13,9 +13,9 @@
 
 @synthesize fetcher;
 
-- (ProtocolBuffersFetcher *)fetcher {
+- (HTTPFetcher *)fetcher {
 	if (fetcher == nil) {
-		fetcher = [[ProtocolBuffersFetcher alloc] init];
+		fetcher = [[HTTPFetcher alloc] init];
 	}
 	return fetcher;
 }

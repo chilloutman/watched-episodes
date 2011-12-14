@@ -20,10 +20,10 @@ typedef void (^DataBlock) (NSData *dataOrNil);
 @end
 
 
-@interface ProtocolBuffersFetcher : NSObject
+@interface HTTPFetcher : NSObject
 
-- (void)sendProtocolBuffersRequestWithURLString:(NSString *)URL delegate:(id<ProtocolBuffersFetcherDelegate>)delegate;
-- (void)sendProtocolBuffersRequestWithURLString:(NSString *)URL completionBlock:(DataBlock)block;
+- (void)sendHTTPRequestWithURLString:(NSString *)URL delegate:(id<ProtocolBuffersFetcherDelegate>)delegate;
+- (void)sendHTTPRequestWithURLString:(NSString *)URL completionBlock:(DataBlock)block;
 
 - (void)cancelConnection;
 

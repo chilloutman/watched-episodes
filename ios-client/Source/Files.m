@@ -1,15 +1,15 @@
 //
-//  FilePathHelper.m
+//  Files.m
 //  WatchedEpisodes
 //
 //  Created by Lucas Neiva on 1/27/11.
 //  Copyright 2011 Lucas Neiva. All rights reserved.
 //
 
-#import "FileHelper.h"
+#import "Files.h"
 
 
-@interface FileHelper ()
+@interface Files ()
 
 + (NSString *)pathForDirectory:(NSString *)directoryName insearchPathDirectory:(NSSearchPathDirectory)searchPathDirectory;
 + (NSString *)specialDirectoryPath:(NSSearchPathDirectory)searchPathDirectory;
@@ -17,7 +17,7 @@
 @end
 
 
-@implementation FileHelper
+@implementation Files
 
 + (NSURL *)URLForDocumentNamed:(NSString *)documentName {
 	NSString *filePath = [[self specialDirectoryPath:NSDocumentDirectory] stringByAppendingPathComponent:documentName];	
@@ -25,16 +25,16 @@
 }
 
 + (NSString *)documentDirectoryNamed:(NSString *)directoryName {
-	return [FileHelper pathForDirectory:directoryName insearchPathDirectory:NSDocumentDirectory];
+	return [Files pathForDirectory:directoryName insearchPathDirectory:NSDocumentDirectory];
 }
 
 + (NSString *)cachesDirectoryNamed:(NSString *)directoryName {
-	return [FileHelper pathForDirectory:directoryName insearchPathDirectory:NSCachesDirectory];
+	return [Files pathForDirectory:directoryName insearchPathDirectory:NSCachesDirectory];
 }
 
 + (NSString *)pathForDirectory:(NSString *)directoryName insearchPathDirectory:(NSSearchPathDirectory)searchPathDirectory {
 	NSString *directoryPath = [[self specialDirectoryPath:searchPathDirectory] stringByAppendingPathComponent:directoryName];
-	return ([FileHelper createDirectoryAtPath:directoryPath]) ? directoryPath : nil;
+	return ([Files createDirectoryAtPath:directoryPath]) ? directoryPath : nil;
 }
 
 + (NSString *)specialDirectoryPath:(NSSearchPathDirectory)searchPathDirectory {

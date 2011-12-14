@@ -7,14 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ProtocolBuffersFetcher.h"
+#import "HTTPFetcher.h"
 
 
-@interface AbstractLoader : NSObject {
-    ProtocolBuffersFetcher *fetcher;
-}
+@interface AbstractLoader : NSObject
 
-@property (nonatomic, retain) ProtocolBuffersFetcher *fetcher;
+@property (nonatomic, retain) HTTPFetcher *fetcher;
 
 - (void)cancelCurrentConnection;
 

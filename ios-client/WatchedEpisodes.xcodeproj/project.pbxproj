@@ -19,7 +19,7 @@
 		EF2AD7FB13327AD500585E3A /* EpisodesLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2AD7FA13327AD400585E3A /* EpisodesLoader.m */; };
 		EF2AD7FE1332800A00585E3A /* EpisodesListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2AD7FD1332800A00585E3A /* EpisodesListViewController.m */; };
 		EF3555E113D3503A00456DBD /* Find@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF3555E013D3503A00456DBD /* Find@2x.png */; };
-		EF36EDCB13BA37E000AEABC1 /* ProtocolBuffersFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = EF36EDCA13BA37E000AEABC1 /* ProtocolBuffersFetcher.m */; };
+		EF36EDCB13BA37E000AEABC1 /* HTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = EF36EDCA13BA37E000AEABC1 /* HTTPFetcher.m */; };
 		EF36EDD113BA496D00AEABC1 /* AbstractLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF36EDD013BA496D00AEABC1 /* AbstractLoader.m */; };
 		EF36EDD313BA579200AEABC1 /* SearchLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF36EDD213BA579200AEABC1 /* SearchLoader.m */; };
 		EF4AD01D12EA22A60058F78E /* SeriesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4AD01B12EA22A60058F78E /* SeriesDetailViewController.m */; };
@@ -46,7 +46,7 @@
 		EFFD085312F0C8FA00F9075B /* FavoritesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD085212F0C8FA00F9075B /* FavoritesManager.m */; };
 		EFFD08B512F21BBC00F9075B /* GetAllEpisodes.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD08B212F21BBC00F9075B /* GetAllEpisodes.pb.m */; };
 		EFFD08B612F21BBC00F9075B /* ProtocolTypes.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD08B412F21BBC00F9075B /* ProtocolTypes.pb.m */; };
-		EFFD093512F22BE700F9075B /* FileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD093412F22BE700F9075B /* FileHelper.m */; };
+		EFFD093512F22BE700F9075B /* Files.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD093412F22BE700F9075B /* Files.m */; };
 		EFFD0AEE12F5D2E400F9075B /* Find.png in Resources */ = {isa = PBXBuildFile; fileRef = EFFD0AED12F5D2E400F9075B /* Find.png */; };
 		EFFD0B0712F5D46900F9075B /* Heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EFFD0B0612F5D46900F9075B /* Heart@2x.png */; };
 		EFFD0B0912F5D47F00F9075B /* Heart.png in Resources */ = {isa = PBXBuildFile; fileRef = EFFD0B0812F5D47F00F9075B /* Heart.png */; };
@@ -106,8 +106,8 @@
 		EF2AD7FC1332800A00585E3A /* EpisodesListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = EpisodesListViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		EF2AD7FD1332800A00585E3A /* EpisodesListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EpisodesListViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		EF3555E013D3503A00456DBD /* Find@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Find@2x.png"; sourceTree = "<group>"; };
-		EF36EDC913BA37E000AEABC1 /* ProtocolBuffersFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolBuffersFetcher.h; sourceTree = "<group>"; };
-		EF36EDCA13BA37E000AEABC1 /* ProtocolBuffersFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolBuffersFetcher.m; sourceTree = "<group>"; };
+		EF36EDC913BA37E000AEABC1 /* HTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPFetcher.h; sourceTree = "<group>"; };
+		EF36EDCA13BA37E000AEABC1 /* HTTPFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPFetcher.m; sourceTree = "<group>"; };
 		EF36EDCF13BA496D00AEABC1 /* AbstractLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AbstractLoader.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		EF36EDD013BA496D00AEABC1 /* AbstractLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AbstractLoader.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		EF36EDD213BA579200AEABC1 /* SearchLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchLoader.m; sourceTree = "<group>"; };
@@ -158,8 +158,8 @@
 		EFFD08B212F21BBC00F9075B /* GetAllEpisodes.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetAllEpisodes.pb.m; sourceTree = "<group>"; };
 		EFFD08B312F21BBC00F9075B /* ProtocolTypes.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolTypes.pb.h; sourceTree = "<group>"; };
 		EFFD08B412F21BBC00F9075B /* ProtocolTypes.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolTypes.pb.m; sourceTree = "<group>"; };
-		EFFD093312F22BE700F9075B /* FileHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileHelper.h; sourceTree = "<group>"; };
-		EFFD093412F22BE700F9075B /* FileHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileHelper.m; sourceTree = "<group>"; };
+		EFFD093312F22BE700F9075B /* Files.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Files.h; sourceTree = "<group>"; };
+		EFFD093412F22BE700F9075B /* Files.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Files.m; sourceTree = "<group>"; };
 		EFFD0AED12F5D2E400F9075B /* Find.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Find.png; sourceTree = "<group>"; };
 		EFFD0B0612F5D46900F9075B /* Heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Heart@2x.png"; sourceTree = "<group>"; };
 		EFFD0B0812F5D47F00F9075B /* Heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Heart.png; sourceTree = "<group>"; };
@@ -326,8 +326,8 @@
 		EF8D79A612DA02170064C5B5 /* Communication */ = {
 			isa = PBXGroup;
 			children = (
-				EF36EDC913BA37E000AEABC1 /* ProtocolBuffersFetcher.h */,
-				EF36EDCA13BA37E000AEABC1 /* ProtocolBuffersFetcher.m */,
+				EF36EDC913BA37E000AEABC1 /* HTTPFetcher.h */,
+				EF36EDCA13BA37E000AEABC1 /* HTTPFetcher.m */,
 				AAB1059213D587E900683DC4 /* CommunicationManager.h */,
 				AAB1059313D587E900683DC4 /* CommunicationManager.m */,
 			);
@@ -380,8 +380,8 @@
 			children = (
 				EF8D79D212DA087D0064C5B5 /* ServiceLocator.h */,
 				EF8D79D312DA087D0064C5B5 /* ServiceLocator.m */,
-				EFFD093312F22BE700F9075B /* FileHelper.h */,
-				EFFD093412F22BE700F9075B /* FileHelper.m */,
+				EFFD093312F22BE700F9075B /* Files.h */,
+				EFFD093412F22BE700F9075B /* Files.m */,
 				EF5AA2A013D5F21B00F6FBCF /* ProtocolCategories.h */,
 				EF5AA2A113D5F21B00F6FBCF /* ProtocolCategories.m */,
 			);
@@ -523,10 +523,10 @@
 				EFFD085312F0C8FA00F9075B /* FavoritesManager.m in Sources */,
 				EFFD08B512F21BBC00F9075B /* GetAllEpisodes.pb.m in Sources */,
 				EFFD08B612F21BBC00F9075B /* ProtocolTypes.pb.m in Sources */,
-				EFFD093512F22BE700F9075B /* FileHelper.m in Sources */,
+				EFFD093512F22BE700F9075B /* Files.m in Sources */,
 				EF2AD7FB13327AD500585E3A /* EpisodesLoader.m in Sources */,
 				EF2AD7FE1332800A00585E3A /* EpisodesListViewController.m in Sources */,
-				EF36EDCB13BA37E000AEABC1 /* ProtocolBuffersFetcher.m in Sources */,
+				EF36EDCB13BA37E000AEABC1 /* HTTPFetcher.m in Sources */,
 				EF36EDD113BA496D00AEABC1 /* AbstractLoader.m in Sources */,
 				EF36EDD313BA579200AEABC1 /* SearchLoader.m in Sources */,
 				EFFD259E13C236900051628A /* WatchedManager.m in Sources */,

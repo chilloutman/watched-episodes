@@ -7,10 +7,10 @@
 //
 
 #import "SeriesBannerLoader.h"
-#import "FileHelper.h"
+#import "Files.h"
 
 
-@interface SeriesBannerLoader () <ProtocolBuffersFetcherDelegate>
+@interface SeriesBannerLoader ()
 
 @property (nonatomic, copy) NSString *currentBannerPath;
 @property (nonatomic, copy) ImageBlock completionBlock;
@@ -35,10 +35,9 @@
 }
 
 - (BOOL)loadSeriesBannerFromCache:(NSString *)bannerPath {
-	NSString *cachedBanner= [self cachePathForBanner:bannerPath];
+	NSString *cachedBanner = [self cachePathForBanner:bannerPath];
 	if ([[NSFileManager defaultManager] isReadableFileAtPath:cachedBanner]) {
 		self.completionBlock([UIImage imageWithContentsOfFile:cachedBanner]);
-        self.completionBlock = nil;
 		return YES;
 	} else {
 		return NO;
@@ -47,7 +46,10 @@
 
 - (void)loadSeriesBannerFromServer:(NSString *)bannerPath {
 	self.currentBannerPath = bannerPath;
-	[self.fetcher sendProtocolBuffersRequestWithURLString:[@"http://www.thetvdb.com/banners/" stringByAppendingString:bannerPath] delegate:self];
+	[self.fetcher sendHTTPRequestWithURLString:[@"http://www.thetvdb.com/banners/" stringByAppendingString:bannerPath] completionBlock:^ (NSData *data) {
+		self.completionBlock([UIImage imageWithData:data]);
+		[self storeBannerData:data bannerPath:self.currentBannerPath];
+	}];
 }
 
 - (void)storeBannerData:(NSData *)bannerData bannerPath:(NSString *)bannerPath {
@@ -55,24 +57,13 @@
 }
 
 - (NSString *)cachePathForBanner:(NSString *)bannerPath {
-	NSString *bannersDirectory= [FileHelper cachesDirectoryNamed:@"banners"];
+	NSString *bannersDirectory= [Files cachesDirectoryNamed:@"banners"];
 	NSString *bannerSubDirectory= [bannersDirectory stringByAppendingPathComponent:[bannerPath stringByDeletingLastPathComponent]];
-	if ([FileHelper createDirectoryAtPath:bannerSubDirectory]) {
+	if ([Files createDirectoryAtPath:bannerSubDirectory]) {
 		return [bannersDirectory stringByAppendingPathComponent:bannerPath];
 	} else {
 		return nil;
 	}
-}
-
-#pragma mark ProtocolBuffersFetcherDelegate
-
-- (void)processData:(NSData *)newData {
-    self.completionBlock([UIImage imageWithData:newData]);
-	[self storeBannerData:newData bannerPath:self.currentBannerPath];
-}
-
-- (void)connectionFailed {
-	self.currentBannerPath = nil;
 }
 
 #pragma mark -

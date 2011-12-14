@@ -14,7 +14,7 @@
 @implementation EpisodesLoader
 
 - (void)loadAllEpisodesForSeries:(NSString *)seriesId completionBlock:(EpisodesBlock)block {
-	[self.fetcher sendProtocolBuffersRequestWithURLString:[NSString stringWithFormat:@"%@/getAllEpisodes?id=%@", ServerURL, seriesId] completionBlock:^ (NSData *data) {
+	[self.fetcher sendHTTPRequestWithURLString:[NSString stringWithFormat:@"%@/getAllEpisodes?id=%@", ServerURL, seriesId] completionBlock:^ (NSData *data) {
 		NSArray *episodes = [GetAllEpisodesResponse parseFromData:data].episodesList;
 		block(episodes);
 	}];

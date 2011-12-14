@@ -3,11 +3,11 @@
 //  WatchedEpisodes
 //
 //  Created by Lucas Neiva on 1/26/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Lucas Neiva. All rights reserved.
 //
 
 #import "FavoritesManager.h"
-#import "FileHelper.h"
+#import "Files.h"
 #import "ServiceLocator.h"
 
 
@@ -80,7 +80,7 @@
 }
 
 - (NSString *)seriesDirectory {
-	return [FileHelper documentDirectoryNamed:@"series"];
+	return [Files documentDirectoryNamed:@"series"];
 }
 
 - (NSString *)filenameForSeries:(PBSeries *)series {

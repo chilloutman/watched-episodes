@@ -1,5 +1,5 @@
 //
-//  FilePathHelper.h
+//  Files.h
 //  WatchedEpisodes
 //
 //  Created by Lucas Neiva on 1/27/11.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface FileHelper : NSObject
+@interface Files : NSObject
 
 + (NSURL *)URLForDocumentNamed:(NSString *)documentName;
 + (NSString *)documentDirectoryNamed:(NSString *)directoryName;

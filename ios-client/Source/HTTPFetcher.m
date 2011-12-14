@@ -6,11 +6,11 @@
 //  Copyright 2011 Lucas Neiva. All rights reserved.
 //
 
-#import "ProtocolBuffersFetcher.h"
+#import "HTTPFetcher.h"
 #import "CommunicationManager.h"
 
 
-@interface ProtocolBuffersFetcher ()
+@interface HTTPFetcher ()
 
 @property (nonatomic, retain) NSURLConnection *connection;
 @property (nonatomic, retain) NSMutableData *receivedData;
@@ -23,16 +23,16 @@
 @end
 
 
-@implementation ProtocolBuffersFetcher
+@implementation HTTPFetcher
 
 @synthesize connection, receivedData, delegate, completionBlock;
 
-- (void)sendProtocolBuffersRequestWithURLString:(NSString *)URL delegate:(id<ProtocolBuffersFetcherDelegate>)d {
+- (void)sendHTTPRequestWithURLString:(NSString *)URL delegate:(id<ProtocolBuffersFetcherDelegate>)d {
 	self.delegate = d;
 	[self sendRequestWithURLString:URL];
 }
 
-- (void)sendProtocolBuffersRequestWithURLString:(NSString *)URL completionBlock:(DataBlock)block {
+- (void)sendHTTPRequestWithURLString:(NSString *)URL completionBlock:(DataBlock)block {
 	self.completionBlock = block;
 	[self sendRequestWithURLString:URL];
 }

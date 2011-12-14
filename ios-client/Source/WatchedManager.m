@@ -9,7 +9,7 @@
 #import "WatchedManager.h"
 #import "ServiceLocator.h"
 #import "WatchedStateDocument.h"
-#import "FileHelper.h"
+#import "Files.h"
 
 
 NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAvailableNotification";
@@ -80,7 +80,7 @@ NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAv
 }
 
 - (void)loadLastWatchedEpisodesWithCompletionBlock:(void (^) ())handler {
-	if ([FileHelper fileExistsAtPath:self.document.fileURL.path]) {
+	if ([Files fileExistsAtPath:self.document.fileURL.path]) {
 		[self.document openWithCompletionHandler:^ (BOOL success) {
             if (success) {
 				NSLog(@"Document was opened");

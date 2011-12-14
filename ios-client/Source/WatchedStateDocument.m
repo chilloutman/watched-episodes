@@ -7,7 +7,7 @@
 //
 
 #import "WatchedStateDocument.h"
-#import "FileHelper.h"
+#import "Files.h"
 
 @interface WatchedStateDocument ()
 
@@ -21,7 +21,7 @@
 @synthesize lastWatchedEpisodes;
 
 - (id)init {
-	NSURL *fileURL = [FileHelper URLForDocumentNamed:@"LastWatched.json"];
+	NSURL *fileURL = [Files URLForDocumentNamed:@"LastWatched.json"];
 	self = [super initWithFileURL:fileURL];
 	if (self) {
 		self.lastWatchedEpisodes = [NSMutableDictionary dictionary];
