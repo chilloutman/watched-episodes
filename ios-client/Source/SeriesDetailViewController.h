@@ -12,7 +12,7 @@
 
 @class FavoritesManager;
 
-@interface SeriesDetailViewController : UIViewController <SeriesLoaderDelegate, SeriesBannerLoaderDelegate, UITextViewDelegate> {
+@interface SeriesDetailViewController : UIViewController <SeriesLoaderDelegate, UITextViewDelegate> {
 	SeriesLoader *seriesLoader;
 	SeriesBannerLoader *bannerLoader;
 	PBSeries *currentSeries;

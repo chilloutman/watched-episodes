@@ -11,7 +11,7 @@
 #import "SeriesBannerLoader.h"
 #import "EpisodesListViewController.h"
 
-@interface LastWatchedEpisodeViewController () <SeriesBannerLoaderDelegate>
+@interface LastWatchedEpisodeViewController ()
 
 - (void)refreshUI;
 
@@ -34,7 +34,6 @@
 - (SeriesBannerLoader *)bannerLoader {
 	if (!bannerLoader) {
 		bannerLoader = [[SeriesBannerLoader alloc] init];
-		bannerLoader.delegate = self;
 	}
 	return bannerLoader;
 }
@@ -53,7 +52,9 @@
 
 - (void)refreshUI {
 	self.bannerView.image = nil;
-	[self.bannerLoader loadSeriesBanner:self.series.banner];
+	[self.bannerLoader loadSeriesBanner:self.series.banner withHandler:^ (UIImage *banner) {
+        self.bannerView.image = banner;
+    }];
 	self.episodeStepper.value = [[WatchedManager shared] lastWatchedEpisodeNumberForSeriesId:self.series.seriesId];
 	[self episodeStepperValueChanged:self.episodeStepper];
 	self.seasonStepper.value = [[WatchedManager shared] lastWatchedEpisodeSeasonNumberForSeriesId:self.series.seriesId];
@@ -74,12 +75,6 @@
 	NSUInteger episode = episodeStepper.value;
 	self.episodeLabel.text = [NSString stringWithFormat:@"Episode %d", episode];
 	[[WatchedManager shared] setLastWatchedEpisodeNumber:episode forSeries:self.series.seriesId];
-}
-
-#pragma mark SeriesBannerLoaderDelegate
-
-- (void)loadedSeriesBanner:(UIImage *)banner {
-	self.bannerView.image = banner;
 }
 
 #pragma mark UITableView

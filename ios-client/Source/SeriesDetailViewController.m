@@ -44,7 +44,6 @@
 - (SeriesBannerLoader *)bannerLoader {
 	if (!bannerLoader) {
 		bannerLoader = [[SeriesBannerLoader alloc] init];
-		bannerLoader.delegate= self;
 	}
 	return bannerLoader;
 }
@@ -96,7 +95,10 @@
 
 - (void)refreshUI {
 	[self.spindicator stopAnimating];
-	[self.bannerLoader loadSeriesBanner:self.series.banner];
+	[self.bannerLoader loadSeriesBanner:self.series.banner withHandler:^(UIImage *banner) {
+        self.nameLabel.text = nil;
+        self.bannerView.image = banner;
+    }];
 
 	self.nameLabel.text = self.series.seriesName;
 	self.overviewView.text = self.series.overview;
@@ -128,11 +130,6 @@
 
 - (void)loadedSeries:(PBSeries *)series {
 	self.series = series;
-}
-
-- (void)loadedSeriesBanner:(UIImage *)banner {
-	self.nameLabel.text = nil;
-	self.bannerView.image = banner;
 }
 
 #pragma mark UITextViewDelegate

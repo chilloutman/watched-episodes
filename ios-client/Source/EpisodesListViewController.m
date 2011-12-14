@@ -23,9 +23,7 @@
 @end
 
 
-@implementation EpisodesListViewController {
-    EpisodesLoader *episodesLoader;
-}
+@implementation EpisodesListViewController
 
 @synthesize currentSeriesId, model, episodesLoader;
 

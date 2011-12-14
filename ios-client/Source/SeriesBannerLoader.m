@@ -12,8 +12,8 @@
 
 @interface SeriesBannerLoader () <ProtocolBuffersFetcherDelegate>
 
-@property (nonatomic, retain) UIImage *banner;
 @property (nonatomic, copy) NSString *currentBannerPath;
+@property (nonatomic, copy) ImageHandler completionHandler;
 
 - (BOOL)loadSeriesBannerFromCache:(NSString *)bannerPath;
 - (void)storeBannerData:(NSData *)bannerData bannerPath:(NSString *)bannerPath;
@@ -25,10 +25,11 @@
 
 @implementation SeriesBannerLoader
 
-@synthesize delegate, banner, currentBannerPath;
+@synthesize currentBannerPath, completionHandler;
 
-- (void)loadSeriesBanner:(NSString *)bannerPath {	
-	if (![self loadSeriesBannerFromCache:bannerPath]) {
+- (void)loadSeriesBanner:(NSString *)bannerPath withHandler:(ImageHandler)handler {
+    self.completionHandler = handler;
+    if (![self loadSeriesBannerFromCache:bannerPath]) {
 		[self loadSeriesBannerFromServer:bannerPath];
 	}
 }
@@ -36,8 +37,8 @@
 - (BOOL)loadSeriesBannerFromCache:(NSString *)bannerPath {
 	NSString *cachedBanner= [self cachePathForBanner:bannerPath];
 	if ([[NSFileManager defaultManager] isReadableFileAtPath:cachedBanner]) {
-		self.banner= [UIImage imageWithContentsOfFile:cachedBanner];
-		[self.delegate loadedSeriesBanner:self.banner];
+		self.completionHandler([UIImage imageWithContentsOfFile:cachedBanner]);
+        self.completionHandler = nil;
 		return YES;
 	} else {
 		return NO;
@@ -66,21 +67,19 @@
 #pragma mark ProtocolBuffersFetcherDelegate
 
 - (void)processData:(NSData *)newData {
-	self.banner = [UIImage imageWithData:newData];
-	[self.delegate loadedSeriesBanner:self.banner];
+    self.completionHandler([UIImage imageWithData:newData]);
 	[self storeBannerData:newData bannerPath:self.currentBannerPath];
 }
 
 - (void)connectionFailed {
-	self.banner = nil;
 	self.currentBannerPath = nil;
 }
 
 #pragma mark -
 
 - (void)dealloc {
-	self.banner = nil;
 	self.currentBannerPath = nil;
+    self.completionHandler = nil;
 	[super dealloc];
 }
 
