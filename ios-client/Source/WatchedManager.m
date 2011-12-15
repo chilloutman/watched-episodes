@@ -15,6 +15,35 @@
 NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAvailableNotification";
 
 
+@implementation WatchedEpisode
+
+@synthesize seriesId, episodeNumber, seasonNumber;
+
++ (WatchedEpisode *)episodeWithSeriesId:(NSString *)seriesId dictionary:(NSDictionary *)lastWatchedDictionary {
+	return [WatchedEpisode episodeWithSeriesId:nil
+								 episodeNumber:[[lastWatchedDictionary objectForKey:@"episode"] unsignedIntegerValue]
+								  seasonNumber:[[lastWatchedDictionary objectForKey:@"season"] unsignedIntegerValue]];
+}
+
++ (WatchedEpisode *)episodeWithSeriesId:(NSString *)seriesId episodeNumber:(NSUInteger)episodeNumber seasonNumber:(NSUInteger)seasonNumber {
+	WatchedEpisode *episode = [[WatchedEpisode alloc] init];
+	episode.seriesId = seriesId;
+	episode.episodeNumber = episodeNumber;
+	episode.seasonNumber = seasonNumber;
+	return [episode autorelease];
+}
+
+- (BOOL)isZero {
+	return (self.seasonNumber == 0) && (self.episodeNumber == 0);
+}
+
+- (void)dealloc {
+	self.seriesId = nil;
+}
+
+@end
+
+
 @interface WatchedManager ()
 
 @property (nonatomic, retain) WatchedStateDocument *document;
@@ -47,52 +76,47 @@ NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAv
 	return document;
 }
 
-- (void)setLastWatchedEpisode:(PBEpisode *)episode {
+- (void)setLastWatchedEpisode:(WatchedEpisode *)episode {
 	NSMutableDictionary *lastWatched= [self.document lastWatchedEpisodeDictionaryForSeries:episode.seriesId];
 	[lastWatched setObject:[NSNumber numberWithUnsignedInteger:episode.episodeNumber] forKey:@"episode"];
 	[lastWatched setObject:[NSNumber numberWithUnsignedInteger:episode.seasonNumber] forKey:@"season"];
 	[self.document updateChangeCount:UIDocumentChangeDone];
 }
 
-- (void)setLastWatchedEpisodeNumber:(NSUInteger)number forSeries:(NSString *)seriesId {
-	NSMutableDictionary *lastWatched= [self.document lastWatchedEpisodeDictionaryForSeries:seriesId];
-	[lastWatched setObject:[NSNumber numberWithUnsignedInteger:number] forKey:@"episode"];
-	[self.document updateChangeCount:UIDocumentChangeDone];
-}
-
-- (void)setLastWatchedEpisodeSeasonNumber:(NSUInteger)number forSeries:(NSString *)seriesId {
-	NSMutableDictionary *lastWatched= [self.document lastWatchedEpisodeDictionaryForSeries:seriesId];
-	[lastWatched setObject:[NSNumber numberWithUnsignedInteger:number] forKey:@"season"];
-	[self.document updateChangeCount:UIDocumentChangeDone];
-}
-
 - (BOOL)isEpisodeMarkedAsWatched:(PBEpisode *)episode {
-	return [episode seasonNumber] <= [self lastWatchedEpisodeSeasonNumberForSeriesId:episode.seriesId]
-	&& [episode episodeNumber] <= [self lastWatchedEpisodeNumberForSeriesId:episode.seriesId];
+	WatchedEpisode *watchedEpisode = [self lastWatchedEpisodeForSeriesId:episode.seriesId];
+	
+	if (episode.seasonNumber < watchedEpisode.seasonNumber) {
+		return YES;
+	} else if (episode.seasonNumber == watchedEpisode.seasonNumber && episode.episodeNumber <= watchedEpisode.episodeNumber) {
+		return YES;
+	} else {
+		return NO;
+	}
 }
 
-- (NSUInteger)lastWatchedEpisodeNumberForSeriesId:(NSString *)seriesId {
-	return [[[self.document lastWatchedEpisodeDictionaryForSeries:seriesId] objectForKey:@"episode"] unsignedIntegerValue];
-}
-			
-- (NSUInteger)lastWatchedEpisodeSeasonNumberForSeriesId:(NSString *)seriesId {
-	return [[[self.document lastWatchedEpisodeDictionaryForSeries:seriesId] objectForKey:@"season"] unsignedIntegerValue];
+- (WatchedEpisode *)lastWatchedEpisodeForSeriesId:(NSString *)seriesId {
+	return [WatchedEpisode episodeWithSeriesId:seriesId dictionary:[self.document lastWatchedEpisodeDictionaryForSeries:seriesId]];
 }
 
-- (void)loadLastWatchedEpisodesWithCompletionBlock:(void (^) ())handler {
+- (void)loadLastWatchedEpisodesWithCompletionBlock:(void (^) ())block {
 	if ([Files fileExistsAtPath:self.document.fileURL.path]) {
 		[self.document openWithCompletionHandler:^ (BOOL success) {
             if (success) {
 				NSLog(@"Document was opened");
-                handler();
+                block();
             } else {
                 NSLog(@"Could not open document");
             }
         }];
 	} else {
 		[self.document saveToURL:self.document.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^ (BOOL success) {
-			NSLog(@"Document created");
-			handler();
+			if (success) {
+				NSLog(@"Document created");
+                block();
+            } else {
+                NSLog(@"Document could not be created");
+            }
 		}];
 	}
 }

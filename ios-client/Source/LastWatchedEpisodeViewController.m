@@ -11,11 +11,24 @@
 #import "SeriesBannerLoader.h"
 #import "EpisodesListViewController.h"
 
+
 @interface LastWatchedEpisodeViewController ()
 
 - (void)refreshUI;
+- (void)refreshLastWatchedEpisodeLabels;
 
 @property (nonatomic, retain) SeriesBannerLoader *bannerLoader;
+
+@property (nonatomic, retain) IBOutlet UIImageView *bannerView;
+@property (nonatomic, retain) IBOutlet UITableViewCell *allEpisodesCell;
+
+@property (nonatomic, retain) IBOutlet UITableViewCell *seasonCell;
+@property (nonatomic, retain) IBOutlet UILabel *seasonLabel;
+@property (nonatomic, retain) IBOutlet UIStepper *seasonStepper;
+
+@property (nonatomic, retain) IBOutlet UITableViewCell *episodeCell;
+@property (nonatomic, retain) IBOutlet UILabel *episodeLabel;
+@property (nonatomic, retain) IBOutlet UIStepper *episodeStepper;
 
 @end
 
@@ -47,6 +60,10 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+	WatchedEpisode *episode = [[WatchedManager shared] lastWatchedEpisodeForSeriesId:series.seriesId];
+	self.episodeStepper.value = episode.episodeNumber;
+	self.seasonStepper.value = episode.seasonNumber;
+	
 	[self refreshUI];
 }
 
@@ -55,26 +72,26 @@
 	[self.bannerLoader loadSeriesBannerForBannerPath:self.series.banner completionBlock:^ (UIImage *banner) {
         self.bannerView.image = banner;
     }];
-	self.episodeStepper.value = [[WatchedManager shared] lastWatchedEpisodeNumberForSeriesId:self.series.seriesId];
-	[self episodeStepperValueChanged:self.episodeStepper];
-	self.seasonStepper.value = [[WatchedManager shared] lastWatchedEpisodeSeasonNumberForSeriesId:self.series.seriesId];
-	[self seasonStepperValueChanged:self.seasonStepper];
+	
+	
+	[self refreshLastWatchedEpisodeLabels];
+}
+
+- (void)refreshLastWatchedEpisodeLabels {
+	WatchedEpisode *episode = [[WatchedManager shared] lastWatchedEpisodeForSeriesId:series.seriesId];
+	
+	self.episodeLabel.text = [NSString stringWithFormat:@"Episode %d", episode];
+	self.seasonLabel.text = [NSString stringWithFormat:@"Season %d", episode.seasonNumber];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (IBAction)seasonStepperValueChanged:(UIStepper *)sender {
-	NSUInteger season = seasonStepper.value;
-	self.seasonLabel.text = [NSString stringWithFormat:@"Season %d", season];
-	[[WatchedManager shared] setLastWatchedEpisodeSeasonNumber:season forSeries:self.series.seriesId];
-}
-
-- (IBAction)episodeStepperValueChanged:(UIStepper *)sender {
-	NSUInteger episode = episodeStepper.value;
-	self.episodeLabel.text = [NSString stringWithFormat:@"Episode %d", episode];
-	[[WatchedManager shared] setLastWatchedEpisodeNumber:episode forSeries:self.series.seriesId];
+- (IBAction)stepperValueChanged:(UIStepper *)sender {	
+	WatchedEpisode *episode = [WatchedEpisode episodeWithSeriesId:series.seriesId episodeNumber:episodeStepper.value seasonNumber:seasonStepper.value];
+	[[WatchedManager shared] setLastWatchedEpisode:episode];
+	[self refreshLastWatchedEpisodeLabels];
 }
 
 #pragma mark UITableView

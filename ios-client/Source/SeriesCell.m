@@ -27,12 +27,12 @@
 	series = seriesToDisplay;
 	self.seriesNameLabel.text = series.seriesName;
 	
-	NSUInteger season = [[WatchedManager shared] lastWatchedEpisodeSeasonNumberForSeriesId:series.seriesId];
-	NSUInteger episode = [[WatchedManager shared] lastWatchedEpisodeNumberForSeriesId:series.seriesId];
-	if (season != 0 && episode != 0) {
-		self.unwatchedLabel.text = [NSString stringWithFormat:@"Season %d Episode %d", season, episode];
-	} else {
+	WatchedEpisode *episode = [[WatchedManager shared] lastWatchedEpisodeForSeriesId:series.seriesId];
+	// TODO Create this string inside the WatchedEpisode class?
+	if (episode.isZero) {
 		self.unwatchedLabel.text = @"";
+	} else {
+		self.unwatchedLabel.text = [NSString stringWithFormat:@"Season %d Episode %d", episode.seasonNumber, episode.episodeNumber];
 	}
 }
 

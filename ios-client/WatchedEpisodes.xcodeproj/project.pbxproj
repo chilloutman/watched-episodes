@@ -118,7 +118,7 @@
 		EF4AD02512EA23BD0058F78E /* SeriesLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeriesLoader.m; sourceTree = "<group>"; };
 		EF4AD02712EA23F10058F78E /* GetSeries.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetSeries.pb.h; sourceTree = "<group>"; };
 		EF4AD02812EA23F10058F78E /* GetSeries.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetSeries.pb.m; sourceTree = "<group>"; };
-		EF5AA29113D5E32A00F6FBCF /* EpisodesDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; path = EpisodesDataProvider.h; sourceTree = "<group>"; };
+		EF5AA29113D5E32A00F6FBCF /* EpisodesDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EpisodesDataProvider.h; sourceTree = "<group>"; };
 		EF5AA29213D5E32A00F6FBCF /* EpisodesDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EpisodesDataProvider.m; sourceTree = "<group>"; };
 		EF5AA2A013D5F21B00F6FBCF /* ProtocolCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolCategories.h; sourceTree = "<group>"; };
 		EF5AA2A113D5F21B00F6FBCF /* ProtocolCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolCategories.m; sourceTree = "<group>"; };

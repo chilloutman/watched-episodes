@@ -9,22 +9,32 @@
 #import <Foundation/Foundation.h>
 #import "ProtocolTypes.pb.h"
 
-extern NSString * const WatchedManagerDidFinishLoadingNotification; // Posted when the WatchedManager is done loading the watched state.
+
+extern NSString * const WatchedManagerDidFinishLoadingNotification; // Posted when the WatchedManager updated the watched episodes.
+
+
+@interface WatchedEpisode : NSObject
+
++ (WatchedEpisode *)episodeWithSeriesId:(NSString *)seriesId episodeNumber:(NSUInteger)episodeNumber seasonNumber:(NSUInteger)seasonNumber;
+
+@property (nonatomic, copy) NSString *seriesId;
+@property (nonatomic, assign) NSUInteger seasonNumber;
+@property (nonatomic, assign) NSUInteger episodeNumber;
+@property (nonatomic, readonly) BOOL isZero;
+
+@end
+
 
 @interface WatchedManager : NSObject
 
 + (WatchedManager *)shared;
 
-- (void)loadLastWatchedEpisodesWithCompletionBlock:(void (^) ())handler;
+- (void)loadLastWatchedEpisodesWithCompletionBlock:(void (^) ())block;
 - (void)save;
 - (void)closeDocument;
 
-- (void)setLastWatchedEpisode:(PBEpisode *)episode;
-- (void)setLastWatchedEpisodeNumber:(NSUInteger)number forSeries:(NSString *)seriesId;
-- (void)setLastWatchedEpisodeSeasonNumber:(NSUInteger)number forSeries:(NSString *)seriesId;
-
+- (void)setLastWatchedEpisode:(WatchedEpisode *)episode;
+- (WatchedEpisode *)lastWatchedEpisodeForSeriesId:(NSString *)seriesId;
 - (BOOL)isEpisodeMarkedAsWatched:(PBEpisode *)episode;
-- (NSUInteger)lastWatchedEpisodeNumberForSeriesId:(NSString *)seriesId;
-- (NSUInteger)lastWatchedEpisodeSeasonNumberForSeriesId:(NSString *)seriesId;
 
 @end
