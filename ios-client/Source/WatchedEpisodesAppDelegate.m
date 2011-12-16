@@ -12,6 +12,8 @@
 #import "SearchSeriesViewController.h"
 #import "FavoritesViewController.h"
 #import "WatchedManager.h"
+#import "SeriesManager.h"
+
 
 @implementation WatchedEpisodesAppDelegate
 
@@ -44,6 +46,7 @@
      Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
      */
 	[[WatchedManager shared] closeDocument];
+	[[SeriesManager shared] closeDocument];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -52,6 +55,7 @@
      If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
      */
 	[[WatchedManager shared] save];
+	[[SeriesManager shared] save];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -67,6 +71,10 @@
 	
 	[[WatchedManager shared] loadLastWatchedEpisodesWithCompletionBlock:^ {
 		[[NSNotificationCenter defaultCenter] postNotificationName:WatchedManagerDidFinishLoadingNotification object:[WatchedManager shared]];
+	}];
+	
+	[[SeriesManager shared] loadFavoritesWithCompletionBlock:^ {
+		
 	}];
 }
 

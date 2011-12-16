@@ -10,32 +10,11 @@
 #import "SeriesLoader.h"
 #import "SeriesBannerLoader.h"
 
-@class FavoritesManager;
+@class SeriesManager;
 
-@interface SeriesDetailViewController : UIViewController <UITextViewDelegate> {
-	SeriesLoader *seriesLoader;
-	SeriesBannerLoader *bannerLoader;
-	PBSeries *currentSeries;
-	BOOL showsFaveButton;
-	
-	UILabel *nameLabel;
-	UITextView *overviewView;
-	UIImageView *bannerView;
-	UIActivityIndicatorView *spindicator;
-	UIBarButtonItem *faveButton;
-}
+@interface SeriesDetailViewController : UIViewController <UITextViewDelegate>
 
 @property (nonatomic, copy) NSString *seriesId;
 @property (nonatomic, assign) BOOL showsFaveButton;
-
-#pragma mark IB
-
-- (IBAction)faveSeries;
-
-@property (nonatomic, retain) IBOutlet UILabel *nameLabel;
-@property (nonatomic, retain) IBOutlet UITextView *overviewView;
-@property (nonatomic, retain) IBOutlet UIImageView *bannerView;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *spindicator;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *faveButton;
 
 @end

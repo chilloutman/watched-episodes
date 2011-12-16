@@ -7,7 +7,7 @@
 //
 
 #import "FavoritesViewController.h"
-#import "FavoritesManager.h"
+#import "SeriesManager.h"
 #import "WatchedManager.h"
 #import "SeriesDetailViewController.h"
 #import "EpisodesListViewController.h"
@@ -17,10 +17,11 @@
 
 @interface FavoritesViewController ()
 
-- (PBSeries *)seriesForIndexPath:(NSIndexPath *)indexPath;
+- (NSString *)seriesIdForIndexPath:(NSIndexPath *)indexPath;
 
 @property (nonatomic, retain) SeriesDetailViewController *seriesController;
 @property (nonatomic, retain) LastWatchedEpisodeViewController *lastWatchedController;
+@property (nonatomic, retain) SeriesLoader *seriesLoader;
 
 @end
 
@@ -29,7 +30,7 @@
 
 static NSString *CellIdentifier = @"SeriesCell";
 
-@synthesize seriesController, lastWatchedController;
+@synthesize seriesController, lastWatchedController, seriesLoader;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -65,6 +66,13 @@ static NSString *CellIdentifier = @"SeriesCell";
 	return seriesController;
 }
 
+- (SeriesLoader *)seriesLoader {
+	if (!seriesLoader) {
+		seriesLoader = [[SeriesLoader alloc] init];
+	}
+	return seriesLoader;
+}
+
 - (LastWatchedEpisodeViewController *)lastWatchedController {
 	if (!lastWatchedController) {
 		lastWatchedController = [[LastWatchedEpisodeViewController alloc] init];
@@ -79,13 +87,16 @@ static NSString *CellIdentifier = @"SeriesCell";
 }
 
 - (NSInteger)tableView:(UITableView *)t numberOfRowsInSection:(NSInteger)section {
-    return [[FavoritesManager shared].allFavoriteSeries count];
+    return [[SeriesManager shared].favoriteSeriesIds count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)t cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SeriesCell *cell = [t dequeueReusableCellWithIdentifier:CellIdentifier];
-    PBSeries *series = [[FavoritesManager shared].allFavoriteSeries objectAtIndex:indexPath.row];
-    cell.series = series;
+
+    NSString *seriesId = [self seriesIdForIndexPath:indexPath];
+	[self.seriesLoader loadSeriesForSeriesId:seriesId completionBlock:^ (PBSeries *series) {
+		cell.series = series;
+	}];
         
     return cell;
 }
@@ -131,17 +142,19 @@ static NSString *CellIdentifier = @"SeriesCell";
 */
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	self.lastWatchedController.series = [self seriesForIndexPath:indexPath];
 	[self.navigationController pushViewController:self.lastWatchedController animated:YES];
+	[self.seriesLoader loadSeriesForSeriesId:[self seriesIdForIndexPath:indexPath] completionBlock:^ (PBSeries *series) {
+		self.lastWatchedController.series = series;
+	}];
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
 	[self.navigationController pushViewController:self.seriesController animated:YES];
-	self.seriesController.seriesId = [self seriesForIndexPath:indexPath].seriesId;
+	self.seriesController.seriesId = [self seriesIdForIndexPath:indexPath];
 }
 
-- (PBSeries *)seriesForIndexPath:(NSIndexPath *)indexPath {
-	return [[FavoritesManager shared].allFavoriteSeries objectAtIndex:indexPath.row];
+- (NSString *)seriesIdForIndexPath:(NSIndexPath *)indexPath {
+	return [[SeriesManager shared].favoriteSeriesIds objectAtIndex:indexPath.row];
 }
 
 #pragma mark -

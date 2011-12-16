@@ -7,6 +7,7 @@
 //
 
 #import "SeriesBannerLoader.h"
+#import "HTTPFetcher.h"
 #import "Files.h"
 
 

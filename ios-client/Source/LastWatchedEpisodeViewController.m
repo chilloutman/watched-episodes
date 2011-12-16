@@ -15,7 +15,8 @@
 @interface LastWatchedEpisodeViewController ()
 
 - (void)refreshUI;
-- (void)refreshLastWatchedEpisodeLabels;
+- (void)refreshSteppers;
+- (void)refreshLabels;
 
 @property (nonatomic, retain) SeriesBannerLoader *bannerLoader;
 
@@ -56,42 +57,46 @@
 		[series release];
 		series = [newSeries retain];
 		[self refreshUI];
+		
+		self.bannerView.image = nil;
+		[self.bannerLoader loadSeriesBannerForBannerPath:self.series.banner completionBlock:^ (UIImage *banner) {
+			self.bannerView.image = banner;
+		}];
 	}
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	WatchedEpisode *episode = [[WatchedManager shared] lastWatchedEpisodeForSeriesId:series.seriesId];
-	self.episodeStepper.value = episode.episodeNumber;
-	self.seasonStepper.value = episode.seasonNumber;
-	
-	[self refreshUI];
+	if (self.series) {
+		[self refreshUI];
+	}
 }
 
 - (void)refreshUI {
-	self.bannerView.image = nil;
-	[self.bannerLoader loadSeriesBannerForBannerPath:self.series.banner completionBlock:^ (UIImage *banner) {
-        self.bannerView.image = banner;
-    }];
-	
-	
-	[self refreshLastWatchedEpisodeLabels];
+	[self refreshSteppers];
+	[self refreshLabels];
 }
 
-- (void)refreshLastWatchedEpisodeLabels {
+- (void)refreshSteppers {
 	WatchedEpisode *episode = [[WatchedManager shared] lastWatchedEpisodeForSeriesId:series.seriesId];
-	
-	self.episodeLabel.text = [NSString stringWithFormat:@"Episode %d", episode];
-	self.seasonLabel.text = [NSString stringWithFormat:@"Season %d", episode.seasonNumber];
+	self.episodeStepper.value = episode.episodeNumber;
+	self.seasonStepper.value = episode.seasonNumber;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return (interfaceOrientation == UIInterfaceOrientationPortrait);
+- (void)refreshLabels {
+	WatchedEpisode *episode = [[WatchedManager shared] lastWatchedEpisodeForSeriesId:series.seriesId];
+
+	self.seasonLabel.text = [NSString stringWithFormat:@"Season %d", episode.seasonNumber];	
+	self.episodeLabel.text = [NSString stringWithFormat:@"Episode %d", episode.episodeNumber];
 }
 
 - (IBAction)stepperValueChanged:(UIStepper *)sender {	
 	WatchedEpisode *episode = [WatchedEpisode episodeWithSeriesId:series.seriesId episodeNumber:episodeStepper.value seasonNumber:seasonStepper.value];
 	[[WatchedManager shared] setLastWatchedEpisode:episode];
-	[self refreshLastWatchedEpisodeLabels];
+	[self refreshLabels];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+	return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark UITableView

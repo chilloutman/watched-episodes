@@ -7,7 +7,7 @@
 //
 
 #import "SeriesDetailViewController.h"
-#import "FavoritesManager.h"
+#import "SeriesManager.h"
 
 
 @interface SeriesDetailViewController ()
@@ -20,6 +20,16 @@
 @property (nonatomic, retain) SeriesLoader *seriesLoader;
 @property (nonatomic, retain) SeriesBannerLoader *bannerLoader;
 @property (nonatomic, retain) PBSeries *series;
+
+#pragma mark IB
+
+- (IBAction)faveSeries;
+
+@property (nonatomic, retain) IBOutlet UILabel *nameLabel;
+@property (nonatomic, retain) IBOutlet UITextView *overviewView;
+@property (nonatomic, retain) IBOutlet UIImageView *bannerView;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *spindicator;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *faveButton;
 
 @end
 
@@ -57,28 +67,12 @@
 	[self resetUI];
 }
 
-- (void)setSeries:(PBSeries *)series {
-	if (![series.seriesId isEqualToString:self.series.seriesId]) {
-		[_series release];
-		_series = [series retain];
-		
-		[self refreshUI];
-	}
-}
-
 - (void)setSeriesId:(NSString *)seriesId {
 	if (![seriesId isEqualToString:_seriesId]) {
 		[_seriesId release];
 		_seriesId = [seriesId copy];
 		
-		self.series = nil;
-		PBSeries *series = [[FavoritesManager shared] seriesForSeriesId:self.seriesId];
-		if (series) {
-			self.series = series;
-		} else {
-			[self loadSeriesForSeriesId:self.seriesId];
-		}
-
+		[self loadSeriesForSeriesId:self.seriesId];
 	}
 }
 
@@ -87,38 +81,35 @@
 }
 
 - (void)loadSeriesForSeriesId:(NSString *)seriesId {
-	[self.seriesLoader loadSeriesForSeriesId:seriesId completionBlock:^ (PBSeries *series) {
-		self.series = series;
-	}];
 	[self resetUI];
 	[self.spindicator startAnimating];
-}
 
-- (void)refreshUI {
-	[self.spindicator stopAnimating];
-	[self.bannerLoader loadSeriesBannerForBannerPath:self.series.banner completionBlock:^(UIImage *banner) {
-        self.nameLabel.text = nil;
-        self.bannerView.image = banner;
-    }];
-
-	self.nameLabel.text = self.series.seriesName;
-	self.overviewView.text = self.series.overview;
-	[self updateFaveButton];
+	[self.seriesLoader loadSeriesForSeriesId:seriesId completionBlock:^ (PBSeries *series) {
+		[self.spindicator stopAnimating];
+		self.series = series;
+		[self refreshUI];
+		[self.bannerLoader loadSeriesBannerForBannerPath:self.series.banner completionBlock:^(UIImage *banner) {
+			self.nameLabel.text = nil;
+			self.bannerView.image = banner;
+		}];
+	}];
 }
 
 - (void)resetUI {
 	self.nameLabel.text = nil;
 	self.overviewView.text = nil;
 	self.bannerView.image = nil;
+	self.faveButton.enabled = NO;
 }
 
-- (IBAction)faveSeries {
-	[[FavoritesManager shared] addSeriesToFavorites:self.series];
+- (void)refreshUI {
+	self.nameLabel.text = self.series.seriesName;
+	self.overviewView.text = self.series.overview;
 	[self updateFaveButton];
 }
 
 - (void)updateFaveButton {
-	if ([[FavoritesManager shared] isInFavorites:self.seriesId]) {
+	if ([[SeriesManager shared] isSeriesInFavorites:self.series.seriesId]) {
 		self.faveButton.enabled = NO;
 		self.faveButton.image = [UIImage imageNamed:@"Heart"];
 	} else {
@@ -126,6 +117,12 @@
 		self.faveButton.image = [UIImage imageNamed:@"HeartAlt"];
 	}
 }
+
+- (IBAction)faveSeries {
+	[[SeriesManager shared] addSeriesToFavorites:self.series.seriesId];
+	[self updateFaveButton];
+}
+
 
 #pragma mark UITextViewDelegate
 

@@ -15,6 +15,8 @@
 		AAB1059413D587E900683DC4 /* CommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB1059313D587E900683DC4 /* CommunicationManager.m */; };
 		AAB1059613D5993500683DC4 /* MessagePopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAB1059513D5993500683DC4 /* MessagePopupView.xib */; };
 		AAB1059C13D59AC300683DC4 /* MessagePopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB1059B13D59AC200683DC4 /* MessagePopupView.m */; };
+		EF0BD215149A8D7E008BC271 /* JSONDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0BD214149A8D7E008BC271 /* JSONDocument.m */; };
+		EF0BD218149A9A60008BC271 /* FileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0BD217149A9A60008BC271 /* FileCache.m */; };
 		EF12EFA112EC90C2007E380E /* SeriesBannerLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF12EFA012EC90C2007E380E /* SeriesBannerLoader.m */; };
 		EF2AD7FB13327AD500585E3A /* EpisodesLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2AD7FA13327AD400585E3A /* EpisodesLoader.m */; };
 		EF2AD7FE1332800A00585E3A /* EpisodesListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2AD7FD1332800A00585E3A /* EpisodesListViewController.m */; };
@@ -40,10 +42,9 @@
 		EF96D38C1493BDBF0060BD13 /* LastWatchedEpisode.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF96D38A1493BDBF0060BD13 /* LastWatchedEpisode.xib */; };
 		EFA0351713D9AB62004EB261 /* SeriesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFA0351613D9AB62004EB261 /* SeriesCell.xib */; };
 		EFA0351A13D9ABF1004EB261 /* SeriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA0351913D9ABF1004EB261 /* SeriesCell.m */; };
-		EFF365781496726F00CB6A92 /* WatchedStateDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF365771496726F00CB6A92 /* WatchedStateDocument.m */; };
 		EFFD078F12F0BE1E00F9075B /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD078E12F0BE1E00F9075B /* FavoritesViewController.m */; };
 		EFFD079512F0BE7A00F9075B /* NavigationControllerTab.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */; };
-		EFFD085312F0C8FA00F9075B /* FavoritesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD085212F0C8FA00F9075B /* FavoritesManager.m */; };
+		EFFD085312F0C8FA00F9075B /* SeriesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD085212F0C8FA00F9075B /* SeriesManager.m */; };
 		EFFD08B512F21BBC00F9075B /* GetAllEpisodes.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD08B212F21BBC00F9075B /* GetAllEpisodes.pb.m */; };
 		EFFD08B612F21BBC00F9075B /* ProtocolTypes.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD08B412F21BBC00F9075B /* ProtocolTypes.pb.m */; };
 		EFFD093512F22BE700F9075B /* Files.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD093412F22BE700F9075B /* Files.m */; };
@@ -99,6 +100,10 @@
 		AAB1059513D5993500683DC4 /* MessagePopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagePopupView.xib; sourceTree = "<group>"; };
 		AAB1059A13D59AC200683DC4 /* MessagePopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagePopupView.h; sourceTree = "<group>"; };
 		AAB1059B13D59AC200683DC4 /* MessagePopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagePopupView.m; sourceTree = "<group>"; };
+		EF0BD213149A8D7E008BC271 /* JSONDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONDocument.h; sourceTree = "<group>"; };
+		EF0BD214149A8D7E008BC271 /* JSONDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONDocument.m; sourceTree = "<group>"; };
+		EF0BD216149A9A60008BC271 /* FileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileCache.h; sourceTree = "<group>"; };
+		EF0BD217149A9A60008BC271 /* FileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileCache.m; sourceTree = "<group>"; };
 		EF12EF9F12EC90C2007E380E /* SeriesBannerLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeriesBannerLoader.h; sourceTree = "<group>"; };
 		EF12EFA012EC90C2007E380E /* SeriesBannerLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeriesBannerLoader.m; sourceTree = "<group>"; };
 		EF2AD7F913327AD300585E3A /* EpisodesLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = EpisodesLoader.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -146,14 +151,12 @@
 		EFA0351613D9AB62004EB261 /* SeriesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeriesCell.xib; sourceTree = "<group>"; };
 		EFA0351813D9ABF1004EB261 /* SeriesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeriesCell.h; sourceTree = "<group>"; };
 		EFA0351913D9ABF1004EB261 /* SeriesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeriesCell.m; sourceTree = "<group>"; };
-		EFF365761496726F00CB6A92 /* WatchedStateDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchedStateDocument.h; sourceTree = "<group>"; };
-		EFF365771496726F00CB6A92 /* WatchedStateDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchedStateDocument.m; sourceTree = "<group>"; };
 		EFFD078D12F0BE1E00F9075B /* FavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesViewController.h; sourceTree = "<group>"; };
 		EFFD078E12F0BE1E00F9075B /* FavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesViewController.m; sourceTree = "<group>"; };
 		EFFD079312F0BE7A00F9075B /* NavigationControllerTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationControllerTab.h; sourceTree = "<group>"; };
 		EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationControllerTab.m; sourceTree = "<group>"; };
-		EFFD085112F0C8FA00F9075B /* FavoritesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesManager.h; sourceTree = "<group>"; };
-		EFFD085212F0C8FA00F9075B /* FavoritesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesManager.m; sourceTree = "<group>"; };
+		EFFD085112F0C8FA00F9075B /* SeriesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeriesManager.h; sourceTree = "<group>"; };
+		EFFD085212F0C8FA00F9075B /* SeriesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeriesManager.m; sourceTree = "<group>"; };
 		EFFD08B112F21BBC00F9075B /* GetAllEpisodes.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetAllEpisodes.pb.h; sourceTree = "<group>"; };
 		EFFD08B212F21BBC00F9075B /* GetAllEpisodes.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetAllEpisodes.pb.m; sourceTree = "<group>"; };
 		EFFD08B312F21BBC00F9075B /* ProtocolTypes.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolTypes.pb.h; sourceTree = "<group>"; };
@@ -243,6 +246,8 @@
 				EF12EFA012EC90C2007E380E /* SeriesBannerLoader.m */,
 				EF2AD7F913327AD300585E3A /* EpisodesLoader.h */,
 				EF2AD7FA13327AD400585E3A /* EpisodesLoader.m */,
+				EF0BD216149A9A60008BC271 /* FileCache.h */,
+				EF0BD217149A9A60008BC271 /* FileCache.m */,
 			);
 			name = Loader;
 			sourceTree = "<group>";
@@ -334,15 +339,6 @@
 			name = Communication;
 			sourceTree = "<group>";
 		};
-		EFF365791496728100CB6A92 /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				EFF365761496726F00CB6A92 /* WatchedStateDocument.h */,
-				EFF365771496726F00CB6A92 /* WatchedStateDocument.m */,
-			);
-			name = Private;
-			sourceTree = "<group>";
-		};
 		EFFD084F12F0C6F000F9075B /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,11 +362,12 @@
 			children = (
 				EF5AA29113D5E32A00F6FBCF /* EpisodesDataProvider.h */,
 				EF5AA29213D5E32A00F6FBCF /* EpisodesDataProvider.m */,
-				EFFD085112F0C8FA00F9075B /* FavoritesManager.h */,
-				EFFD085212F0C8FA00F9075B /* FavoritesManager.m */,
+				EFFD085112F0C8FA00F9075B /* SeriesManager.h */,
+				EFFD085212F0C8FA00F9075B /* SeriesManager.m */,
 				EFFD259C13C236900051628A /* WatchedManager.h */,
 				EFFD259D13C236900051628A /* WatchedManager.m */,
-				EFF365791496728100CB6A92 /* Private */,
+				EF0BD213149A8D7E008BC271 /* JSONDocument.h */,
+				EF0BD214149A8D7E008BC271 /* JSONDocument.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -520,7 +517,7 @@
 				EF12EFA112EC90C2007E380E /* SeriesBannerLoader.m in Sources */,
 				EFFD078F12F0BE1E00F9075B /* FavoritesViewController.m in Sources */,
 				EFFD079512F0BE7A00F9075B /* NavigationControllerTab.m in Sources */,
-				EFFD085312F0C8FA00F9075B /* FavoritesManager.m in Sources */,
+				EFFD085312F0C8FA00F9075B /* SeriesManager.m in Sources */,
 				EFFD08B512F21BBC00F9075B /* GetAllEpisodes.pb.m in Sources */,
 				EFFD08B612F21BBC00F9075B /* ProtocolTypes.pb.m in Sources */,
 				EFFD093512F22BE700F9075B /* Files.m in Sources */,
@@ -536,7 +533,8 @@
 				EF5AA2A213D5F21B00F6FBCF /* ProtocolCategories.m in Sources */,
 				EFA0351A13D9ABF1004EB261 /* SeriesCell.m in Sources */,
 				EF96D38B1493BDBF0060BD13 /* LastWatchedEpisodeViewController.m in Sources */,
-				EFF365781496726F00CB6A92 /* WatchedStateDocument.m in Sources */,
+				EF0BD215149A8D7E008BC271 /* JSONDocument.m in Sources */,
+				EF0BD218149A9A60008BC271 /* FileCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

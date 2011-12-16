@@ -8,16 +8,45 @@
 
 #import "SeriesLoader.h"
 #import "GetSeries.pb.h"
+#import "HTTPFetcher.h"
+#import "FileCache.h"
+
+
+@interface SeriesLoader ()
+
+- (PBSeries *)seriesFromData:(NSData *)data;
+- (NSString *)URLStringForSeriesId:(NSString *)seriesId;
+
+@end
 
 
 @implementation SeriesLoader
 
 - (void)loadSeriesForSeriesId:(NSString *)seriesId completionBlock:(SeriesBlock)block {
-	NSString *URLString = [NSString stringWithFormat:@"%@/getSeries?id=%@", ServerURL, seriesId];
-	[self.fetcher sendHTTPRequestWithURLString:URLString completionBlock:^ (NSData *data) {
-		PBSeries *series = [GetSeriesResponse parseFromData:data].series;
-		block(series);
-	}];
+	NSData *cachedData = [self.cache loadDataForKey:seriesId];
+	if (cachedData) {
+		dispatch_async(dispatch_get_main_queue(), ^ {
+			block([self seriesFromData:cachedData]);
+		});
+	} else {
+		[self.fetcher sendHTTPRequestWithURLString:[self URLStringForSeriesId:seriesId] completionBlock:^ (NSData *data) {
+			PBSeries *series = [self seriesFromData:data];
+			[self.cache cacheData:data forKey:seriesId];
+			block(series);
+		}];
+	}
+}
+
+- (PBSeries *)seriesFromData:(NSData *)data {
+	return [GetSeriesResponse parseFromData:data].series;
+}
+
+- (NSString *)URLStringForSeriesId:(NSString *)seriesId {
+	return [NSString stringWithFormat:@"%@/getSeries?id=%@", ServerURL, seriesId];
+}
+
+- (NSString *)cacheDirectoryPath {
+	return @"SeriesCache";
 }
 
 @end

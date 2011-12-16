@@ -7,17 +7,25 @@
 //
 
 #import "AbstractLoader.h"
-
+#import "HTTPFetcher.h"
+#import "FileCache.h"
 
 @implementation AbstractLoader
 
-@synthesize fetcher;
+@synthesize fetcher, cache, cacheDirectoryPath;
 
 - (HTTPFetcher *)fetcher {
-	if (fetcher == nil) {
+	if (!fetcher) {
 		fetcher = [[HTTPFetcher alloc] init];
 	}
 	return fetcher;
+}
+
+- (FileCache *)cache {
+	if (!cache) {
+		self.cache = [FileCache fileCacheWithDirectoryName:self.cacheDirectoryPath];
+	}
+	return cache;
 }
 
 - (void)cancelCurrentConnection {
@@ -26,6 +34,7 @@
 
 - (void)dealloc {
 	self.fetcher = nil;
+	self.cache = nil;
 }
 
 @end

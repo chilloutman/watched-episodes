@@ -7,6 +7,7 @@
 //
 
 #import "SearchLoader.h"
+#import "HTTPFetcher.h"
 #import "NSString+URLEncoding.h"
 
 

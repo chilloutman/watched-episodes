@@ -8,7 +8,7 @@
 
 #import "WatchedManager.h"
 #import "ServiceLocator.h"
-#import "WatchedStateDocument.h"
+#import "JSONDocument.h"
 #import "Files.h"
 
 
@@ -21,8 +21,8 @@ NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAv
 
 + (WatchedEpisode *)episodeWithSeriesId:(NSString *)seriesId dictionary:(NSDictionary *)lastWatchedDictionary {
 	return [WatchedEpisode episodeWithSeriesId:nil
-								 episodeNumber:[[lastWatchedDictionary objectForKey:@"episode"] unsignedIntegerValue]
-								  seasonNumber:[[lastWatchedDictionary objectForKey:@"season"] unsignedIntegerValue]];
+								 episodeNumber:[[lastWatchedDictionary objectForKey:@"e"] unsignedIntegerValue]
+								  seasonNumber:[[lastWatchedDictionary objectForKey:@"s"] unsignedIntegerValue]];
 }
 
 + (WatchedEpisode *)episodeWithSeriesId:(NSString *)seriesId episodeNumber:(NSUInteger)episodeNumber seasonNumber:(NSUInteger)seasonNumber {
@@ -44,16 +44,19 @@ NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAv
 @end
 
 
-@interface WatchedManager ()
+@interface WatchedManager () <JSONDocumentDataProvider>
 
-@property (nonatomic, retain) WatchedStateDocument *document;
+@property (nonatomic, retain) JSONDocument *document;
+@property (nonatomic, retain) NSMutableDictionary *lastWatchedEpisodes;
+
+- (NSMutableDictionary *)lastWatchedEpisodeDictionaryForSeries:(NSString *)seriesId;
 
 @end
 
 
 @implementation WatchedManager
 
-@synthesize document;
+@synthesize document, lastWatchedEpisodes;
 
 + (WatchedManager *)shared {
 	return [ServiceLocator singletonForClass:[WatchedManager class]];
@@ -62,24 +65,22 @@ NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAv
 - (id)init {
     self = [super init];
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserverForName:UIDocumentStateChangedNotification object:self.document queue:[NSOperationQueue mainQueue] usingBlock:^ (NSNotification *n) {
-			NSLog(@"%d", self.document.documentState);
-		}];
-    }
+		self.lastWatchedEpisodes = [NSMutableDictionary dictionary];
+	}
     return self;
 }
 
-- (WatchedStateDocument *)document {
+- (JSONDocument *)document {
 	if (!document) {
-		document = [[WatchedStateDocument alloc] init];
+		document = [[JSONDocument alloc] initWithDocumentName:@"LastWatched.json" dataProvider:self];
 	}
 	return document;
 }
 
 - (void)setLastWatchedEpisode:(WatchedEpisode *)episode {
-	NSMutableDictionary *lastWatched= [self.document lastWatchedEpisodeDictionaryForSeries:episode.seriesId];
-	[lastWatched setObject:[NSNumber numberWithUnsignedInteger:episode.episodeNumber] forKey:@"episode"];
-	[lastWatched setObject:[NSNumber numberWithUnsignedInteger:episode.seasonNumber] forKey:@"season"];
+	NSMutableDictionary *lastWatched = [self lastWatchedEpisodeDictionaryForSeries:episode.seriesId];
+	[lastWatched setObject:[NSNumber numberWithUnsignedInteger:episode.episodeNumber] forKey:@"e"];
+	[lastWatched setObject:[NSNumber numberWithUnsignedInteger:episode.seasonNumber] forKey:@"s"];
 	[self.document updateChangeCount:UIDocumentChangeDone];
 }
 
@@ -96,29 +97,28 @@ NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAv
 }
 
 - (WatchedEpisode *)lastWatchedEpisodeForSeriesId:(NSString *)seriesId {
-	return [WatchedEpisode episodeWithSeriesId:seriesId dictionary:[self.document lastWatchedEpisodeDictionaryForSeries:seriesId]];
+	return [WatchedEpisode episodeWithSeriesId:seriesId dictionary:[self lastWatchedEpisodeDictionaryForSeries:seriesId]];
 }
 
-- (void)loadLastWatchedEpisodesWithCompletionBlock:(void (^) ())block {
-	if ([Files fileExistsAtPath:self.document.fileURL.path]) {
-		[self.document openWithCompletionHandler:^ (BOOL success) {
-            if (success) {
-				NSLog(@"Document was opened");
-                block();
-            } else {
-                NSLog(@"Could not open document");
-            }
-        }];
-	} else {
-		[self.document saveToURL:self.document.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^ (BOOL success) {
-			if (success) {
-				NSLog(@"Document created");
-                block();
-            } else {
-                NSLog(@"Document could not be created");
-            }
-		}];
+- (NSMutableDictionary *)lastWatchedEpisodeDictionaryForSeries:(NSString *)seriesId {
+	NSMutableDictionary *dictionary = [self.lastWatchedEpisodes objectForKey:seriesId];
+	if (!dictionary) {
+		dictionary = [NSMutableDictionary dictionaryWithCapacity:2];
+		NSLog(@"%@", self.lastWatchedEpisodes);
+		[self.lastWatchedEpisodes setObject:dictionary forKey:seriesId];
 	}
+	
+	return dictionary;
+}
+
+#pragma mark Opening and Closing the Document
+
+- (void)loadLastWatchedEpisodesWithCompletionBlock:(void (^) ())block {
+	[self.document openWithCompletionHandler:^ (BOOL success) {
+		if (success) {
+			block();
+		}
+	}];
 }
 
 - (void)save {
@@ -127,19 +127,29 @@ NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAv
 
 - (void)closeDocument {
 	[self.document closeWithCompletionHandler:^ (BOOL success) {
-		if (success) {
-			self.document = nil;
-			NSLog(@"Document was closed");
-		} else {
-			NSLog(@"Document could not be closed");
-		}
+		self.document = nil;
 	}];
+}
+
+#pragma JSONDocumentDataProvider
+
+- (void)setJSONObject:(NSMutableDictionary *)JSONObject {
+	self.lastWatchedEpisodes = JSONObject;
+}
+
+- (id)JSONObject {
+	return self.lastWatchedEpisodes;
+}
+
+- (BOOL)isJSONObjectEmpty {
+	return [self.lastWatchedEpisodes count] == 0;
 }
 
 #pragma mark -
 
 - (void)dealloc {
 	self.document = nil;
+	self.lastWatchedEpisodes = nil;
 	[super dealloc];
 }
 

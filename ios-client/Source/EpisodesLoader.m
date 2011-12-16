@@ -9,6 +9,7 @@
 #import "EpisodesLoader.h"
 #import	"Constants.h"
 #import "GetAllEpisodes.pb.h"
+#import "HTTPFetcher.h"
 
 
 @implementation EpisodesLoader
