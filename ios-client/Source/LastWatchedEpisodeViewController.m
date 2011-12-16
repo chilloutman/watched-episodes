@@ -8,7 +8,7 @@
 
 #import "LastWatchedEpisodeViewController.h"
 #import "WatchedManager.h"
-#import "SeriesBannerLoader.h"
+#import "SeriesManager.h"
 #import "EpisodesListViewController.h"
 
 
@@ -17,8 +17,6 @@
 - (void)refreshUI;
 - (void)refreshSteppers;
 - (void)refreshLabels;
-
-@property (nonatomic, retain) SeriesBannerLoader *bannerLoader;
 
 @property (nonatomic, retain) IBOutlet UIImageView *bannerView;
 @property (nonatomic, retain) IBOutlet UITableViewCell *allEpisodesCell;
@@ -36,20 +34,13 @@
 
 @implementation LastWatchedEpisodeViewController
 
-@synthesize bannerLoader, series;
+@synthesize series;
 @synthesize bannerView, allEpisodesCell;
 @synthesize seasonCell, seasonLabel, seasonStepper;
 @synthesize episodeCell, episodeLabel, episodeStepper;
 
 - (NSString *)nibName {
 	return @"LastWatchedEpisode";
-}
-
-- (SeriesBannerLoader *)bannerLoader {
-	if (!bannerLoader) {
-		bannerLoader = [[SeriesBannerLoader alloc] init];
-	}
-	return bannerLoader;
 }
 
 - (void)setSeries:(PBSeries *)newSeries {
@@ -59,7 +50,7 @@
 		[self refreshUI];
 		
 		self.bannerView.image = nil;
-		[self.bannerLoader loadSeriesBannerForBannerPath:self.series.banner completionBlock:^ (UIImage *banner) {
+		[[SeriesManager shared].seriesBannerLoader loadSeriesBannerForBannerPath:self.series.banner completionBlock:^ (UIImage *banner) {
 			self.bannerView.image = banner;
 		}];
 	}
@@ -148,7 +139,6 @@
 }
 
 - (void)dealloc {
-	self.bannerLoader = nil;
 	self.series = nil;
 	
 	self.bannerView = nil;

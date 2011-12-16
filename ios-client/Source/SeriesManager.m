@@ -7,8 +7,8 @@
 //
 
 #import "SeriesManager.h"
-#import "Files.h"
 #import "ServiceLocator.h"
+#import "Files.h"
 #import "JSONDocument.h"
 
 
@@ -22,7 +22,7 @@
 
 @implementation SeriesManager
 
-@synthesize document, seriesIds;
+@synthesize document, seriesIds, seriesLoader, seriesBannerLoader;
 
 + (SeriesManager *)shared {
     return [ServiceLocator singletonForClass:[SeriesManager class]];
@@ -41,6 +41,28 @@
 		document = [[JSONDocument alloc] initWithDocumentName:@"Series.json" dataProvider:self];
 	}
 	return document;
+}
+
+- (SeriesLoader *)seriesLoader {
+	if (!seriesLoader) {
+		seriesLoader = [[SeriesLoader alloc] init];
+	}
+	return seriesLoader;
+}
+
+- (SeriesBannerLoader *)seriesBannerLoader {
+	if (!seriesBannerLoader) {
+		seriesBannerLoader = [[SeriesBannerLoader alloc] init];
+	}
+	return seriesBannerLoader;
+}
+
+- (void)loadSeriesForSeriesId:(NSString *)seriesId completionBlock:(SeriesBlock)block {
+	[self.seriesLoader loadSeriesForSeriesId:seriesId completionBlock:block];
+}
+
+- (void)loadSeriesBannerForBannerPath:(NSString *)bannerPath completionBlock:(ImageBlock)block {
+	[self.seriesBannerLoader loadSeriesBannerForBannerPath:bannerPath completionBlock:block];
 }
 
 - (NSArray *)favoriteSeriesIds {
@@ -95,6 +117,8 @@
 - (void)dealloc {
 	self.document = nil;
 	self.seriesIds = nil;
+	[seriesLoader release];
+	[seriesBannerLoader release];
 	[super dealloc];
 }
 

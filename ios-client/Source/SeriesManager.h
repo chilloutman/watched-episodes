@@ -7,10 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SeriesLoader.h"
+#import "SeriesBannerLoader.h"
 
 @interface SeriesManager : NSObject
 
 @property (nonatomic, readonly) NSArray *favoriteSeriesIds;
+@property (nonatomic, readonly) SeriesLoader *seriesLoader;
+@property (nonatomic, readonly) SeriesBannerLoader *seriesBannerLoader;
+
 
 + (SeriesManager *)shared;
 

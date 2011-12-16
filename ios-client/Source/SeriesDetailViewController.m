@@ -17,8 +17,6 @@
 - (void)loadSeriesForSeriesId:(NSString *)seriesId;
 - (void)updateFaveButton;
 
-@property (nonatomic, retain) SeriesLoader *seriesLoader;
-@property (nonatomic, retain) SeriesBannerLoader *bannerLoader;
 @property (nonatomic, retain) PBSeries *series;
 
 #pragma mark IB
@@ -36,25 +34,11 @@
 
 @implementation SeriesDetailViewController
 
-@synthesize seriesLoader, bannerLoader, showsFaveButton, series=_series, seriesId=_seriesId;
+@synthesize showsFaveButton, series=_series, seriesId=_seriesId;
 @synthesize nameLabel, overviewView, bannerView, spindicator, faveButton;
 
 - (NSString *)nibName {
 	return @"SeriesDetail";
-}
-
-- (SeriesLoader *)seriesLoader {
-	if (!seriesLoader) {
-		seriesLoader = [[SeriesLoader alloc] init];
-	}
-	return seriesLoader;
-}
-
-- (SeriesBannerLoader *)bannerLoader {
-	if (!bannerLoader) {
-		bannerLoader = [[SeriesBannerLoader alloc] init];
-	}
-	return bannerLoader;
 }
 
 - (void)viewDidLoad {
@@ -84,11 +68,11 @@
 	[self resetUI];
 	[self.spindicator startAnimating];
 
-	[self.seriesLoader loadSeriesForSeriesId:seriesId completionBlock:^ (PBSeries *series) {
+	[[SeriesManager shared].seriesLoader loadSeriesForSeriesId:seriesId completionBlock:^ (PBSeries *series) {
 		[self.spindicator stopAnimating];
 		self.series = series;
 		[self refreshUI];
-		[self.bannerLoader loadSeriesBannerForBannerPath:self.series.banner completionBlock:^(UIImage *banner) {
+		[[SeriesManager shared].seriesBannerLoader loadSeriesBannerForBannerPath:self.series.banner completionBlock:^(UIImage *banner) {
 			self.nameLabel.text = nil;
 			self.bannerView.image = banner;
 		}];
@@ -134,8 +118,6 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.bannerLoader = nil;
-	self.seriesLoader = nil;
 	self.faveButton = nil;
 	self.overviewView = nil;
 	self.bannerView = nil;
@@ -144,8 +126,6 @@
 
 - (void)dealloc {
 	self.faveButton = nil;
-	self.bannerLoader = nil;
-	self.seriesLoader = nil;
 	self.series = nil;
 	self.seriesId = nil;
 	self.nameLabel = nil;

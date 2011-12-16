@@ -21,7 +21,6 @@
 
 @property (nonatomic, retain) SeriesDetailViewController *seriesController;
 @property (nonatomic, retain) LastWatchedEpisodeViewController *lastWatchedController;
-@property (nonatomic, retain) SeriesLoader *seriesLoader;
 
 @end
 
@@ -30,7 +29,7 @@
 
 static NSString *CellIdentifier = @"SeriesCell";
 
-@synthesize seriesController, lastWatchedController, seriesLoader;
+@synthesize seriesController, lastWatchedController;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -66,13 +65,6 @@ static NSString *CellIdentifier = @"SeriesCell";
 	return seriesController;
 }
 
-- (SeriesLoader *)seriesLoader {
-	if (!seriesLoader) {
-		seriesLoader = [[SeriesLoader alloc] init];
-	}
-	return seriesLoader;
-}
-
 - (LastWatchedEpisodeViewController *)lastWatchedController {
 	if (!lastWatchedController) {
 		lastWatchedController = [[LastWatchedEpisodeViewController alloc] init];
@@ -94,7 +86,7 @@ static NSString *CellIdentifier = @"SeriesCell";
     SeriesCell *cell = [t dequeueReusableCellWithIdentifier:CellIdentifier];
 
     NSString *seriesId = [self seriesIdForIndexPath:indexPath];
-	[self.seriesLoader loadSeriesForSeriesId:seriesId completionBlock:^ (PBSeries *series) {
+	[[SeriesManager shared].seriesLoader loadSeriesForSeriesId:seriesId completionBlock:^ (PBSeries *series) {
 		cell.series = series;
 	}];
         
@@ -143,7 +135,7 @@ static NSString *CellIdentifier = @"SeriesCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[self.navigationController pushViewController:self.lastWatchedController animated:YES];
-	[self.seriesLoader loadSeriesForSeriesId:[self seriesIdForIndexPath:indexPath] completionBlock:^ (PBSeries *series) {
+	[[SeriesManager shared].seriesLoader loadSeriesForSeriesId:[self seriesIdForIndexPath:indexPath] completionBlock:^ (PBSeries *series) {
 		self.lastWatchedController.series = series;
 	}];
 }
