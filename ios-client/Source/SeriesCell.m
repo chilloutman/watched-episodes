@@ -8,22 +8,32 @@
 
 #import "SeriesCell.h"
 #import "WatchedManager.h"
+#import "SeriesBannerLoader.h"
+
+
+@interface SeriesCell ()
+
+@property (nonatomic, retain) SeriesBannerLoader *bannerLoader;
+
+@end
 
 
 @implementation SeriesCell
 
-@synthesize series;
-@synthesize unwatchedLabel, seriesNameLabel;
+@synthesize series, bannerLoader;
+@synthesize unwatchedLabel, seriesNameLabel, bannerView;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+- (SeriesBannerLoader *)bannerLoader {
+	if (!bannerLoader) {
+		bannerLoader = [[SeriesBannerLoader alloc] init];
+	}
+	return bannerLoader;
 }
 
 - (void)setSeries:(PBSeries *)seriesToDisplay {
+	self.bannerView.image = nil;
+	[self.bannerLoader cancelCurrentConnection];
+	
 	series = seriesToDisplay;
 	self.seriesNameLabel.text = series.seriesName;
 	
@@ -34,6 +44,10 @@
 	} else {
 		self.unwatchedLabel.text = [NSString stringWithFormat:@"Season %d Episode %d", episode.seasonNumber, episode.episodeNumber];
 	}
+	
+	[self.bannerLoader loadSeriesBannerForBannerPath:series.banner completionBlock:^ (UIImage *banner) {
+		self.bannerView.image = banner;
+	}];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -45,6 +59,8 @@
 - (void)dealloc {
 	self.unwatchedLabel = nil;
 	self.seriesNameLabel = nil;
+	self.bannerView = nil;
+	self.bannerLoader = nil;
     [super dealloc];
 }
 

@@ -10,6 +10,7 @@
 
 @interface FileCache : NSObject
 
++ (FileCache *)sharedCacheWithDirectoryName:(NSString *)cacheDirectoryName;
 + (FileCache *)fileCacheWithDirectoryName:(NSString *)cacheDirectoryName;
 
 - (void)cacheData:(NSData *)data forKey:(NSString *)key;

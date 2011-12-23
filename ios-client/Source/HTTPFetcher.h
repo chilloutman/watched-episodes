@@ -12,17 +12,8 @@
 typedef void (^DataBlock) (NSData *dataOrNil);
 
 
-@protocol ProtocolBuffersFetcherDelegate
-
-- (void)processData:(NSData *)newData;
-- (void)connectionFailed;
-
-@end
-
-
 @interface HTTPFetcher : NSObject
 
-- (void)sendHTTPRequestWithURLString:(NSString *)URL delegate:(id<ProtocolBuffersFetcherDelegate>)delegate;
 - (void)sendHTTPRequestWithURLString:(NSString *)URL completionBlock:(DataBlock)block;
 
 - (void)cancelConnection;

@@ -14,27 +14,24 @@
 
 @property (nonatomic, retain) NSURLConnection *connection;
 @property (nonatomic, retain) NSMutableData *receivedData;
-@property (nonatomic, assign) id<ProtocolBuffersFetcherDelegate> delegate;
 @property (nonatomic, copy) DataBlock completionBlock;
 
 - (void)sendRequestWithURLString:(NSString *)URL;
 - (NSURLRequest *)protocolBuffersRequestWithURL:(NSURL *)URL;
+- (void)reset;
 
 @end
 
 
 @implementation HTTPFetcher
 
-@synthesize connection, receivedData, delegate, completionBlock;
-
-- (void)sendHTTPRequestWithURLString:(NSString *)URL delegate:(id<ProtocolBuffersFetcherDelegate>)d {
-	self.delegate = d;
-	[self sendRequestWithURLString:URL];
-}
+@synthesize connection, receivedData, completionBlock;
 
 - (void)sendHTTPRequestWithURLString:(NSString *)URL completionBlock:(DataBlock)block {
-	self.completionBlock = block;
-	[self sendRequestWithURLString:URL];
+	dispatch_async(dispatch_get_main_queue(), ^ {
+		self.completionBlock = block;
+		[self sendRequestWithURLString:URL];
+	});
 }
 
 - (void)sendRequestWithURLString:(NSString *)URL {
@@ -43,7 +40,7 @@
 #endif
 	NSURLRequest *request = [self protocolBuffersRequestWithURL:[NSURL URLWithString:URL]];
 	self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
-    [[CommunicationManager shared] startedConnection];
+	[[CommunicationManager shared] startedConnection];
 }
 
 - (NSURLRequest *)protocolBuffersRequestWithURL:(NSURL *)URL {
@@ -54,8 +51,14 @@
 }
 
 - (void)cancelConnection {
-    [self.connection cancel];
-	self.delegate = nil;
+	if (self.connection) {
+		[[CommunicationManager shared] finnishedConnection];
+		[self.connection cancel];
+		[self reset];
+	}
+}
+
+- (void)reset {
 	self.completionBlock = nil;
 	self.connection = nil;
 	self.receivedData = nil;
@@ -68,9 +71,8 @@
         long long contentLength = [response expectedContentLength];
         self.receivedData = (contentLength == NSURLResponseUnknownLength) ? [NSMutableData data] : [NSMutableData dataWithCapacity:contentLength];
     } else {
-        [[CommunicationManager shared] finnishedConnection];
-        [[CommunicationManager shared] displayErrorMessageForStatusCode:response.statusCode];
-        [self cancelConnection];
+		[[CommunicationManager shared] displayErrorMessageForStatusCode:response.statusCode];
+		[self cancelConnection];
     }
 }
 
@@ -79,13 +81,10 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
-	if (delegate) {
-		[self.delegate processData:self.receivedData];
-	} else {
+	if (self.completionBlock) {
 		self.completionBlock(self.receivedData);
 	}
 	[self cancelConnection];
-    [[CommunicationManager shared] finnishedConnection];
 }
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {

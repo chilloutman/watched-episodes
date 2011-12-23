@@ -12,4 +12,7 @@
 
 + (id)singletonForClass:(Class)serviceClass;
 
++ (void)registerSingletonInstance:(id)instance forKey:(id)key;
++ (id)singletonForKey:(id)key;
+
 @end

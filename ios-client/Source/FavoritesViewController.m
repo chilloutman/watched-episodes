@@ -35,6 +35,7 @@ static NSString *CellIdentifier = @"SeriesCell";
 	[super viewDidLoad];
     UINib *cellNib = [UINib nibWithNibName:CellIdentifier bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:CellIdentifier];
+	self.tableView.rowHeight = 85;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -86,13 +87,13 @@ static NSString *CellIdentifier = @"SeriesCell";
     SeriesCell *cell = [t dequeueReusableCellWithIdentifier:CellIdentifier];
 
     NSString *seriesId = [self seriesIdForIndexPath:indexPath];
+	// TODO This causes a problem after the cache is wiped
 	[[SeriesManager shared].seriesLoader loadSeriesForSeriesId:seriesId completionBlock:^ (PBSeries *series) {
 		cell.series = series;
 	}];
         
     return cell;
 }
-
 
 /*
 // Override to support conditional editing of the table view.
@@ -101,7 +102,6 @@ static NSString *CellIdentifier = @"SeriesCell";
     return YES;
 }
 */
-
 
 /*
 // Override to support editing the table view.

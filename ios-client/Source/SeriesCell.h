@@ -13,6 +13,7 @@
 @property (nonatomic, assign) PBSeries * series;
 
 @property (nonatomic, retain) IBOutlet UILabel *unwatchedLabel;
+@property (nonatomic, retain) IBOutlet UIImageView *bannerView;
 @property (nonatomic, retain) IBOutlet UILabel *seriesNameLabel;
 
 @end

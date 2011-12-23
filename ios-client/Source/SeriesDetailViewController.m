@@ -64,6 +64,11 @@
 	[self refreshUI];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+	[[SeriesManager shared].seriesBannerLoader cancelCurrentConnection];
+	[[SeriesManager shared].seriesLoader cancelCurrentConnection];
+}
+
 - (void)loadSeriesForSeriesId:(NSString *)seriesId {
 	[self resetUI];
 	[self.spindicator startAnimating];

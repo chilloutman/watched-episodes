@@ -23,6 +23,7 @@
     if (numberOfConnections > 0) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     }
+	NSLog(@"Ongoing requests: %d", numberOfConnections);
 }
                               
 - (void)finnishedConnection {
@@ -30,6 +31,7 @@
     if (numberOfConnections == 0) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     }
+	NSLog(@"Ongoing requests: %d", numberOfConnections);
 }
 
 - (void)displayErrorMessageForStatusCode:(NSInteger)statusCode {

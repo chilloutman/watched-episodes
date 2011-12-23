@@ -20,7 +20,7 @@ NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAv
 @synthesize seriesId, episodeNumber, seasonNumber;
 
 + (WatchedEpisode *)episodeWithSeriesId:(NSString *)seriesId dictionary:(NSDictionary *)lastWatchedDictionary {
-	return [WatchedEpisode episodeWithSeriesId:nil
+	return [WatchedEpisode episodeWithSeriesId:seriesId
 								 episodeNumber:[[lastWatchedDictionary objectForKey:@"e"] unsignedIntegerValue]
 								  seasonNumber:[[lastWatchedDictionary objectForKey:@"s"] unsignedIntegerValue]];
 }
@@ -104,7 +104,6 @@ NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAv
 	NSMutableDictionary *dictionary = [self.lastWatchedEpisodes objectForKey:seriesId];
 	if (!dictionary) {
 		dictionary = [NSMutableDictionary dictionaryWithCapacity:2];
-		NSLog(@"%@", self.lastWatchedEpisodes);
 		[self.lastWatchedEpisodes setObject:dictionary forKey:seriesId];
 	}
 	

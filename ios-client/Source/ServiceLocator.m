@@ -23,13 +23,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ServiceLocator)
 @synthesize singletons;
 
 + (id)singletonForClass:(Class)serviceClass {
-	id service = [[ServiceLocator shared].singletons objectForKey:serviceClass];
+	id service = [ServiceLocator singletonForKey:serviceClass];
 	if (service == nil) {
 		service = [[serviceClass alloc] init];
 		[[ServiceLocator shared].singletons setObject:service forKey:serviceClass];
 		[service release];
 	}
 	return service;
+}
+
++ (void)registerSingletonInstance:(id)instance forKey:(NSString *)key {
+	[[ServiceLocator shared].singletons setObject:instance forKey:key];
+}
+
++ (id)singletonForKey:(id)key {
+	return [[ServiceLocator shared].singletons objectForKey:key];
 }
 
 - (NSMutableDictionary *)singletons {
