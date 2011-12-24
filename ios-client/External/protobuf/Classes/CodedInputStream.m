@@ -1,10 +1,13 @@
+// Protocol Buffers for Objective C
+//
+// Copyright 2010 Booyah Inc.
 // Copyright 2008 Cyrus Najmabadi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -425,34 +428,6 @@ const int32_t BUFFER_SIZE = 4096;
   (((int64_t)b6 & 0xff) << 40) |
   (((int64_t)b7 & 0xff) << 48) |
   (((int64_t)b8 & 0xff) << 56);
-}
-
-
-/**
- * Decode a ZigZag-encoded 32-bit value.  ZigZag encodes signed integers
- * into values that can be efficiently encoded with varint.  (Otherwise,
- * negative values must be sign-extended to 64 bits to be varint encoded,
- * thus always taking 10 bytes on the wire.)
- *
- * @param n An unsigned 32-bit integer, stored in a signed int
- * @return A signed 32-bit integer.
- */
-int32_t decodeZigZag32(int32_t n) {
-  return logicalRightShift32(n, 1) ^ -(n & 1);
-}
-
-
-/**
- * Decode a ZigZag-encoded 64-bit value.  ZigZag encodes signed integers
- * into values that can be efficiently encoded with varint.  (Otherwise,
- * negative values must be sign-extended to 64 bits to be varint encoded,
- * thus always taking 10 bytes on the wire.)
- *
- * @param n An unsigned 64-bit integer, stored in a signed int
- * @return A signed 64-bit integer.
- */
-int64_t decodeZigZag64(int64_t n) {
-  return logicalRightShift64(n, 1) ^ -(n & 1);
 }
 
 

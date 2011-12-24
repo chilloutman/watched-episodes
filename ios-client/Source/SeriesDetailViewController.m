@@ -56,7 +56,9 @@
 		[_seriesId release];
 		_seriesId = [seriesId copy];
 		
-		[self loadSeriesForSeriesId:self.seriesId];
+		if (seriesId) {
+			[self loadSeriesForSeriesId:self.seriesId];
+		}
 	}
 }
 
@@ -130,6 +132,8 @@
 }
 
 - (void)dealloc {
+	[[SeriesManager shared].seriesBannerLoader cancel];
+	[[SeriesManager shared].seriesLoader cancel];
 	self.faveButton = nil;
 	self.series = nil;
 	self.seriesId = nil;

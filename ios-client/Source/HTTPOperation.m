@@ -116,6 +116,7 @@
 	
 	[self.connection cancel];
 	self.connection = nil;
+	self.completionBlocks = nil;
 	[[CommunicationManager shared] finnishedConnection];
 	self.isFinished = YES;
 	
@@ -128,6 +129,8 @@
 - (void)dealloc {
 	self.connection = nil;
 	self.completionBlocks = nil;
+	self.result = nil;
+	self.URL = nil;
 	[super dealloc];
 }
 

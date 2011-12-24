@@ -36,7 +36,6 @@
 		EF8D76F212D8DEDA0064C5B5 /* SearchSeriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D76EF12D8DEDA0064C5B5 /* SearchSeriesViewController.m */; };
 		EF8D78B912D933500064C5B5 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D786012D933500064C5B5 /* NSString+URLEncoding.m */; };
 		EF8D790512D933AB0064C5B5 /* SearchSeries.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D790412D933AB0064C5B5 /* SearchSeries.pb.m */; };
-		EF8D790E12D934030064C5B5 /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8D78F812D933800064C5B5 /* libProtocolBuffers.a */; };
 		EF8D793512D9F9AA0064C5B5 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D793412D9F9AA0064C5B5 /* Constants.m */; };
 		EF8D79D412DA087D0064C5B5 /* ServiceLocator.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D79D312DA087D0064C5B5 /* ServiceLocator.m */; };
 		EF96D38B1493BDBF0060BD13 /* LastWatchedEpisodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96D3891493BDBF0060BD13 /* LastWatchedEpisodeViewController.m */; };
@@ -44,6 +43,7 @@
 		EFA0351713D9AB62004EB261 /* SeriesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFA0351613D9AB62004EB261 /* SeriesCell.xib */; };
 		EFA0351A13D9ABF1004EB261 /* SeriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA0351913D9ABF1004EB261 /* SeriesCell.m */; };
 		EFA5E2CA14A655DC0012CD1F /* HTTPOperationResult.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA5E2C914A655DC0012CD1F /* HTTPOperationResult.m */; };
+		EFA5E2DF14A67F0C0012CD1F /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFA5E2DB14A67EA70012CD1F /* libProtocolBuffers.a */; };
 		EFFD078F12F0BE1E00F9075B /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD078E12F0BE1E00F9075B /* FavoritesViewController.m */; };
 		EFFD079512F0BE7A00F9075B /* NavigationControllerTab.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */; };
 		EFFD085312F0C8FA00F9075B /* SeriesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD085212F0C8FA00F9075B /* SeriesManager.m */; };
@@ -59,32 +59,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		EF8D78F712D933800064C5B5 /* PBXContainerItemProxy */ = {
+		EFA5E2DA14A67EA70012CD1F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EF8D78EE12D933800064C5B5 /* ProtocolBuffers.xcodeproj */;
+			containerPortal = EFA5E2D214A67EA70012CD1F /* ProtocolBuffers.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 7461B52E0F94FAF800A0C422;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
 			remoteInfo = ProtocolBuffers;
 		};
-		EF8D78F912D933800064C5B5 /* PBXContainerItemProxy */ = {
+		EFA5E2E014A67F1B0012CD1F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EF8D78EE12D933800064C5B5 /* ProtocolBuffers.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7401C1A80F950347006D8281;
-			remoteInfo = UnitTests;
-		};
-		EF8D78FB12D933800064C5B5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EF8D78EE12D933800064C5B5 /* ProtocolBuffers.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 748F14580FD75E3B000858A9;
-			remoteInfo = CommandLineTests;
-		};
-		EF8D790C12D933F90064C5B5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EF8D78EE12D933800064C5B5 /* ProtocolBuffers.xcodeproj */;
+			containerPortal = EFA5E2D214A67EA70012CD1F /* ProtocolBuffers.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 7461B52D0F94FAF800A0C422;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
 			remoteInfo = ProtocolBuffers;
 		};
 /* End PBXContainerItemProxy section */
@@ -139,8 +125,6 @@
 		EF8D76EF12D8DEDA0064C5B5 /* SearchSeriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSeriesViewController.m; sourceTree = "<group>"; };
 		EF8D785F12D933500064C5B5 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
 		EF8D786012D933500064C5B5 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
-		EF8D78EE12D933800064C5B5 /* ProtocolBuffers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ProtocolBuffers.xcodeproj; path = protobuf/ProtocolBuffers.xcodeproj; sourceTree = "<group>"; };
-		EF8D78FD12D933920064C5B5 /* ProtocolBuffers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProtocolBuffers.h; path = protobuf/Classes/ProtocolBuffers.h; sourceTree = "<group>"; };
 		EF8D790312D933AB0064C5B5 /* SearchSeries.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSeries.pb.h; sourceTree = "<group>"; };
 		EF8D790412D933AB0064C5B5 /* SearchSeries.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSeries.pb.m; sourceTree = "<group>"; };
 		EF8D793312D9F9AA0064C5B5 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -157,6 +141,8 @@
 		EFA0351913D9ABF1004EB261 /* SeriesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeriesCell.m; sourceTree = "<group>"; };
 		EFA5E2C814A655DC0012CD1F /* HTTPOperationResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPOperationResult.h; sourceTree = "<group>"; };
 		EFA5E2C914A655DC0012CD1F /* HTTPOperationResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPOperationResult.m; sourceTree = "<group>"; };
+		EFA5E2D214A67EA70012CD1F /* ProtocolBuffers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ProtocolBuffers.xcodeproj; path = protobuf/ProtocolBuffers.xcodeproj; sourceTree = "<group>"; };
+		EFA5E2E214A67F4B0012CD1F /* ProtocolBuffers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProtocolBuffers.h; path = protobuf/Classes/ProtocolBuffers.h; sourceTree = "<group>"; };
 		EFFD078D12F0BE1E00F9075B /* FavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesViewController.h; sourceTree = "<group>"; };
 		EFFD078E12F0BE1E00F9075B /* FavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesViewController.m; sourceTree = "<group>"; };
 		EFFD079312F0BE7A00F9075B /* NavigationControllerTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationControllerTab.h; sourceTree = "<group>"; };
@@ -183,7 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF8D790E12D934030064C5B5 /* libProtocolBuffers.a in Frameworks */,
+				EFA5E2DF14A67F0C0012CD1F /* libProtocolBuffers.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -300,23 +286,13 @@
 		EF8D785E12D933500064C5B5 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				EFA5E2E214A67F4B0012CD1F /* ProtocolBuffers.h */,
+				EFA5E2D214A67EA70012CD1F /* ProtocolBuffers.xcodeproj */,
 				EF8D79D512DA09530064C5B5 /* SynthesizeSingleton.h */,
 				EF8D785F12D933500064C5B5 /* NSString+URLEncoding.h */,
 				EF8D786012D933500064C5B5 /* NSString+URLEncoding.m */,
-				EF8D78EE12D933800064C5B5 /* ProtocolBuffers.xcodeproj */,
-				EF8D78FD12D933920064C5B5 /* ProtocolBuffers.h */,
 			);
 			path = External;
-			sourceTree = "<group>";
-		};
-		EF8D78EF12D933800064C5B5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EF8D78F812D933800064C5B5 /* libProtocolBuffers.a */,
-				EF8D78FA12D933800064C5B5 /* UnitTests.octest */,
-				EF8D78FC12D933800064C5B5 /* CommandLineTests.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		EF8D790212D933AB0064C5B5 /* Generated */ = {
@@ -347,6 +323,14 @@
 				AAB1059313D587E900683DC4 /* CommunicationManager.m */,
 			);
 			name = Communication;
+			sourceTree = "<group>";
+		};
+		EFA5E2D314A67EA70012CD1F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EFA5E2DB14A67EA70012CD1F /* libProtocolBuffers.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		EFFD084F12F0C6F000F9075B /* UI */ = {
@@ -422,7 +406,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				EF8D790D12D933F90064C5B5 /* PBXTargetDependency */,
+				EFA5E2E114A67F1B0012CD1F /* PBXTargetDependency */,
 			);
 			name = WatchedEpisodes;
 			productName = WatchedEpisodes;
@@ -452,8 +436,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = EF8D78EF12D933800064C5B5 /* Products */;
-					ProjectRef = EF8D78EE12D933800064C5B5 /* ProtocolBuffers.xcodeproj */;
+					ProductGroup = EFA5E2D314A67EA70012CD1F /* Products */;
+					ProjectRef = EFA5E2D214A67EA70012CD1F /* ProtocolBuffers.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -464,25 +448,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		EF8D78F812D933800064C5B5 /* libProtocolBuffers.a */ = {
+		EFA5E2DB14A67EA70012CD1F /* libProtocolBuffers.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libProtocolBuffers.a;
-			remoteRef = EF8D78F712D933800064C5B5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		EF8D78FA12D933800064C5B5 /* UnitTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = UnitTests.octest;
-			remoteRef = EF8D78F912D933800064C5B5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		EF8D78FC12D933800064C5B5 /* CommandLineTests.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = CommandLineTests.app;
-			remoteRef = EF8D78FB12D933800064C5B5 /* PBXContainerItemProxy */;
+			remoteRef = EFA5E2DA14A67EA70012CD1F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -553,10 +523,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		EF8D790D12D933F90064C5B5 /* PBXTargetDependency */ = {
+		EFA5E2E114A67F1B0012CD1F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = ProtocolBuffers;
-			targetProxy = EF8D790C12D933F90064C5B5 /* PBXContainerItemProxy */;
+			targetProxy = EFA5E2E014A67F1B0012CD1F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

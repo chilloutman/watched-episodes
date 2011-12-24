@@ -13,6 +13,8 @@
 
 @interface SeriesLoader ()
 
+@property (nonatomic, copy) SeriesBlock completionBlock;
+
 - (PBSeries *)seriesFromData:(NSData *)data;
 - (NSString *)URLStringForSeriesId:(NSString *)seriesId;
 
@@ -21,17 +23,24 @@
 
 @implementation SeriesLoader
 
+@synthesize completionBlock;
+
 - (void)loadSeriesForSeriesId:(NSString *)seriesId completionBlock:(SeriesBlock)block {
+	self.completionBlock = block;
 	NSData *cachedData = [self.cache loadDataForKey:seriesId];
 	if (cachedData) {
 		dispatch_async(dispatch_get_main_queue(), ^ {
-			block([self seriesFromData:cachedData]);
+			if (self.completionBlock) {
+				self.completionBlock([self seriesFromData:cachedData]);
+			}
 		});
 	} else {
 		[self sendHTTPRequestWithURLString:[self URLStringForSeriesId:seriesId] completionBlock:^ (NSData *data) {
-			PBSeries *series = [self seriesFromData:data];
-			[self.cache cacheData:data forKey:seriesId];
-			block(series);
+			if (self.completionBlock) {
+				PBSeries *series = [self seriesFromData:data];
+				[self.cache cacheData:data forKey:seriesId];
+				block(series);
+			}
 		}];
 	}
 }
@@ -46,6 +55,11 @@
 
 - (NSString *)cacheDirectoryPath {
 	return @"SeriesCache";
+}
+
+- (void)cancel {
+	[super cancel];
+	self.completionBlock = nil;
 }
 
 @end
