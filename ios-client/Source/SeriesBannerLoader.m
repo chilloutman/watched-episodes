@@ -7,7 +7,6 @@
 //
 
 #import "SeriesBannerLoader.h"
-#import "HTTPFetcher.h"
 #import "Files.h"
 #import "FileCache.h"
 #import "ServiceLocator.h"
@@ -58,7 +57,7 @@
 }
 
 - (void)loadSeriesBannerFromServer:(NSString *)bannerPath {
-	[self.fetcher sendHTTPRequestWithURLString:[@"http://www.thetvdb.com/banners/_cache/" stringByAppendingString:bannerPath] completionBlock:^ (NSData *data) {
+	[self sendHTTPRequestWithURLString:[@"http://www.thetvdb.com/banners/_cache/" stringByAppendingString:bannerPath] completionBlock:^ (NSData *data) {
 		if (data) {
 			[self finishedLoadingData:data];
 			[self.cache cacheData:data forKey:[self cacheKeyForBannerPath:bannerPath]];
@@ -87,8 +86,8 @@
 	});
 }
 
-- (void)cancelCurrentConnection {
-	[super cancelCurrentConnection];
+- (void)cancel {
+	[super cancel];
 	self.completionBlock = nil;
 }
 

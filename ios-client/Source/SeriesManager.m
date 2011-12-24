@@ -108,10 +108,6 @@
 	self.seriesIds = JSONObject;
 }
 
-- (BOOL)isJSONObjectEmpty {
-	return [self.seriesIds count] == 0;
-}
-
 #pragma mark -
 
 - (void)dealloc {

@@ -7,7 +7,6 @@
 //
 
 #import "SearchLoader.h"
-#import "HTTPFetcher.h"
 #import "NSString+URLEncoding.h"
 
 
@@ -15,7 +14,7 @@
 
 - (void)searchSeriesWithName:(NSString *)seriesName completionBlock:(SearchResultsBlock)block {
 	NSString *searchTerm = [seriesName URLEncodedString];
-	[self.fetcher sendHTTPRequestWithURLString:[NSString stringWithFormat:@"%@/searchSeries?name=%@", ServerURL, searchTerm] completionBlock:^ (NSData *data) {
+	[self sendHTTPRequestWithURLString:[NSString stringWithFormat:@"%@/searchSeries?name=%@", ServerURL, searchTerm] completionBlock:^ (NSData *data) {
 		NSArray *searchResults = [[SearchSeriesResponse parseFromData:data] seriesList];
 		block(searchResults);
 	}];

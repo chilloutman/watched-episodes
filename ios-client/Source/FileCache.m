@@ -53,12 +53,11 @@
 
 - (void)cacheData:(NSData *)data forKey:(NSString *)key {
 	[self.cache setObject:data forKey:key];
-	if (![[NSFileManager defaultManager] createFileAtPath:[self filePathForKey:key] contents:data attributes:nil]) {
-		NSLog(@"WTF %@", [self filePathForKey:key]);
-	}
-//	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^ {
-//		
-//	});
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^ {
+		if (![[NSFileManager defaultManager] createFileAtPath:[self filePathForKey:key] contents:data attributes:nil]) {
+			NSLog(@"Could not create file at path %@", [self filePathForKey:key]);
+		}
+	});
 }
 
 - (NSData *)loadDataForKey:(NSString *)key {
@@ -71,7 +70,7 @@
 }
 
 - (NSString *)filePathForKey:(NSString *)key {
-	return [NSString stringWithFormat:@"%@/%@", self.directoyPath, key];
+	return [self.directoyPath stringByAppendingPathComponent:key];
 }
 
 - (void)dealloc {

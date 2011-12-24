@@ -8,7 +8,6 @@
 
 #import "SeriesLoader.h"
 #import "GetSeries.pb.h"
-#import "HTTPFetcher.h"
 #import "FileCache.h"
 
 
@@ -29,7 +28,7 @@
 			block([self seriesFromData:cachedData]);
 		});
 	} else {
-		[self.fetcher sendHTTPRequestWithURLString:[self URLStringForSeriesId:seriesId] completionBlock:^ (NSData *data) {
+		[self sendHTTPRequestWithURLString:[self URLStringForSeriesId:seriesId] completionBlock:^ (NSData *data) {
 			PBSeries *series = [self seriesFromData:data];
 			[self.cache cacheData:data forKey:seriesId];
 			block(series);

@@ -12,7 +12,6 @@
 @protocol JSONDocumentDataProvider
 
 @property (nonatomic, assign) id JSONObject;
-@property (nonatomic, readonly) BOOL isJSONObjectEmpty;
 
 @end
 

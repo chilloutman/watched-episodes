@@ -9,3 +9,5 @@
 #import <Foundation/Foundation.h>
 
 extern NSString * const ServerURL;
+
+typedef void (^DataBlock) (NSData *dataOrNil);

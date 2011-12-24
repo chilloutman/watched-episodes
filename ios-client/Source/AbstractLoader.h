@@ -8,15 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@class HTTPFetcher;
+
 @class FileCache;
+
 
 @interface AbstractLoader : NSObject
 
-@property (nonatomic, retain) HTTPFetcher *fetcher;
 @property (nonatomic, retain) FileCache *cache;
 @property (nonatomic, readonly) NSString *cacheDirectoryPath;
 
-- (void)cancelCurrentConnection;
+- (void)cancel;
+- (void)sendHTTPRequestWithURLString:(NSString *)URLString completionBlock:(DataBlock)dataBlock;
 
 @end

@@ -87,7 +87,6 @@ static NSString *CellIdentifier = @"SeriesCell";
     SeriesCell *cell = [t dequeueReusableCellWithIdentifier:CellIdentifier];
 
     NSString *seriesId = [self seriesIdForIndexPath:indexPath];
-	// TODO This causes a problem after the cache is wiped
 	[[SeriesManager shared].seriesLoader loadSeriesForSeriesId:seriesId completionBlock:^ (PBSeries *series) {
 		cell.series = series;
 	}];

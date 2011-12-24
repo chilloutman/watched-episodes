@@ -140,10 +140,6 @@ NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAv
 	return self.lastWatchedEpisodes;
 }
 
-- (BOOL)isJSONObjectEmpty {
-	return [self.lastWatchedEpisodes count] == 0;
-}
-
 #pragma mark -
 
 - (void)dealloc {

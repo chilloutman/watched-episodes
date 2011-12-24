@@ -47,9 +47,7 @@
 }
 
 - (NSData *)contentsForType:(NSString *)typeName error:(NSError **)outError {
-	NSLog(@"is Valid JSON object: %@", [NSNumber numberWithBool:[NSJSONSerialization isValidJSONObject:self.dataProvider.JSONObject]]);
-	
-    return (self.dataProvider.isJSONObjectEmpty) ? [NSData data] : [NSJSONSerialization dataWithJSONObject:self.dataProvider.JSONObject options:0 error:outError];
+    return ([NSJSONSerialization isValidJSONObject:self.dataProvider.JSONObject]) ? [NSData data] : [NSJSONSerialization dataWithJSONObject:self.dataProvider.JSONObject options:0 error:outError];
 }
 
 - (void)openWithCompletionHandler:(void (^)(BOOL))completionHandler {

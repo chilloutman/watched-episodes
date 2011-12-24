@@ -7,15 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-
-
-typedef void (^DataBlock) (NSData *dataOrNil);
+#import "HTTPOperation.h"
 
 
 @interface HTTPFetcher : NSObject
 
-- (void)sendHTTPRequestWithURLString:(NSString *)URL completionBlock:(DataBlock)block;
-
-- (void)cancelConnection;
++ (HTTPFetcher *)shared;
+- (HTTPOperation *)sendHTTPRequestWithURLString:(NSString *)URLString taker:(id)takerObject completionBlock:(HTTPOperationBlock)block;
+- (void)cancelAllRequestsForTaker:(id)takerObject;
 
 @end

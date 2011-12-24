@@ -10,16 +10,15 @@
 #import "HTTPFetcher.h"
 #import "FileCache.h"
 
+
+@interface AbstractLoader ()
+
+@end
+
+
 @implementation AbstractLoader
 
-@synthesize fetcher, cache, cacheDirectoryPath;
-
-- (HTTPFetcher *)fetcher {
-	if (!fetcher) {
-		fetcher = [[HTTPFetcher alloc] init];
-	}
-	return fetcher;
-}
+@synthesize cache, cacheDirectoryPath;
 
 - (FileCache *)cache {
 	if (!cache) {
@@ -28,12 +27,17 @@
 	return cache;
 }
 
-- (void)cancelCurrentConnection {
-	[self.fetcher cancelConnection];
+- (void)sendHTTPRequestWithURLString:(NSString *)URLString completionBlock:(DataBlock)dataBlock {
+	[[HTTPFetcher shared] sendHTTPRequestWithURLString:URLString taker:self completionBlock:^ (HTTPOperationResult *result) {
+		dataBlock(result.receivedData);
+	}];
+}
+
+- (void)cancel {
+	[[HTTPFetcher shared] cancelAllRequestsForTaker:self];
 }
 
 - (void)dealloc {
-	self.fetcher = nil;
 	self.cache = nil;
 }
 

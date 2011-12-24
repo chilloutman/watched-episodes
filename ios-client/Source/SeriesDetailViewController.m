@@ -65,8 +65,8 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-	[[SeriesManager shared].seriesBannerLoader cancelCurrentConnection];
-	[[SeriesManager shared].seriesLoader cancelCurrentConnection];
+	[[SeriesManager shared].seriesBannerLoader cancel];
+	[[SeriesManager shared].seriesLoader cancel];
 }
 
 - (void)loadSeriesForSeriesId:(NSString *)seriesId {

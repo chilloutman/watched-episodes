@@ -32,7 +32,7 @@
 
 - (void)setSeries:(PBSeries *)seriesToDisplay {
 	self.bannerView.image = nil;
-	[self.bannerLoader cancelCurrentConnection];
+	[self.bannerLoader cancel];
 	
 	series = seriesToDisplay;
 	self.seriesNameLabel.text = series.seriesName;

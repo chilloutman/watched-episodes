@@ -1,3 +1,4 @@
+
 //
 //  HTTPFetcher.m
 //  WatchedEpisodes
@@ -7,97 +8,75 @@
 //
 
 #import "HTTPFetcher.h"
+#import "ServiceLocator.h"
 #import "CommunicationManager.h"
 
 
 @interface HTTPFetcher ()
 
-@property (nonatomic, retain) NSURLConnection *connection;
-@property (nonatomic, retain) NSMutableData *receivedData;
-@property (nonatomic, copy) DataBlock completionBlock;
+@property (nonatomic, retain) NSOperationQueue *queue;
 
-- (void)sendRequestWithURLString:(NSString *)URL;
-- (NSURLRequest *)protocolBuffersRequestWithURL:(NSURL *)URL;
-- (void)reset;
+- (HTTPOperation *)alreadyQueuedOperationForURL:(NSURL *)URL;
 
 @end
 
 
 @implementation HTTPFetcher
 
-@synthesize connection, receivedData, completionBlock;
+@synthesize queue;
 
-- (void)sendHTTPRequestWithURLString:(NSString *)URL completionBlock:(DataBlock)block {
-	dispatch_async(dispatch_get_main_queue(), ^ {
-		self.completionBlock = block;
-		[self sendRequestWithURLString:URL];
-	});
++ (HTTPFetcher *)shared {
+	return [ServiceLocator singletonForClass:[HTTPFetcher class]];
 }
 
-- (void)sendRequestWithURLString:(NSString *)URL {
+- (NSOperationQueue *)queue {
+	if (!queue) {
+		queue = [[NSOperationQueue alloc] init];
+		queue.maxConcurrentOperationCount = 3;
+	}
+	return queue;
+}
+
+- (HTTPOperation *)sendHTTPRequestWithURLString:(NSString *)URLString taker:(id)takerObject completionBlock:(HTTPOperationBlock)block {
 #ifdef FAKEDATA
-    URL = [URL stringByAppendingString:@"&debug"];
+	URLString = [URL stringByAppendingString:@"&debug"];
 #endif
-	NSURLRequest *request = [self protocolBuffersRequestWithURL:[NSURL URLWithString:URL]];
-	self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
-	[[CommunicationManager shared] startedConnection];
-}
-
-- (NSURLRequest *)protocolBuffersRequestWithURL:(NSURL *)URL {
-	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
-	[request setHTTPMethod:@"GET"];
-	[request addValue:@"application/x-protobuf" forHTTPHeaderField:@"Accept"];
-	return request;
-}
-
-- (void)cancelConnection {
-	if (self.connection) {
-		[[CommunicationManager shared] finnishedConnection];
-		[self.connection cancel];
-		[self reset];
+	
+	NSURL *URL = [NSURL URLWithString:URLString];
+	HTTPOperation *operation = [self alreadyQueuedOperationForURL:URL];
+	if (operation) {
+		[operation addCompletitionBlock:block];
+	} else {
+		operation = [HTTPOperation operationWithURL:URL taker:takerObject completitionBlock:block];
+		[self.queue addOperation:operation];
 	}
+	
+	return operation;
+
 }
 
-- (void)reset {
-	self.completionBlock = nil;
-	self.connection = nil;
-	self.receivedData = nil;
-}
-
-#pragma mark NSURLConnection
-
-- (void)connection:(NSURLConnection *)c didReceiveResponse:(NSHTTPURLResponse *)response {
-    if (response.statusCode == 200) {
-        long long contentLength = [response expectedContentLength];
-        self.receivedData = (contentLength == NSURLResponseUnknownLength) ? [NSMutableData data] : [NSMutableData dataWithCapacity:contentLength];
-    } else {
-		[[CommunicationManager shared] displayErrorMessageForStatusCode:response.statusCode];
-		[self cancelConnection];
-    }
-}
-
-- (void)connection:(NSURLConnection *)aConnection didReceiveData:(NSData *)newData {
-	[self.receivedData appendData:newData];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
-	if (self.completionBlock) {
-		self.completionBlock(self.receivedData);
+- (HTTPOperation *)alreadyQueuedOperationForURL:(NSURL *)URL {
+	HTTPOperation *operation = nil;
+	for (HTTPOperation *o in self.queue.operations) {
+		if ([o.URL isEqual:URL]) {
+			operation = o;
+		}
 	}
-	[self cancelConnection];
+	return operation;
 }
 
-- (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
-	[[CommunicationManager shared] displayErrorMessageForStatusCode:error.code];
-	[self cancelConnection];
+- (void)cancelAllRequestsForTaker:(id)takerObject {
+	for (HTTPOperation *o in self.queue.operations) {
+		if (o.takerObject == takerObject) {
+			[o cancel];
+		}
+	}
 }
 
 #pragma mark -
 
 - (void)dealloc {
-	self.connection = nil;
-	self.receivedData = nil;
-	self.completionBlock = nil;
+	self.queue = nil;
 	[super dealloc];
 }
 
