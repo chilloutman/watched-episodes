@@ -38,6 +38,7 @@
 }
 
 - (void)dealloc {
+    [super dealloc];
 	self.cache = nil;
 }
 
