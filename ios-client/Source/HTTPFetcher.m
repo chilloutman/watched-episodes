@@ -39,10 +39,10 @@
 
 - (HTTPOperation *)sendHTTPRequestWithURLString:(NSString *)URLString taker:(id)takerObject completionBlock:(HTTPOperationBlock)block {
 #ifdef FAKEDATA
-	URLString = [URL stringByAppendingString:@"&debug"];
+	URLString = [URLString stringByAppendingString:@"&debug"];
 #endif
 	
-	NSURL *URL = [NSURL URLWithString:URLString];
+    NSURL *URL = [NSURL URLWithString:URLString];
 	HTTPOperation *operation = [self alreadyQueuedOperationForURL:URL];
 	if (operation) {
 		[operation addCompletitionBlock:block];

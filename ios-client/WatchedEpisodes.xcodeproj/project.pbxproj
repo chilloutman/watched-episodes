@@ -44,7 +44,7 @@
 		EFA0351A13D9ABF1004EB261 /* SeriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA0351913D9ABF1004EB261 /* SeriesCell.m */; };
 		EFA5E2CA14A655DC0012CD1F /* HTTPOperationResult.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA5E2C914A655DC0012CD1F /* HTTPOperationResult.m */; };
 		EFA5E2DF14A67F0C0012CD1F /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFA5E2DB14A67EA70012CD1F /* libProtocolBuffers.a */; };
-		EFFD078F12F0BE1E00F9075B /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD078E12F0BE1E00F9075B /* FavoritesViewController.m */; };
+		EFFD078F12F0BE1E00F9075B /* SeriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD078E12F0BE1E00F9075B /* SeriesViewController.m */; };
 		EFFD079512F0BE7A00F9075B /* NavigationControllerTab.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */; };
 		EFFD085312F0C8FA00F9075B /* SeriesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD085212F0C8FA00F9075B /* SeriesManager.m */; };
 		EFFD08B512F21BBC00F9075B /* GetAllEpisodes.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD08B212F21BBC00F9075B /* GetAllEpisodes.pb.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -143,8 +143,8 @@
 		EFA5E2C914A655DC0012CD1F /* HTTPOperationResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPOperationResult.m; sourceTree = "<group>"; };
 		EFA5E2D214A67EA70012CD1F /* ProtocolBuffers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ProtocolBuffers.xcodeproj; path = protobuf/ProtocolBuffers.xcodeproj; sourceTree = "<group>"; };
 		EFA5E2E214A67F4B0012CD1F /* ProtocolBuffers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProtocolBuffers.h; path = protobuf/Classes/ProtocolBuffers.h; sourceTree = "<group>"; };
-		EFFD078D12F0BE1E00F9075B /* FavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesViewController.h; sourceTree = "<group>"; };
-		EFFD078E12F0BE1E00F9075B /* FavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesViewController.m; sourceTree = "<group>"; };
+		EFFD078D12F0BE1E00F9075B /* SeriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeriesViewController.h; sourceTree = "<group>"; };
+		EFFD078E12F0BE1E00F9075B /* SeriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeriesViewController.m; sourceTree = "<group>"; };
 		EFFD079312F0BE7A00F9075B /* NavigationControllerTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationControllerTab.h; sourceTree = "<group>"; };
 		EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationControllerTab.m; sourceTree = "<group>"; };
 		EFFD085112F0C8FA00F9075B /* SeriesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeriesManager.h; sourceTree = "<group>"; };
@@ -339,8 +339,8 @@
 				EF5AA28413D5C64D00F6FBCF /* Views */,
 				EF8D76EE12D8DEDA0064C5B5 /* SearchSeriesViewController.h */,
 				EF8D76EF12D8DEDA0064C5B5 /* SearchSeriesViewController.m */,
-				EFFD078D12F0BE1E00F9075B /* FavoritesViewController.h */,
-				EFFD078E12F0BE1E00F9075B /* FavoritesViewController.m */,
+				EFFD078D12F0BE1E00F9075B /* SeriesViewController.h */,
+				EFFD078E12F0BE1E00F9075B /* SeriesViewController.m */,
 				EF4AD01A12EA22A60058F78E /* SeriesDetailViewController.h */,
 				EF4AD01B12EA22A60058F78E /* SeriesDetailViewController.m */,
 				EF2AD7FC1332800A00585E3A /* EpisodesListViewController.h */,
@@ -495,7 +495,7 @@
 				EF4AD02612EA23BD0058F78E /* SeriesLoader.m in Sources */,
 				EF4AD02912EA23F10058F78E /* GetSeries.pb.m in Sources */,
 				EF12EFA112EC90C2007E380E /* SeriesBannerLoader.m in Sources */,
-				EFFD078F12F0BE1E00F9075B /* FavoritesViewController.m in Sources */,
+				EFFD078F12F0BE1E00F9075B /* SeriesViewController.m in Sources */,
 				EFFD079512F0BE7A00F9075B /* NavigationControllerTab.m in Sources */,
 				EFFD085312F0C8FA00F9075B /* SeriesManager.m in Sources */,
 				EFFD08B512F21BBC00F9075B /* GetAllEpisodes.pb.m in Sources */,

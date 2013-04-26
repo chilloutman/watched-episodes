@@ -10,30 +10,26 @@
 
 #import "NavigationControllerTab.h"
 #import "SearchSeriesViewController.h"
-#import "FavoritesViewController.h"
+#import "SeriesViewController.h"
 #import "WatchedManager.h"
 #import "SeriesManager.h"
 
 
-@implementation WatchedEpisodesAppDelegate
+@interface WatchedEpisodesAppDelegate () <SeriesViewControllerDelegate>
 
-@synthesize window;
-@synthesize tabController;
+
+@end
+
+
+@implementation WatchedEpisodesAppDelegate
 
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-	UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Find" image:[UIImage imageNamed:@"Find"] tag:0];
-	NavigationControllerTab *find = [NavigationControllerTab controllerWithRootController:[SearchSeriesViewController class]
-                                                                              tabBarItem:tabBarItem];
-	tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Favorites" image:[UIImage imageNamed:@"Heart"] tag:1];
-	NavigationControllerTab *favs = [NavigationControllerTab controllerWithRootController:[FavoritesViewController class]
-																			  tabBarItem:tabBarItem];
-	
-	self.tabController = [[UITabBarController alloc] init];
-	[self.tabController setViewControllers:[NSArray arrayWithObjects:find, favs, nil]];
-	
-    [self.window addSubview:self.tabController.view];
+    SeriesViewController *c = [[SeriesViewController alloc] init];
+    c.delegate = self;
+    
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:c];
     [self.window makeKeyAndVisible];
 
     return YES;
@@ -83,6 +79,14 @@
      Called when the application is about to terminate.
      See also applicationDidEnterBackground:.
      */
+}
+
+#pragma mark SeriesViewControllerDelegate
+
+- (void)seriesViewControllerWantsToSearchShows:(SeriesViewController *)controller {
+    SearchSeriesViewController *search = [[SearchSeriesViewController alloc] init];
+    UIViewController *controllerToPresent = [[UINavigationController alloc] initWithRootViewController:search];
+    [controller presentViewController:controllerToPresent animated:YES completion:nil];
 }
 
 #pragma mark -

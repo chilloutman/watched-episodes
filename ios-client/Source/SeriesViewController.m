@@ -6,7 +6,7 @@
 //  Copyright 2011 Lucas Neiva. All rights reserved.
 //
 
-#import "FavoritesViewController.h"
+#import "SeriesViewController.h"
 #import "SeriesManager.h"
 #import "WatchedManager.h"
 #import "SeriesDetailViewController.h"
@@ -15,7 +15,7 @@
 #import "SeriesCell.h"
 
 
-@interface FavoritesViewController ()
+@interface SeriesViewController ()
 
 - (NSString *)seriesIdForIndexPath:(NSIndexPath *)indexPath;
 
@@ -25,7 +25,7 @@
 @end
 
 
-@implementation FavoritesViewController
+@implementation SeriesViewController
 
 static NSString *CellIdentifier = @"SeriesCell";
 
@@ -36,6 +36,12 @@ static NSString *CellIdentifier = @"SeriesCell";
     UINib *cellNib = [UINib nibWithNibName:CellIdentifier bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:CellIdentifier];
 	self.tableView.rowHeight = 85;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStyleBordered target:self action:@selector(addButtonTapped)];
+}
+
+- (void)addButtonTapped {
+    [self.delegate seriesViewControllerWantsToSearchShows:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

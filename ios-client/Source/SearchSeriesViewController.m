@@ -37,6 +37,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleBordered target:self action:@selector(close)];
+}
+
+- (void)close {
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (NSString *)nibName {
