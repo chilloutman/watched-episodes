@@ -8,8 +8,8 @@
 
 #import "WatchedManager.h"
 #import "ServiceLocator.h"
-#import "JSONDocument.h"
 #import "Files.h"
+#import "Persister.h"
 
 
 NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAvailableNotification";
@@ -19,10 +19,10 @@ NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAv
 
 @synthesize seriesId, episodeNumber, seasonNumber;
 
-+ (WatchedEpisode *)episodeWithSeriesId:(NSString *)seriesId dictionary:(NSDictionary *)lastWatchedDictionary {
-	return [WatchedEpisode episodeWithSeriesId:seriesId
-								 episodeNumber:[[lastWatchedDictionary objectForKey:@"e"] unsignedIntegerValue]
-								  seasonNumber:[[lastWatchedDictionary objectForKey:@"s"] unsignedIntegerValue]];
++ (WatchedEpisode *)episodeWithFavoriteSeries:(FavoriteSeries *)favoriteSeries {
+	return [WatchedEpisode episodeWithSeriesId:favoriteSeries.seriesId
+                                 episodeNumber:[favoriteSeries.episode unsignedIntegerValue]
+                                  seasonNumber:[favoriteSeries.season unsignedIntegerValue]];
 }
 
 + (WatchedEpisode *)episodeWithSeriesId:(NSString *)seriesId episodeNumber:(NSUInteger)episodeNumber seasonNumber:(NSUInteger)seasonNumber {
@@ -40,44 +40,32 @@ NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAv
 @end
 
 
-@interface WatchedManager () <JSONDocumentDataProvider>
+@interface WatchedManager ()
 
-@property (nonatomic, retain) JSONDocument *document;
-@property (nonatomic, retain) NSMutableDictionary *lastWatchedEpisodes;
-
-- (NSMutableDictionary *)lastWatchedEpisodeDictionaryForSeries:(NSString *)seriesId;
 
 @end
 
 
-@implementation WatchedManager
-
-@synthesize document, lastWatchedEpisodes;
+@implementation WatchedManager {
+    Persister *_persister;
+}
 
 + (WatchedManager *)shared {
 	return [ServiceLocator singletonForClass:[WatchedManager class]];
 }
 
-- (id)init {
+- (id)initWithPersister:(Persister *)persister {
     self = [super init];
     if (self) {
-		self.lastWatchedEpisodes = [NSMutableDictionary dictionary];
+        _persister = persister;
 	}
     return self;
 }
 
-- (JSONDocument *)document {
-	if (!document) {
-		document = [[JSONDocument alloc] initWithDocumentName:@"LastWatched.json" dataProvider:self];
-	}
-	return document;
-}
-
 - (void)setLastWatchedEpisode:(WatchedEpisode *)episode {
-	NSMutableDictionary *lastWatched = [self lastWatchedEpisodeDictionaryForSeries:episode.seriesId];
-	[lastWatched setObject:[NSNumber numberWithUnsignedInteger:episode.episodeNumber] forKey:@"e"];
-	[lastWatched setObject:[NSNumber numberWithUnsignedInteger:episode.seasonNumber] forKey:@"s"];
-	[self.document updateChangeCount:UIDocumentChangeDone];
+    FavoriteSeries *favoriteSeries = [_persister loadFavoriteSeriesWithId:episode.seriesId];
+    favoriteSeries.episode = @(episode.episodeNumber);
+    favoriteSeries.season = @(episode.seasonNumber);
 }
 
 - (BOOL)isEpisodeMarkedAsWatched:(PBEpisode *)episode {
@@ -93,47 +81,8 @@ NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAv
 }
 
 - (WatchedEpisode *)lastWatchedEpisodeForSeriesId:(NSString *)seriesId {
-	return [WatchedEpisode episodeWithSeriesId:seriesId dictionary:[self lastWatchedEpisodeDictionaryForSeries:seriesId]];
-}
-
-- (NSMutableDictionary *)lastWatchedEpisodeDictionaryForSeries:(NSString *)seriesId {
-	NSMutableDictionary *dictionary = [self.lastWatchedEpisodes objectForKey:seriesId];
-	if (!dictionary) {
-		dictionary = [NSMutableDictionary dictionaryWithCapacity:2];
-		[self.lastWatchedEpisodes setObject:dictionary forKey:seriesId];
-	}
-	
-	return dictionary;
-}
-
-#pragma mark Opening and Closing the Document
-
-- (void)loadLastWatchedEpisodesWithCompletionBlock:(void (^) ())block {
-	[self.document openWithCompletionHandler:^ (BOOL success) {
-		if (success) {
-			block();
-		}
-	}];
-}
-
-- (void)save {
-	[self.document savePresentedItemChangesWithCompletionHandler:^ (NSError *error) { }];
-}
-
-- (void)closeDocument {
-	[self.document closeWithCompletionHandler:^ (BOOL success) {
-		self.document = nil;
-	}];
-}
-
-#pragma JSONDocumentDataProvider
-
-- (void)setJSONObject:(NSMutableDictionary *)JSONObject {
-	self.lastWatchedEpisodes = JSONObject;
-}
-
-- (id)JSONObject {
-	return self.lastWatchedEpisodes;
+    FavoriteSeries *favoriteSeries = [_persister loadFavoriteSeriesWithId:seriesId];
+	return [WatchedEpisode episodeWithFavoriteSeries:favoriteSeries];
 }
 
 @end

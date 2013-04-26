@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ProtocolTypes.pb.h"
-
+@class Persister;
 
 extern NSString * const WatchedManagerDidFinishLoadingNotification; // Posted when the WatchedManager updated the watched episodes.
 
@@ -28,10 +28,7 @@ extern NSString * const WatchedManagerDidFinishLoadingNotification; // Posted wh
 @interface WatchedManager : NSObject
 
 + (WatchedManager *)shared;
-
-- (void)loadLastWatchedEpisodesWithCompletionBlock:(void (^) ())block;
-- (void)save;
-- (void)closeDocument;
+- (id)initWithPersister:(Persister *)persister;
 
 - (void)setLastWatchedEpisode:(WatchedEpisode *)episode;
 - (WatchedEpisode *)lastWatchedEpisodeForSeriesId:(NSString *)seriesId;

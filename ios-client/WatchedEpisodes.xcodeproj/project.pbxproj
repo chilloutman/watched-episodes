@@ -12,11 +12,14 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		2899E5220DE3E06400AC0155 /* SearchSeries.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* SearchSeries.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		AA0A057E172AC0F9006FBF29 /* UserData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AA0A057C172AC0F9006FBF29 /* UserData.xcdatamodeld */; };
+		AA0A05AE172AC3F0006FBF29 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0A05AD172AC3F0006FBF29 /* CoreData.framework */; };
+		AA0A05B1172AC491006FBF29 /* Persister.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0A05B0172AC490006FBF29 /* Persister.m */; };
+		AA0A05BF172AC8DB006FBF29 /* FavoriteSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0A05BE172AC8DB006FBF29 /* FavoriteSeries.m */; };
 		AAB1059413D587E900683DC4 /* CommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB1059313D587E900683DC4 /* CommunicationManager.m */; };
 		AAB1059613D5993500683DC4 /* MessagePopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAB1059513D5993500683DC4 /* MessagePopupView.xib */; };
 		AAB1059C13D59AC300683DC4 /* MessagePopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB1059B13D59AC200683DC4 /* MessagePopupView.m */; };
 		AABE50A7172ABA8B000525A2 /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFA5E2DB14A67EA70012CD1F /* libProtocolBuffers.a */; };
-		EF0BD215149A8D7E008BC271 /* JSONDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0BD214149A8D7E008BC271 /* JSONDocument.m */; };
 		EF0BD218149A9A60008BC271 /* FileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0BD217149A9A60008BC271 /* FileCache.m */; };
 		EF12EFA112EC90C2007E380E /* SeriesBannerLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF12EFA012EC90C2007E380E /* SeriesBannerLoader.m */; };
 		EF2AD7FB13327AD500585E3A /* EpisodesLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2AD7FA13327AD400585E3A /* EpisodesLoader.m */; };
@@ -83,13 +86,17 @@
 		2899E5210DE3E06400AC0155 /* SearchSeries.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchSeries.xib; sourceTree = "<group>"; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* WatchedEpisodes-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "WatchedEpisodes-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		AA0A057D172AC0F9006FBF29 /* UserData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserData.xcdatamodel; sourceTree = "<group>"; };
+		AA0A05AD172AC3F0006FBF29 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		AA0A05AF172AC490006FBF29 /* Persister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Persister.h; sourceTree = "<group>"; };
+		AA0A05B0172AC490006FBF29 /* Persister.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Persister.m; sourceTree = "<group>"; };
+		AA0A05BD172AC8DB006FBF29 /* FavoriteSeries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteSeries.h; sourceTree = "<group>"; };
+		AA0A05BE172AC8DB006FBF29 /* FavoriteSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteSeries.m; sourceTree = "<group>"; };
 		AAB1059213D587E900683DC4 /* CommunicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunicationManager.h; sourceTree = "<group>"; };
 		AAB1059313D587E900683DC4 /* CommunicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunicationManager.m; sourceTree = "<group>"; };
 		AAB1059513D5993500683DC4 /* MessagePopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagePopupView.xib; sourceTree = "<group>"; };
 		AAB1059A13D59AC200683DC4 /* MessagePopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagePopupView.h; sourceTree = "<group>"; };
 		AAB1059B13D59AC200683DC4 /* MessagePopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagePopupView.m; sourceTree = "<group>"; };
-		EF0BD213149A8D7E008BC271 /* JSONDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONDocument.h; sourceTree = "<group>"; };
-		EF0BD214149A8D7E008BC271 /* JSONDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONDocument.m; sourceTree = "<group>"; };
 		EF0BD216149A9A60008BC271 /* FileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileCache.h; sourceTree = "<group>"; };
 		EF0BD217149A9A60008BC271 /* FileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileCache.m; sourceTree = "<group>"; };
 		EF12EF9F12EC90C2007E380E /* SeriesBannerLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeriesBannerLoader.h; sourceTree = "<group>"; };
@@ -169,6 +176,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA0A05AE172AC3F0006FBF29 /* CoreData.framework in Frameworks */,
 				AABE50A7172ABA8B000525A2 /* libProtocolBuffers.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
@@ -218,11 +226,21 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA0A05AD172AC3F0006FBF29 /* CoreData.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AA0A05B3172AC6C4006FBF29 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				AA0A05BD172AC8DB006FBF29 /* FavoriteSeries.h */,
+				AA0A05BE172AC8DB006FBF29 /* FavoriteSeries.m */,
+			);
+			name = "Core Data";
 			sourceTree = "<group>";
 		};
 		EF12EF9D12EC8FE1007E380E /* Loader */ = {
@@ -298,6 +316,7 @@
 		EF8D790212D933AB0064C5B5 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				AA0A05B3172AC6C4006FBF29 /* Core Data */,
 				EFFD08B312F21BBC00F9075B /* ProtocolTypes.pb.h */,
 				EFFD08B412F21BBC00F9075B /* ProtocolTypes.pb.m */,
 				EFFD08B112F21BBC00F9075B /* GetAllEpisodes.pb.h */,
@@ -354,14 +373,15 @@
 		EFFD085012F0C8CB00F9075B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AA0A05AF172AC490006FBF29 /* Persister.h */,
+				AA0A05B0172AC490006FBF29 /* Persister.m */,
 				EF5AA29113D5E32A00F6FBCF /* EpisodesDataProvider.h */,
 				EF5AA29213D5E32A00F6FBCF /* EpisodesDataProvider.m */,
 				EFFD085112F0C8FA00F9075B /* SeriesManager.h */,
 				EFFD085212F0C8FA00F9075B /* SeriesManager.m */,
 				EFFD259C13C236900051628A /* WatchedManager.h */,
 				EFFD259D13C236900051628A /* WatchedManager.m */,
-				EF0BD213149A8D7E008BC271 /* JSONDocument.h */,
-				EF0BD214149A8D7E008BC271 /* JSONDocument.m */,
+				AA0A057C172AC0F9006FBF29 /* UserData.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -513,10 +533,12 @@
 				EF5AA2A213D5F21B00F6FBCF /* ProtocolCategories.m in Sources */,
 				EFA0351A13D9ABF1004EB261 /* SeriesCell.m in Sources */,
 				EF96D38B1493BDBF0060BD13 /* LastWatchedEpisodeViewController.m in Sources */,
-				EF0BD215149A8D7E008BC271 /* JSONDocument.m in Sources */,
 				EF0BD218149A9A60008BC271 /* FileCache.m in Sources */,
 				EF63693814A51F6A00BAD54B /* HTTPOperation.m in Sources */,
 				EFA5E2CA14A655DC0012CD1F /* HTTPOperationResult.m in Sources */,
+				AA0A057E172AC0F9006FBF29 /* UserData.xcdatamodeld in Sources */,
+				AA0A05B1172AC491006FBF29 /* Persister.m in Sources */,
+				AA0A05BF172AC8DB006FBF29 /* FavoriteSeries.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,6 +691,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		AA0A057C172AC0F9006FBF29 /* UserData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AA0A057D172AC0F9006FBF29 /* UserData.xcdatamodel */,
+			);
+			currentVersion = AA0A057D172AC0F9006FBF29 /* UserData.xcdatamodel */;
+			name = UserData.xcdatamodeld;
+			path = ../Resources/UserData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
 }

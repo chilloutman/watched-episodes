@@ -31,11 +31,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ServiceLocator)
 	return service;
 }
 
-+ (void)registerSingletonInstance:(id)instance forKey:(NSString *)key {
++ (void)registerSingletonInstance:(id)instance forKey:(id<NSCopying>)key {
 	[[ServiceLocator shared].singletons setObject:instance forKey:key];
 }
 
-+ (id)singletonForKey:(id)key {
++ (id)singletonForKey:(id<NSCopying>)key {
 	return [[ServiceLocator shared].singletons objectForKey:key];
 }
 

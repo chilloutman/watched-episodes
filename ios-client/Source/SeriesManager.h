@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SeriesLoader.h"
 #import "SeriesBannerLoader.h"
+#import "Persister.h"
 
 @interface SeriesManager : NSObject
 
@@ -18,10 +19,7 @@
 
 
 + (SeriesManager *)shared;
-
-- (void)loadFavoritesWithCompletionBlock:(void (^) ())block;
-- (void)save;
-- (void)closeDocument;
+- (id)initWithPersister:(Persister *)persister;
 
 - (void)addSeriesToFavorites:(NSString *)seriesId;
 - (BOOL)isSeriesInFavorites:(NSString *)seriesId;

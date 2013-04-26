@@ -9,38 +9,33 @@
 #import "SeriesManager.h"
 #import "ServiceLocator.h"
 #import "Files.h"
-#import "JSONDocument.h"
+#import "Persister.h"
 
 
-@interface SeriesManager () <JSONDocumentDataProvider>
+@interface SeriesManager ()
 
-@property (nonatomic, retain) JSONDocument *document;
 @property (nonatomic, retain) NSMutableArray *seriesIds;
 
 @end
 
 
-@implementation SeriesManager
+@implementation SeriesManager {
+    Persister *_persister;
+}
 
-@synthesize document, seriesIds, seriesLoader, seriesBannerLoader;
+@synthesize seriesIds, seriesLoader, seriesBannerLoader;
 
 + (SeriesManager *)shared {
     return [ServiceLocator singletonForClass:[SeriesManager class]];
 }
 
-- (id)init {
+- (id)initWithPersister:(Persister *)persister {
     self = [super init];
 	if (self != nil) {
 		self.seriesIds = [NSMutableArray array];
+        _persister = persister;
 	}
 	return self;
-}
-
-- (JSONDocument *)document {
-	if (!document) {
-		document = [[JSONDocument alloc] initWithDocumentName:@"Series.json" dataProvider:self];
-	}
-	return document;
 }
 
 - (SeriesLoader *)seriesLoader {
@@ -66,46 +61,23 @@
 }
 
 - (NSArray *)favoriteSeriesIds {
-	return self.seriesIds;
+    NSArray *favorites = [_persister loadFavoriteSeries];
+    NSMutableArray *ids = [[NSMutableArray alloc] initWithCapacity:favorites.count];
+    for (FavoriteSeries *favorite in favorites) {
+        [ids addObject:favorite.seriesId];
+    }
+	return ids;
 }
 
 - (void)addSeriesToFavorites:(NSString *)seriesId {
 	if (![self.seriesIds containsObject:seriesId]) {
 		[self.seriesIds addObject:seriesId];
-		[self.document updateChangeCount:UIDocumentChangeDone];
+        [_persister insertFavoriteSeries:seriesId];
 	}
 }
 
 - (BOOL)isSeriesInFavorites:(NSString *)seriesId {
 	return [self.seriesIds containsObject:seriesId];
-}
-
-- (void)loadFavoritesWithCompletionBlock:(void (^) ())block {
-	[self.document openWithCompletionHandler:^ (BOOL success) {
-		if (success) {
-			block();
-		}
-	}];
-}
-
-- (void)save {
-	[self.document savePresentedItemChangesWithCompletionHandler:^ (NSError *error) { }];
-}
-
-- (void)closeDocument {
-	[self.document closeWithCompletionHandler:^ (BOOL success) {
-		self.document = nil;
-	}];
-}
-
-#pragma mark JSONDocumentDataProvider
-
-- (id)JSONObject {
-	return self.seriesIds;
-}
-
-- (void)setJSONObject:(id)JSONObject {
-	self.seriesIds = JSONObject;
 }
 
 @end
