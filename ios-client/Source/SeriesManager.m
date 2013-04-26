@@ -108,14 +108,4 @@
 	self.seriesIds = JSONObject;
 }
 
-#pragma mark -
-
-- (void)dealloc {
-	self.document = nil;
-	self.seriesIds = nil;
-	[seriesLoader release];
-	[seriesBannerLoader release];
-	[super dealloc];
-}
-
 @end

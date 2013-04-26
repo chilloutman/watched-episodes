@@ -17,8 +17,7 @@
 	tab.title = item.title;
 	tab.tabBarItem = item;
 	
-	[rootController release];
-	return [tab autorelease];
+	return tab;
 }
 
 @end

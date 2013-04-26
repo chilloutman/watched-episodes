@@ -165,12 +165,5 @@ static NSString *CellIdentifier = @"SeriesCell";
 	self.lastWatchedController = nil;
 }
 
-- (void)dealloc {
-	self.seriesController = nil;
-	self.lastWatchedController = nil;
-    [super dealloc];
-}
-
-
 @end
 

@@ -27,7 +27,7 @@
 		EF4AD01D12EA22A60058F78E /* SeriesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4AD01B12EA22A60058F78E /* SeriesDetailViewController.m */; };
 		EF4AD01E12EA22A60058F78E /* SeriesDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF4AD01C12EA22A60058F78E /* SeriesDetail.xib */; };
 		EF4AD02612EA23BD0058F78E /* SeriesLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4AD02512EA23BD0058F78E /* SeriesLoader.m */; };
-		EF4AD02912EA23F10058F78E /* GetSeries.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4AD02812EA23F10058F78E /* GetSeries.pb.m */; };
+		EF4AD02912EA23F10058F78E /* GetSeries.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4AD02812EA23F10058F78E /* GetSeries.pb.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EF5AA29313D5E32A00F6FBCF /* EpisodesDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5AA29213D5E32A00F6FBCF /* EpisodesDataProvider.m */; };
 		EF5AA2A213D5F21B00F6FBCF /* ProtocolCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5AA2A113D5F21B00F6FBCF /* ProtocolCategories.m */; };
 		EF63693814A51F6A00BAD54B /* HTTPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = EF63693714A51F6A00BAD54B /* HTTPOperation.m */; };
@@ -35,7 +35,7 @@
 		EF8D76F112D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D76ED12D8DEDA0064C5B5 /* WatchedEpisodesAppDelegate.m */; };
 		EF8D76F212D8DEDA0064C5B5 /* SearchSeriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D76EF12D8DEDA0064C5B5 /* SearchSeriesViewController.m */; };
 		EF8D78B912D933500064C5B5 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D786012D933500064C5B5 /* NSString+URLEncoding.m */; };
-		EF8D790512D933AB0064C5B5 /* SearchSeries.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D790412D933AB0064C5B5 /* SearchSeries.pb.m */; };
+		EF8D790512D933AB0064C5B5 /* SearchSeries.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D790412D933AB0064C5B5 /* SearchSeries.pb.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EF8D793512D9F9AA0064C5B5 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D793412D9F9AA0064C5B5 /* Constants.m */; };
 		EF8D79D412DA087D0064C5B5 /* ServiceLocator.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D79D312DA087D0064C5B5 /* ServiceLocator.m */; };
 		EF96D38B1493BDBF0060BD13 /* LastWatchedEpisodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96D3891493BDBF0060BD13 /* LastWatchedEpisodeViewController.m */; };
@@ -47,8 +47,8 @@
 		EFFD078F12F0BE1E00F9075B /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD078E12F0BE1E00F9075B /* FavoritesViewController.m */; };
 		EFFD079512F0BE7A00F9075B /* NavigationControllerTab.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */; };
 		EFFD085312F0C8FA00F9075B /* SeriesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD085212F0C8FA00F9075B /* SeriesManager.m */; };
-		EFFD08B512F21BBC00F9075B /* GetAllEpisodes.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD08B212F21BBC00F9075B /* GetAllEpisodes.pb.m */; };
-		EFFD08B612F21BBC00F9075B /* ProtocolTypes.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD08B412F21BBC00F9075B /* ProtocolTypes.pb.m */; };
+		EFFD08B512F21BBC00F9075B /* GetAllEpisodes.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD08B212F21BBC00F9075B /* GetAllEpisodes.pb.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		EFFD08B612F21BBC00F9075B /* ProtocolTypes.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD08B412F21BBC00F9075B /* ProtocolTypes.pb.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EFFD093512F22BE700F9075B /* Files.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD093412F22BE700F9075B /* Files.m */; };
 		EFFD0AEE12F5D2E400F9075B /* Find.png in Resources */ = {isa = PBXBuildFile; fileRef = EFFD0AED12F5D2E400F9075B /* Find.png */; };
 		EFFD0B0712F5D46900F9075B /* Heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EFFD0B0612F5D46900F9075B /* Heart@2x.png */; };
@@ -535,6 +535,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/WatchedEpisodes_Prefix.pch;
@@ -548,6 +549,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/WatchedEpisodes_Prefix.pch;
@@ -632,6 +634,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/WatchedEpisodes_Prefix.pch;

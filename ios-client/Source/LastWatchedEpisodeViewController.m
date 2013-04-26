@@ -45,8 +45,7 @@
 
 - (void)setSeries:(PBSeries *)newSeries {
 	if (![newSeries.seriesId isEqualToString:self.series.seriesId]) {
-		[series release];
-		series = [newSeries retain];
+		series = newSeries;
 		[self refreshUI];
 		
 		self.bannerView.image = nil;
@@ -121,34 +120,7 @@
 		EpisodesListViewController *episodesList= [[EpisodesListViewController alloc] init];
 		[self.navigationController pushViewController:episodesList animated:YES];
 		[episodesList displayEpisodesForSeriesWithId:self.series.seriesId];
-		[episodesList release];
 	}
-}
-
-#pragma mark -
-
-- (void)viewDidUnload {
-	[super viewDidUnload];
-	self.bannerView = nil;
-	self.seasonCell = nil;
-	self.seasonLabel = nil;
-	self.seasonStepper = nil;
-	self.seasonCell = nil;
-	self.episodeLabel = nil;
-	self.episodeStepper = nil;
-}
-
-- (void)dealloc {
-	self.series = nil;
-	
-	self.bannerView = nil;
-	self.seasonCell = nil;
-	self.seasonLabel = nil;
-	self.seasonStepper = nil;
-	self.seasonCell = nil;
-	self.episodeLabel = nil;
-	self.episodeStepper = nil;
-    [super dealloc];
 }
 
 @end

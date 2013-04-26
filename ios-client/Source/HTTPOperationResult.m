@@ -14,12 +14,7 @@
 @synthesize receivedData;
 
 + (HTTPOperationResult *)operationResult {
-	return [[[HTTPOperationResult alloc] init] autorelease];
-}
-
-- (void)dealloc {
-	self.receivedData = nil;
-	[super dealloc];
+	return [[HTTPOperationResult alloc] init];
 }
 
 @end

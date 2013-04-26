@@ -24,7 +24,7 @@
 @synthesize allEpisodes, seasonsDictionary;
 
 + (EpisodesDataProvider *)providerWithEpisodes:(NSArray *)episodes {
-    return [[[EpisodesDataProvider alloc] initWithEpisodes:episodes] autorelease];
+    return [[EpisodesDataProvider alloc] initWithEpisodes:episodes];
 }
 
 - (id)initWithEpisodes:(NSArray *)episodes {
@@ -64,12 +64,6 @@
 - (NSArray *)episodesForSeason:(NSUInteger)seasonNumber {
     NSString *seasonString = [NSString stringWithFormat:@"%d", seasonNumber];
     return [self.seasonsDictionary objectForKey:seasonString];
-}
-
-- (void)dealloc {
-    self.allEpisodes = nil;
-    self.seasonsDictionary = nil;
-    [super dealloc];
 }
 
 @end

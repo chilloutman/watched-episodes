@@ -38,7 +38,7 @@
 	FileCache *cache = [[FileCache alloc] init];
 	cache.directoyPath = [Files cachesDirectoryNamed:cacheDirectoryName];
 	cache.cache = [NSMutableDictionary dictionary];
-	return [cache autorelease];
+	return cache;
 }
 
 - (id)init {
@@ -71,12 +71,6 @@
 
 - (NSString *)filePathForKey:(NSString *)key {
 	return [self.directoyPath stringByAppendingPathComponent:key];
-}
-
-- (void)dealloc {
-	self.directoyPath = nil;
-	self.cache = nil;
-	[super dealloc];
 }
 
 @end

@@ -53,7 +53,6 @@
 
 - (void)setSeriesId:(NSString *)seriesId {
 	if (![seriesId isEqualToString:_seriesId]) {
-		[_seriesId release];
 		_seriesId = [seriesId copy];
 		
 		if (seriesId) {
@@ -134,14 +133,6 @@
 - (void)dealloc {
 	[[SeriesManager shared].seriesBannerLoader cancel];
 	[[SeriesManager shared].seriesLoader cancel];
-	self.faveButton = nil;
-	self.series = nil;
-	self.seriesId = nil;
-	self.nameLabel = nil;
-	self.overviewView = nil;
-	self.bannerView = nil;
-	self.spindicator = nil;
-    [super dealloc];
 }
 
 @end

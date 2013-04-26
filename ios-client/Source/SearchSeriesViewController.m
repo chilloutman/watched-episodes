@@ -96,7 +96,7 @@
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	
 	if (cell == nil) {
-		cell= [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		cell= [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 	}
 	
 	PBSeriesSummary *series= [self.searchResults objectAtIndex:indexPath.row];
@@ -120,13 +120,6 @@
 
 - (void)viewDidUnload {
 	self.searchResults= nil;
-}
-
-- (void)dealloc {
-	self.model= nil;
-	self.searchResults= nil;
-	self.lastSearchString= nil;
-    [super dealloc];
 }
 
 @end

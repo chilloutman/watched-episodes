@@ -91,11 +91,4 @@
 	self.completionBlock = nil;
 }
 
-#pragma mark -
-
-- (void)dealloc {
-    self.completionBlock = nil;
-	[super dealloc];
-}
-
 @end

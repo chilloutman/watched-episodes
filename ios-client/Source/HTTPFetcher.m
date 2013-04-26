@@ -72,11 +72,4 @@
 	}
 }
 
-#pragma mark -
-
-- (void)dealloc {
-	self.queue = nil;
-	[super dealloc];
-}
-
 @end

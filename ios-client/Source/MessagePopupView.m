@@ -42,9 +42,4 @@
     }];
 }
 
-- (void)dealloc {
-    self.messageLabel = nil;
-    [super dealloc];
-}
-
 @end

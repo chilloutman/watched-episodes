@@ -40,15 +40,13 @@
 	self.navigationItem.backBarButtonItem.title = @"Episodes";
 	UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithTitle:@"Series Info" style:UIBarButtonItemStyleBordered target:self action:@selector(showSeriesInfo)];
 	self.navigationItem.rightBarButtonItem = infoButton;
-	[infoButton release];
-    self.model = [[[EpisodesDataProvider alloc] init] autorelease];
+    self.model = [[EpisodesDataProvider alloc] init];
 }
 
 - (void)showSeriesInfo {
 	SeriesDetailViewController *seriesInfo = [[SeriesDetailViewController alloc] init];	
 	[self.navigationController pushViewController:seriesInfo animated:YES];
 	seriesInfo.seriesId = self.currentSeriesId;
-	[seriesInfo release];
 }
 
 - (void)displayEpisodesForSeriesWithId:(NSString *)seriesId {
@@ -80,7 +78,7 @@
     
     UITableViewCell *cell = [t dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
 	PBEpisode *episode = [self episodeForIndexPath:indexPath];
@@ -102,13 +100,6 @@
 
 - (void)viewDidUnload {
     self.currentSeriesId = nil;
-}
-
-- (void)dealloc {
-	self.model = nil;
-    self.episodesLoader = nil;
-    self.currentSeriesId = nil;
-	[super dealloc];
 }
 
 @end

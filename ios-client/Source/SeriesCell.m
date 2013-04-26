@@ -56,12 +56,4 @@
     // Configure the view for the selected state
 }
 
-- (void)dealloc {
-	self.unwatchedLabel = nil;
-	self.seriesNameLabel = nil;
-	self.bannerView = nil;
-	self.bannerLoader = nil;
-    [super dealloc];
-}
-
 @end

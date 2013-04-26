@@ -33,8 +33,8 @@
 	operation.result = [HTTPOperationResult operationResult];
 	operation.URL = URL;
 	operation.takerObject = takerObject;
-	operation.completionBlocks = [NSMutableSet setWithObject:[[block copy] autorelease]];
-    return [operation autorelease];
+	operation.completionBlocks = [NSMutableSet setWithObject:[block copy]];
+    return operation;
 }
 
 - (BOOL)isConcurrent {
@@ -63,7 +63,7 @@
 }
 
 - (void)addCompletitionBlock:(HTTPOperationBlock)block {
-	[self.completionBlocks addObject:[[block copy] autorelease]];
+	[self.completionBlocks addObject:[block copy]];
 }
 
 #pragma mark NSURLConnection
@@ -122,16 +122,6 @@
 	
 	[self didChangeValueForKey:@"isExecuting"];
     [self didChangeValueForKey:@"isFinished"];
-}
-
-#pragma mark -
-
-- (void)dealloc {
-	self.connection = nil;
-	self.completionBlocks = nil;
-	self.result = nil;
-	self.URL = nil;
-	[super dealloc];
 }
 
 @end

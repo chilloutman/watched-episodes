@@ -37,9 +37,4 @@
 	[[HTTPFetcher shared] cancelAllRequestsForTaker:self];
 }
 
-- (void)dealloc {
-    [super dealloc];
-	self.cache = nil;
-}
-
 @end

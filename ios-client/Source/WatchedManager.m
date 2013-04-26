@@ -30,16 +30,11 @@ NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAv
 	episode.seriesId = seriesId;
 	episode.episodeNumber = episodeNumber;
 	episode.seasonNumber = seasonNumber;
-	return [episode autorelease];
+	return episode;
 }
 
 - (BOOL)isZero {
 	return (self.seasonNumber == 0) && (self.episodeNumber == 0);
-}
-
-- (void)dealloc {
-	self.seriesId = nil;
-    [super dealloc];
 }
 
 @end
@@ -139,14 +134,6 @@ NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAv
 
 - (id)JSONObject {
 	return self.lastWatchedEpisodes;
-}
-
-#pragma mark -
-
-- (void)dealloc {
-	self.document = nil;
-	self.lastWatchedEpisodes = nil;
-	[super dealloc];
 }
 
 @end

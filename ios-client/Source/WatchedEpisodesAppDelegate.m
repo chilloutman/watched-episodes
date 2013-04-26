@@ -23,14 +23,14 @@
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-	UITabBarItem *tabBarItem = [[[UITabBarItem alloc] initWithTitle:@"Find" image:[UIImage imageNamed:@"Find"] tag:0] autorelease];
+	UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Find" image:[UIImage imageNamed:@"Find"] tag:0];
 	NavigationControllerTab *find = [NavigationControllerTab controllerWithRootController:[SearchSeriesViewController class]
                                                                               tabBarItem:tabBarItem];
-	tabBarItem = [[[UITabBarItem alloc] initWithTitle:@"Favorites" image:[UIImage imageNamed:@"Heart"] tag:1] autorelease];
+	tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Favorites" image:[UIImage imageNamed:@"Heart"] tag:1];
 	NavigationControllerTab *favs = [NavigationControllerTab controllerWithRootController:[FavoritesViewController class]
 																			  tabBarItem:tabBarItem];
 	
-	self.tabController = [[[UITabBarController alloc] init] autorelease];
+	self.tabController = [[UITabBarController alloc] init];
 	[self.tabController setViewControllers:[NSArray arrayWithObjects:find, favs, nil]];
 	
     [self.window addSubview:self.tabController.view];
@@ -91,12 +91,6 @@
     /*
      Free up as much memory as possible by purging cached data objects that can be recreated (or reloaded from disk) later.
      */
-}
-
-- (void)dealloc {
-	self.tabController = nil;
-	self.window = nil;
-    [super dealloc];
 }
 
 @end
