@@ -96,10 +96,4 @@
     return [[self.model episodesForSeason:indexPath.section+1] objectAtIndex:indexPath.row];
 }
 
-#pragma mark -
-
-- (void)viewDidUnload {
-    self.currentSeriesId = nil;
-}
-
 @end

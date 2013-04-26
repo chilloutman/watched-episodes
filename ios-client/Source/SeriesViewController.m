@@ -45,7 +45,7 @@ static NSString *CellIdentifier = @"SeriesCell";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+    [super viewWillAppear:animated];
 	
 	[[NSNotificationCenter defaultCenter] addObserverForName:WatchedManagerDidFinishLoadingNotification object:self queue:[NSOperationQueue mainQueue] usingBlock:^ (NSNotification *notification) {
 		[self.tableView reloadData];
@@ -58,12 +58,6 @@ static NSString *CellIdentifier = @"SeriesCell";
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:WatchedManagerDidFinishLoadingNotification object:[WatchedManager shared]];
 }
-
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
-*/
 
 - (SeriesDetailViewController *)seriesController {
 	if (!seriesController) {
@@ -147,28 +141,8 @@ static NSString *CellIdentifier = @"SeriesCell";
 	}];
 }
 
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-	[self.navigationController pushViewController:self.seriesController animated:YES];
-	self.seriesController.seriesId = [self seriesIdForIndexPath:indexPath];
-}
-
 - (NSString *)seriesIdForIndexPath:(NSIndexPath *)indexPath {
 	return [[SeriesManager shared].favoriteSeriesIds objectAtIndex:indexPath.row];
-}
-
-#pragma mark -
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Relinquish ownership any cached data, images, etc. that aren't in use.
-}
-
-- (void)viewDidUnload {
-	[super viewDidUnload];
-    self.seriesController = nil;
-	self.lastWatchedController = nil;
 }
 
 @end

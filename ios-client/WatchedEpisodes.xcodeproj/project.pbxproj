@@ -15,6 +15,7 @@
 		AAB1059413D587E900683DC4 /* CommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB1059313D587E900683DC4 /* CommunicationManager.m */; };
 		AAB1059613D5993500683DC4 /* MessagePopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAB1059513D5993500683DC4 /* MessagePopupView.xib */; };
 		AAB1059C13D59AC300683DC4 /* MessagePopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB1059B13D59AC200683DC4 /* MessagePopupView.m */; };
+		AABE50A7172ABA8B000525A2 /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFA5E2DB14A67EA70012CD1F /* libProtocolBuffers.a */; };
 		EF0BD215149A8D7E008BC271 /* JSONDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0BD214149A8D7E008BC271 /* JSONDocument.m */; };
 		EF0BD218149A9A60008BC271 /* FileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0BD217149A9A60008BC271 /* FileCache.m */; };
 		EF12EFA112EC90C2007E380E /* SeriesBannerLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF12EFA012EC90C2007E380E /* SeriesBannerLoader.m */; };
@@ -43,7 +44,6 @@
 		EFA0351713D9AB62004EB261 /* SeriesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFA0351613D9AB62004EB261 /* SeriesCell.xib */; };
 		EFA0351A13D9ABF1004EB261 /* SeriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA0351913D9ABF1004EB261 /* SeriesCell.m */; };
 		EFA5E2CA14A655DC0012CD1F /* HTTPOperationResult.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA5E2C914A655DC0012CD1F /* HTTPOperationResult.m */; };
-		EFA5E2DF14A67F0C0012CD1F /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFA5E2DB14A67EA70012CD1F /* libProtocolBuffers.a */; };
 		EFFD078F12F0BE1E00F9075B /* SeriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD078E12F0BE1E00F9075B /* SeriesViewController.m */; };
 		EFFD079512F0BE7A00F9075B /* NavigationControllerTab.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD079412F0BE7A00F9075B /* NavigationControllerTab.m */; };
 		EFFD085312F0C8FA00F9075B /* SeriesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFD085212F0C8FA00F9075B /* SeriesManager.m */; };
@@ -169,7 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFA5E2DF14A67F0C0012CD1F /* libProtocolBuffers.a in Frameworks */,
+				AABE50A7172ABA8B000525A2 /* libProtocolBuffers.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,

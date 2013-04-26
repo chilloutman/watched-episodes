@@ -28,13 +28,6 @@
 
 @synthesize model, seriesController, searchResults, lastSearchString;
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleBordered target:self action:@selector(close)];
@@ -121,10 +114,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 	self.model= nil;
-}
-
-- (void)viewDidUnload {
-	self.searchResults= nil;
 }
 
 @end

@@ -56,6 +56,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 	if (self.series) {
 		[self refreshUI];
 	}

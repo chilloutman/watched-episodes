@@ -42,6 +42,7 @@
 }
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
 	self.title = @"Info";
 	if (showsFaveButton) {
 		self.navigationItem.rightBarButtonItem = self.faveButton;
@@ -62,10 +63,12 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 	[self refreshUI];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
 	[[SeriesManager shared].seriesBannerLoader cancel];
 	[[SeriesManager shared].seriesLoader cancel];
 }
@@ -121,14 +124,6 @@
 }
 
 #pragma mark -
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-	self.faveButton = nil;
-	self.overviewView = nil;
-	self.bannerView = nil;
-	self.spindicator = nil;
-}
 
 - (void)dealloc {
 	[[SeriesManager shared].seriesBannerLoader cancel];
