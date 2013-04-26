@@ -17,9 +17,9 @@ public abstract class SAXHandler<ResultType> extends DefaultHandler {
 	public void startDocument () throws SAXException {
 		startTime = System.currentTimeMillis();
 		elementStack = new Stack<XMLElement>();
-		currentValue = new StringBuilder();
+		currentValue = new StringBuilder();		
 	}
-	
+
 	@Override
 	public void startElement (String uri, String localName, String qName, Attributes atts) throws SAXException {
 		willStartElement(qName);
@@ -45,7 +45,7 @@ public abstract class SAXHandler<ResultType> extends DefaultHandler {
 		XMLElement element = elementStack.pop();
 		element.setContent(currentValue.toString().trim());
 		currentValue.delete(0, currentValue.length());
-		
+
 		if (!elementStack.empty()) {
 			element.setParentName(elementStack.peek().getName());
 		}

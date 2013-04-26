@@ -26,7 +26,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ServiceLocator)
 	id service = [ServiceLocator singletonForKey:serviceClass];
 	if (service == nil) {
 		service = [[serviceClass alloc] init];
-		[[ServiceLocator shared].singletons setObject:service forKey:serviceClass];
+		[[ServiceLocator shared].singletons setObject:service forKey:(id<NSCopying>)serviceClass];
 		[service release];
 	}
 	return service;

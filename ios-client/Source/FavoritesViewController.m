@@ -88,7 +88,9 @@ static NSString *CellIdentifier = @"SeriesCell";
 
     NSString *seriesId = [self seriesIdForIndexPath:indexPath];
 	[[SeriesManager shared].seriesLoader loadSeriesForSeriesId:seriesId completionBlock:^ (PBSeries *series) {
-		cell.series = series;
+        if ([series.seriesId isEqualToString:seriesId]) {
+            cell.series = series;
+        }
 	}];
         
     return cell;

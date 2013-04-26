@@ -39,6 +39,7 @@ NSString * const WatchedManagerDidFinishLoadingNotification = @"WatchedManagerAv
 
 - (void)dealloc {
 	self.seriesId = nil;
+    [super dealloc];
 }
 
 @end

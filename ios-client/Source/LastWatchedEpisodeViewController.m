@@ -148,6 +148,7 @@
 	self.seasonCell = nil;
 	self.episodeLabel = nil;
 	self.episodeStepper = nil;
+    [super dealloc];
 }
 
 @end

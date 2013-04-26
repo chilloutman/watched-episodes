@@ -57,7 +57,7 @@
 }
 
 - (void)loadSeriesBannerFromServer:(NSString *)bannerPath {
-	[self sendHTTPRequestWithURLString:[@"http://www.thetvdb.com/banners/_cache/" stringByAppendingString:bannerPath] completionBlock:^ (NSData *data) {
+	[self sendHTTPRequestWithURLString:[@"http://www.thetvdb.com/banners/" stringByAppendingString:bannerPath] completionBlock:^ (NSData *data) {
 		if (data) {
 			[self finishedLoadingData:data];
 			[self.cache cacheData:data forKey:[self cacheKeyForBannerPath:bannerPath]];
